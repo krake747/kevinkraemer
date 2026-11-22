@@ -1,4 +1,4 @@
-import { AskMalformedResponse, AskUnsupported, AskUpstream, type AskError } from "@core/ask/errors"
+import { type AskMalformedResponse, AskUnsupported, type AskUpstream, type AskError } from "@core/ask/errors"
 import type { TapePrint } from "@core/ask/tape"
 import { Result } from "better-result"
 

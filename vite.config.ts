@@ -47,6 +47,13 @@ export default defineConfig({
             perf: "off",
         },
         rules: {
+            curly: ["error", "all"],
+            "typescript/consistent-type-definitions": ["error", "type"],
+            "typescript/consistent-type-imports": [
+                "error",
+                { fixStyle: "inline-type-imports", prefer: "type-imports" },
+            ],
+            "unicorn/filename-case": ["error", { case: "kebabCase" }],
             "import/extensions": "off",
             "import/no-duplicates": "error",
             "import/no-nodejs-modules": "error",

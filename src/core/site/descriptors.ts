@@ -1,4 +1,4 @@
-import { apiVersion } from "@core/site/api-version"
+import type { apiVersion } from "@core/site/api-version"
 
 export type PageDescriptor = {
     url: string
