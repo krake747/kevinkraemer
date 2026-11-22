@@ -72,6 +72,7 @@ export default defineConfig({
             "kk/no-class-string-const": "error",
             "kk/component-props-omit": "error",
             "kk/no-styles-import": "error",
+            "kk/alias-imports": "error",
             "vitest/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
             "solid/jsx-no-duplicate-props": "error",
             "solid/jsx-no-undef": "error",
