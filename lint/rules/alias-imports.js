@@ -1,5 +1,7 @@
 import { defineRule } from "vite-plus/lint/plugins"
 
+import { isUnderSrc } from "./shared.js"
+
 const CODE_EXTENSIONS = new Set(["cjs", "cts", "js", "jsx", "mjs", "mts", "ts", "tsx"])
 
 function isRelative(specifier) {
@@ -25,10 +27,6 @@ function isCodeSpecifier(specifier) {
         return true
     }
     return CODE_EXTENSIONS.has(ext)
-}
-
-function isUnderSrc(filename) {
-    return /(^|\/)src\//.test(filename)
 }
 
 function isAllowlisted(filename) {

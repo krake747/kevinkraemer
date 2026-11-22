@@ -7,7 +7,10 @@ import { featureNames } from "./rules/feature-names.js"
 import { noClassStringConst } from "./rules/no-class-string-const.js"
 import { noDescribeFunctionTitle } from "./rules/no-describe-function-title.js"
 import { noProseComments } from "./rules/no-prose-comments.js"
+import { noRawColor } from "./rules/no-raw-color.js"
+import { noSeparateLeading } from "./rules/no-separate-leading.js"
 import { noStylesImport } from "./rules/no-styles-import.js"
+import { noTransitionAll } from "./rules/no-transition-all.js"
 import { strictTypes } from "./rules/strict-types.js"
 
 export default definePlugin({
@@ -20,7 +23,10 @@ export default definePlugin({
         "no-class-string-const": noClassStringConst,
         "no-describe-function-title": noDescribeFunctionTitle,
         "no-prose-comments": noProseComments,
+        "no-raw-color": noRawColor,
+        "no-separate-leading": noSeparateLeading,
         "no-styles-import": noStylesImport,
+        "no-transition-all": noTransitionAll,
         "strict-types": strictTypes,
     },
 })

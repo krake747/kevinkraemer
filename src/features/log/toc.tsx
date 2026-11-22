@@ -5,7 +5,7 @@ import { PanelLabel } from "@ui/panel-label"
 import { For, Show, createSignal, onSettled } from "solid-js"
 
 const tocLink = cva({
-    base: "-ml-px block border-l py-1.5 pl-3 wrap-break-word font-mono text-xs leading-relaxed transition-colors duration-150 ease-out-quart",
+    base: "-ml-px block border-l py-1.5 pl-3 wrap-break-word font-mono text-xs transition-colors duration-150 ease-out-quart",
     variants: {
         state: {
             active: "border-emerald-500 text-emerald-800 dark:text-emerald-400",
@@ -37,7 +37,7 @@ export function LogTocDisclosure(props: { entries: LogTocEntry[] }) {
                                 <li>
                                     <a
                                         href={`#${item.id}`}
-                                        class="block font-mono text-xs leading-relaxed text-stone-600 dark:text-stone-400"
+                                        class="block font-mono text-xs text-stone-600 dark:text-stone-400"
                                     >
                                         {item.text}
                                     </a>

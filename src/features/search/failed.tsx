@@ -6,7 +6,7 @@ export function SearchFailed(props: { message: string; onRetry: () => void }) {
     return (
         <StackRow size="relaxed" class="text-center">
             <SearchPanelTitle>Search failed.</SearchPanelTitle>
-            <SearchPanelNote class="mt-2 leading-relaxed">{props.message}</SearchPanelNote>
+            <SearchPanelNote class="mt-2">{props.message}</SearchPanelNote>
             <Button intent="link" class="mt-4" onClick={() => props.onRetry()}>
                 retry
             </Button>
