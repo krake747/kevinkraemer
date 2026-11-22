@@ -58,7 +58,7 @@ export function Badge(props: BadgeSpanProps | BadgeAnchorProps): JSX.Element {
         <Tag
             {...rest()}
             {...externalAttrs()}
-            class={cx(badge({ tone: tone(), size: props.size, interactive: props.interactive }), props.class)}
+            class={cx(badge({ tone: tone(), size: props.size, interactive: props.interactive, class: props.class }))}
         >
             {props.children}
             {external() ? <span class="sr-only"> (opens in a new tab)</span> : null}

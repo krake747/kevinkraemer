@@ -20,7 +20,7 @@ export function Button(props: Omit<ComponentProps<"button">, "type"> & VariantPr
     const rest = omit(props, "intent", "class", "children")
 
     return (
-        <button {...rest} type="button" class={cx(button({ intent: props.intent }), props.class)}>
+        <button {...rest} type="button" class={cx(button({ intent: props.intent, class: props.class }))}>
             {props.children}
         </button>
     )

@@ -32,7 +32,7 @@ export function DecorMark(props: ComponentProps<"svg"> & VariantProps<typeof dec
         <svg
             {...rest}
             aria-hidden="true"
-            class={cx(decorMark({ position: props.position }), props.class)}
+            class={cx(decorMark({ position: props.position, class: props.class }))}
             fill="none"
             stroke-linecap="round"
             stroke-linejoin="round"
