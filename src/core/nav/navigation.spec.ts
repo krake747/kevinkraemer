@@ -42,7 +42,17 @@ describe("navigation", () => {
 
     it("returns home section links on home", () => {
         const links = getSectionLinks("/")
-        expect(links.map((link) => link.href)).toEqual(["/#story", "/#contact"])
+        expect(links.map((link) => link.href)).toEqual(["/#story", "/#logs", "/#contact"])
+    })
+
+    it("returns uses section links on uses", () => {
+        const links = getSectionLinks("/uses")
+        expect(links.map((link) => link.href)).toEqual([
+            "/uses#workspace",
+            "/uses#development",
+            "/uses#ai-agents",
+            "/uses#exploring",
+        ])
     })
 
     it("returns no section links elsewhere", () => {

@@ -8,7 +8,7 @@ import { For, Show, type ParentProps } from "solid-js"
 export function HomeLogs(props: ParentProps<{ entries: LogEntry[] }>) {
     return (
         <Show when={props.entries.length > 0}>
-            <SectionShell command="tail -f ~/logs">
+            <SectionShell id="logs" command="tail -f ~/logs">
                 <Stack class="reveal-item">
                     <For each={props.entries}>
                         {(entry) => (
