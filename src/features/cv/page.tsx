@@ -1,6 +1,5 @@
 import { CvEducation } from "@features/cv/education"
 import { CvHeader } from "@features/cv/header"
-import { CvLastUpdated } from "@features/cv/last-updated"
 import { CvProjects } from "@features/cv/projects"
 import { CvSection } from "@features/cv/section"
 import { CvSkills } from "@features/cv/skills"
@@ -43,8 +42,6 @@ export function CvPage() {
                 <CvSection id="education" heading="Education">
                     <CvEducation />
                 </CvSection>
-
-                <CvLastUpdated />
             </div>
         </PageShell>
     )
