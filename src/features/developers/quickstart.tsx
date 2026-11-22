@@ -66,7 +66,7 @@ export function DevelopersQuickstart() {
             </ol>
             <DevelopersProse class="mt-4">
                 Nonexistent paths return HTTP 404 in both representations; treat it as proof the path does not exist.
-                Send <InlineCode>Accept: application/json</InlineCode> anywhere for a typed descriptor — or an RFC 9457
+                Send <InlineCode>Accept: application/json</InlineCode> anywhere for a typed descriptor, or an RFC 9457
                 problem response with <InlineCode>code</InlineCode> and <InlineCode>hint</InlineCode> fields.
             </DevelopersProse>
         </section>

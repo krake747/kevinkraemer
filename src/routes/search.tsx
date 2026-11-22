@@ -9,7 +9,7 @@ export default function SearchRoute() {
         <ProseShell
             command="grep -r"
             title="Search"
-            lede="Find anything across the site — logs, CV, and docs. Results update as you type."
+            lede="Find anything across the site: logs, CV, and docs. Results update as you type."
         >
             <Seo
                 title="Search"
