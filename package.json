@@ -60,6 +60,7 @@
         "@commitlint/config-conventional": "^21.2.4",
         "@lhci/cli": "0.16.1",
         "@playwright/test": "^1.65.1",
+        "@shadcn/lint": "^0.2.5",
         "@solidjs/vite-plugin": "^3.0.1",
         "@tailwindcss/vite": "^4.3.5",
         "@testing-library/jest-dom": "^8.0.0",

@@ -85,6 +85,12 @@ export default defineConfig({
             "solid/self-closing-comp": "warn",
             "solid/no-unused-signal": "warn",
             "solid/prefer-structured-class": "warn",
+            "shadcn/no-unknown-classes": [
+                "warn",
+                {
+                    allow: ["blog-post", "hero-intro", "not-prose", "reveal-section"],
+                },
+            ],
             "no-restricted-properties": [
                 "error",
                 {
@@ -140,6 +146,10 @@ export default defineConfig({
             {
                 name: "solid",
                 specifier: "eslint-plugin-solid",
+            },
+            {
+                name: "shadcn",
+                specifier: "@shadcn/lint",
             },
         ],
     },
