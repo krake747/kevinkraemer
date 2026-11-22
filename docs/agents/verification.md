@@ -1,7 +1,7 @@
 # Verification
 
-Source of truth: `lefthook.yml`, `.github/workflows/`, `package.json` scripts, `scripts/checks/`.
-This file caches only the judgement the gates cannot state.
+Source of truth: `lefthook.yml`, `.github/workflows/`, `package.json` scripts, the `vite.config.ts`
+lint block, `lint/`. This file caches only the judgement the gates cannot state.
 
 A change is done when the claim carries the check that settled it.
 
@@ -37,12 +37,12 @@ did not start.
 Why hand-running these in a session duplicates them and hides the one check that is actually
 missing. Solve run only the narrowest check that supplies the signal you lack.
 
-| Stage      | Runs                                                                                                                                                                                         |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| pre-commit | oxlint and oxfmt on staged files, cliché lint on staged log entries, `check:docs`, `check:names`, `strict-types`, `check:comments`, `fallow audit --base main`, `fallow health --complexity` |
-| pre-push   | `pnpm lint:ts`                                                                                                                                                                               |
-| `pr.yml`   | `fmt:ci`, `generate`, `lint`, `lint:ts`, `fallow audit`, `test:unit`, `test:e2e`, `build`, `check:docs`                                                                                      |
-| `main.yml` | the `pr.yml` set plus `test:unit:coverage`                                                                                                                                                   |
+| Stage      | Runs                                                                                                                                                                                              |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| pre-commit | oxlint and oxfmt on staged files (plus staged `scripts` specs), cliché lint on staged log entries, `check:docs`, `check:comments` (CSS), `fallow audit --base main`, `fallow health --complexity` |
+| pre-push   | `pnpm lint:ts`                                                                                                                                                                                    |
+| `pr.yml`   | `fmt:ci`, `generate`, `lint`, `lint:ts`, `fallow audit`, `test:unit`, `test:e2e`, `build`, `check:docs`                                                                                           |
+| `main.yml` | the `pr.yml` set plus `test:unit:coverage`                                                                                                                                                        |
 
 A docs-only pull request skips every code job: `pr.yml` filters on changed paths, so `check:docs`
 alone carries it.

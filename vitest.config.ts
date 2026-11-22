@@ -8,7 +8,7 @@ export default defineConfig({
         setupFiles: ["./vitest.setup.ts"],
         exclude: ["node_modules", "dist"],
         environment: "happy-dom",
-        include: ["src/**/*.{test,spec}.{ts,tsx}", "netlify/**/*.spec.ts", "scripts/**/*.spec.ts"],
+        include: ["src/**/*.{test,spec}.{ts,tsx}", "netlify/**/*.spec.ts", "scripts/**/*.spec.ts", "lint/**/*.spec.ts"],
         coverage: {
             provider: "v8",
             reporter: ["text", "html", "json-summary"],

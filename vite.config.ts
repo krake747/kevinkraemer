@@ -57,6 +57,15 @@ export default defineConfig({
             "vitest/require-mock-type-parameters": "error",
             "import/no-unassigned-import": "off",
             "vite-plus/prefer-vite-plus-imports": "error",
+            "kk/cva-class-prop": "error",
+            "kk/no-describe-function-title": "error",
+            "kk/strict-types": "error",
+            "kk/no-prose-comments": "error",
+            "kk/feature-names": "error",
+            "kk/no-class-string-const": "error",
+            "kk/component-props-omit": "error",
+            "kk/no-styles-import": "error",
+            "vitest/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
             "solid/jsx-no-duplicate-props": "error",
             "solid/jsx-no-undef": "error",
             "solid/no-unassigned-vars": "error",
@@ -113,6 +122,12 @@ export default defineConfig({
         },
         overrides: [
             {
+                files: ["e2e/**"],
+                rules: {
+                    "vitest/consistent-test-it": "off",
+                },
+            },
+            {
                 files: [
                     "**/*.spec.ts",
                     "**/*.spec.tsx",
@@ -137,8 +152,12 @@ export default defineConfig({
                 },
             },
         ],
-        ignorePatterns: ["dist", "scripts"],
+        ignorePatterns: ["dist", "scripts/**", "!scripts/**/*.spec.ts"],
         jsPlugins: [
+            {
+                name: "kk",
+                specifier: "./lint/plugin.js",
+            },
             {
                 name: "vite-plus",
                 specifier: "vite-plus/oxlint-plugin",

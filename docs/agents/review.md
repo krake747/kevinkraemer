@@ -46,8 +46,8 @@ not the feature: `log/card.tsx` exports `LogCard`, `developers/page.tsx` exports
 `create-{part}.ts` and export `create{Feature}{Part}` (`log/create-filter.ts` → `createLogFilter`,
 `mcp/create-handler.ts` → `createMcpHandler`). Keep `use*` for router and context readers only
 (`useParams`, `useSearchParams`), which arrive named. `src/ui/**` files keep their own kebab name
-(`stack-row.tsx`, `button.tsx`). Check via `pnpm check:names` (`scripts/checks/feature-names.mjs`),
-which fails a file that repeats its folder or a component that is not `{Feature}{Part}`.
+(`stack-row.tsx`, `button.tsx`). Check via `pnpm lint` (`kk/feature-names` in `lint/`), which fails
+a file that repeats its folder or a component that is not `{Feature}{Part}`.
 
 ## Page parts — one stem per page
 
@@ -58,8 +58,8 @@ the route, and keeps two parts from reading the same in a grep. Solve name the r
 prefix every part with the same stem (`CvHeader`, `CvSummary`, `CvTimeline`, `ProjectList`); end a
 section wrapper in `Section` (`AboutSection`, `UsesGroupSection`). Omit the parts a page does not
 have. A part that two pages need moves down to `src/pattern` or `src/ui` (`architecture.md`) instead
-of losing its stem in place. Check via `pnpm check:names` — a component without its page stem is the
-smell.
+of losing its stem in place. Check via `pnpm lint` (`kk/feature-names`) — a component without its
+page stem is the smell.
 
 ## Import alias — use `@` except `edge`
 

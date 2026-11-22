@@ -12,8 +12,6 @@
         "build": "pnpm generate && vp build && node scripts/prerender.ts && node scripts/function.ts && pagefind --site dist/client",
         "check:docs": "node scripts/checks/docs.mjs",
         "check:comments": "node scripts/checks/no-prose-comments.mjs",
-        "check:tests": "node scripts/checks/test-titles.mjs",
-        "check:names": "node scripts/checks/feature-names.mjs",
         "check:agents": "node scripts/checks/agent-reachability.mjs",
         "check:prose": "vp fmt --check \"content/logs/**/*.md\" && node scripts/prose/cliche-lint.mjs",
         "dev": "pnpm generate && vp dev",
@@ -30,7 +28,7 @@
         "test:e2e": "playwright test",
         "test:unit": "vp test run --config vitest.config.ts",
         "test:unit:coverage": "vp test run --coverage --config vitest.config.ts",
-        "verify": "pnpm fmt:ci && pnpm lint && pnpm check:names && pnpm check:tests && pnpm lint:ts && pnpm exec fallow audit --quiet && pnpm test:unit"
+        "verify": "pnpm fmt:ci && pnpm lint && pnpm lint:ts && pnpm exec fallow audit --quiet && pnpm test:unit"
     },
     "dependencies": {
         "@modelcontextprotocol/server": "^2.4.0",
