@@ -29,11 +29,9 @@ export function Header() {
                     </a>
                     <DecorMark position="bottom-right" arm="short" />
                 </div>
-
                 <div class="flex flex-1 items-center border-r border-stone-200 px-3 md:hidden dark:border-stone-800">
                     <span class="font-mono text-xs text-stone-600 dark:text-stone-300">{pageLabel()}</span>
                 </div>
-
                 <div class="relative hidden flex-1 items-center justify-center border-r border-stone-200 px-2 sm:px-4 md:flex dark:border-stone-800">
                     <nav class="flex items-center gap-4">
                         <For each={TOP_NAV}>
@@ -57,7 +55,6 @@ export function Header() {
                     </nav>
                     <DecorMark position="bottom-right" arm="short" />
                 </div>
-
                 <div class="hidden flex-1 items-center justify-center border-r border-stone-200 px-2 sm:px-4 md:flex dark:border-stone-800">
                     <Show when={sectionLinks().length > 0}>
                         <nav class="flex items-center gap-4">
@@ -74,7 +71,6 @@ export function Header() {
                         </nav>
                     </Show>
                 </div>
-
                 <div class="relative flex shrink-0 items-center gap-2 px-2 sm:gap-3 sm:px-4">
                     <DecorMark position="bottom-left" arm="short" />
                     <CommandPalette />

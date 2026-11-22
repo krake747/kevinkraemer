@@ -9,14 +9,12 @@ export function HomeContact() {
                     Got something you want to build, a role to fill, or feel like talking shop? Write me. I reply to
                     every note, usually within a couple of business days.
                 </p>
-
                 <a
                     href={`mailto:${site.email}`}
                     class="reveal-item hit-area-y-2 inline-flex items-center gap-2 font-mono text-base wrap-break-word text-stone-900 transition-colors duration-150 ease-out-quart hover:text-emerald-800 sm:text-lg dark:text-stone-200 dark:hover:text-emerald-400"
                 >
                     {site.email}
                 </a>
-
                 <p class="reveal-item font-mono text-sm text-stone-600 dark:text-stone-400">Based in Luxembourg</p>
             </div>
         </SectionShell>

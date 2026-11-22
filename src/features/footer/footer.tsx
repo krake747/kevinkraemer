@@ -34,14 +34,12 @@ export function Footer() {
                     <FooterPixelAvatar mood={moodForPathname(location.pathname, night())} />
                     <DecorMark position="top-right" arm="short" class="rotate-180" />
                 </div>
-
                 <div class="relative hidden flex-1 items-center justify-center gap-4 border-r border-stone-200 px-4 font-mono text-stone-600 sm:flex dark:border-stone-800 dark:text-stone-300">
                     <span class="flex items-center gap-1.5">
                         Built with intent <Bolt class="inline size-3.5" />
                     </span>
                     <DecorMark position="top-right" arm="short" class="rotate-180" />
                 </div>
-
                 <div class="flex items-center gap-2 px-2 sm:gap-3 sm:px-4">
                     <span class="hidden font-mono text-stone-600 dark:text-stone-300">Solid</span>
                     <span class="hidden text-stone-300 dark:text-stone-700">|</span>

@@ -49,13 +49,9 @@ export function LogArticle(props: { detail: LogDetail }) {
                         </div>
                     ) : null}
                 </div>
-
                 <LogBody html={entry().html} graphs={entry().graphs} class="blog-post" />
-
                 <LogRelated entries={props.detail.related} />
-
                 <LogPager older={props.detail.older} newer={props.detail.newer} />
-
                 <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
                     <a
                         href="/logs"

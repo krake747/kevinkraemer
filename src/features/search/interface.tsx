@@ -56,7 +56,6 @@ export function SearchInterface() {
                     </Show>
                 </div>
             </div>
-
             <Show when={committedQuery().length >= MIN_QUERY_LENGTH} fallback={<SearchIntro />}>
                 <Errored fallback={(error, retry) => <SearchFailed message={String(error())} onRetry={retry} />}>
                     <Loading fallback={<SearchSkeleton />}>

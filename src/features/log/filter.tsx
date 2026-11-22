@@ -42,7 +42,6 @@ export function LogFilter(props: { entries: LogEntry[] }) {
                     <LogFilterList />
                     <LogFilterEmpty />
                 </div>
-
                 <LogFilterRail>
                     <LogFilterTags />
                 </LogFilterRail>

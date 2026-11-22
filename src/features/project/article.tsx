@@ -27,11 +27,9 @@ export function ProjectArticle(props: { project: Project }) {
         <article class="mx-auto max-w-prose">
             <ProjectHeader project={props.project} />
             <ProjectMetadata project={props.project} />
-
             <ProjectSection id="problem" title="Problem and point of view">
                 <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{props.project.problem}</p>
             </ProjectSection>
-
             <Show when={props.project.decisions.length > 0}>
                 <ProjectSection id="decisions" title="Key decisions">
                     <Stack class="mt-4">
@@ -50,7 +48,6 @@ export function ProjectArticle(props: { project: Project }) {
                     </Stack>
                 </ProjectSection>
             </Show>
-
             <Show when={props.project.evidence.length > 0}>
                 <ProjectSection id="evidence" title="Evidence">
                     <Stack class="mt-4">
@@ -66,7 +63,6 @@ export function ProjectArticle(props: { project: Project }) {
                     </Stack>
                 </ProjectSection>
             </Show>
-
             <Show when={props.project.changelog.length > 0}>
                 <ProjectSection id="changelog" title="Changelog">
                     <Stack as="ul" class="mt-4">
@@ -96,7 +92,6 @@ export function ProjectArticle(props: { project: Project }) {
                     </Stack>
                 </ProjectSection>
             </Show>
-
             <p class="mt-10">
                 <Anchor href="/projects" variant="muted" class="inline-flex items-center gap-1.5">
                     <ChevronLeft class="size-3 shrink-0" />

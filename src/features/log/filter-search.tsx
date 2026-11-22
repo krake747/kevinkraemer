@@ -19,7 +19,6 @@ export function LogFilterSearch() {
             >
                 <InputPrompt />
             </Input>
-
             <Show when={state.hasActiveFilters()}>
                 <Button class="shrink-0" onClick={actions.clear}>
                     clear
