@@ -15,7 +15,7 @@ const chip = cva({
     },
 })
 
-export function Chip(props: ComponentProps<"button"> & VariantProps<typeof chip>) {
+export function Chip(props: Omit<ComponentProps<"button">, "type"> & VariantProps<typeof chip>) {
     const rest = omit(props, "selected", "class", "children")
 
     return (

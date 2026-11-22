@@ -2,9 +2,10 @@ import { createBrowserValue } from "@pattern/create-browser-value"
 import { createCopyFeedback } from "@pattern/create-copy-feedback"
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { Show } from "solid-js"
+import { omit, Show } from "solid-js"
 
 export function CodeBlock(props: ComponentProps<"pre">) {
+    const rest = omit(props, "class", "children")
     const { copyLabel, copy } = createCopyFeedback()
     const supported = createBrowserValue(
         true,
@@ -19,6 +20,7 @@ export function CodeBlock(props: ComponentProps<"pre">) {
 
     return (
         <pre
+            {...rest}
             data-codeblock
             class={cx(
                 "kk-scrollbar relative border border-stone-200 bg-stone-900 p-4 dark:border-stone-800 dark:bg-stone-950",

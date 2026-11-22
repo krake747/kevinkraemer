@@ -1,8 +1,12 @@
+import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
+import { omit } from "solid-js"
 
-export function DevelopersIndex(props: { index: number; class?: string }) {
+export function DevelopersIndex(props: ComponentProps<"span"> & { index: number }) {
+    const rest = omit(props, "index", "class", "children")
     return (
         <span
+            {...rest}
             aria-hidden="true"
             class={cx("font-mono text-xs text-stone-400 tabular-nums dark:text-stone-600", props.class)}
         >

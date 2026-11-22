@@ -1,14 +1,30 @@
+import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import type { ParentProps } from "solid-js"
+import { omit } from "solid-js"
 
-export function SearchPanelTitle(props: ParentProps) {
-    return <p class="font-mono text-sm text-stone-700 dark:text-stone-300">{props.children}</p>
+export function SearchPanelTitle(props: ComponentProps<"p">) {
+    const rest = omit(props, "class", "children")
+    return (
+        <p {...rest} class={cx("font-mono text-sm text-stone-700 dark:text-stone-300", props.class)}>
+            {props.children}
+        </p>
+    )
 }
 
-export function SearchPanelNote(props: ParentProps<{ class?: string }>) {
-    return <p class={cx("font-mono text-xs text-stone-600 dark:text-stone-400", props.class)}>{props.children}</p>
+export function SearchPanelNote(props: ComponentProps<"p">) {
+    const rest = omit(props, "class", "children")
+    return (
+        <p {...rest} class={cx("font-mono text-xs text-stone-600 dark:text-stone-400", props.class)}>
+            {props.children}
+        </p>
+    )
 }
 
-export function SearchPanelEmphasis(props: ParentProps) {
-    return <span class="text-stone-900 dark:text-stone-100">{props.children}</span>
+export function SearchPanelEmphasis(props: ComponentProps<"span">) {
+    const rest = omit(props, "class", "children")
+    return (
+        <span {...rest} class={cx("text-stone-900 dark:text-stone-100", props.class)}>
+            {props.children}
+        </span>
+    )
 }
