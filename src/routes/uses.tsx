@@ -1,6 +1,5 @@
 import { sortByOrder } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
-import { UsesNav } from "@features/uses/nav"
 import { UsesSection } from "@features/uses/section"
 import { ProseShell } from "@pattern/prose-shell"
 import { Seo } from "@pattern/seo"
@@ -16,7 +15,6 @@ export default function UsesRoute() {
                 description="The setup: the tools I run, and why. Editor, terminal, OS, languages, models, hardware, and what I'm exploring."
                 path="/uses"
             />
-            <UsesNav sections={sections} updated={siteContent.meta.usesUpdated} />
             <For each={sections}>{(section) => <UsesSection section={section} />}</For>
         </ProseShell>
     )
