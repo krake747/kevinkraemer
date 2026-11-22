@@ -75,10 +75,10 @@ actually imports.
 ## Import order — packages, then aliases
 
 Why one order means a reader never scans a file twice to find where a name came from, and a moved
-import is noise in an otherwise focused diff. Solve one block with no blank lines: `solid-js` first,
-then `@solidjs/*`, then every other package, then the `@` aliases (`@ui`, `@pattern`, `@features`,
-`@core`), then relative imports. Inside one import, values come before `type` bindings, and a
-binding list of nothing but types is `import type`.
+import is noise in an otherwise focused diff. Solve one block with no blank lines; let `vp fmt`
+(`fmt.sortImports: true` in `vite.config.ts`) decide path order — do not hand-sort `solid-js` to the
+top. Inside one import, values come before `type` bindings, and a binding list of nothing but types
+is `import type`.
 
 ```tsx
 import type { ComponentProps } from "@solidjs/web"
@@ -88,9 +88,8 @@ import { omit, type ParentProps } from "solid-js"
 
 Inside the alias group keep the order the file reads in; alphabetical sorting is not required
 (`@core/site/urls` may precede `@core/site/catalog`), and no layer order is imposed between `@ui`,
-`@pattern`, `@features`, and `@core`. Check via the head of the file: a `solid-js` import below an
-`@` alias, a package below an alias, a blank line inside the block, or `{ type X }` as the only
-binding is the smell.
+`@pattern`, `@features`, and `@core`. Check via the head of the file: a blank line inside the block,
+or `{ type X }` as the only binding is the smell.
 
 ## Icons — one home, no `aria-hidden`
 
