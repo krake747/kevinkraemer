@@ -15,10 +15,11 @@ Repeatable comment removal for one scope at a time. Never run repo-wide without 
 List every true comment in the scope. Most `//` hits are false positives: URLs in strings, regexes,
 and XML strings are not comments. Check line starts only:
 
-- Full-line `//`, `/*`, leading `*` in code files (`ts`, `tsx`, `mjs`, `mts`, `css`, `astro`);
-  `<!--` counts only in `astro` files, where it can be a real comment. In `ts`/`tsx` a line-start
-  `<!--` is string test data, not a comment.
-- `scripts/` is out of scope for the guard and the linter. Do not audit it.
+- Full-line `//`, `/*`, leading `*` in code files (`ts`, `tsx`, `css`); `<!--` counts only in
+  `astro` files, where it can be a real comment. In `ts`/`tsx` a line-start `<!--` is string test
+  data, not a comment.
+- `scripts/` non-spec files are out of scope for the guard and the linter. Do not audit them;
+  `scripts/**/*.spec.ts` files are linted and stay in scope.
 - Confirm each hit by reading the file; record `path:line` for real ones only.
 
 Test fixture strings (e.g. `<!-- comment -->` inside a template literal) are test data. Directive
@@ -38,11 +39,11 @@ lines (`oxlint-disable`, `eslint-disable`, `fallow-ignore`, `@ts-`, `@vite-ignor
 
 ## Guard
 
-Enforce with `pnpm check:comments` (`scripts/checks/no-prose-comments.mjs`). Ratchet rules:
+Enforce TS/TSX with `pnpm lint` (`kk/no-prose-comments` in `lint/`); enforce CSS with
+`pnpm check:comments` (`scripts/checks/no-prose-comments.mjs`). Ratchet rules:
 
-- New prose comments fail the check. Fix the code or write the ADR; never add to
-  `scripts/checks/no-prose-comments.baseline`. The baseline is empty by design and stays empty.
-- Test-data false positives are handled by the scope rules above, not the baseline.
+- New prose comments fail the check. Fix the code or write the ADR.
+- Test-data false positives are handled by the scope rules above.
 
 ## Estimate
 

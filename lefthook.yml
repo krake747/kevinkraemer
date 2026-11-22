@@ -7,6 +7,10 @@ pre-commit:
         - "scripts/**"
       run: pnpm lint {staged_files}
       stage_fixed: true
+    lint-scripts-specs:
+      glob: "scripts/**/*.spec.{ts,tsx}"
+      run: pnpm lint {staged_files}
+      stage_fixed: true
     fmt:
       glob: "*.{ts,tsx,css,md,json,yaml,yml,toml}"
       run: pnpm exec vp fmt {staged_files}
@@ -16,14 +20,8 @@ pre-commit:
       run: node scripts/prose/cliche-lint.mjs {staged_files}
     docs:
       run: pnpm check:docs
-    strict-types:
-      run: node scripts/checks/strict-types.mjs
     comments:
       run: pnpm check:comments
-    test-titles:
-      run: pnpm check:tests
-    feature-names:
-      run: pnpm check:names
     fallow:
       run: pnpm exec fallow audit --base main --quiet --gate-marker pre-commit
     fallow-complexity:

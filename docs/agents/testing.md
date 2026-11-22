@@ -19,9 +19,10 @@ describe("the tag list", () => {
 })
 ```
 
-`it` is the only runner call; `describe` never takes a function or component identifier. The check
-`pnpm check:tests` (`scripts/checks/test-titles.mjs`) fails on `test(...)` and on a lowerCamelCase
-`describe` subject, and the pre-commit hook runs it.
+`it` is the only runner call; `describe` never takes a function or component identifier. The
+`vitest/consistent-test-it` rule and `kk/no-describe-function-title` (both in `pnpm lint`, rules
+live in `lint/`) fail on `test(...)` and on a lowerCamelCase `describe` subject, and the pre-commit
+hook lints staged specs.
 
 Apply two imagined edits before keeping a test. Break the behavior: it must fail. Change the
 internals: it must stay green. A test that survives both earns nothing, and a second test of the

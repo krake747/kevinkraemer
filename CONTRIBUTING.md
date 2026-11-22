@@ -44,7 +44,7 @@ that it is not configured.
 | `pnpm dev:search`          | Build, then dev, so Pagefind has an index                  |
 | `pnpm build`               | Prerendered build into `dist/client/`                      |
 | `pnpm preview`             | Build and serve the production stack with the Netlify CLI  |
-| `pnpm lint`                | oxlint                                                     |
+| `pnpm lint`                | oxlint, including the local `kk/*` rules (`lint/`)         |
 | `pnpm fmt` / `pnpm fmt:ci` | Format, or check formatting across the repo                |
 | `pnpm test`                | Unit tests                                                 |
 | `pnpm test:unit`           | Unit tests                                                 |
@@ -53,7 +53,6 @@ that it is not configured.
 | `pnpm verify`              | `fmt:ci`, `lint`, `lint:ts`, `fallow audit`, `test:unit`   |
 | `pnpm check:prose`         | Log formatting and the cliché lint                         |
 | `pnpm check:docs`          | Doc paths, relative links, and `pnpm` script names         |
-| `pnpm check:names`         | Feature files carry their folder stem (`scripts/checks/`)  |
 | `pnpm check:agents`        | Retrieval agents allowed in `robots.txt` (`--live` probes) |
 | `pnpm generate`            | Rebuild the generated content and ask tape                 |
 | `pnpm lint:ts`             | Generate and run `tsc --noEmit`                            |
@@ -67,8 +66,8 @@ dev, build, and type-check run.
 
 Lefthook runs on commit:
 
-- pre-commit: oxlint and oxfmt on staged files, the cliché lint on staged log entries, the docs
-  check, the feature-name check, the strict-type check, and `fallow audit --base main`
+- pre-commit: oxlint and oxfmt on staged files (including staged `scripts` specs), the cliché lint
+  on staged log entries, the docs and CSS-comments checks, and `fallow audit --base main`
 - pre-push: `pnpm lint:ts`
 - commit-msg: commitlint
 
