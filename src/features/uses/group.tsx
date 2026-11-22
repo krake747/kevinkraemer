@@ -97,12 +97,7 @@ export function UsesGroup(props: { group: UsesGroupData }) {
     return (
         <div>
             <Show when={layout() !== "plain"}>
-                <PanelLabel class={props.group.note ? "mb-2" : "mb-4"}>
-                    {props.group.label}
-                    <span class="tracking-normal text-stone-500 tabular-nums dark:text-stone-400">
-                        ({props.group.items.length})
-                    </span>
-                </PanelLabel>
+                <PanelLabel class={props.group.note ? "mb-2" : "mb-4"}>{props.group.label}</PanelLabel>
             </Show>
             <Show when={props.group.note}>
                 <p class="mb-4 max-w-prose text-sm leading-relaxed text-stone-600 dark:text-stone-400">
