@@ -12,6 +12,7 @@ function entry(overrides: Partial<LogEntry> = {}): LogEntry {
         body: "body text",
         html: "<p>body text</p>",
         graphs: [],
+        toc: [],
         ...overrides,
     }
 }

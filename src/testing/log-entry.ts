@@ -12,6 +12,7 @@ export function makeLogEntry(id: string, overrides: LogEntryOverrides = {}): Log
         body: "body",
         html: "<p>body</p>",
         graphs: [],
+        toc: [],
         ...overrides,
     }
 }

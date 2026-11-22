@@ -11,6 +11,7 @@ const entry: LogEntry = {
     body: "First paragraph.\n\nSecond paragraph.",
     html: "<p>First paragraph.</p>",
     graphs: [],
+    toc: [],
 }
 
 describe("log entry markdown", () => {

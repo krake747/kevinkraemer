@@ -9,7 +9,7 @@ import * as v from "valibot"
 import { parse as parseYaml } from "yaml"
 
 import { namedFlows, type FlowName } from "../src/core/content/graphs.ts"
-import type { GraphFlowSpec, Project } from "../src/core/content/model.ts"
+import type { GraphFlowSpec, LogTocEntry, Project } from "../src/core/content/model.ts"
 import { prerenderPaths } from "../src/core/site/prerender-paths.ts"
 
 const CONTENT = fileURLToPath(new URL("../content", import.meta.url))
@@ -142,8 +142,12 @@ function readFiles(dir: string, extension: string): Promise<string[]> {
     return readdir(join(CONTENT, dir)).then((files) => files.filter((file) => file.endsWith(extension)))
 }
 
-function renderMarkdown(source: string, file: string): { html: string; graphs: GraphFlowSpec[]; frontmatter: string } {
+function renderMarkdown(
+    source: string,
+    file: string,
+): { html: string; graphs: GraphFlowSpec[]; toc: LogTocEntry[]; frontmatter: string } {
     const graphs: GraphFlowSpec[] = []
+    const toc: LogTocEntry[] = []
     const slugger = new GithubSlugger()
 
     const result = markdownToHtml(source, {
@@ -182,7 +186,15 @@ function renderMarkdown(source: string, file: string): { html: string; graphs: G
                 element: {
                     filter: ["h1", "h2", "h3", "h4", "h5", "h6"],
                     visit(node, ctx) {
-                        ctx.setProperty(node, "id", slugger.slug(ctx.textContent(node)))
+                        const text = ctx.textContent(node)
+                        const id = slugger.slug(text)
+                        ctx.setProperty(node, "id", id)
+                        if (node.tagName === "h2") {
+                            const trimmed = text.trim()
+                            if (trimmed.length > 0) {
+                                toc.push({ id, text: trimmed })
+                            }
+                        }
                     },
                 },
             }),
@@ -193,7 +205,7 @@ function renderMarkdown(source: string, file: string): { html: string; graphs: G
     if (frontmatter === null) {
         throw new Error("markdown document has no frontmatter")
     }
-    return { html: result.html, graphs, frontmatter: frontmatter.value }
+    return { html: result.html, graphs, toc, frontmatter: frontmatter.value }
 }
 
 function extractBody(source: string, file: string): string {
@@ -217,6 +229,7 @@ async function loadMarkdown<T extends object>(dir: string, schema: v.GenericSche
             body: extractBody(source, file),
             html: rendered.html,
             graphs: rendered.graphs,
+            toc: rendered.toc,
             data,
         })
     }
@@ -226,7 +239,7 @@ async function loadMarkdown<T extends object>(dir: string, schema: v.GenericSche
 
 async function loadLogs() {
     const entries = await loadMarkdown("logs", LogEntrySchema)
-    return entries.map(({ id, body, html, graphs, data }) => ({
+    return entries.map(({ id, body, html, graphs, toc, data }) => ({
         id,
         title: data.title,
         description: data.description,
@@ -235,6 +248,7 @@ async function loadLogs() {
         body,
         html,
         graphs,
+        toc,
     }))
 }
 

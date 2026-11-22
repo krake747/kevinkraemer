@@ -21,7 +21,7 @@ const limitSchema = v.object({
 })
 
 function entry(id: string, title: string, description: string, tags: string[], date: string): LogEntry {
-    return { id, title, description, tags, date, body: "", html: "", graphs: [] }
+    return { id, title, description, tags, date, body: "", html: "", graphs: [], toc: [] }
 }
 
 const entries = [

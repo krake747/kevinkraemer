@@ -4,6 +4,11 @@ export type GraphFlowSpec =
     | { kind: "single"; title: string; flow: FlowName }
     | { kind: "compare"; title: string; flow: FlowName; compare: FlowName; third?: FlowName }
 
+export type LogTocEntry = {
+    id: string
+    text: string
+}
+
 export type LogEntry = {
     id: string
     title: string
@@ -13,6 +18,7 @@ export type LogEntry = {
     body: string
     html: string
     graphs: GraphFlowSpec[]
+    toc: LogTocEntry[]
 }
 
 export type AboutEntry = {
