@@ -27,6 +27,7 @@
         "scripts",
         "netlify",
         "e2e",
+        "lint",
         "vite.config.ts",
         "vitest.config.ts",
         "vitest.browser.config.ts",
