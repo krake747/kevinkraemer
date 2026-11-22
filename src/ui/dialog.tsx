@@ -51,7 +51,10 @@ export function DialogContent(props: ComponentProps<typeof BaseDialogContent> & 
     const rest = omit(props, "align", "size", "class", "children")
 
     return (
-        <BaseDialogContent {...rest} class={cx(dialogContent({ align: props.align, size: props.size }), props.class)}>
+        <BaseDialogContent
+            {...rest}
+            class={cx(dialogContent({ align: props.align, size: props.size, class: props.class }))}
+        >
             {props.children}
         </BaseDialogContent>
     )

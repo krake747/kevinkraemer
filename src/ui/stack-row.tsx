@@ -30,7 +30,7 @@ export function StackRow<T extends ValidComponent = "div">(
     const rest = omit(props, "as", "size", "interactive", "class", "children")
 
     return (
-        <Tag {...rest} class={cx(stackRow({ size: props.size, interactive: props.interactive }), props.class)}>
+        <Tag {...rest} class={cx(stackRow({ size: props.size, interactive: props.interactive, class: props.class }))}>
             {props.children}
         </Tag>
     )

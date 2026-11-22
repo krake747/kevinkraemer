@@ -33,7 +33,7 @@ export function Anchor(
             {...rest}
             target={external() ? "_blank" : undefined}
             rel={securityRel()}
-            class={cx(anchor({ variant: props.variant }), props.class)}
+            class={cx(anchor({ variant: props.variant, class: props.class }))}
         >
             {props.children}
             {props.external === true ? <span class="sr-only"> (opens in a new tab)</span> : null}

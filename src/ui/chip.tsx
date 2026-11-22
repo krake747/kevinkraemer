@@ -15,7 +15,7 @@ const chip = cva({
     },
 })
 
-export function Chip(props: ComponentProps<"button"> & VariantProps<typeof chip>) {
+export function Chip(props: Omit<ComponentProps<"button">, "type"> & VariantProps<typeof chip>) {
     const rest = omit(props, "selected", "class", "children")
 
     return (
@@ -23,7 +23,7 @@ export function Chip(props: ComponentProps<"button"> & VariantProps<typeof chip>
             {...rest}
             type="button"
             aria-pressed={props.selected === true ? "true" : "false"}
-            class={cx(chip({ selected: props.selected }), props.class)}
+            class={cx(chip({ selected: props.selected, class: props.class }))}
         >
             {props.children}
         </button>

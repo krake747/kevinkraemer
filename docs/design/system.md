@@ -62,6 +62,9 @@ Never:
   feature, not to `src/ui`.
 - Variants are CVA, not caller overrides: a padding, tone, size, or alignment difference is a
   variant prop, never `class="py-12"` at the call site.
+- A component that owns a cva variant function takes the caller class into that function, still
+  wrapped in `cx` so Tailwind conflicts merge:
+  `class={cx(anchor({ variant: props.variant, class: props.class }))}`.
 - Primitive props come from the platform: `ComponentProps<"tag">` for element props,
   `VariantProps<typeof variant>` for CVA values. A component that renders more than one tag declares
   the attributes its call sites use (`Badge` takes `ComponentProps<"a">` when `as="a"`).

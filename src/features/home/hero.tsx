@@ -1,13 +1,12 @@
 import { HomeHeroContact } from "@features/home/hero-contact"
 import { HomeHeroName } from "@features/home/hero-name"
-import { pageFrame } from "@pattern/page-shell"
-import { cx } from "@ui/cva.config"
+import { PageFrame } from "@pattern/page-frame"
 import { SectionHeading } from "@ui/section-heading"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export function HomeHero() {
     return (
-        <section class={cx("hero-intro min-h-[90dvh]", pageFrame)}>
+        <PageFrame as="section" class="hero-intro min-h-[90dvh]">
             <div class="mx-auto max-w-6xl">
                 <div class="mb-12 animate-fade-up [animation-delay:0ms]">
                     <TerminalCommandHeader command="whoami" />
@@ -39,6 +38,6 @@ export function HomeHero() {
                 </div>
                 <HomeHeroContact />
             </div>
-        </section>
+        </PageFrame>
     )
 }
