@@ -10,7 +10,7 @@ import { cx } from "@ui/cva.config"
 import { Input, InputPrompt } from "@ui/input"
 import { Errored, Loading, Show, latest } from "solid-js"
 
-export function SearchPage() {
+export function SearchInterface() {
     const query = createUrlQuery({ param: "q", wait: PAGEFIND_DEBOUNCE_MS })
     const committedQuery = () => query.query().trim()
     const { outcome, total, isLoading: isStale } = createPagefindSearch(committedQuery, 10)

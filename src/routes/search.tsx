@@ -1,4 +1,4 @@
-import { SearchPage } from "@features/search/page"
+import { SearchInterface } from "@features/search/interface"
 import { ProseShell } from "@pattern/prose-shell"
 import { Seo } from "@pattern/seo"
 import { Anchor } from "@ui/anchor"
@@ -19,7 +19,7 @@ export default function SearchRoute() {
             />
             <section aria-labelledby="search-input-heading" class="animate-fade-up">
                 <SectionHeading id="search-input-heading">query</SectionHeading>
-                <SearchPage />
+                <SearchInterface />
             </section>
             <footer class="pt-6">
                 <noscript>

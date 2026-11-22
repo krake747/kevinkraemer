@@ -1,4 +1,10 @@
-import { DevelopersPage } from "@features/developers/page"
+import { DevelopersFooter } from "@features/developers/footer"
+import { DevelopersJsonErrors } from "@features/developers/json-errors"
+import { DevelopersOnThisPage } from "@features/developers/on-this-page"
+import { DevelopersQuickstart } from "@features/developers/quickstart"
+import { DevelopersResources } from "@features/developers/resources"
+import { DevelopersResponses } from "@features/developers/responses"
+import { DevelopersStability } from "@features/developers/stability"
 import { ProseShell } from "@pattern/prose-shell"
 import { Seo } from "@pattern/seo"
 import { Anchor } from "@ui/anchor"
@@ -23,7 +29,13 @@ export default function DevelopersRoute() {
                 description="Machine-readable endpoints, OpenAPI specification, markdown content negotiation, and retrieval quickstart for agents and tooling on kevinkraemer.com."
                 path="/developers"
             />
-            <DevelopersPage />
+            <DevelopersOnThisPage />
+            <DevelopersResources />
+            <DevelopersQuickstart />
+            <DevelopersJsonErrors />
+            <DevelopersResponses />
+            <DevelopersStability />
+            <DevelopersFooter />
         </ProseShell>
     )
 }
