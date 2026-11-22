@@ -11,7 +11,7 @@ export function LogCard(props: { entry: LogSummary }) {
                     <h2 class="truncate font-semibold text-stone-900 transition-colors group-hover:text-emerald-800 dark:text-stone-100 dark:group-hover:text-emerald-400">
                         {props.entry.title}
                     </h2>
-                    <p class="mt-1 line-clamp-2 text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                    <p class="mt-1 line-clamp-2 text-sm/relaxed text-stone-600 dark:text-stone-400">
                         {props.entry.description}
                     </p>
                     <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400">

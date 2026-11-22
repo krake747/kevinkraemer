@@ -7,10 +7,10 @@ export function CvFacts(props: { children?: JSX.Element }) {
 export function CvFact(props: { label: string; children?: JSX.Element }) {
     return (
         <div class="grid min-w-0 grid-cols-[5rem_1fr] items-baseline gap-x-3">
-            <span class="font-mono text-xs leading-5 tracking-wide text-stone-600 dark:text-stone-400">
+            <span class="font-mono text-xs/5 tracking-widest text-stone-600 uppercase dark:text-stone-400">
                 {props.label}
             </span>
-            <span class="text-sm leading-5 text-stone-700 dark:text-stone-300">{props.children}</span>
+            <span class="text-sm/5 text-stone-700 dark:text-stone-300">{props.children}</span>
         </div>
     )
 }

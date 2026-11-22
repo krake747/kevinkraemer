@@ -27,7 +27,7 @@ export function HomeHeroContact() {
                 <For each={HERO_CONTACTS}>
                     {(contact) => (
                         <div class="flex items-baseline gap-4">
-                            <span class="w-20 tracking-wide text-stone-600 uppercase dark:text-stone-300">
+                            <span class="w-20 tracking-widest text-stone-600 uppercase dark:text-stone-300">
                                 {contact.label}
                             </span>{" "}
                             <Anchor

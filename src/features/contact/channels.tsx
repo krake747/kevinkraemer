@@ -31,7 +31,7 @@ const contactTitle = cva({
 })
 
 const contactNote = cva({
-    base: "mt-3 block max-w-[26ch] text-sm leading-relaxed",
+    base: "mt-3 block max-w-[26ch] text-sm/relaxed",
     variants: {
         primary: {
             true: "text-stone-300",

@@ -8,7 +8,7 @@ export function ProjectMetadata(props: { project: Project }) {
     return (
         <Stack as="dl" aria-label="Project metadata" class="mb-12">
             <ProjectMetadataRow label="Role">
-                <dd class="font-mono text-sm leading-[1.8] text-stone-600 dark:text-stone-400">{props.project.role}</dd>
+                <dd class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">{props.project.role}</dd>
             </ProjectMetadataRow>
             <ProjectMetadataRow label="Stack">
                 <dd class="font-mono text-sm text-stone-600 tabular-nums dark:text-stone-400">
@@ -17,7 +17,7 @@ export function ProjectMetadata(props: { project: Project }) {
             </ProjectMetadataRow>
             <ProjectMetadataRow label="Status">
                 <dd class="font-mono text-sm text-stone-600 tabular-nums dark:text-stone-400">
-                    <span class="tracking-wide uppercase">{props.project.status}</span>
+                    <span class="tracking-widest uppercase">{props.project.status}</span>
                     {props.project.year !== undefined ? ` · ${props.project.year}` : ""}
                 </dd>
             </ProjectMetadataRow>

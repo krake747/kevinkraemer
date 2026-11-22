@@ -17,7 +17,7 @@ export function HomeHeroName() {
     return (
         <h1
             aria-label="Kevin Kraemer"
-            class="text-[clamp(2.5rem,8vw,6rem)] leading-[0.9] font-semibold tracking-tight text-stone-900 sm:text-[clamp(3rem,10vw,6rem)] dark:text-stone-100"
+            class="text-[clamp(2.5rem,8vw,6rem)]/[0.9] font-semibold tracking-tight text-stone-900 sm:text-[clamp(3rem,10vw,6rem)] dark:text-stone-100"
             id="hero-name"
         >
             <span class="inline-block overflow-hidden" aria-hidden="true">

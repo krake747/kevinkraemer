@@ -31,7 +31,7 @@ function gridClass(spec: GraphFlowSpec): string {
 
 export function LogGraphFlow(props: { spec: GraphFlowSpec }) {
     return (
-        <figure class="not-prose relative my-8 graph-frame font-mono text-sm leading-6" aria-label={props.spec.title}>
+        <figure class="not-prose relative my-8 graph-frame font-mono text-sm/6" aria-label={props.spec.title}>
             <div
                 class="absolute top-0 left-1/2 z-10 w-max -translate-x-1/2 -translate-y-1/2 bg-stone-50 px-3 text-xs tracking-widest text-(--graph-accent) dark:bg-stone-950"
                 aria-hidden="true"
@@ -40,13 +40,13 @@ export function LogGraphFlow(props: { spec: GraphFlowSpec }) {
             </div>
             <span
                 aria-hidden="true"
-                class="pointer-events-none absolute top-0 left-0 z-10 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm leading-none text-(--graph-muted) dark:bg-stone-950"
+                class="pointer-events-none absolute top-0 left-0 z-10 flex size-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm/none text-(--graph-muted) dark:bg-stone-950"
             >
                 +
             </span>
             <span
                 aria-hidden="true"
-                class="pointer-events-none absolute top-0 right-0 z-10 flex size-4 translate-x-1/2 -translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm leading-none text-(--graph-muted) dark:bg-stone-950"
+                class="pointer-events-none absolute top-0 right-0 z-10 flex size-4 translate-x-1/2 -translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm/none text-(--graph-muted) dark:bg-stone-950"
             >
                 +
             </span>
@@ -77,9 +77,7 @@ export function LogGraphFlow(props: { spec: GraphFlowSpec }) {
                                                 {index() < lane.steps.length - 1 ? (
                                                     <li class="flex flex-col items-center py-1" aria-hidden="true">
                                                         <span class="h-5 w-px border-l border-dashed border-(--graph-accent)" />
-                                                        <span class="text-[11px] leading-none text-(--graph-accent)">
-                                                            ▼
-                                                        </span>
+                                                        <span class="text-[11px]/none text-(--graph-accent)">▼</span>
                                                     </li>
                                                 ) : null}
                                             </>
@@ -92,13 +90,13 @@ export function LogGraphFlow(props: { spec: GraphFlowSpec }) {
                 </div>
             </div>
             <span
-                class="pointer-events-none absolute bottom-0 left-0 z-10 flex size-4 -translate-x-1/2 translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm leading-none text-(--graph-muted) dark:bg-stone-950"
+                class="pointer-events-none absolute bottom-0 left-0 z-10 flex size-4 -translate-x-1/2 translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm/none text-(--graph-muted) dark:bg-stone-950"
                 aria-hidden="true"
             >
                 +
             </span>
             <span
-                class="pointer-events-none absolute right-0 bottom-0 z-10 flex size-4 translate-x-1/2 translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm leading-none text-(--graph-muted) dark:bg-stone-950"
+                class="pointer-events-none absolute right-0 bottom-0 z-10 flex size-4 translate-x-1/2 translate-y-1/2 items-center justify-center bg-stone-50 font-mono text-sm/none text-(--graph-muted) dark:bg-stone-950"
                 aria-hidden="true"
             >
                 +

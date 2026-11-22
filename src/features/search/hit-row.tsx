@@ -10,7 +10,7 @@ export function SearchHitRow(props: { hit: SearchHit }) {
                     <span class="block truncate font-semibold text-stone-900 transition-colors group-hover:text-emerald-800 dark:text-stone-100 dark:group-hover:text-emerald-400">
                         {props.hit.title}
                     </span>
-                    <span class="mt-1 line-clamp-2 block text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                    <span class="mt-1 line-clamp-2 block text-sm/relaxed text-stone-600 dark:text-stone-400">
                         {props.hit.excerpt}
                     </span>
                     <span class="mt-2 block font-mono text-xs text-stone-600 dark:text-stone-400">

@@ -18,7 +18,7 @@ export function ProseShell(props: ProseShellProps) {
                     <h1 class="text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100">
                         {props.title}
                     </h1>
-                    <p class="mt-3 max-w-prose text-sm leading-relaxed text-stone-600 empty:hidden dark:text-stone-400">
+                    <p class="mt-3 max-w-prose text-sm/relaxed text-stone-600 empty:hidden dark:text-stone-400">
                         {props.lede}
                     </p>
                 </header>

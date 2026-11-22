@@ -26,7 +26,7 @@ export function HomeHero() {
                 <div class="mt-16">
                     <SectionHeading id="hero-about-heading">about.txt</SectionHeading>
                     <div class="mt-4">
-                        <p class="max-w-prose text-base leading-[1.8] text-stone-600 md:text-lg dark:text-stone-400">
+                        <p class="max-w-prose text-base/[1.8] text-stone-600 md:text-lg dark:text-stone-400">
                             I got into code the lazy way: too many Excel assignments at university, so I taught myself{" "}
                             <span class="text-stone-900 dark:text-stone-200">Python</span> to do them for me. At my
                             first job, there was lots of SQL and data, so I picked up{" "}

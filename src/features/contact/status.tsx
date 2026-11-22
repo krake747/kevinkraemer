@@ -14,7 +14,7 @@ function ContactStatusRows() {
             <For each={STATUS_ROWS}>
                 {(row) => (
                     <div>
-                        <dt class="tracking-wider text-stone-600 uppercase dark:text-stone-400">{row.label}</dt>
+                        <dt class="tracking-widest text-stone-600 uppercase dark:text-stone-400">{row.label}</dt>
                         <dd class="text-stone-700 tabular-nums dark:text-stone-300">{row.value}</dd>
                     </div>
                 )}

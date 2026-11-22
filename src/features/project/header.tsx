@@ -8,9 +8,7 @@ export function ProjectHeader(props: { project: Project }) {
             <h1 class="text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100">
                 {props.project.name}
             </h1>
-            <p class="mt-3 font-mono text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                {props.project.tagline}
-            </p>
+            <p class="mt-3 font-mono text-sm/relaxed text-stone-600 dark:text-stone-400">{props.project.tagline}</p>
         </header>
     )
 }

@@ -28,7 +28,7 @@ export function CvSkills() {
                 <For each={SKILL_CATEGORIES}>
                     {(category) => (
                         <div>
-                            <h3 class="mb-2 font-mono text-xs tracking-wide text-stone-600 dark:text-stone-300">
+                            <h3 class="mb-2 font-mono text-xs tracking-widest text-stone-600 uppercase dark:text-stone-300">
                                 {category.name}
                             </h3>
                             <div class="flex flex-col gap-1">

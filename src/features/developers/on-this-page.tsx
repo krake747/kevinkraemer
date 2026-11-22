@@ -14,7 +14,7 @@ const ON_THIS_PAGE = [
 export function DevelopersOnThisPage() {
     return (
         <StackRow as="nav" size="compact" aria-label="On this page">
-            <ol class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs tracking-wide">
+            <ol class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
                 <For each={ON_THIS_PAGE}>
                     {(item, index) => (
                         <li class="flex items-center gap-2">

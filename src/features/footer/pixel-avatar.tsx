@@ -140,9 +140,9 @@ function PixelRow(props: { cells: readonly Tone[]; closed: boolean }) {
 function SleepyZzz() {
     return (
         <div class="pointer-events-none absolute bottom-full left-1/2 mb-0.5 hidden -translate-x-1/2 items-end gap-0.5 font-mono text-stone-400 motion-safe:flex dark:text-stone-500">
-            <span class="text-[8px] leading-none motion-safe:animate-zzz motion-safe:[animation-delay:-1.6s]">z</span>
-            <span class="text-[10px] leading-none motion-safe:animate-zzz motion-safe:[animation-delay:-0.8s]">z</span>
-            <span class="text-[12px] leading-none motion-safe:animate-zzz">z</span>
+            <span class="text-[8px]/none motion-safe:animate-zzz motion-safe:[animation-delay:-1.6s]">z</span>
+            <span class="text-[10px]/none motion-safe:animate-zzz motion-safe:[animation-delay:-0.8s]">z</span>
+            <span class="text-[12px]/none motion-safe:animate-zzz">z</span>
         </div>
     )
 }

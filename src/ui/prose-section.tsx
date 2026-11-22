@@ -16,7 +16,10 @@ export function ProseSectionBody(props: ComponentProps<"div">) {
     return (
         <div
             {...rest}
-            class={cx("max-w-prose flex flex-col gap-4 leading-[1.8] text-stone-600 dark:text-stone-400", props.class)}
+            class={cx(
+                "max-w-prose flex flex-col gap-4 text-base/[1.8] text-stone-600 dark:text-stone-400",
+                props.class,
+            )}
         >
             {props.children}
         </div>

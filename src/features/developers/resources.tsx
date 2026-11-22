@@ -19,7 +19,7 @@ export function DevelopersResources() {
                             <Anchor href={resource.path} variant="channel" rel="external" class="hit-area-y-2">
                                 {resource.path}
                             </Anchor>
-                            <p class="max-w-prose text-sm leading-relaxed text-stone-600 dark:text-stone-400">
+                            <p class="max-w-prose text-sm/relaxed text-stone-600 dark:text-stone-400">
                                 <span class="font-mono text-xs text-stone-500 dark:text-stone-400">
                                     {resource.type}
                                 </span>{" "}
@@ -32,7 +32,7 @@ export function DevelopersResources() {
                     )}
                 </For>
             </Stack>
-            <p class="mt-4 font-mono text-xs leading-relaxed text-stone-600 tabular-nums dark:text-stone-400">
+            <p class="mt-4 font-mono text-xs/relaxed text-stone-600 tabular-nums dark:text-stone-400">
                 Canonical origin: <span class="text-stone-900 dark:text-stone-200">{origin}</span> All other origins
                 redirect here.
             </p>

@@ -29,7 +29,7 @@ export function ProjectArticle(props: { project: Project }) {
             <ProjectMetadata project={props.project} />
 
             <ProjectSection id="problem" title="Problem and point of view">
-                <p class="mt-4 leading-[1.8] text-stone-600 dark:text-stone-400">{props.project.problem}</p>
+                <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{props.project.problem}</p>
             </ProjectSection>
 
             <Show when={props.project.decisions.length > 0}>
@@ -41,7 +41,7 @@ export function ProjectArticle(props: { project: Project }) {
                                     <h3 class="font-semibold tracking-tight text-stone-900 dark:text-stone-100">
                                         {decision.title}
                                     </h3>
-                                    <p class="mt-2 font-mono text-sm leading-[1.8] text-stone-600 dark:text-stone-400">
+                                    <p class="mt-2 font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
                                         {decision.reason}
                                     </p>
                                 </StackRow>
@@ -57,7 +57,7 @@ export function ProjectArticle(props: { project: Project }) {
                         <For each={props.project.evidence}>
                             {(item) => (
                                 <StackRow as="figure" size="compact">
-                                    <p class="font-mono text-sm leading-[1.8] text-stone-700 dark:text-stone-300">
+                                    <p class="font-mono text-sm/[1.8] text-stone-700 dark:text-stone-300">
                                         {item.caption}
                                     </p>
                                 </StackRow>
@@ -86,7 +86,7 @@ export function ProjectArticle(props: { project: Project }) {
                                         </span>
                                     )}
                                     {item.note ? (
-                                        <span class="font-mono text-sm leading-[1.8] text-stone-600 dark:text-stone-400">
+                                        <span class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
                                             {item.note}
                                         </span>
                                     ) : null}

@@ -27,8 +27,10 @@ Text: headline `stone-900` / `stone-100`, body `stone-800` / `stone-200`, prose 
 **Geist** (`--font-display`) for headings, display, body, prose. **JetBrains Mono** (`--font-mono`)
 for commands, nav, data, labels, buttons, tags, counts, code. Sizes: `text-xs` mono chrome,
 `text-sm` secondary mono, `text-base` body and inputs. Floor `text-[11px]` for dense data only. One
-prose measure: `max-w-prose` (`--max-width-prose`, 70ch) at `leading-[1.8]`; UI copy at component
-width with `leading-relaxed`. Headings `text-balance`, body `text-pretty`. `tabular-nums` on every
+prose measure: `max-w-prose` (`--max-width-prose`, 70ch) at `text-*/[1.8]`; UI copy at component
+width with `text-*/relaxed`. Size and leading always combine in one `text-*/<leading>` class, never
+a separate `leading-*`. Tracking: `tracking-tight` on Geist headings, `tracking-widest` on uppercase
+mono labels, none elsewhere. Headings `text-balance`, body `text-pretty`. `tabular-nums` on every
 date, count, and figure. `InlineCode` is the only rounded element; `Kbd` stays square with a `1px`
 stone border.
 

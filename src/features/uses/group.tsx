@@ -21,9 +21,7 @@ function UsesRow(props: { item: UsesItem }) {
     return (
         <StackRow as="li" size="compact" class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
             <span class="sm:w-56 sm:shrink-0">{toolName(props.item, "muted")}</span>
-            <span class="min-w-0 text-sm leading-relaxed text-stone-600 sm:flex-1 dark:text-stone-400">
-                {props.item.note}
-            </span>
+            <span class="min-w-0 text-sm/relaxed text-stone-600 sm:flex-1 dark:text-stone-400">{props.item.note}</span>
         </StackRow>
     )
 }
@@ -44,7 +42,7 @@ function UsesDailyPanel(props: { items: UsesItem[] }) {
                     {(item) => (
                         <li class="flex flex-col gap-1">
                             {toolName(item, "channel")}
-                            <span class="text-sm leading-relaxed text-stone-600 dark:text-stone-400">{item.note}</span>
+                            <span class="text-sm/relaxed text-stone-600 dark:text-stone-400">{item.note}</span>
                         </li>
                     )}
                 </For>
@@ -63,7 +61,7 @@ function UsesHardware(props: { items: UsesItem[] }) {
                             <dt class="font-mono text-sm font-medium text-stone-900 dark:text-stone-100">
                                 {item.name}
                             </dt>
-                            <dd class="m-0 font-mono text-xs leading-relaxed text-stone-600 dark:text-stone-400">
+                            <dd class="m-0 font-mono text-xs/relaxed text-stone-600 dark:text-stone-400">
                                 {item.note}
                             </dd>
                         </div>
@@ -81,7 +79,7 @@ function UsesPlain(props: { items: UsesItem[] }) {
                 {(item) => (
                     <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
                         <dt class="sm:w-32 sm:shrink-0">{toolName(item, "muted")}</dt>
-                        <dd class="m-0 min-w-0 text-sm leading-relaxed text-stone-600 sm:flex-1 dark:text-stone-400">
+                        <dd class="m-0 min-w-0 text-sm/relaxed text-stone-600 sm:flex-1 dark:text-stone-400">
                             {item.note}
                         </dd>
                     </div>
@@ -100,9 +98,7 @@ export function UsesGroup(props: { group: UsesGroupData }) {
                 <PanelLabel class={props.group.note ? "mb-2" : "mb-4"}>{props.group.label}</PanelLabel>
             </Show>
             <Show when={props.group.note}>
-                <p class="mb-4 max-w-prose text-sm leading-relaxed text-stone-600 dark:text-stone-400">
-                    {props.group.note}
-                </p>
+                <p class="mb-4 max-w-prose text-sm/relaxed text-stone-600 dark:text-stone-400">{props.group.note}</p>
             </Show>
             <Switch>
                 <Match when={layout() === "daily"}>
