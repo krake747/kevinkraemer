@@ -1,0 +1,37 @@
+import { dynamic, type ComponentProps, type ValidComponent } from "@solidjs/web"
+import { cva, cx, type VariantProps } from "@ui/cva.config"
+import { omit } from "solid-js"
+
+export const stackRow = cva({
+    base: "border border-stone-200/80 bg-stone-100 dark:border-stone-800 dark:bg-stone-900",
+    variants: {
+        size: {
+            default: "px-4 py-5",
+            compact: "px-4 py-3",
+            relaxed: "px-4 py-6",
+            roomy: "px-4 py-8",
+            spacious: "px-4 py-12",
+        },
+        interactive: {
+            true: "group transition-colors hover:bg-emerald-500/3 dark:hover:bg-emerald-500/5",
+            false: "",
+        },
+    },
+    defaultVariants: {
+        size: "default",
+        interactive: false,
+    },
+})
+
+export function StackRow<T extends ValidComponent = "div">(
+    props: ComponentProps<T> & VariantProps<typeof stackRow> & { as?: T },
+) {
+    const Tag = dynamic(() => props.as ?? "div")
+    const rest = omit(props, "as", "size", "interactive", "class", "children")
+
+    return (
+        <Tag {...rest} class={cx(stackRow({ size: props.size, interactive: props.interactive }), props.class)}>
+            {props.children}
+        </Tag>
+    )
+}

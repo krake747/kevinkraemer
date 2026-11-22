@@ -1,0 +1,37 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "jsx": "preserve",
+        "jsxImportSource": "@solidjs/web",
+        "types": ["node"],
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "noEmit": true,
+        "skipLibCheck": true,
+        "verbatimModuleSyntax": true,
+        "paths": {
+            "@core/*": ["./src/core/*"],
+            "@features/*": ["./src/features/*"],
+            "@generated/*": ["./src/generated/*"],
+            "@pattern/*": ["./src/pattern/*"],
+            "@testing/*": ["./src/testing/*"],
+            "@ui/*": ["./src/ui/*"]
+        },
+        "allowImportingTsExtensions": true,
+        "allowJs": true
+    },
+    "include": [
+        "src",
+        "scripts",
+        "netlify",
+        "e2e",
+        "vite.config.ts",
+        "vitest.config.ts",
+        "vitest.browser.config.ts",
+        "vitest.setup.ts",
+        "playwright.config.ts"
+    ],
+    "exclude": ["scripts/prerender.ts"]
+}

@@ -1,0 +1,107 @@
+{
+    "label": "development",
+    "order": 2,
+    "groups": [
+        {
+            "label": "languages",
+            "items": [
+                {
+                    "name": "TypeScript",
+                    "href": "https://www.typescriptlang.org",
+                    "note": "Strong domain modelling via types and unions."
+                },
+                {
+                    "name": "Golang",
+                    "href": "https://go.dev",
+                    "note": "Fast backends for cloud-native services."
+                },
+                {
+                    "name": "Python",
+                    "href": "https://www.python.org",
+                    "note": "Still my scripts, and my go-to for random stuff."
+                },
+                {
+                    "name": "C#",
+                    "href": "https://learn.microsoft.com/en-us/dotnet/csharp/",
+                    "note": "My way into software. Daily at work, reliable for enterprise."
+                }
+            ]
+        },
+        {
+            "label": "frameworks",
+            "items": [
+                {
+                    "name": "React",
+                    "href": "https://react.dev",
+                    "note": "Default. Angular was nice, but the ecosystem wins."
+                },
+                {
+                    "name": "TanStack",
+                    "href": "https://tanstack.com",
+                    "note": "My favourite way to build web apps."
+                },
+                {
+                    "name": "Solid",
+                    "href": "https://www.solidjs.com",
+                    "note": "For personal projects."
+                },
+                {
+                    "name": "Tailwind CSS",
+                    "href": "https://tailwindcss.com",
+                    "note": "Made me like CSS. Atomic classes are a joy to work with."
+                }
+            ]
+        },
+        {
+            "label": "cloud · work",
+            "note": "Cloud and DevOps is my weakest area. These are the tools I use at work when a situation calls for it.",
+            "items": [
+                {
+                    "name": "Azure",
+                    "href": "https://azure.microsoft.com",
+                    "note": "The cloud platform."
+                },
+                {
+                    "name": "OpenTofu",
+                    "href": "https://opentofu.org",
+                    "note": "Infrastructure as code."
+                },
+                {
+                    "name": "Docker",
+                    "href": "https://www.docker.com",
+                    "note": "Containers, also at home."
+                },
+                {
+                    "name": "Kubernetes",
+                    "href": "https://kubernetes.io",
+                    "note": "Orchestration."
+                },
+                {
+                    "name": "Helm",
+                    "href": "https://helm.sh",
+                    "note": "Packaging and deploys."
+                }
+            ]
+        },
+        {
+            "label": "cloud · home",
+            "items": [
+                {
+                    "name": "Cloudflare",
+                    "href": "https://www.cloudflare.com",
+                    "note": "Domains and delivery."
+                },
+                {
+                    "name": "Netlify",
+                    "href": "https://www.netlify.com",
+                    "note": "Hosts this site."
+                },
+                {
+                    "name": "Railway",
+                    "href": "https://railway.com",
+                    "note": "Backends."
+                }
+            ]
+        }
+    ]
+}

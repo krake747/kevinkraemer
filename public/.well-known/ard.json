@@ -1,0 +1,21 @@
+{
+    "entries": [
+        {
+            "@context": "https://agenticresourcediscovery.org/context/v1",
+            "identifier": "urn:air:www.kevinkraemer.com:mcp:site",
+            "displayName": "kevinkraemer.com MCP server",
+            "type": "application/mcp-server-card+json",
+            "url": "https://www.kevinkraemer.com/mcp/server-card",
+            "description": "Answers questions from Kevin Kraemer's published site and serves every page as markdown.",
+            "version": "1.0.0",
+            "capabilities": ["ask"],
+            "tags": ["portfolio", "biography", "logs", "retrieval"],
+            "representativeQueries": [
+                "what did Kevin Kraemer build at Dennemeyer",
+                "is Kevin Kraemer available for a full-stack role in Luxembourg",
+                "what has Kevin Kraemer written about type systems",
+                "how do I contact Kevin Kraemer"
+            ]
+        }
+    ]
+}

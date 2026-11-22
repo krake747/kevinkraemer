@@ -1,0 +1,124 @@
+name: Main gate
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  static:
+    name: Static checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Check formatting
+        run: vp fmt --check
+
+      - name: Generate content
+        run: vpr generate
+
+      - name: Lint
+        run: vp lint --deny-warnings
+
+      - name: TypeScript lint
+        run: vpr lint:ts
+
+      - name: Dead code audit
+        run: vpx fallow audit --quiet
+
+  coverage:
+    name: Code coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Run tests with coverage
+        run: vpr generate && vp test run --coverage --config vitest.config.ts
+
+      - name: Coverage summary
+        if: always()
+        run: node scripts/coverage-summary.mjs
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 7
+
+  e2e:
+    name: E2E
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install Playwright browsers
+        run: vpx playwright install --with-deps chromium
+
+      - name: Run E2E
+        run: vpx playwright test
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Build
+        run: vpr build
+
+  docs:
+    name: Docs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Check docs
+        run: node scripts/checks/docs.mjs
+
+  gate:
+    name: Full gate
+    needs: [static, coverage, e2e, build, docs]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Roll up job results
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          python3 -c "import json,os,sys; needs=json.loads(os.environ['NEEDS']); print({k: v['result'] for k,v in needs.items()}); sys.exit(0 if all(v['result'] in ('success','skipped') for k,v in needs.items()) else 1)"

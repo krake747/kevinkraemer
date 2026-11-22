@@ -1,0 +1,13 @@
+{
+    "company": "Banque de Luxembourg - Private Banking",
+    "role": "Trainee / Office Worker",
+    "location": "Luxembourg, Luxembourg",
+    "startDate": "Summer 2018",
+    "endDate": "Summer 2018 (4 weeks)",
+    "order": 4,
+    "responsibilities": [
+        "Contact mutual fund managers for client-related information to comply with MIFID II and GDPR requirements",
+        "Update portfolio database by cross-checking Eikon, Bloomberg, Morningstar, and fund manager data for consistency",
+        "Automate Excel business processes using Bloomberg and Morningstar APIs"
+    ]
+}

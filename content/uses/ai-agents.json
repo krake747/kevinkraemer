@@ -1,0 +1,51 @@
+{
+    "label": "ai & agents",
+    "order": 3,
+    "groups": [
+        {
+            "label": "agents",
+            "items": [
+                {
+                    "name": "OpenCode",
+                    "href": "https://opencode.ai",
+                    "note": "My daily harness. It writes, I review in Zed."
+                },
+                {
+                    "name": "Herdr",
+                    "href": "https://herdr.dev/",
+                    "note": "Keeps terminals alive, so long agent runs survive."
+                },
+                {
+                    "name": "Grok Bots",
+                    "href": "https://x.ai/bot",
+                    "note": "Personal tasks and light coding while I sleep."
+                }
+            ]
+        },
+        {
+            "label": "models",
+            "items": [
+                {
+                    "name": "Muse",
+                    "href": "https://dev.meta.ai/models/muse-spark",
+                    "note": "My main model for plans and stress-testing ideas."
+                },
+                {
+                    "name": "DeepSeek",
+                    "href": "https://www.deepseek.com",
+                    "note": "My main builder for speed and token efficiency."
+                },
+                {
+                    "name": "Claude",
+                    "href": "https://claude.ai",
+                    "note": "At work. Slow, but the quality holds up."
+                },
+                {
+                    "name": "OpenAI",
+                    "href": "https://openai.com",
+                    "note": "General chat and learning."
+                }
+            ]
+        }
+    ]
+}

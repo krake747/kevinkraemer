@@ -1,0 +1,135 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://www.kevinkraemer.com/",
+      "item": [
+        {
+          "href": "https://www.kevinkraemer.com/.well-known/api-catalog",
+          "rel": "self",
+          "type": "application/linkset+json",
+          "title": "This catalog"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/.well-known/ard.json",
+          "rel": "describedby",
+          "type": "application/json",
+          "title": "ARD manifest: this site's discoverable agentic resources"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/.well-known/agent-skills/index.json",
+          "rel": "describedby",
+          "type": "application/json",
+          "title": "Agent Skills Discovery index"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/mcp/server-card",
+          "rel": "service-desc",
+          "type": "application/mcp-server-card+json",
+          "title": "MCP Server Card for the /mcp endpoint"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/openapi.json",
+          "rel": "service-desc",
+          "type": "application/json",
+          "title": "OpenAPI specification of this site's retrieval API"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/llms.txt",
+          "rel": "describedby",
+          "type": "text/plain",
+          "title": "llms.txt site index written for agents"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/llms-full.txt",
+          "rel": "describedby",
+          "type": "text/plain",
+          "title": "Full content archive: every log entry in one file"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/logs-llms.txt",
+          "rel": "describedby",
+          "type": "text/plain",
+          "title": "Logs section guide for agents"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/rss.xml",
+          "rel": "alternate",
+          "type": "application/rss+xml",
+          "title": "Logs RSS feed"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/sitemap-index.xml",
+          "rel": "sitemap",
+          "type": "application/xml",
+          "title": "Sitemap of all indexed pages"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/robots.txt",
+          "rel": "describedby",
+          "type": "text/plain",
+          "title": "Crawler permissions and sitemap pointer"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/developers",
+          "rel": "service-doc",
+          "type": "text/html",
+          "title": "Developer documentation: endpoints and retrieval quickstart"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/scalar",
+          "rel": "service-doc",
+          "type": "text/html",
+          "title": "API Reference: interactive docs for the retrieval API"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/logs",
+          "rel": "related",
+          "type": "text/html",
+          "title": "Logs: writing on software, type systems, and finance"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/cv",
+          "rel": "related",
+          "type": "text/html",
+          "title": "Curriculum vitae"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/about",
+          "rel": "related",
+          "type": "text/html",
+          "title": "About Kevin Kraemer: background, current role, and philosophy"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/contact",
+          "rel": "related",
+          "type": "text/html",
+          "title": "Contact channels and response expectations"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/privacy",
+          "rel": "related",
+          "type": "text/html",
+          "title": "Data handling statement: no analytics, no tracking, no cookies"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/20260503_kevinkraemer_cv.pdf",
+          "rel": "related",
+          "type": "application/pdf",
+          "title": "Curriculum vitae (PDF)"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/uses",
+          "rel": "related",
+          "type": "text/html",
+          "title": "Uses: tools, runtimes, hardware and more"
+        },
+        {
+          "href": "https://www.kevinkraemer.com/projects",
+          "rel": "related",
+          "type": "text/html",
+          "title": "Projects: case files"
+        }
+      ]
+    }
+  ]
+}

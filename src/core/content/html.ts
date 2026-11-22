@@ -1,0 +1,66 @@
+const STRIP_SELECTORS = ["head", "script", "style", "noscript", "nav", "footer", "header"]
+
+const COLLAPSE_BLANK = /\n{3,}/g
+
+function stripFallbackTags(html: string): string {
+    return STRIP_SELECTORS.reduce(
+        (cleaned, tag) => cleaned.replace(new RegExp(`<${tag}[^>]*>[\\s\\S]*?<\\/${tag}>`, "gi"), ""),
+        html,
+    )
+}
+
+function stripFallbackSpans(html: string): string {
+    return [
+        /<!--[\s\S]*?-->/g,
+        /<span[^>]*class="[^"]*lambda[^"]*"[^>]*>[\s\S]*?<\/span>/gi,
+        /<span[^>]*>\|<\/span>/gi,
+    ].reduce((cleaned, pattern) => cleaned.replace(pattern, ""), html)
+}
+
+function cleanWithoutDom(html: string): string {
+    return stripFallbackSpans(stripFallbackTags(html)).replace(COLLAPSE_BLANK, "\n\n")
+}
+
+function removeSelectors(doc: Document): void {
+    for (const selector of STRIP_SELECTORS) {
+        doc.querySelectorAll(selector).forEach((element) => element.remove())
+    }
+}
+
+function removeLambdaSpans(doc: Document): void {
+    doc.querySelectorAll('span[class*="lambda"]').forEach((element) => element.remove())
+}
+
+function removePipeSpans(doc: Document): void {
+    doc.querySelectorAll("span").forEach((element) => {
+        if (element.textContent?.trim() === "|") {
+            element.remove()
+        }
+    })
+}
+
+function removeComments(doc: Document): void {
+    const walker = doc.createTreeWalker(doc, NodeFilter.SHOW_COMMENT)
+    const comments: Comment[] = []
+    let current: Node | null = walker.nextNode()
+    while (current !== null) {
+        if (current instanceof Comment) {
+            comments.push(current)
+        }
+        current = walker.nextNode()
+    }
+    comments.forEach((comment) => comment.remove())
+}
+
+function cleanWithDom(html: string): string {
+    const doc = new DOMParser().parseFromString(html, "text/html")
+    removeSelectors(doc)
+    removeLambdaSpans(doc)
+    removePipeSpans(doc)
+    removeComments(doc)
+    return (doc.body?.innerHTML ?? "").replace(COLLAPSE_BLANK, "\n\n")
+}
+
+export function cleanHtml(html: string): string {
+    return typeof globalThis.DOMParser === "undefined" ? cleanWithoutDom(html) : cleanWithDom(html)
+}

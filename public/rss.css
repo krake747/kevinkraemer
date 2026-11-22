@@ -1,0 +1,171 @@
+rss {
+    display: block;
+    min-height: 100vh;
+    margin: 0;
+    background: #fafaf9;
+    color: #1c1917;
+    font-family: Geist, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+channel {
+    display: block;
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 3rem 1rem 4rem;
+    counter-reset: entries;
+}
+
+channel > title {
+    display: block;
+    margin: 0.5rem 0 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+channel > title::before {
+    content: "> tail -f ~/logs -- rss.xml";
+    display: block;
+    margin-bottom: 0.5rem;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    color: #78716c;
+}
+
+channel > description {
+    display: block;
+    margin: 0.5rem 0 0;
+    max-width: 65ch;
+    line-height: 1.6;
+    color: #78716c;
+}
+
+channel > description::after {
+    content: "Subscribe by copying the feed URL: https://www.kevinkraemer.com/rss.xml -- also readable as HTML at /logs.";
+    display: block;
+    margin-top: 1rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e7e5e4;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #78716c;
+}
+
+channel > link,
+channel > language,
+channel > ttl {
+    display: none;
+}
+
+item {
+    display: block;
+    padding: 1.25rem 1rem;
+    border-top: 1px solid #e7e5e4;
+    counter-increment: entries;
+}
+
+item:last-child {
+    border-bottom: 1px solid #e7e5e4;
+}
+
+item > title {
+    display: block;
+    font-weight: 600;
+}
+
+item > description {
+    display: block;
+    margin-top: 0.25rem;
+    line-height: 1.5;
+    color: #57534e;
+}
+
+item > link {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    color: #059669;
+    word-break: break-all;
+}
+
+item > pubDate,
+item > category {
+    display: inline;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    color: #78716c;
+}
+
+item > pubDate {
+    margin-right: 1rem;
+}
+
+item > category::before {
+    content: "#";
+}
+
+item > category {
+    margin-right: 0.75rem;
+}
+
+item > guid,
+item > author {
+    display: none;
+}
+
+channel::after {
+    content: "entries -- " counter(entries)
+        " -- Reader tip: paste this URL into Feedly, NetNewsWire, or any RSS reader.";
+    display: block;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e7e5e4;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: #78716c;
+}
+
+@media (prefers-color-scheme: dark) {
+    rss {
+        background: #0c0a09;
+        color: #e7e5e4;
+    }
+
+    channel > title::before,
+    channel > description,
+    channel > description::after,
+    item > pubDate,
+    item > category,
+    channel::after {
+        color: #a8a29e;
+    }
+
+    channel > description::after {
+        border-bottom-color: #292524;
+    }
+
+    item {
+        border-top-color: #292524;
+    }
+
+    item:last-child {
+        border-bottom-color: #292524;
+    }
+
+    item > description {
+        color: #a8a29e;
+    }
+
+    item > link {
+        color: #34d399;
+    }
+
+    channel::after {
+        border-top-color: #292524;
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "label": "exploring",
+    "order": 4,
+    "groups": [
+        {
+            "label": "exploring",
+            "layout": "plain",
+            "items": [
+                {
+                    "name": "Rust",
+                    "href": "https://www.rust-lang.org",
+                    "note": "The eventual winner. Still learning."
+                },
+                {
+                    "name": "F#",
+                    "href": "https://fsharp.org",
+                    "note": "Wish I used it more. Hard to justify."
+                },
+                {
+                    "name": "OCaml",
+                    "href": "https://ocaml.org",
+                    "note": "Where my finance domain model lives."
+                },
+                {
+                    "name": "Gleam",
+                    "href": "https://gleam.run",
+                    "note": "Simple, but no reason yet."
+                },
+                {
+                    "name": "Octane",
+                    "href": "https://octanejs.dev/",
+                    "note": "Watching. Curious where it goes."
+                },
+                {
+                    "name": "TSRX",
+                    "href": "https://tsrx.dev/",
+                    "note": "JSX successor, compiles to Solid."
+                }
+            ]
+        }
+    ]
+}

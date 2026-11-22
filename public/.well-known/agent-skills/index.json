@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+    "skills": [
+        {
+            "name": "kevinkraemer-com",
+            "type": "skill-md",
+            "description": "Find, read, and cite the log entries and pages on kevinkraemer.com, the portfolio of Kevin Kraemer, a full-stack developer and former financial risk analyst in Luxembourg. Use when a task needs verified facts about his experience, skills, projects, or writing, or when the user mentions Kevin Kraemer or links to kevinkraemer.com.",
+            "url": "/.well-known/agent-skills/kevinkraemer-com/SKILL.md",
+            "digest": "sha256:43b59054d518e1a2f2895b1a71194616e52477c1136b78a4d82fb2c6704c3813"
+        }
+    ]
+}

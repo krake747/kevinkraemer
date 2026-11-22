@@ -1,0 +1,148 @@
+name: Verify pull request
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  filter:
+    name: Detect code changes
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+      docs: ${{ steps.filter.outputs.docs }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Detect code changes
+        id: filter
+        run: |
+          if git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD -- . ':!**.md' ':!docs/**' ':!LICENSE*' ':!NOTICE' | grep -q .; then
+            echo "code=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "code=false" >> "$GITHUB_OUTPUT"
+          fi
+          if git diff --name-only "${{ github.event.pull_request.base.sha }}"...HEAD -- '**.md' 'docs/**' 'LICENSE*' 'NOTICE' | grep -q .; then
+            echo "docs=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "docs=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  static:
+    name: Static checks
+    needs: filter
+    if: needs.filter.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Check formatting
+        run: vp fmt --check
+
+      - name: Generate content
+        run: vpr generate
+
+      - name: Lint
+        run: vp lint --deny-warnings
+
+      - name: TypeScript lint
+        run: vpr lint:ts
+
+      - name: Dead code audit
+        run: vpx fallow audit --quiet
+
+  unit:
+    name: Unit tests
+    needs: filter
+    if: needs.filter.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Run tests
+        run: vpr generate && vp test run --config vitest.config.ts
+
+  e2e:
+    name: E2E
+    needs: filter
+    if: needs.filter.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
+      - name: Install Playwright browsers
+        run: vpx playwright install --with-deps chromium
+
+      - name: Run E2E
+        run: vpx playwright test
+
+  build:
+    name: Build
+    needs: filter
+    if: needs.filter.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Vite+ and install dependencies
+        uses: ./.github/actions/setup
+
+      - name: Build
+        run: vpr build
+
+  docs:
+    name: Docs
+    needs: filter
+    if: needs.filter.outputs.code == 'true' || needs.filter.outputs.docs == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Check docs
+        run: node scripts/checks/docs.mjs
+
+  gate:
+    name: Full gate
+    needs: [filter, static, unit, e2e, build, docs]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Roll up job results
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          python3 -c "import json,os,sys; needs=json.loads(os.environ['NEEDS']); print({k: v['result'] for k,v in needs.items()}); sys.exit(0 if needs['filter']['result'] == 'success' and all(v['result'] in ('success','skipped') for k,v in needs.items() if k != 'filter') else 1)"

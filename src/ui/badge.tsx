@@ -1,0 +1,67 @@
+import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
+import { cva, cx, type VariantProps } from "@ui/cva.config"
+import { createMemo, omit } from "solid-js"
+
+const badge = cva({
+    base: "inline-flex items-center border font-mono transition-colors",
+    variants: {
+        tone: {
+            neutral: "border-stone-300/60 bg-transparent text-stone-700 dark:border-stone-700/60 dark:text-stone-300",
+            emerald:
+                "border-stone-300/60 bg-transparent text-emerald-800 dark:border-stone-700/60 dark:text-emerald-400",
+        },
+        size: {
+            sm: "px-2 py-0.5 text-xs",
+            xs: "px-1.5 py-0.5 text-[11px] leading-none tracking-wide",
+        },
+        interactive: {
+            true: "hit-area-x-1 hit-area-y-3",
+            false: "",
+        },
+    },
+    defaultVariants: {
+        tone: "neutral",
+        size: "sm",
+        interactive: false,
+    },
+    compoundVariants: [
+        {
+            interactive: true,
+            tone: "neutral",
+            class: "hover:border-emerald-500/30 hover:text-emerald-800 dark:text-stone-400 dark:hover:text-emerald-400",
+        },
+        {
+            interactive: true,
+            tone: "emerald",
+            class: "hover:border-emerald-500/30 hover:bg-emerald-500/5 dark:hover:border-emerald-500/30 dark:hover:bg-emerald-500/10",
+        },
+    ],
+})
+
+type BadgeVariants = VariantProps<typeof badge>
+type BadgeSpanProps = BadgeVariants & ComponentProps<"span"> & { as?: "span" }
+type BadgeAnchorProps = BadgeVariants & ComponentProps<"a"> & { as: "a"; external?: boolean }
+
+export function Badge(props: BadgeSpanProps | BadgeAnchorProps): JSX.Element {
+    const Tag = dynamic(() => props.as ?? "span")
+    const rest = createMemo(() => {
+        if (props.as === "a") {
+            return omit(props, "as", "tone", "size", "interactive", "class", "children", "external")
+        }
+        return omit(props, "as", "tone", "size", "interactive", "class", "children")
+    })
+    const tone = () => props.tone ?? "neutral"
+    const external = () => props.as === "a" && props.external === true
+    const externalAttrs = () => (external() ? { target: "_blank", rel: "noopener noreferrer" } : {})
+
+    return (
+        <Tag
+            {...rest()}
+            {...externalAttrs()}
+            class={cx(badge({ tone: tone(), size: props.size, interactive: props.interactive }), props.class)}
+        >
+            {props.children}
+            {external() ? <span class="sr-only"> (opens in a new tab)</span> : null}
+        </Tag>
+    )
+}

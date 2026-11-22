@@ -1,0 +1,20 @@
+{
+    "company": "Arkus Financial Services",
+    "role": "Software Developer & Risk Analyst",
+    "location": "Munsbach, Luxembourg",
+    "startDate": "October 2019",
+    "endDate": "March 2024",
+    "order": 3,
+    "responsibilities": [
+        "Managed client portfolios and produced risk reports, from daily to yearly. Handled reporting requests, feature development, and research on risk and finance processes to implement for clients.",
+        "Researched and implemented pricing and valuation services that risk analysts used for quantitative and qualitative assessment.",
+        "Assisted with client onboarding onto the Risk Radar platform. Handled asset mapping, data feeds and quality assurance.",
+        "Acted as the link between Risk and IT, the only person on the team working in both finance and software.",
+        "Developed and enhanced the Risk Radar risk analysis engine. Implemented investment restriction guidelines, liquidity, leverage and market risk routines, financial performance metrics, SRRI and PRIIPs calculations.",
+        "Built ETL pipelines that pulled end-of-day market data from the Refinitiv and Bloomberg APIs.",
+        "Developed front-end dashboards and widgets for asset and risk managers using Angular, AG Grid and AG Charts.",
+        "Led the migration of legacy .NET Framework 4.8 processes to .NET 8.",
+        "Consolidated internal Word and PDF documentation into one MkDocs Material site written in Markdown.",
+        "Moved the team from TFS/JIRA to Azure DevOps Services and Azure DevOps Boards."
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "$schema": "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
+    "name": "kevinkraemer.com/site",
+    "title": "kevinkraemer.com",
+    "description": "Answers questions from Kevin Kraemer's published site and serves every page as markdown.",
+    "version": "1.0.0",
+    "websiteUrl": "https://www.kevinkraemer.com/",
+    "remotes": [
+        {
+            "type": "streamable-http",
+            "url": "https://www.kevinkraemer.com/mcp",
+            "supportedProtocolVersions": [
+                "2025-11-25",
+                "2025-06-18",
+                "2025-03-26",
+                "2024-11-05",
+                "2024-10-07"
+            ]
+        }
+    ]
+}

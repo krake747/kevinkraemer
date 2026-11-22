@@ -1,0 +1,40 @@
+/*
+  Link: </.well-known/ard.json>; rel="ard"
+  Link: </llms.txt>; rel="describedby"
+  Link: </openapi.json>; rel="service-desc"
+  Link: </logs>; rel="archives"
+  Link: </sitemap-index.xml>; rel="sitemap"
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json
+  API-Version: 1.0.0
+
+/.well-known/ard.json
+  API-Version: 1.0.0
+
+/.well-known/agent-skills/index.json
+  API-Version: 1.0.0
+
+/mcp/server-card
+  API-Version: 1.0.0
+
+/openapi.json
+  API-Version: 1.0.0
+
+/llms.txt
+  API-Version: 1.0.0
+
+/llms-full.txt
+  API-Version: 1.0.0
+
+/logs-llms.txt
+  API-Version: 1.0.0
+
+/rss.xml
+  API-Version: 1.0.0
+
+/sitemap-index.xml
+  API-Version: 1.0.0
+
+/robots.txt
+  API-Version: 1.0.0

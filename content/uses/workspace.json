@@ -1,0 +1,57 @@
+{
+    "label": "workspace",
+    "order": 1,
+    "groups": [
+        {
+            "label": "daily",
+            "layout": "daily",
+            "items": [
+                {
+                    "name": "Omarchy",
+                    "href": "https://omarchy.org",
+                    "note": "Omakase by DHH. Preconfigured Arch."
+                },
+                {
+                    "name": "Zed",
+                    "href": "https://zed.dev",
+                    "note": "My only editor. Picked for speed."
+                },
+                {
+                    "name": "Ghostty",
+                    "href": "https://ghostty.org",
+                    "note": "A fast terminal. Where every day starts."
+                }
+            ]
+        },
+        {
+            "label": "hardware",
+            "layout": "hardware",
+            "items": [
+                {
+                    "name": "My Omarchy machine",
+                    "note": "Ryzen 7 5800X / RTX 3080, MSI X570 Tomahawk, 32GB DDR5."
+                },
+                {
+                    "name": "LG 34GN850",
+                    "note": "34-inch ultrawide, 3440 × 1440 at 144Hz."
+                },
+                {
+                    "name": "GMMK 2 Fullsize",
+                    "note": "At home. Main keyboard."
+                },
+                {
+                    "name": "Glorious Model O",
+                    "note": "At home. Light wired mouse."
+                },
+                {
+                    "name": "Nuphy Air 75 v2",
+                    "note": "At work. Compact."
+                },
+                {
+                    "name": "Keychron M3 Mini",
+                    "note": "At work. Wireless."
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+# Logs — section guide for agents
+
+> Log entries (the blog) on kevinkraemer.com: thoughts on software architecture,
+> type systems, finance meets code, and the spaces in between. Presented on-site
+> as `tail -f ~/logs`. Written for the Passer-by: each entry is self-contained.
+
+## Index
+
+- [Logs index](https://www.kevinkraemer.com/logs): all entries, newest first
+- [Full content archive](https://www.kevinkraemer.com/llms-full.txt): every entry in one file
+- [RSS feed](https://www.kevinkraemer.com/rss.xml): entries newest first
+- [Site index](https://www.kevinkraemer.com/llms.txt): when to use this site
+
+## How to retrieve entries
+
+```sh
+curl -H "Accept: text/markdown" https://www.kevinkraemer.com/logs
+curl https://www.kevinkraemer.com/logs/<slug>.md
+curl -H "Accept: text/markdown" https://www.kevinkraemer.com/logs/<slug>
+curl -H "Accept: application/json" https://www.kevinkraemer.com/logs/<slug>
+```
+
+Slugs are stable. Discover them via `/logs`, `/rss.xml`, or `/sitemap-index.xml`.
+`/logs/<slug>.md` is the authored file: YAML front matter (`title`, `description`, `date`,
+`tags`, `canonical`) followed by the entry as written, with links made absolute. Prefer it over the
+converted HTML when quoting or citing.
+Entry responses carry `Vary: Accept, Accept-Encoding` and `API-Version`.
+Unknown slugs return real HTTP 404 with an RFC 9457 problem body (`code`, `hint`).

@@ -1,0 +1,89 @@
+{
+    "$schema": "./node_modules/fallow/schema.json",
+    "entry": [
+        "public/rss.css",
+        "netlify/edge-functions/markdown.ts",
+        "src/app.tsx",
+        "src/middleware.ts",
+        "src/document.tsx"
+    ],
+    "supportEntry": [],
+    "ignorePatterns": [".agents/**", ".opencode/**", "scripts/**"],
+    "ignoreUnresolvedImports": ["/pagefind/pagefind.js"],
+    "ignoreBinaries": ["if", "then", "else", "fi"],
+    "rules": {
+        "unused-dependencies": "warn",
+        "unused-dev-dependencies": "warn",
+        "boundary-violation": "error"
+    },
+    "duplicates": {
+        "ignore": ["**/dist/**"]
+    },
+    "dynamicallyLoaded": ["src/routes/**/*.{ts,tsx}"],
+    "health": {
+        "maxCyclomatic": 20,
+        "maxCognitive": 15,
+        "maxCrap": 30
+    },
+    "ignoreExports": [
+        {
+            "file": "netlify/edge-functions/markdown.ts",
+            "exports": ["config"]
+        }
+    ],
+    "boundaries": {
+        "zones": [
+            {
+                "name": "core",
+                "patterns": ["src/core/**"]
+            },
+            {
+                "name": "ui",
+                "patterns": ["src/ui/**"]
+            },
+            {
+                "name": "pattern",
+                "patterns": ["src/pattern/**"]
+            },
+            {
+                "name": "features",
+                "patterns": ["src/features/**"]
+            },
+            {
+                "name": "routes",
+                "patterns": ["src/routes/**"]
+            },
+            {
+                "name": "edge",
+                "patterns": ["netlify/edge-functions/**"]
+            }
+        ],
+        "rules": [
+            {
+                "from": "core",
+                "allow": ["core"]
+            },
+            {
+                "from": "ui",
+                "allow": ["ui"]
+            },
+            {
+                "from": "pattern",
+                "allow": ["core", "ui", "pattern"]
+            },
+            {
+                "from": "features",
+                "allow": ["core", "ui", "pattern", "features"]
+            },
+            {
+                "from": "routes",
+                "allow": ["core", "ui", "pattern", "features", "routes"]
+            },
+            {
+                "from": "edge",
+                "allow": ["core", "edge"]
+            }
+        ]
+    },
+    "ignoreDependencies": ["filesystem-routing", "github-slugger", "satteri"]
+}

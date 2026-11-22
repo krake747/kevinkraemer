@@ -1,0 +1,38 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.{ts,tsx}"
+      exclude:
+        - "scripts/**"
+      run: pnpm lint {staged_files}
+      stage_fixed: true
+    fmt:
+      glob: "*.{ts,tsx,css,md,json,yaml,yml,toml}"
+      run: pnpm exec vp fmt {staged_files}
+      stage_fixed: true
+    prose-cliches:
+      glob: "content/logs/*.md"
+      run: node scripts/prose/cliche-lint.mjs {staged_files}
+    docs:
+      run: pnpm check:docs
+    strict-types:
+      run: node scripts/checks/strict-types.mjs
+    comments:
+      run: pnpm check:comments
+    test-titles:
+      run: pnpm check:tests
+    feature-names:
+      run: pnpm check:names
+    fallow:
+      run: pnpm exec fallow audit --base main --quiet --gate-marker pre-commit
+    fallow-complexity:
+      run: pnpm exec fallow health --complexity --quiet
+pre-push:
+  commands:
+    types:
+      run: pnpm lint:ts
+commit-msg:
+  commands:
+    conventional:
+      run: pnpm commitlint --edit {1}

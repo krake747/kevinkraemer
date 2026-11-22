@@ -1,0 +1,17 @@
+{
+    "company": "Dennemeyer Techsys S.A.",
+    "role": "Full-Stack Software Developer",
+    "location": "Howald, Luxembourg",
+    "startDate": "August 2024",
+    "endDate": null,
+    "order": 1,
+    "responsibilities": [
+        "Led the rewrite of the Simple IP web application from Blazor to React 19.2 using TypeScript, TanStack and Tailwind CSS",
+        "Own the architecture and development standards for the main Simple IP web application",
+        "Lead the technical side of the public-facing website, including the path marketing uses to publish updates",
+        "Rebuilt the .NET Blazor BFF as a lightweight gateway to microservices to simplify request routing and integration",
+        "Develop and maintain Golang microservices for the Simple IP platform that call services owned by other teams",
+        "Build and maintain CI/CD pipelines and manage Helm charts and Kubernetes deployments on Azure Kubernetes Service (AKS)",
+        "Assist a sister team migrating their Angular applications to React, with code review and support"
+    ]
+}

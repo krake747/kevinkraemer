@@ -1,0 +1,37 @@
+packages:
+  - .
+
+allowBuilds:
+  esbuild: true
+  fallow: true
+  lefthook: true
+  netlify: true
+  sharp: true
+  unix-dgram: false
+
+permissions:
+  "@solidjs/web":
+    skills: true
+  "@ui-sdk/core":
+    skills: true
+  fallow:
+    skills: true
+  solid-js:
+    skills: [reactivity-diagnostics, solid-2.0, solid-2.0-cheatsheet]
+
+skills:
+  dirs:
+    - .agents/skills
+catalog:
+  vite: npm:@voidzero-dev/vite-plus-core@8.3.8000
+  vitest: 5.1.0
+  vite-plus: 1.7.0
+  "@vitest/coverage-v8": 5.1.0
+overrides:
+  vite@*: "catalog:"
+  vitest@*: "catalog:"
+peerDependencyRules:
+  allowAny:
+    - vitest
+  allowedVersions:
+    vitest: "*"

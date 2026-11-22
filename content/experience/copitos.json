@@ -1,0 +1,11 @@
+{
+    "company": "Copitos Lux S.A.",
+    "role": "Full-Stack Software Developer",
+    "location": "Senningerberg, Luxembourg",
+    "startDate": "April 2024",
+    "endDate": "May 2024",
+    "order": 2,
+    "responsibilities": [
+        "Develop front-end and back-end solutions for a fund-related service provider within the Azure .NET software team"
+    ]
+}

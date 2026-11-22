@@ -1,0 +1,1 @@
+export const DEPRECATION_SUNSET_DAYS = 90
