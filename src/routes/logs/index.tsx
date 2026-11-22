@@ -23,9 +23,7 @@ export default function LogsRoute() {
                         What I'm figuring out about building software, written down as I go.
                     </p>
                 </div>
-
                 <LogFilter entries={siteContent.logs} />
-
                 <LogNoScript entries={siteContent.logs} />
             </section>
         </PageShell>

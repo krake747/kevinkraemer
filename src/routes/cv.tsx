@@ -29,17 +29,13 @@ export default function CvRoute() {
                         <TerminalCommandHeader command="cd ~/cv" class="mb-4 print:hidden" />
                         <CvHeader />
                     </header>
-
                     <CvSummary />
-
                     <CvSection id="experience" heading="Experience">
                         <CvTimeline />
                     </CvSection>
-
                     <CvSection id="skills" heading="Technical Skills">
                         <CvSkills />
                     </CvSection>
-
                     <CvSection
                         id="projects"
                         heading={
@@ -50,7 +46,6 @@ export default function CvRoute() {
                     >
                         <CvProjects />
                     </CvSection>
-
                     <CvSection id="education" heading="Education">
                         <CvEducation />
                     </CvSection>
