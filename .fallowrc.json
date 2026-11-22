@@ -14,8 +14,10 @@
     "rules": {
         "unused-dependencies": "warn",
         "unused-dev-dependencies": "warn",
-        "boundary-violation": "error"
+        "boundary-violation": "error",
+        "policy-violation": "error"
     },
+    "rulePacks": ["fallow-policy/imports.json"],
     "duplicates": {
         "ignore": ["**/dist/**"]
     },
