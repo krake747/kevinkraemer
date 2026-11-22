@@ -26,7 +26,8 @@ render leaf components owned elsewhere; domain state and loading stay with the o
 ## Consequences
 
 - One hook to grep; a component that drops it shows up in review.
-- One home for cross-cutting reuse; import direction is checkable by the boundary lint.
+- One home for cross-cutting reuse; import direction is checkable by `fallow audit` against the
+  `boundaries` zones and allow rules in `.fallowrc.json`.
 - Shared domain UI with behavior becomes a small feature rather than a shared component.
 - Supersedes prior platform-naming split; amends the mechanism-only layer with composition.
 

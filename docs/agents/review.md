@@ -39,10 +39,10 @@ file imports is the smell.
 
 Why repeating the feature in every file makes `log/log-card.tsx` read twice and puts the same word
 in the path and the identifier. Solve name every file in `src/features/{feature}/` after its part,
-not the feature: `log/card.tsx` exports `LogCard`, `developers/page.tsx` exports `DevelopersPage`,
-`command-palette/row-item.tsx` exports `CommandPaletteRowItem`. The file named exactly
-`{feature}.ts(x)` is the feature entry and exports the component of that name (`header.tsx` →
-`Header`, `footer.tsx` → `Footer`, `command-palette.tsx` → `CommandPalette`). Name a builder
+not the feature: `log/card.tsx` exports `LogCard`, `developers/footer.tsx` exports
+`DevelopersFooter`, `command-palette/row-item.tsx` exports `CommandPaletteRowItem`. The file named
+exactly `{feature}.ts(x)` is the feature entry and exports the component of that name (`header.tsx`
+→ `Header`, `footer.tsx` → `Footer`, `command-palette.tsx` → `CommandPalette`). Name a builder
 `create-{part}.ts` and export `create{Feature}{Part}` (`log/create-filter.ts` → `createLogFilter`,
 `mcp/create-handler.ts` → `createMcpHandler`). Keep `use*` for router and context readers only
 (`useParams`, `useSearchParams`), which arrive named. `src/ui/**` files keep their own kebab name
@@ -53,13 +53,14 @@ a file that repeats its folder or a component that is not `{Feature}{Part}`.
 
 Why a predictable part vocabulary lets an agent find a page's header, summary or row without opening
 the route, and keeps two parts from reading the same in a grep. Solve name the route export
-`{Name}Route`; put the page root in `src/features/{name}/` as `{Name}Page` (`CvPage`, `SearchPage`,
-`DevelopersPage`) or `{Name}Layout` when it wraps rather than owns the page (`ContactLayout`);
-prefix every part with the same stem (`CvHeader`, `CvSummary`, `CvTimeline`, `ProjectList`); end a
-section wrapper in `Section` (`AboutSection`, `UsesGroupSection`). Omit the parts a page does not
-have. A part that two pages need moves down to `src/pattern` or `src/ui` (`architecture.md`) instead
-of losing its stem in place. Check via `pnpm lint` (`kk/feature-names`) — a component without its
-page stem is the smell.
+`{Name}Route` (`SearchRoute`, `CvRoute`, `DevelopersRoute` in `src/routes`) and compose feature
+parts there; the page root in features is the part itself (`SearchInterface` in
+`src/features/search/interface.tsx`), or `{Name}Layout` when it wraps rather than owns the page
+(`ContactLayout`); prefix every part with the same stem (`CvHeader`, `CvSummary`, `CvTimeline`,
+`ProjectList`); end a section wrapper in `Section` (`AboutSection`, `UsesGroupSection`). Omit the
+parts a page does not have. A part that two pages need moves down to `src/pattern` or `src/ui`
+(`architecture.md`) instead of losing its stem in place. Check via `pnpm lint` (`kk/feature-names`)
+— a component without its page stem is the smell.
 
 ## Import alias — use `@` except `edge`
 
@@ -70,7 +71,11 @@ keep `netlify/edge-functions/**` on relative imports only, no `@` alias
 (`docs/adr/0004-edge-negotiation-conversion.md`). One exception: a `src` module the edge bundle
 imports joins the edge rule for its own imports, since the edge bundler resolves no aliases
 (`src/core/site/problem.ts` imports `./api-version.ts`). Keep the exception to modules the edge tree
-actually imports.
+actually imports. `kk/alias-imports` forbids relative imports under `src/`; the edge no-alias rule
+lives in the Fallow pack `fallow-policy/imports.json` (`imports/edge-no-aliases`), wired via
+`.fallowrc.json` `rulePacks`. Orchestrator and chrome leaves may import across features
+(`src/features/header/header.tsx` imports `CommandPalette`, `src/routes/index.tsx` composes
+`LogSubscribe`); do not treat those as boundary violations.
 
 ## Import order — packages, then aliases
 
@@ -111,10 +116,10 @@ of fetched records without `keyed` is the smell.
 Why a loading flag or a `{ failure }` union turns every reader into a branch. Solve let the memo
 body return the promise, put `Loading` around the first value and `isPending` on a refetch, and
 throw when the response is unusable so the nearest `Errored` renders the retry (`SearchFailed` in
-`search/page.tsx`, `CommandPaletteFailed` in `command-palette/failed.tsx`). Keep a value only for an
-expected outcome the caller renders differently (`SearchOutcome` `"unavailable"`, `CopyOutcome`).
-Check via `grep -n "Errored\|isPending" src` — an async read with a hand-rolled loading boolean is
-the smell.
+`src/features/search/interface.tsx`, `CommandPaletteFailed` in `command-palette/failed.tsx`). Keep a
+value only for an expected outcome the caller renders differently (`SearchOutcome` `"unavailable"`,
+`CopyOutcome`). Check via `grep -n "Errored\|isPending" src` — an async read with a hand-rolled
+loading boolean is the smell.
 
 ## Commit scope — attributable hunks, named behavior changes
 
@@ -135,5 +140,12 @@ both sides. Pass a prop that inserts JSX as an element and render it directly (`
 production strips the warnings — and load every route with the console open:
 `Hydration tag mismatch`, `Hydration structure mismatch`, or an "unclaimed server-rendered node"
 warning means an id moved. Search parameters are the other way to shift markup: they are absent
-while prerendering and not readable until the page settles, so gate `useSearchParams` reads behind
-`onSettled` and filter only after that (`log/filter.tsx`, `search/page.tsx`).
+while prerendering, so gate `useSearchParams` reads with `createHydrated()` from
+`@pattern/create-browser-value` (used in `src/pattern/create-url-query.ts` and
+`src/features/log/create-filter.ts`) and filter only after that.
+
+## Polymorphism — `as` is first-party, `render` is ui-sdk
+
+Why two override APIs in one tree doubles the review surface. Solve first-party hosts take
+`as="tag"` (`as="li"`, never `as={<li />}`), as in `docs/design/system.md`; ui-sdk primitives take
+their `render` prop. Do not mix the two APIs.
