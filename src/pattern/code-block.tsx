@@ -1,16 +1,15 @@
-import { createBrowserValue } from "@pattern/create-browser-value"
 import { createCopyFeedback } from "@pattern/create-copy-feedback"
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { omit, Show } from "solid-js"
+import { Show, createSignal, omit, onSettled } from "solid-js"
 
 export function CodeBlock(props: ComponentProps<"pre">) {
     const rest = omit(props, "class", "children")
     const { copyLabel, copy } = createCopyFeedback()
-    const supported = createBrowserValue(
-        true,
-        () => navigator.clipboard !== undefined && "writeText" in navigator.clipboard,
-    )
+    const [supported, setSupported] = createSignal(true)
+    onSettled(() => {
+        setSupported(navigator.clipboard !== undefined && "writeText" in navigator.clipboard)
+    })
     let code!: HTMLElement
 
     const handleCopy = () => {

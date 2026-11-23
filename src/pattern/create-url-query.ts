@@ -1,6 +1,6 @@
-import { createHydrated } from "@pattern/create-browser-value"
 import { createDebouncedInput } from "@pattern/create-debounced-input"
 import { useSearchParams } from "@solidjs/router"
+import { createSignal, onSettled } from "solid-js"
 
 type UrlParams = Record<string, string | string[] | undefined>
 
@@ -20,7 +20,10 @@ function paramValue(value: string | string[] | undefined): string {
 
 export function createUrlQuery({ param, wait }: UrlQueryOptions) {
     const [searchParams, setSearchParams] = useSearchParams<UrlParams>()
-    const isHydrated = createHydrated()
+    const [isHydrated, setHydrated] = createSignal(false)
+    onSettled(() => {
+        setHydrated(true)
+    })
     const committed = () => (isHydrated() ? paramValue(searchParams[param]) : "")
     const { input, update, reset } = createDebouncedInput({
         commit: (value) => {

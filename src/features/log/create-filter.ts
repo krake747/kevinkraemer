@@ -1,9 +1,8 @@
 import { filterLogEntries, getAllTags, sortByDateDesc, type LogEntry } from "@core/content/model"
 import { toLogSummaries } from "@features/log/summaries"
-import { createHydrated } from "@pattern/create-browser-value"
 import { createUrlQuery } from "@pattern/create-url-query"
 import { useSearchParams } from "@solidjs/router"
-import { createMemo } from "solid-js"
+import { createMemo, createSignal, onSettled } from "solid-js"
 
 type LogFilterCounts = {
     shown: number
@@ -14,7 +13,10 @@ export function createLogFilter(entries: () => LogEntry[]) {
     const summaries = createMemo(() => toLogSummaries(entries()))
     const tags = createMemo(() => getAllTags(entries()))
     const [searchParams, setSearchParams] = useSearchParams<{ tag?: string | string[] }>()
-    const isReady = createHydrated()
+    const [isReady, setReady] = createSignal(false)
+    onSettled(() => {
+        setReady(true)
+    })
     const query = createUrlQuery({ param: "q", wait: 0 })
 
     const selectedTags = createMemo<string[]>(() => {

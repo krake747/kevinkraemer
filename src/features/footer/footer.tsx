@@ -1,12 +1,12 @@
 import { siteContent } from "@core/content/site-content"
 import { isLogsPath } from "@core/site/navigation"
 import { FooterPixelAvatar, type PixelMood } from "@features/footer/pixel-avatar"
-import { createBrowserValue } from "@pattern/create-browser-value"
 import { useLocation } from "@solidjs/router"
 import { anchor } from "@ui/anchor"
 import { cx } from "@ui/cva.config"
 import { DecorMark } from "@ui/decor-mark"
 import { Bolt } from "@ui/icon"
+import { createSignal, onSettled } from "solid-js"
 
 const MOOD_BY_PATHNAME: Record<string, PixelMood> = {
     "/about": "wink",
@@ -23,7 +23,10 @@ function moodForPathname(pathname: string, night: boolean): PixelMood {
 
 export function Footer() {
     const location = useLocation()
-    const night = createBrowserValue(false, () => new Date().getHours() < 6)
+    const [night, setNight] = createSignal(false)
+    onSettled(() => {
+        setNight(new Date().getHours() < 6)
+    })
     return (
         <footer
             data-pagefind-ignore
