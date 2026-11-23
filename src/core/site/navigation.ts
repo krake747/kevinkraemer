@@ -4,40 +4,32 @@ export function isHomePath(pathname: string): boolean {
     return pathname === "/" || pathname === ""
 }
 
-export function isCvPath(pathname: string): boolean {
+function isSectionPath(pathname: string, section: string): boolean {
     return (
-        pathname === "/cv" ||
-        pathname === "/cv/" ||
-        pathname.startsWith("/cv/") ||
-        pathname.startsWith("/cv#") ||
-        pathname.startsWith("/cv?")
+        pathname === section ||
+        pathname === `${section}/` ||
+        pathname.startsWith(`${section}/`) ||
+        pathname.startsWith(`${section}#`) ||
+        pathname.startsWith(`${section}?`)
     )
+}
+
+export function isCvPath(pathname: string): boolean {
+    return isSectionPath(pathname, "/cv")
 }
 
 export function isLogsPath(pathname: string): boolean {
-    return (
-        pathname === "/logs" ||
-        pathname === "/logs/" ||
-        pathname.startsWith("/logs/") ||
-        pathname.startsWith("/logs#") ||
-        pathname.startsWith("/logs?")
-    )
+    return isSectionPath(pathname, "/logs")
 }
 
 function isUsesPath(pathname: string): boolean {
-    return (
-        pathname === "/uses" ||
-        pathname === "/uses/" ||
-        pathname.startsWith("/uses/") ||
-        pathname.startsWith("/uses#") ||
-        pathname.startsWith("/uses?")
-    )
+    return isSectionPath(pathname, "/uses")
 }
 
 export type NavEntry = {
     label: string
     href: string
-    keywords?: string[]
+    keywords: string[]
     topNav?: boolean
     active?: "home" | "cv" | "logs" | "uses" | "exact"
 }
