@@ -6,6 +6,7 @@ import { Result } from "better-result"
 import * as v from "valibot"
 
 const pagePrefix = "page_"
+const answerabilityKey = "answerable"
 
 const NoulAnswerSchema = v.object({ noul: v.number() })
 
@@ -57,7 +58,7 @@ export function parseJudgment(response: unknown, pages: TapePrint[]): Result<Ask
         if (!shaped.success) {
             return Result.err(new AskMalformedResponse({ message: "Missing ask answers", page: "" }))
         }
-        const answerable = v.safeParse(NoulAnswerSchema, shaped.output.answers["answerable"])
+        const answerable = v.safeParse(NoulAnswerSchema, shaped.output.answers[answerabilityKey])
         if (!answerable.success) {
             return Result.err(new AskMalformedResponse({ message: "Missing answerability answer", page: "" }))
         }
@@ -90,7 +91,7 @@ export const judgeWith =
                                 {
                                     state: buildGateState(question, pages),
                                     questions: {
-                                        answerable: noul(
+                                        [answerabilityKey]: noul(
                                             "Can the visitor's question be answered from the supplied site content?",
                                             {
                                                 true: "The site content states or clearly implies enough information to answer the question.",

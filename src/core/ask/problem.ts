@@ -1,8 +1,10 @@
 import type { AskError } from "@core/ask/errors"
+import { ASK_QUESTION_MAX_LENGTH } from "@core/ask/request"
 import type { Problem } from "@core/site/problem"
 import { matchError } from "better-result"
 
 const hint = "Send a question answered by this site; see /llms.txt and /openapi.json for valid resources."
+const upstreamDetail = "Answering failed; retry once, then fall back to /llms.txt."
 
 export function malformedBodyProblem(): Problem {
     return {
@@ -26,7 +28,7 @@ export function askProblem(error: AskError): Problem {
     return matchError<AskError, Problem>(error, {
         AskInvalidRequest: () => ({
             status: 400,
-            detail: 'Provide a question up to 500 characters as ?question= or {"question"}.',
+            detail: `Provide a question up to ${ASK_QUESTION_MAX_LENGTH} characters as ?question= or {"question"}.`,
             code: "INVALID_QUESTION",
             hint,
         }),
@@ -50,13 +52,13 @@ export function askProblem(error: AskError): Problem {
         }),
         AskUpstream: () => ({
             status: 502,
-            detail: "Answering failed; retry once, then fall back to /llms.txt.",
+            detail: upstreamDetail,
             code: "UPSTREAM_ERROR",
             hint,
         }),
         AskMalformedResponse: () => ({
             status: 502,
-            detail: "Answering failed; retry once, then fall back to /llms.txt.",
+            detail: upstreamDetail,
             code: "UPSTREAM_ERROR",
             hint,
         }),
