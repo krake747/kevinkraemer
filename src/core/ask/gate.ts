@@ -81,11 +81,11 @@ export const judgeWith =
         signal: AbortSignal,
     ): Promise<Result<AskPageJudgment, AskUpstream | AskMalformedResponse>> =>
         Result.gen(async function* () {
+            const client = new TypeSafeClient({ apiKey })
             const response = yield* Result.await(
                 Result.tryPromise(
                     {
                         try: () => {
-                            const client = new TypeSafeClient({ apiKey })
                             return client.systemOne(
                                 {
                                     state: buildGateState(question, pages),

@@ -7,11 +7,11 @@ const ANSWER_MODEL = "gpt-6-luna"
 
 export const answerWith =
     (apiKey: string) =>
-    (question: string, sources: TapePrint[], signal: AbortSignal): Promise<Result<string, AskUpstream>> =>
-        Result.tryPromise(
+    (question: string, sources: TapePrint[], signal: AbortSignal): Promise<Result<string, AskUpstream>> => {
+        const client = new OpenAI({ apiKey })
+        return Result.tryPromise(
             {
                 try: async () => {
-                    const client = new OpenAI({ apiKey })
                     const response = await client.responses.create(
                         {
                             model: ANSWER_MODEL,
@@ -31,3 +31,4 @@ export const answerWith =
                 retry: { times: 1, delayMs: 1000, backoff: "constant" },
             },
         )
+    }
