@@ -1,3 +1,5 @@
+import type { NonEmpty } from "@core/non-empty"
+
 export function isHomePath(pathname: string): boolean {
     return pathname === "/" || pathname === ""
 }
@@ -104,7 +106,7 @@ export function isActiveFor(entry: NavEntry, pathname: string): boolean {
     }
 }
 
-export type SectionLink = {
+type SectionLink = {
     label: string
     href: string
 }
@@ -112,6 +114,6 @@ export type SectionLink = {
 declare module "@solidjs/router" {
     // oxlint-disable-next-line typescript/consistent-type-definitions
     interface RouteInfo {
-        sections?: SectionLink[]
+        sections?: NonEmpty<SectionLink>
     }
 }

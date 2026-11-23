@@ -1,5 +1,6 @@
 import { type AskMalformedResponse, AskUnsupported, type AskUpstream, type AskError } from "@core/ask/errors"
 import type { TapePrint } from "@core/ask/tape"
+import { isNonEmpty, type NonEmpty } from "@core/non-empty"
 import { Result } from "better-result"
 
 export type AskPageJudgment = {
@@ -17,9 +18,7 @@ const answerabilityFloor = 0.85
 
 export const askSourceExclusions = ["/"]
 
-type RankedSelection = { kind: "supported"; sources: [TapePrint, ...TapePrint[]] } | { kind: "unsupported" }
-
-const isNonEmpty = <T>(items: T[]): items is [T, ...T[]] => items.length > 0
+type RankedSelection = { kind: "supported"; sources: NonEmpty<TapePrint> } | { kind: "unsupported" }
 
 export function rankSources(
     judgment: AskPageJudgment,
