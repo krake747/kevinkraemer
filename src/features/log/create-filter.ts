@@ -1,5 +1,5 @@
-import { toLogSummaries } from "@core/content/log-summaries"
 import { filterLogEntries, getAllTags, sortByDateDesc, type LogEntry } from "@core/content/model"
+import { toLogSummaries } from "@features/log/summaries"
 import { createHydrated } from "@pattern/create-browser-value"
 import { createUrlQuery } from "@pattern/create-url-query"
 import { useSearchParams } from "@solidjs/router"

@@ -1,5 +1,5 @@
-import { toLogSummaries } from "@core/content/log-summaries"
 import type { LogEntry } from "@core/content/model"
+import { toLogSummaries } from "@features/log/summaries"
 import { describe, expect, it } from "vite-plus/test"
 
 function entry(overrides: Partial<LogEntry> = {}): LogEntry {
