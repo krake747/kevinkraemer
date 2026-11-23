@@ -32,6 +32,16 @@ tester.run("kk/feature-names", featureNames, {
             filename: "src/ui/card.tsx",
             code: `export function AnythingGoes() { return null }`,
         },
+        {
+            name: "browser spec keeps the part stem",
+            filename: "src/features/log/toc.browser.spec.tsx",
+            code: `export {}`,
+        },
+        {
+            name: "browser spec for a builder",
+            filename: "src/features/ask/create-handler.browser.spec.ts",
+            code: `export {}`,
+        },
     ],
     invalid: [
         {

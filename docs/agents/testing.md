@@ -42,10 +42,10 @@ paste the passing run. The PR Evidence section carries both.
   parameterize with `test.each`, inject RNG and time.
 - **Components `src/features/**`, `src/ui/**`** Why component behavior needs a real browser, not a
   DOM simulation. Solve mount with `renderToContainer` from `@testing/render`
-  (`search-outcome-view.spec.tsx`), which renders into a detached container and disposes it after
+  (`outcome-view.browser.spec.tsx`), which renders into a detached container and disposes it after
   each test, then assert on text and structure (`querySelector`, `querySelectorAll`); every
-  `*.spec.tsx` plus the DOM-dependent `*.spec.ts` files live in the `browser` project
-  (`vitest.config.ts` `browserSpecs`).
+  `*.browser.spec.*` file lives in the `browser` project. Name a spec `*.browser.spec.*` when it
+  needs a real DOM; everything else runs on `node` in the `unit` project.
 - **E2E `e2e/**`** Why smoke proves wiring across pages, hydration, and the edge function. Solve
   `playwright.config.ts` `webServer: pnpm preview` (the Netlify CLI builds and serves the production
   stack), wait on `html[data-hydrated]` — set by `onHydrationEnd` in `src/app.tsx` — before

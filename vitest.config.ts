@@ -2,12 +2,6 @@ import solid from "@solidjs/vite-plugin"
 import { defineConfig } from "vite-plus"
 import { playwright } from "vite-plus/test/browser-playwright"
 
-const browserSpecs = [
-    "src/**/*.spec.tsx",
-    "src/pattern/create-copy-feedback.spec.ts",
-    "src/pattern/create-debounced-input.spec.ts",
-]
-
 export default defineConfig({
     plugins: [solid()],
     resolve: { tsconfigPaths: true },
@@ -25,14 +19,14 @@ export default defineConfig({
                         "scripts/**/*.spec.ts",
                         "lint/**/*.spec.ts",
                     ],
-                    exclude: browserSpecs,
+                    exclude: ["**/*.browser.spec.{ts,tsx}"],
                 },
             },
             {
                 test: {
                     name: "browser",
                     setupFiles: ["./vitest.setup.ts"],
-                    include: browserSpecs,
+                    include: ["src/**/*.browser.spec.{ts,tsx}"],
                     browser: {
                         enabled: true,
                         headless: true,

@@ -77,7 +77,10 @@ function fileParts(context) {
 }
 
 function fileStem(file) {
-    return file.replace(/\.spec\.(ts|tsx)$/, "").replace(/\.(ts|tsx)$/, "")
+    return file
+        .replace(/\.browser\.spec\.(ts|tsx)$/, "")
+        .replace(/\.spec\.(ts|tsx)$/, "")
+        .replace(/\.(ts|tsx)$/, "")
 }
 
 function checkKebab(context, program, stem) {
