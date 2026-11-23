@@ -2,6 +2,8 @@ import { CvBullets } from "@features/cv/bullets"
 import { CvDates } from "@features/cv/dates"
 import { CvRole } from "@features/cv/role"
 import { CvRowHeader } from "@features/cv/row-header"
+import { CvSection } from "@features/cv/section"
+import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
@@ -47,19 +49,22 @@ const EDUCATION_ENTRIES: Education[] = [
 
 export function CvEducation() {
     return (
-        <Stack>
-            <For each={EDUCATION_ENTRIES}>
-                {(item) => (
-                    <StackRow as="article" class="break-inside-avoid">
-                        <CvRowHeader title={item.institution} meta={item.location} />
-                        <CvRole>{item.degree}</CvRole>
-                        <CvDates start={item.startDate} end={item.endDate} separator="to" />
-                        {item.details !== undefined && item.details.length > 0 ? (
-                            <CvBullets items={item.details} />
-                        ) : null}
-                    </StackRow>
-                )}
-            </For>
-        </Stack>
+        <CvSection id="education">
+            <CvSectionHeading>Education</CvSectionHeading>
+            <Stack>
+                <For each={EDUCATION_ENTRIES}>
+                    {(item) => (
+                        <StackRow as="article" class="break-inside-avoid">
+                            <CvRowHeader title={item.institution} meta={item.location} />
+                            <CvRole>{item.degree}</CvRole>
+                            <CvDates start={item.startDate} end={item.endDate} separator="to" />
+                            {item.details !== undefined && item.details.length > 0 ? (
+                                <CvBullets items={item.details} />
+                            ) : null}
+                        </StackRow>
+                    )}
+                </For>
+            </Stack>
+        </CvSection>
     )
 }
