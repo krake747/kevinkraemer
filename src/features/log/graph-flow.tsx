@@ -1,7 +1,7 @@
 import type { FlowStep } from "@core/content/graphs"
 import type { GraphFlowSpec } from "@core/content/model"
 import { isFlowName, namedFlows, type FlowName } from "@features/log/flows"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
 type Lane = {
     caption: string
@@ -30,7 +30,7 @@ function gridClass(spec: GraphFlowSpec): string {
         : "grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-4"
 }
 
-export function LogGraphFlow(props: { spec: GraphFlowSpec }) {
+export function LogGraphFlow(props: VoidProps<{ spec: GraphFlowSpec }>) {
     return (
         <figure class="not-prose relative my-8 graph-frame font-mono text-sm/6" aria-label={props.spec.title}>
             <div

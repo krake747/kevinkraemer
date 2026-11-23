@@ -1,6 +1,6 @@
 import { DisclosureRow } from "@pattern/disclosure-row"
 import { PanelLabel } from "@ui/panel-label"
-import { For, Show } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
 const STATUS_ROWS = [
     { label: "base", value: "Luxembourg · CET" },
@@ -23,7 +23,7 @@ function ContactStatusRows() {
     )
 }
 
-export function ContactStatus(props: { as: "details" | "aside" }) {
+export function ContactStatus(props: VoidProps<{ as: "details" | "aside" }>) {
     return (
         <Show
             when={props.as === "details"}

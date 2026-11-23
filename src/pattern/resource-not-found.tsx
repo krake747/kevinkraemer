@@ -2,6 +2,7 @@ import { PageShell } from "@pattern/page-shell"
 import { Anchor } from "@ui/anchor"
 import { ChevronLeft } from "@ui/icon"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
+import type { VoidProps } from "solid-js"
 
 type ResourceNotFoundProps = {
     title: string
@@ -9,7 +10,7 @@ type ResourceNotFoundProps = {
     backLabel: string
 }
 
-export function ResourceNotFound(props: ResourceNotFoundProps) {
+export function ResourceNotFound(props: VoidProps<ResourceNotFoundProps>) {
     return (
         <PageShell>
             <TerminalCommandHeader command="cat missing.txt" class="mb-8 w-fit" />

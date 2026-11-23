@@ -1,7 +1,7 @@
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
 import { StackRow } from "@ui/stack-row"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
 type SkillCategory = {
     name: string
@@ -23,7 +23,7 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     },
 ]
 
-export function CvSkills(props: { id: string }) {
+export function CvSkills(props: VoidProps<{ id: string }>) {
     return (
         <CvSection id={props.id}>
             <CvSectionHeading>Technical Skills</CvSectionHeading>

@@ -3,9 +3,9 @@ import { useCommandPalette } from "@features/command-palette/provider"
 import { dynamic } from "@solidjs/web"
 import { CommandItem } from "@ui/command"
 import { ArrowRight } from "@ui/icon"
-import { Show, createMemo } from "solid-js"
+import { Show, createMemo, type VoidProps } from "solid-js"
 
-export function CommandPaletteRowItem(props: { row: CommandPaletteRow }) {
+export function CommandPaletteRowItem(props: VoidProps<{ row: CommandPaletteRow }>) {
     const { state } = useCommandPalette()
     const label = createMemo(() => {
         const flash = props.row.flash

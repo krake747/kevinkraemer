@@ -6,9 +6,9 @@ import { CommandPaletteRowItem } from "@features/command-palette/row-item"
 import { createMediaQuery } from "@solid-primitives/media"
 import { Command, CommandEmpty, CommandGroup, CommandGroupLabel, CommandInput, CommandList } from "@ui/command"
 import { Dialog, DialogBackdrop, DialogContent, DialogTitle } from "@ui/dialog"
-import { Errored, For, createEffect, latest } from "solid-js"
+import { Errored, For, createEffect, latest, type VoidProps } from "solid-js"
 
-export function CommandPaletteDialog(props: { open: boolean; onOpenChange: (next: boolean) => void }) {
+export function CommandPaletteDialog(props: VoidProps<{ open: boolean; onOpenChange: (next: boolean) => void }>) {
     return (
         <CommandPaletteProvider close={() => props.onOpenChange(false)}>
             <CommandPaletteDialogBody open={props.open} onOpenChange={props.onOpenChange} />

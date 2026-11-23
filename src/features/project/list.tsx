@@ -1,8 +1,8 @@
 import { sortByOrder, type Project } from "@core/content/model"
 import { Anchor } from "@ui/anchor"
-import { For, Show } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
-export function ProjectList(props: { projects: Project[] }) {
+export function ProjectList(props: VoidProps<{ projects: Project[] }>) {
     const ordered = () => sortByOrder(props.projects)
     return (
         <section aria-label="Case files" class="animate-fade-up [animation-delay:100ms]">

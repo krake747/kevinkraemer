@@ -1,7 +1,8 @@
 import { site } from "@core/site/site-meta"
 import { SectionShell } from "@pattern/section-shell"
+import type { VoidProps } from "solid-js"
 
-export function HomeContact(props: { id: string }) {
+export function HomeContact(props: VoidProps<{ id: string }>) {
     return (
         <SectionShell id={props.id} command={'echo "Get in touch"'}>
             <div class="flex max-w-prose flex-col gap-6">

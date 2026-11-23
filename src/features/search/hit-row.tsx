@@ -1,8 +1,9 @@
 import type { SearchHit } from "@core/search/pagefind"
 import { ArrowRight } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
+import type { VoidProps } from "solid-js"
 
-export function SearchHitRow(props: { hit: SearchHit }) {
+export function SearchHitRow(props: VoidProps<{ hit: SearchHit }>) {
     return (
         <StackRow as="li" interactive class="flex items-start justify-between gap-4">
             <a href={props.hit.href} class="contents">

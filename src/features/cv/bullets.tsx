@@ -1,6 +1,6 @@
 import { useCvEntryCurrent } from "@features/cv/entry"
 import { cva, type VariantProps } from "@ui/cva.config"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
 const bulletMark = cva({
     base: "font-mono",
@@ -12,7 +12,7 @@ const bulletMark = cva({
     },
 })
 
-export function CvBullets(props: { items: string[]; tone?: VariantProps<typeof bulletMark>["tone"] }) {
+export function CvBullets(props: VoidProps<{ items: string[]; tone?: VariantProps<typeof bulletMark>["tone"] }>) {
     const isCurrent = useCvEntryCurrent()
     const tone = () => bulletMark({ tone: props.tone ?? (isCurrent() ? "active" : "muted") })
     return (

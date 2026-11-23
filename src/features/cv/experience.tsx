@@ -9,9 +9,9 @@ import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
-export function CvExperience(props: { id: string }) {
+export function CvExperience(props: VoidProps<{ id: string }>) {
     const experienceEntries = sortByOrder(siteContent.experience)
 
     return (

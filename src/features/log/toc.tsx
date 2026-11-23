@@ -2,7 +2,7 @@ import type { LogTocEntry } from "@core/content/model"
 import { DisclosureRow } from "@pattern/disclosure-row"
 import { cva } from "@ui/cva.config"
 import { PanelLabel } from "@ui/panel-label"
-import { For, Show, createSignal, onSettled } from "solid-js"
+import { For, Show, createSignal, onSettled, type VoidProps } from "solid-js"
 
 const tocLink = cva({
     base: "-ml-px block border-l py-1.5 pl-3 wrap-break-word font-mono text-xs transition-colors duration-150 ease-out-quart",
@@ -17,7 +17,7 @@ const tocLink = cva({
     },
 })
 
-export function LogTocDisclosure(props: { entries: LogTocEntry[] }) {
+export function LogTocDisclosure(props: VoidProps<{ entries: LogTocEntry[] }>) {
     return (
         <Show when={props.entries.length > 1}>
             <DisclosureRow
@@ -51,7 +51,7 @@ export function LogTocDisclosure(props: { entries: LogTocEntry[] }) {
     )
 }
 
-export function LogToc(props: { entries: LogTocEntry[] }) {
+export function LogToc(props: VoidProps<{ entries: LogTocEntry[] }>) {
     const [active, setActive] = createSignal<string | undefined>(undefined)
 
     onSettled(() => {

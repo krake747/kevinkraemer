@@ -1,12 +1,13 @@
 import type { LogEntry } from "@core/content/model"
 import { stackRow } from "@ui/stack-row"
+import type { VoidProps } from "solid-js"
 
 const BY_ID = new Intl.Collator("en-US")
 
 const escapeHtml = (value: string): string =>
     value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;")
 
-export function LogNoScript(props: { entries: LogEntry[] }) {
+export function LogNoScript(props: VoidProps<{ entries: LogEntry[] }>) {
     const html = () =>
         [
             '<ul class="flex flex-col gap-4">',

@@ -1,8 +1,8 @@
 import type { LogEntry } from "@core/content/model"
 import { ArrowLeft, ArrowRight } from "@ui/icon"
-import { Show } from "solid-js"
+import { Show, type VoidProps } from "solid-js"
 
-export function LogPager(props: { older?: LogEntry; newer?: LogEntry }) {
+export function LogPager(props: VoidProps<{ older?: LogEntry; newer?: LogEntry }>) {
     return (
         <div class="mt-10 grid grid-cols-2 gap-6">
             <Show when={props.older} fallback={<div />}>

@@ -10,9 +10,9 @@ import { LogToc, LogTocDisclosure } from "@features/log/toc"
 import { Badge } from "@ui/badge"
 import { ChevronLeft, Clock, FileText } from "@ui/icon"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
-export function LogArticle(props: { detail: LogDetail }) {
+export function LogArticle(props: VoidProps<{ detail: LogDetail }>) {
     const entry = () => props.detail.entry
 
     return (

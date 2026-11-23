@@ -2,8 +2,9 @@ import { SearchPanelNote, SearchPanelTitle } from "@features/search/panel"
 import { Anchor } from "@ui/anchor"
 import { Button } from "@ui/button"
 import { StackRow } from "@ui/stack-row"
+import type { VoidProps } from "solid-js"
 
-export function SearchNoResults(props: { query: string; onClear: () => void }) {
+export function SearchNoResults(props: VoidProps<{ query: string; onClear: () => void }>) {
     return (
         <StackRow size="spacious" class="text-center">
             <SearchPanelTitle>

@@ -3,7 +3,7 @@ import { Anchor } from "@ui/anchor"
 import { PanelLabel } from "@ui/panel-label"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
-import { For, Match, Show, Switch } from "solid-js"
+import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
 function toolName(item: UsesItem, variant: "channel" | "muted") {
     const href = item.href
@@ -89,7 +89,7 @@ function UsesPlain(props: { items: UsesItem[] }) {
     )
 }
 
-export function UsesGroup(props: { group: UsesGroupData }) {
+export function UsesGroup(props: VoidProps<{ group: UsesGroupData }>) {
     const layout = () => props.group.layout
 
     return (

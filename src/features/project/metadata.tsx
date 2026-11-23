@@ -2,9 +2,9 @@ import type { Project } from "@core/content/model"
 import { ProjectMetadataRow } from "@features/project/metadata-row"
 import { Anchor } from "@ui/anchor"
 import { Stack } from "@ui/stack"
-import { Show } from "solid-js"
+import { Show, type VoidProps } from "solid-js"
 
-export function ProjectMetadata(props: { project: Project }) {
+export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
     return (
         <Stack as="dl" aria-label="Project metadata" class="mb-12">
             <ProjectMetadataRow label="Role">

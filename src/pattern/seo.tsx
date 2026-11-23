@@ -3,7 +3,7 @@ import { buildTitle, seoDefaults } from "@core/site/seo"
 import { site } from "@core/site/site-meta"
 import { canonicalFor, origin } from "@core/site/urls"
 import { Head, Link, Meta, Script, Title } from "@solidjs/meta"
-import { For, Show } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
 type SeoBase = {
     title: string
@@ -30,11 +30,11 @@ export function NoIndex() {
     return <Meta name="robots" content="noindex, nofollow" />
 }
 
-export function BreadcrumbSchema(props: { items: Crumb[] }) {
+export function BreadcrumbSchema(props: VoidProps<{ items: Crumb[] }>) {
     return <Script type="application/ld+json">{JSON.stringify(toJsonLd(makeBreadcrumbListSchema(props.items)))}</Script>
 }
 
-export function Seo(props: SeoProps) {
+export function Seo(props: VoidProps<SeoProps>) {
     const fullTitle = () => buildTitle(props.title)
     const description = () => props.description
     const article = (): Extract<SeoProps, { type: "article" }> | undefined =>

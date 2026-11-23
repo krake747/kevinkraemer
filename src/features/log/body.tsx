@@ -1,7 +1,7 @@
 import type { GraphFlowSpec } from "@core/content/model"
 import { LogGraphFlow } from "@features/log/graph-flow"
 import type { ComponentProps } from "@solidjs/web"
-import { For, omit, Show } from "solid-js"
+import { For, omit, Show, type VoidProps } from "solid-js"
 
 type Segment = { kind: "html"; html: string } | { kind: "graph"; slot: number }
 
@@ -27,7 +27,7 @@ function toSegments(html: string): Segment[] {
     return segments
 }
 
-export function LogBody(props: ComponentProps<"div"> & { html: string; graphs: GraphFlowSpec[] }) {
+export function LogBody(props: VoidProps<ComponentProps<"div"> & { html: string; graphs: GraphFlowSpec[] }>) {
     const rest = omit(props, "html", "graphs", "class", "children")
     const segments = () => toSegments(props.html)
 

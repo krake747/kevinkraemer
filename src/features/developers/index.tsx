@@ -1,8 +1,8 @@
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { omit } from "solid-js"
+import { omit, type VoidProps } from "solid-js"
 
-export function DevelopersIndex(props: ComponentProps<"span"> & { index: number }) {
+export function DevelopersIndex(props: VoidProps<ComponentProps<"span"> & { index: number }>) {
     const rest = omit(props, "index", "class", "children")
     return (
         <span

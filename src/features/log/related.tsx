@@ -4,9 +4,9 @@ import { ArrowRight } from "@ui/icon"
 import { SectionHeading } from "@ui/section-heading"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
-export function LogRelated(props: { entries: LogEntry[] }) {
+export function LogRelated(props: VoidProps<{ entries: LogEntry[] }>) {
     return (
         <>
             {props.entries.length > 0 ? (

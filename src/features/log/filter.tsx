@@ -7,7 +7,7 @@ import { LogFilterRail } from "@features/log/filter-rail"
 import { LogFilterSearch } from "@features/log/filter-search"
 import { LogFilterTags } from "@features/log/filter-tags"
 import { Stack } from "@ui/stack"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
 function LogFilterList() {
     const { state } = useLogFilter()
@@ -30,7 +30,7 @@ function LogFilterList() {
     )
 }
 
-export function LogFilter(props: { entries: LogEntry[] }) {
+export function LogFilter(props: VoidProps<{ entries: LogEntry[] }>) {
     return (
         <LogFilterProvider entries={props.entries}>
             <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem]">

@@ -3,7 +3,7 @@ import { siteContent } from "@core/content/site-content"
 import { SectionShell } from "@pattern/section-shell"
 import { ProseSectionBody } from "@ui/prose-section"
 import { SectionHeading } from "@ui/section-heading"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
 type Column = {
     entries: AboutEntry[]
@@ -30,7 +30,7 @@ function columns(): Column[] {
     ]
 }
 
-export function HomeAbout(props: { id: string }) {
+export function HomeAbout(props: VoidProps<{ id: string }>) {
     return (
         <SectionShell id={props.id} command="cat story.md">
             <div class="grid gap-12 lg:grid-cols-12">

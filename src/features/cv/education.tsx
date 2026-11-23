@@ -6,7 +6,7 @@ import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
 type Education = {
     institution: string
@@ -47,7 +47,7 @@ const EDUCATION_ENTRIES: Education[] = [
     },
 ]
 
-export function CvEducation(props: { id: string }) {
+export function CvEducation(props: VoidProps<{ id: string }>) {
     return (
         <CvSection id={props.id}>
             <CvSectionHeading>Education</CvSectionHeading>

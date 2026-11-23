@@ -4,7 +4,7 @@ import { Anchor } from "@ui/anchor"
 import { ArrowUpRight } from "@ui/icon"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
-import { For, Show } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
 type SideProject = {
     name: string
@@ -30,7 +30,7 @@ const SIDE_PROJECTS: SideProject[] = [
     },
 ]
 
-export function CvProjects(props: { id: string }) {
+export function CvProjects(props: VoidProps<{ id: string }>) {
     return (
         <CvSection id={props.id}>
             <CvSectionHeading>
