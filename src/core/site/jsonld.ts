@@ -1,15 +1,19 @@
 import { site } from "@core/site/site-meta"
 import { origin } from "@core/site/urls"
 
-export function makePersonSchema(personUrl: string, knowsAbout: string[] = [...site.keywords].slice(1)) {
+const PERSON_BIO = "Full-stack developer and former financial risk analyst based in Luxembourg"
+const JOB_TITLE = "Full-stack Developer"
+const PERSON_KNOWS_ABOUT = [...site.keywords].slice(1)
+
+export function makePersonSchema(personUrl: string, knowsAbout: string[] = PERSON_KNOWS_ABOUT) {
     return {
         context: "https://schema.org",
         kind: "Person",
         name: site.name,
         url: personUrl,
-        jobTitle: "Full-stack Developer",
+        jobTitle: JOB_TITLE,
         sameAs: [site.socials.github, site.socials.linkedin],
-        description: "Full-stack developer and former financial risk analyst based in Luxembourg",
+        description: PERSON_BIO,
         knowsAbout,
     }
 }
@@ -40,7 +44,7 @@ function makeOrganizationSchema() {
 export function makeHomepageOrganizationSchema() {
     return {
         ...makeOrganizationSchema(),
-        knowsAbout: [...site.keywords].slice(1),
+        knowsAbout: PERSON_KNOWS_ABOUT,
         makesOffer: {
             kind: "Offer",
             itemOffered: {
@@ -67,7 +71,7 @@ export function makeWebSiteSchema() {
         kind: "WebSite",
         name: site.name,
         url: site.url,
-        description: "Full-stack developer and former financial risk analyst based in Luxembourg",
+        description: PERSON_BIO,
         inLanguage: "en",
         keywords: site.keywords.join(", "),
     }
@@ -79,13 +83,13 @@ export function makeProfilePageSchema() {
         kind: "ProfilePage",
         name: `${site.name} · Full-stack developer`,
         url: site.url,
-        description: "Full-stack developer and former financial risk analyst based in Luxembourg",
+        description: PERSON_BIO,
         inLanguage: "en",
         mainEntity: {
             kind: "Person",
             name: site.name,
             url: site.url,
-            jobTitle: "Full-stack Developer",
+            jobTitle: JOB_TITLE,
         },
     }
 }
@@ -145,7 +149,7 @@ export function makeBlogSchema(input: {
             kind: "Person",
             name: input.author,
             url: site.url,
-            jobTitle: "Full-stack Developer",
+            jobTitle: JOB_TITLE,
             sameAs: [site.socials.github, site.socials.linkedin],
         },
         publisher: makeOrganizationSchema(),
