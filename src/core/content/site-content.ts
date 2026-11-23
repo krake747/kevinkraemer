@@ -1,6 +1,9 @@
+import { CONTENT_BUNDLE_VERSION } from "@core/content/content-intake"
 import type { ContentBundle } from "@core/content/model"
 import { content } from "@generated/content"
 
-const siteContent: ContentBundle = content
+if (content.meta.version !== CONTENT_BUNDLE_VERSION) {
+    throw new Error(`content bundle v${content.meta.version} does not match reader v${CONTENT_BUNDLE_VERSION}`)
+}
 
-export { siteContent }
+export const siteContent: ContentBundle = content

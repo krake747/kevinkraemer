@@ -103,7 +103,7 @@ export type Project = {
 }
 
 export type ContentBundle = {
-    meta: { cvUpdated: string; usesUpdated: string; buildDate: string; buildYear: number }
+    meta: { cvUpdated: string; usesUpdated: string; buildDate: string; buildYear: number; version: number }
     logs: LogEntry[]
     about: AboutEntry[]
     experience: ExperienceEntry[]

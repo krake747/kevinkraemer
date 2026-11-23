@@ -15,101 +15,14 @@ import { isFlowName, type FlowName } from "../src/features/log/flows.ts"
 const CONTENT = fileURLToPath(new URL("../content", import.meta.url))
 const OUT = fileURLToPath(new URL("../src/generated/content.ts", import.meta.url))
 
-const LogEntrySchema = v.object({
-    title: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
-    description: v.pipe(v.string(), v.minLength(10), v.maxLength(200)),
-    date: v.pipe(
-        v.string(),
-        v.minLength(1),
-        v.check((value) => !Number.isNaN(Date.parse(value)), "date must parse to a timestamp"),
-    ),
-    tags: v.optional(v.array(v.string()), []),
-})
-
-const AboutSchema = v.object({
-    title: v.pipe(v.string(), v.minLength(1), v.maxLength(50)),
-    order: v.pipe(v.number(), v.integer()),
-})
-
-const ExperienceSchema = v.object({
-    company: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
-    role: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
-    location: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
-    startDate: v.pipe(v.string(), v.minLength(1), v.maxLength(50)),
-    endDate: v.nullable(v.pipe(v.string(), v.minLength(1), v.maxLength(50))),
-    order: v.pipe(v.number(), v.integer()),
-    responsibilities: v.array(v.pipe(v.string(), v.minLength(1))),
-})
-
-const UsesItemSchema = v.object({
-    name: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
-    href: v.optional(v.pipe(v.string(), v.url())),
-    note: v.pipe(v.string(), v.minLength(1), v.maxLength(300)),
-    ariaLabel: v.optional(v.pipe(v.string(), v.minLength(1), v.maxLength(200))),
-})
-
-const UsesSchema = v.object({
-    label: v.pipe(v.string(), v.minLength(1), v.maxLength(50)),
-    order: v.pipe(v.number(), v.integer()),
-    groups: v.array(
-        v.object({
-            label: v.pipe(v.string(), v.minLength(1), v.maxLength(50)),
-            note: v.optional(v.pipe(v.string(), v.minLength(1), v.maxLength(300))),
-            layout: v.optional(v.picklist(["rows", "daily", "hardware", "plain"]), "rows"),
-            items: v.array(UsesItemSchema),
-        }),
-    ),
-})
-
-const ProjectSchema = v.object({
-    name: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
-    tagline: v.pipe(v.string(), v.minLength(1), v.maxLength(300)),
-    status: v.pipe(v.string(), v.minLength(1), v.maxLength(50)),
-    year: v.optional(v.pipe(v.number(), v.integer())),
-    stack: v.array(v.pipe(v.string(), v.minLength(1))),
-    role: v.pipe(v.string(), v.minLength(1), v.maxLength(200)),
-    liveUrl: v.optional(v.pipe(v.string(), v.url())),
-    repoUrl: v.optional(v.pipe(v.string(), v.url())),
-    figure: v.optional(
-        v.union([
-            v.object({
-                value: v.pipe(v.string(), v.minLength(1), v.maxLength(20)),
-                label: v.pipe(v.string(), v.minLength(1), v.maxLength(60)),
-                source: v.optional(v.literal("manual")),
-            }),
-            v.object({
-                label: v.pipe(v.string(), v.minLength(1), v.maxLength(60)),
-                source: v.literal("prerender-routes"),
-            }),
-        ]),
-    ),
-    order: v.pipe(v.number(), v.integer()),
-    problem: v.pipe(v.string(), v.minLength(1)),
-    decisions: v.array(
-        v.object({
-            title: v.pipe(v.string(), v.minLength(1)),
-            reason: v.pipe(v.string(), v.minLength(1)),
-        }),
-    ),
-    evidence: v.optional(
-        v.array(
-            v.object({
-                caption: v.pipe(v.string(), v.minLength(1)),
-            }),
-        ),
-        [],
-    ),
-    changelog: v.optional(
-        v.array(
-            v.object({
-                label: v.pipe(v.string(), v.minLength(1)),
-                href: v.optional(v.pipe(v.string(), v.url())),
-                note: v.optional(v.pipe(v.string(), v.minLength(1))),
-            }),
-        ),
-        [],
-    ),
-})
+import {
+    AboutSchema,
+    CONTENT_BUNDLE_VERSION,
+    ExperienceSchema,
+    LogEntrySchema,
+    ProjectSchema,
+    UsesSchema,
+} from "../src/core/content/content-intake.ts"
 
 function parseFlow(value: string, file: string): FlowName {
     if (isFlowName(value)) {
@@ -332,6 +245,7 @@ const projects: Project[] = rawProjects.map((project) => {
 
 const content = {
     meta: {
+        version: CONTENT_BUNDLE_VERSION,
         cvUpdated: readCvUpdated(),
         usesUpdated: readUsesUpdated(),
         buildDate: new Date().toISOString().slice(0, 10),
