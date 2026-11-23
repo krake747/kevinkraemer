@@ -16,6 +16,7 @@
             "@features/*": ["./src/features/*"],
             "@generated/*": ["./src/generated/*"],
             "@pattern/*": ["./src/pattern/*"],
+            "@routes/*": ["./src/routes/*"],
             "@testing/*": ["./src/testing/*"],
             "@ui/*": ["./src/ui/*"]
         },

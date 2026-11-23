@@ -30,9 +30,9 @@ function columns(): Column[] {
     ]
 }
 
-export function HomeAbout() {
+export function HomeAbout(props: { id: string }) {
     return (
-        <SectionShell id="story" command="cat story.md">
+        <SectionShell id={props.id} command="cat story.md">
             <div class="grid gap-12 lg:grid-cols-12">
                 <For each={columns()}>
                     {(column) => (

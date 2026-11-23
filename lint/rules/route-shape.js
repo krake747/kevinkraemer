@@ -18,7 +18,7 @@ export const routeShape = defineRule({
         },
     },
     create(context) {
-        if (!inRoutes(context.filename)) {
+        if (!inRoutes(context.filename) || context.filename.includes(".spec.")) {
             return {}
         }
         const page = context.filename.endsWith(".tsx")

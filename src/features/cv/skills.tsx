@@ -23,9 +23,9 @@ const SKILL_CATEGORIES: SkillCategory[] = [
     },
 ]
 
-export function CvSkills() {
+export function CvSkills(props: { id: string }) {
     return (
-        <CvSection id="skills">
+        <CvSection id={props.id}>
             <CvSectionHeading>Technical Skills</CvSectionHeading>
             <StackRow>
                 <div class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 md:grid-cols-3">

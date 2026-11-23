@@ -12,7 +12,14 @@ import { HomeContact } from "@features/home/contact"
 import { HomeHero } from "@features/home/hero"
 import { HomeLogs } from "@features/home/logs"
 import { LogSubscribe } from "@features/log/subscribe"
+import { PageSections, type SectionLink } from "@pattern/section-nav"
 import { Seo } from "@pattern/seo"
+
+const SECTION_LINKS: SectionLink[] = [
+    { label: "#story", href: "/#story" },
+    { label: "#logs", href: "/#logs" },
+    { label: "#contact", href: "/#contact" },
+]
 
 export default function HomeRoute() {
     const recentLogs = getRecentLogEntries(siteContent.logs, HOMEPAGE_RECENT_LOG_COUNT)
@@ -38,12 +45,13 @@ export default function HomeRoute() {
                 path="/"
                 extraSchemas={extraSchemas}
             />
+            <PageSections links={SECTION_LINKS} />
             <HomeHero />
-            <HomeAbout />
-            <HomeLogs entries={recentLogs}>
+            <HomeAbout id="story" />
+            <HomeLogs entries={recentLogs} id="logs">
                 <LogSubscribe />
             </HomeLogs>
-            <HomeContact />
+            <HomeContact id="contact" />
         </div>
     )
 }

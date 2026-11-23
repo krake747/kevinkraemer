@@ -68,7 +68,7 @@ export const routeSeoPath = defineRule({
         },
     },
     create(context) {
-        if (!inRoutes(context.filename) || !context.filename.endsWith(".tsx")) {
+        if (!inRoutes(context.filename) || !context.filename.endsWith(".tsx") || context.filename.includes(".spec.")) {
             return {}
         }
         const expected = routePath(context.filename)

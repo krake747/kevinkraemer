@@ -11,11 +11,11 @@ import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
 
-export function CvExperience() {
+export function CvExperience(props: { id: string }) {
     const experienceEntries = sortByOrder(siteContent.experience)
 
     return (
-        <CvSection id="experience">
+        <CvSection id={props.id}>
             <CvSectionHeading>Experience</CvSectionHeading>
             <Stack>
                 <For each={experienceEntries}>

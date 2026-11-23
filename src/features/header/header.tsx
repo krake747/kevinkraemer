@@ -1,6 +1,7 @@
-import { getCurrentPageLabel, getSectionLinks, isActiveFor, TOP_NAV } from "@core/site/navigation"
+import { getCurrentPageLabel, isActiveFor, TOP_NAV } from "@core/site/navigation"
 import { CommandPalette } from "@features/command-palette/command-palette"
 import { ThemeToggle } from "@features/theme/toggle"
+import { useSectionLinks } from "@pattern/section-nav"
 import { useLocation } from "@solidjs/router"
 import { anchor } from "@ui/anchor"
 import { cx } from "@ui/cva.config"
@@ -10,7 +11,7 @@ import { For, Show, createMemo } from "solid-js"
 export function Header() {
     const location = useLocation()
     const pageLabel = createMemo(() => getCurrentPageLabel(location.pathname))
-    const sectionLinks = createMemo(() => getSectionLinks(location.pathname))
+    const sectionLinks = useSectionLinks()
 
     return (
         <header

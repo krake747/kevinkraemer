@@ -42,6 +42,11 @@ tester.run("kk/route-seo-path", routeSeoPath, {
             filename: "src/features/log/article.tsx",
             code: `export function LogArticle() { return null }`,
         },
+        {
+            name: "route spec files hold tests, not routes",
+            filename: "src/routes/cv.spec.tsx",
+            code: `import { describe, it } from "vite-plus/test"`,
+        },
     ],
     invalid: [
         {

@@ -47,9 +47,9 @@ const EDUCATION_ENTRIES: Education[] = [
     },
 ]
 
-export function CvEducation() {
+export function CvEducation(props: { id: string }) {
     return (
-        <CvSection id="education">
+        <CvSection id={props.id}>
             <CvSectionHeading>Education</CvSectionHeading>
             <Stack>
                 <For each={EDUCATION_ENTRIES}>

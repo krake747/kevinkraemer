@@ -1,9 +1,9 @@
 import { site } from "@core/site/site-meta"
 import { SectionShell } from "@pattern/section-shell"
 
-export function HomeContact() {
+export function HomeContact(props: { id: string }) {
     return (
-        <SectionShell id="contact" command={'echo "Get in touch"'}>
+        <SectionShell id={props.id} command={'echo "Get in touch"'}>
             <div class="flex max-w-prose flex-col gap-6">
                 <p class="reveal-item text-base/[1.8] text-stone-600 dark:text-stone-400">
                     Got something you want to build, a role to fill, or feel like talking shop? Write me. I reply to

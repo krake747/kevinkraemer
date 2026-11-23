@@ -30,9 +30,9 @@ const SIDE_PROJECTS: SideProject[] = [
     },
 ]
 
-export function CvProjects() {
+export function CvProjects(props: { id: string }) {
     return (
-        <CvSection id="projects">
+        <CvSection id={props.id}>
             <CvSectionHeading>
                 <Anchor href="/projects" variant="muted" class="text-xs">
                     Projects

@@ -1,12 +1,4 @@
-import {
-    getCurrentPageLabel,
-    getSectionLinks,
-    isActiveFor,
-    isCvPath,
-    isHomePath,
-    isLogsPath,
-    TOP_NAV,
-} from "@core/site/navigation"
+import { getCurrentPageLabel, isActiveFor, isCvPath, isHomePath, isLogsPath, TOP_NAV } from "@core/site/navigation"
 import { describe, expect, it } from "vite-plus/test"
 
 describe("the home path", () => {
@@ -73,31 +65,5 @@ describe("navigation", () => {
             expect(active).toHaveLength(1)
             expect(active[0]?.label).toBe(expected)
         }
-    })
-
-    it("returns cv section links on cv", () => {
-        expect(getSectionLinks("/cv").map((link) => link.href)).toEqual([
-            "/cv#experience",
-            "/cv#skills",
-            "/cv#projects",
-            "/cv#education",
-        ])
-    })
-
-    it("returns home section links on home", () => {
-        expect(getSectionLinks("/").map((link) => link.href)).toEqual(["/#story", "/#logs", "/#contact"])
-    })
-
-    it("returns uses section links on uses", () => {
-        expect(getSectionLinks("/uses").map((link) => link.href)).toEqual([
-            "/uses#workspace",
-            "/uses#development",
-            "/uses#ai-agents",
-            "/uses#exploring",
-        ])
-    })
-
-    it("returns no section links elsewhere", () => {
-        expect(getSectionLinks("/logs")).toEqual([])
     })
 })
