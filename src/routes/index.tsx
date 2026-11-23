@@ -1,4 +1,4 @@
-import { HOMEPAGE_RECENT_LOG_COUNT, getRecentLogEntries } from "@core/content/model"
+import { getRecentLogEntries } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
 import {
     makeHomepageBlogSchema,
@@ -26,8 +26,10 @@ const SECTION_LINKS = [
 
 export const route = defineFileRoute("/", { info: { sections: [...SECTION_LINKS] } })
 
+const RECENT_LOG_COUNT = 3
+
 export default function HomeRoute() {
-    const recentLogs = getRecentLogEntries(siteContent.logs, HOMEPAGE_RECENT_LOG_COUNT)
+    const recentLogs = getRecentLogEntries(siteContent.logs, RECENT_LOG_COUNT)
     const homepageSchemas = [
         makeProfilePageSchema(),
         makeWebSiteSchema(),

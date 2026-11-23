@@ -113,8 +113,6 @@ export type ContentBundle = {
     projects: Project[]
 }
 
-export const HOMEPAGE_RECENT_LOG_COUNT = 3
-
 export function findById<T extends { id: string }>(items: readonly T[], id: string | undefined): T | undefined {
     return id === undefined ? undefined : items.find((item) => item.id === id)
 }
