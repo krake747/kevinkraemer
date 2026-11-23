@@ -33,7 +33,9 @@ surface. Solve declare each shape where it is owned, then narrow at the use site
 `Omit`, `Parameters`, `ReturnType`, or `typeof`, and with `v.InferOutput` where a valibot schema
 owns it (`LogSummary`, `CatalogEntry`, `TapeFile`). Check via
 `git diff main -- src | grep "^+type .* = {"` — a new literal whose fields already sit on a type the
-file imports is the smell.
+file imports is the smell. Renders children take `ParentProps` (or `ComponentProps`, which carries
+them); data-only components take `VoidProps` so stray text fails instead of vanishing. A new
+component whose body never reads `props.children` but whose props lack `VoidProps` is the smell.
 
 ## File naming — kebab-case, the folder names the part
 
