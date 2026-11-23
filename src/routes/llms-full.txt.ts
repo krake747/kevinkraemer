@@ -1,4 +1,4 @@
-import { sortLogEntries, sortByOrder } from "@core/content/model"
+import { sortByDateDesc, sortByOrder } from "@core/content/model"
 import type { LogEntry, Project } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
 import { catalogEntries } from "@core/site/catalog"
@@ -98,7 +98,7 @@ export function GET(): Response {
             "",
             "## Logs",
             "",
-            ...sortLogEntries(siteContent.logs).flatMap(formatLogEntry),
+            ...sortByDateDesc(siteContent.logs).flatMap(formatLogEntry),
             "",
             "## Projects",
             "",

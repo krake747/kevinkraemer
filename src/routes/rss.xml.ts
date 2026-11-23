@@ -1,4 +1,4 @@
-import { sortLogEntries } from "@core/content/model"
+import { sortByDateDesc } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
 import { escapeXml, xml } from "@core/site/respond"
 import { buildTitle } from "@core/site/seo"
@@ -35,7 +35,7 @@ export function GET(): Response {
             "<language>en-us</language>",
             "<ttl>60</ttl>",
             `<atom:link href="${siteUrl}rss.xml" rel="self" type="application/rss+xml"/>`,
-            ...sortLogEntries(siteContent.logs).map(item),
+            ...sortByDateDesc(siteContent.logs).map(item),
             "</channel>",
             "</rss>",
         ].join(""),

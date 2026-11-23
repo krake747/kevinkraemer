@@ -4,7 +4,7 @@ import {
     getAllTags,
     getRecentLogEntries,
     getRelatedLogEntries,
-    sortLogEntries,
+    sortByDateDesc,
 } from "@core/content/model"
 import { makeLogEntry as makeEntry } from "@testing/log-entry"
 import { describe, expect, it } from "vite-plus/test"
@@ -16,7 +16,7 @@ describe("log ordering", () => {
             makeEntry("b", { date: "2026-03-01" }),
             makeEntry("c", { date: "2026-02-01" }),
         ]
-        expect(sortLogEntries(entries).map((entry) => entry.id)).toEqual(["b", "c", "a"])
+        expect(sortByDateDesc(entries).map((entry) => entry.id)).toEqual(["b", "c", "a"])
     })
 })
 

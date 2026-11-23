@@ -127,12 +127,8 @@ export function sortByDateDesc<T extends { date: string }>(items: readonly T[]):
     return items.toSorted(compareByDateDesc)
 }
 
-export function sortLogEntries(entries: readonly LogEntry[]): LogEntry[] {
-    return entries.toSorted(compareByDateDesc)
-}
-
 export function getRecentLogEntries(entries: readonly LogEntry[], limit: number): LogEntry[] {
-    return sortLogEntries(entries).slice(0, limit)
+    return sortByDateDesc(entries).slice(0, limit)
 }
 
 export function getAllTags(entries: readonly LogEntry[]): string[] {

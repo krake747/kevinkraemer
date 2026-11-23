@@ -1,4 +1,4 @@
-import { findById, getRelatedLogEntries, sortLogEntries, type LogEntry } from "@core/content/model"
+import { findById, getRelatedLogEntries, sortByDateDesc, type LogEntry } from "@core/content/model"
 
 export type LogDetail = {
     entry: LogEntry
@@ -10,7 +10,7 @@ export type LogDetail = {
 const RELATED_LIMIT = 3
 
 export function resolveLogDetail(entries: readonly LogEntry[], slug: string | undefined): LogDetail | undefined {
-    const sorted = sortLogEntries(entries)
+    const sorted = sortByDateDesc(entries)
     const entry = findById(sorted, slug)
     if (entry === undefined) {
         return undefined
