@@ -72,6 +72,10 @@ describe("log filtering", () => {
         expect(filterLogEntries(entries, [], "solid").map((entry) => entry.id)).toEqual(["solid-guide"])
     })
 
+    it("ignores surrounding whitespace in the query", () => {
+        expect(filterLogEntries(entries, [], "  solid  ").map((entry) => entry.id)).toEqual(["solid-guide"])
+    })
+
     it("requires a match on both tag and query when both are set", () => {
         expect(filterLogEntries(entries, ["solid"], "rust").map((entry) => entry.id)).toEqual([])
         expect(filterLogEntries(entries, ["solid"], "guide").map((entry) => entry.id)).toEqual(["solid-guide"])

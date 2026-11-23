@@ -162,7 +162,7 @@ export function filterLogEntries<T extends FilterableLogEntry>(
     selectedTags: string[],
     query: string,
 ): T[] {
-    const normalizedQuery = query.toLowerCase()
+    const normalizedQuery = query.trim().toLowerCase()
     return entries.filter((entry) => matchesTags(entry, selectedTags) && matchesQuery(entry, normalizedQuery))
 }
 

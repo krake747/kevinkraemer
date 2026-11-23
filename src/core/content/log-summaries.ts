@@ -5,13 +5,13 @@ export type LogSummary = Pick<LogEntry, "id" | "title" | "description" | "date" 
     readTime: string
 }
 
-export function toLogSummaries(entries: LogEntry[]): LogSummary[] {
+export function toLogSummaries(entries: readonly LogEntry[]): LogSummary[] {
     return entries.map((entry) => ({
         id: entry.id,
         title: entry.title,
         description: entry.description,
         date: entry.date,
-        tags: entry.tags,
+        tags: [...entry.tags],
         readTime: getReadTime(entry.body),
     }))
 }
