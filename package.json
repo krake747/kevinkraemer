@@ -26,9 +26,9 @@
         "prerender": "node scripts/prerender.ts",
         "test": "vp test run",
         "test:e2e": "playwright test",
-        "test:unit": "vp test run --config vitest.config.ts",
-        "test:unit:coverage": "vp test run --coverage --config vitest.config.ts",
-        "verify": "pnpm fmt:ci && pnpm lint && pnpm lint:ts && pnpm exec fallow audit --quiet && pnpm test:unit"
+        "test:vitest": "vp test run --config vitest.config.ts",
+        "test:coverage": "vp test run --coverage --config vitest.config.ts",
+        "verify": "pnpm fmt:ci && pnpm lint && pnpm lint:ts && pnpm exec fallow audit --quiet && pnpm test:vitest"
     },
     "dependencies": {
         "@modelcontextprotocol/server": "^2.4.0",

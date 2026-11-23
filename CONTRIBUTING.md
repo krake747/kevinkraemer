@@ -47,10 +47,10 @@ that it is not configured.
 | `pnpm lint`                | oxlint, including the local `kk/*` rules (`lint/`)         |
 | `pnpm fmt` / `pnpm fmt:ci` | Format, or check formatting across the repo                |
 | `pnpm test`                | Unit tests                                                 |
-| `pnpm test:unit`           | Unit tests                                                 |
-| `pnpm test:unit:coverage`  | Unit tests with the `src/core` thresholds                  |
+| `pnpm test:vitest`         | Vitest suites (unit on node, components in Chromium)       |
+| `pnpm test:coverage`       | Vitest suites with the `src/core` thresholds               |
 | `pnpm test:e2e`            | Playwright smoke suite against `pnpm preview`              |
-| `pnpm verify`              | `fmt:ci`, `lint`, `lint:ts`, `fallow audit`, `test:unit`   |
+| `pnpm verify`              | `fmt:ci`, `lint`, `lint:ts`, `fallow audit`, `test:vitest` |
 | `pnpm check:prose`         | Log formatting and the cliché lint                         |
 | `pnpm check:docs`          | Doc paths, relative links, and `pnpm` script names         |
 | `pnpm check:agents`        | Retrieval agents allowed in `robots.txt` (`--live` probes) |

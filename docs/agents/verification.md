@@ -49,8 +49,8 @@ missing. Solve run only the narrowest check that supplies the signal you lack.
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | pre-commit | oxlint and oxfmt on staged files (plus staged `scripts` specs), cliché lint on staged log entries, `check:docs`, `check:comments` (CSS), `fallow audit --base main`, `fallow health --complexity` |
 | pre-push   | `pnpm lint:ts`                                                                                                                                                                                    |
-| `pr.yml`   | `fmt:ci`, `generate`, `lint`, `lint:ts`, `fallow audit`, `test:unit`, `test:e2e`, `build`, `check:docs`                                                                                           |
-| `main.yml` | the `pr.yml` set plus `test:unit:coverage`                                                                                                                                                        |
+| `pr.yml`   | `fmt:ci`, `generate`, `lint`, `lint:ts`, `fallow audit`, `test:vitest`, `test:e2e`, `build`, `check:docs`                                                                                         |
+| `main.yml` | the `pr.yml` set plus `test:coverage`                                                                                                                                                             |
 
 A docs-only pull request skips every code job: `pr.yml` filters on changed paths, so `check:docs`
 alone carries it.
