@@ -39,7 +39,7 @@ paste the passing run. The PR Evidence section carries both.
 ## Tiers — one branch per target
 
 - **Logic `src/core/**`, `netlify/**`** Why pure `node` suffices. Solve keep in the `unit` project,
-  parameterize with `test.each`, inject RNG and time.
+  parameterize with `it.each`, inject RNG and time.
 - **Components `src/features/**`, `src/ui/**`** Why component behavior needs a real browser, not a
   DOM simulation. Solve mount with `renderToContainer` from `@testing/render`
   (`outcome-view.browser.spec.tsx`), which renders into a detached container and disposes it after
