@@ -1,4 +1,4 @@
-import { NAV_ENTRIES } from "@core/nav/paths"
+import { NAV_ENTRIES } from "@core/site/navigation"
 import { site } from "@core/site/site-meta"
 import { RSS_PATH } from "@core/site/urls"
 import { BriefcaseBusiness, CodeXml, Download, Mail, Moon, Rss } from "@ui/icon"

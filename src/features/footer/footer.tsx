@@ -1,5 +1,5 @@
 import { siteContent } from "@core/content/site-content"
-import { isLogsPath } from "@core/nav/paths"
+import { isLogsPath } from "@core/site/navigation"
 import { FooterPixelAvatar, type PixelMood } from "@features/footer/pixel-avatar"
 import { createBrowserValue } from "@pattern/create-browser-value"
 import { useLocation } from "@solidjs/router"

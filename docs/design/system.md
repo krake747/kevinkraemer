@@ -82,8 +82,9 @@ sanctioned exceptions to the no-hairline rule in `tokens.md`.
 
 - Header: `KK` home mark, page routes, in-page section links on `/` and `/cv`, command palette,
   theme toggle. The palette is also mobile navigation — there is no hamburger.
-- Header routes are exactly three: `/`, `/cv`, `/logs` (`topNav: true` in `src/core/nav/paths.ts`).
-  Every other route is palette-only. A new route does not earn a header slot by existing.
+- Header routes are exactly three: `/`, `/cv`, `/logs` (`topNav: true` in
+  `src/core/site/navigation.ts`). Every other route is palette-only. A new route does not earn a
+  header slot by existing.
 - Footer: pixel avatar, “Built with intent”, `~/developers`, year. Status-line look. It may overlay
   in-flow content, including the first viewport; that is not a bug to fix by un-fixing the bar or
   padding the hero clear of it.

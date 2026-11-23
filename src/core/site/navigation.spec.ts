@@ -1,6 +1,51 @@
-import { getCurrentPageLabel, getSectionLinks, isActiveFor } from "@core/nav/navigation"
-import { TOP_NAV } from "@core/nav/paths"
+import {
+    getCurrentPageLabel,
+    getSectionLinks,
+    isActiveFor,
+    isCvPath,
+    isHomePath,
+    isLogsPath,
+    TOP_NAV,
+} from "@core/site/navigation"
 import { describe, expect, it } from "vite-plus/test"
+
+describe("the home path", () => {
+    it.each([
+        ["/", true],
+        ["", true],
+        ["/cv", false],
+        ["/logs", false],
+        ["/about", false],
+    ] as const)("isHomePath(%s) -> %s", (path, expected) => {
+        expect(isHomePath(path)).toBe(expected)
+    })
+})
+
+describe("the CV path", () => {
+    it.each([
+        ["/cv", true],
+        ["/cv/", true],
+        ["/cv#experience", true],
+        ["/cv/foo", true],
+        ["/", false],
+        ["/cvs", false],
+        ["/about", false],
+    ] as const)("isCvPath(%s) -> %s", (path, expected) => {
+        expect(isCvPath(path)).toBe(expected)
+    })
+})
+
+describe("the logs path", () => {
+    it.each([
+        ["/logs", true],
+        ["/logs/", true],
+        ["/logs/post", true],
+        ["/logistics", false],
+        ["/", false],
+    ] as const)("isLogsPath(%s) -> %s", (path, expected) => {
+        expect(isLogsPath(path)).toBe(expected)
+    })
+})
 
 describe("navigation", () => {
     it("labels the home path", () => {
@@ -31,8 +76,7 @@ describe("navigation", () => {
     })
 
     it("returns cv section links on cv", () => {
-        const links = getSectionLinks("/cv")
-        expect(links.map((link) => link.href)).toEqual([
+        expect(getSectionLinks("/cv").map((link) => link.href)).toEqual([
             "/cv#experience",
             "/cv#skills",
             "/cv#projects",
@@ -41,13 +85,11 @@ describe("navigation", () => {
     })
 
     it("returns home section links on home", () => {
-        const links = getSectionLinks("/")
-        expect(links.map((link) => link.href)).toEqual(["/#story", "/#logs", "/#contact"])
+        expect(getSectionLinks("/").map((link) => link.href)).toEqual(["/#story", "/#logs", "/#contact"])
     })
 
     it("returns uses section links on uses", () => {
-        const links = getSectionLinks("/uses")
-        expect(links.map((link) => link.href)).toEqual([
+        expect(getSectionLinks("/uses").map((link) => link.href)).toEqual([
             "/uses#workspace",
             "/uses#development",
             "/uses#ai-agents",

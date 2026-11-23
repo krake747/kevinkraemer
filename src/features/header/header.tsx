@@ -1,5 +1,4 @@
-import { getCurrentPageLabel, getSectionLinks, isActiveFor } from "@core/nav/navigation"
-import { TOP_NAV } from "@core/nav/paths"
+import { getCurrentPageLabel, getSectionLinks, isActiveFor, TOP_NAV } from "@core/site/navigation"
 import { CommandPalette } from "@features/command-palette/command-palette"
 import { ThemeToggle } from "@features/theme/toggle"
 import { useLocation } from "@solidjs/router"
