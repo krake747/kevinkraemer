@@ -61,9 +61,9 @@ that it is not configured.
 (type), `typescript/consistent-type-imports` (inline type-imports), `unicorn/filename-case`
 (kebabCase), and `vitest/consistent-test-it`, plus these `kk/*` rules: cva-class-prop,
 no-describe-function-title, strict-types, no-prose-comments, feature-names, no-class-string-const,
-component-props-omit, no-styles-import, alias-imports, no-transition-all, no-raw-color, and
-no-separate-leading. `pnpm verify` runs `fallow audit`, which uses the `.fallowrc.json` `boundaries`
-and the `fallow-policy/imports.json` `edge-no-aliases` pack.
+component-props-omit, no-styles-import, alias-imports, no-transition-all, no-raw-color,
+no-separate-leading, and route-shape. `pnpm verify` runs `fallow audit`, which uses the
+`.fallowrc.json` `boundaries` and the `fallow-policy/imports.json` `edge-no-aliases` pack.
 
 Playwright browsers are a one-time install: `pnpm exec playwright install --with-deps chromium`.
 
