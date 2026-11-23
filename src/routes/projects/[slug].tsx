@@ -3,12 +3,14 @@ import { siteContent } from "@core/content/site-content"
 import { ProjectArticle } from "@features/project/article"
 import { ProjectNotFound } from "@features/project/not-found"
 import { sectionTrail, DetailShell } from "@pattern/detail-shell"
-import { useParams } from "@solidjs/router"
+import { type RouteProps } from "@solidjs/router"
+import { defineFileRoute } from "@solidjs/router/fs"
 import { Show } from "solid-js"
 
-export default function ProjectRoute() {
-    const params = useParams()
-    const project = () => findById(siteContent.projects, params.slug)
+export const route = defineFileRoute("/projects/:slug")
+
+export default function ProjectRoute(props: RouteProps<typeof route>) {
+    const project = () => findById(siteContent.projects, props.params.slug)
 
     return (
         <Show when={project()} fallback={<ProjectNotFound />}>

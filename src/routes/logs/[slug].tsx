@@ -3,14 +3,16 @@ import { LogArticle } from "@features/log/article"
 import { resolveLogDetail } from "@features/log/detail"
 import { LogNotFound } from "@features/log/not-found"
 import { sectionTrail, DetailShell } from "@pattern/detail-shell"
-import { useParams } from "@solidjs/router"
+import { type RouteProps } from "@solidjs/router"
+import { defineFileRoute } from "@solidjs/router/fs"
 import { Show, createMemo } from "solid-js"
 
 import "@features/log/prose.css"
 
-export default function LogRoute() {
-    const params = useParams()
-    const detail = createMemo(() => resolveLogDetail(siteContent.logs, params.slug))
+export const route = defineFileRoute("/logs/:slug")
+
+export default function LogRoute(props: RouteProps<typeof route>) {
+    const detail = createMemo(() => resolveLogDetail(siteContent.logs, props.params.slug))
 
     return (
         <Show when={detail()} fallback={<LogNotFound />}>
