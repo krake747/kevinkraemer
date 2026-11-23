@@ -6,6 +6,7 @@ import { CvEntry } from "@features/cv/entry"
 import { CvRole } from "@features/cv/role"
 import { CvRowHeader } from "@features/cv/row-header"
 import { CvSection } from "@features/cv/section"
+import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
@@ -14,7 +15,8 @@ export function CvExperience() {
     const experienceEntries = sortByOrder(siteContent.experience)
 
     return (
-        <CvSection id="experience" heading="Experience">
+        <CvSection id="experience">
+            <CvSectionHeading>Experience</CvSectionHeading>
             <Stack>
                 <For each={experienceEntries}>
                     {(item) => (
