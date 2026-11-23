@@ -1,4 +1,4 @@
-import { SearchNoScript } from "@features/search/noscript"
+import { SearchNoScript } from "@features/search/no-script"
 import { SearchQuerySection } from "@features/search/query-section"
 import { ProseShell } from "@pattern/prose-shell"
 import { Seo } from "@pattern/seo"
