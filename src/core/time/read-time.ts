@@ -6,12 +6,17 @@ export function getWordCount(body: string): number {
     return trimmed.split(/\s+/).length
 }
 
-const WORD_COUNT_FORMAT = new Intl.NumberFormat("en-US")
+function createWordCountFormatter(locale: string): (count: number) => string {
+    const format = new Intl.NumberFormat(locale)
+    return (count) => format.format(count)
+}
+
+const formatCount = createWordCountFormatter("en-US")
 
 const READ_WORDS_PER_MINUTE = 200
 
 export function formatWordCount(body: string): string {
-    return WORD_COUNT_FORMAT.format(getWordCount(body))
+    return formatCount(getWordCount(body))
 }
 
 export function getReadTime(body: string): string {
