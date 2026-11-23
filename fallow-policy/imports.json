@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "name": "imports",
+    "rules": [
+        {
+            "id": "edge-no-aliases",
+            "kind": "banned-import",
+            "zones": ["edge"],
+            "severity": "error",
+            "specifiers": ["@core/*", "@features/*", "@generated/*", "@pattern/*", "@testing/*", "@ui/*"],
+            "message": "Edge functions must use relative paths into src/, not path aliases."
+        }
+    ]
+}
