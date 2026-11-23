@@ -32,7 +32,7 @@ export default function HomeRoute() {
     ]
 
     return (
-        <main class="flex-1">
+        <div class="flex-1">
             <Seo
                 title="Full-stack developer"
                 description="Full-stack developer and former financial risk analyst based in Luxembourg. I automate the boring parts first, then sweat the details everyone feels but nobody can name."
@@ -46,6 +46,6 @@ export default function HomeRoute() {
                 <LogSubscribe />
             </HomeLogs>
             <HomeContact />
-        </main>
+        </div>
     )
 }

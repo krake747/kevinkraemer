@@ -6,16 +6,15 @@ import { registerWebMcpTools } from "@features/webmcp/register"
 import { createRouter, useNavigate } from "@solidjs/router"
 import { fileRoutes } from "@solidjs/router/fs"
 import { isServer } from "@solidjs/web"
-import type { JSX } from "@solidjs/web"
 import { Preferences } from "@ui-sdk/solid/preferences"
-import { onCleanup, onHydrationEnd } from "solid-js"
+import { onCleanup, onHydrationEnd, type ParentProps } from "solid-js"
 import { pageRoutes } from "virtual:file-routes"
 
 import "./app.css"
 
 const Router = createRouter({ routes: fileRoutes(pageRoutes) })
 
-function Layout(props: { children?: JSX.Element }) {
+function Layout(props: ParentProps) {
     const navigate = useNavigate()
     const webMcp = new AbortController()
 
@@ -30,9 +29,9 @@ function Layout(props: { children?: JSX.Element }) {
     return (
         <>
             <Header />
-            <div id="main-content" data-pagefind-body class="flex flex-1 flex-col pb-10">
+            <main id="main-content" data-pagefind-body class="flex flex-1 flex-col pb-10">
                 {props.children}
-            </div>
+            </main>
             <Footer />
         </>
     )

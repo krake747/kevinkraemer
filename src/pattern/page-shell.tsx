@@ -4,8 +4,8 @@ import type { ParentProps } from "solid-js"
 
 export function PageShell(props: ParentProps<{ class?: string }>) {
     return (
-        <main class="flex-1">
+        <div class="flex-1">
             <PageFrame class={cx("mx-auto max-w-6xl", props.class)}>{props.children}</PageFrame>
-        </main>
+        </div>
     )
 }

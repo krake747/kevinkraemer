@@ -15,11 +15,9 @@ export default function LogsRoute() {
                 path="/logs"
                 breadcrumbs={[{ name: "Home", url: canonicalFor("/") }, { name: "Logs" }]}
             />
-            <section>
-                <LogHeader />
-                <LogFilter entries={siteContent.logs} />
-                <LogNoScript entries={siteContent.logs} />
-            </section>
+            <LogHeader />
+            <LogFilter entries={siteContent.logs} />
+            <LogNoScript entries={siteContent.logs} />
         </PageShell>
     )
 }
