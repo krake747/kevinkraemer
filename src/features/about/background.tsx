@@ -7,8 +7,8 @@ export function AboutBackground() {
             <SectionHeading id="about-background-heading">background</SectionHeading>
             <ProseSectionBody>
                 <p>
-                    I worked as a financial risk analyst. The small tools around the risk models were the part I
-                    looked forward to, so I moved to software.
+                    I worked as a financial risk analyst. The small tools around the risk models were the part I looked
+                    forward to, so I moved to software.
                 </p>
             </ProseSectionBody>
         </ProseSection>
