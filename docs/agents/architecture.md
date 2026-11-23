@@ -31,6 +31,16 @@ file; the handler lives in `src/features/<name>/` behind a `Request -> Response`
 `src/routes/ask.ts` and `src/routes/mcp.ts` follow this split and deploy through
 `scripts/function.ts` into the `dist/functions` host-function directory.
 
+## Shape routes by kind — `page` vs `endpoint`, with two exemptions
+
+Why a route file that mixes page composition with handler plumbing hides which surface it serves,
+and a page whose Seo path drifts from its filename ships the wrong canonical. Solve keep two shapes
+in `src/routes`: a page (`.tsx`) default-exports a `*Route` component and declares Seo with the
+file's path, inline (`<Seo path>`) or through a shell (`DetailShell seo`); an endpoint (`.ts`)
+exports method handlers and no page shell, with document endpoints also listed in the prerender
+artifact list. `[...404].tsx` carries no canonical path by nature and `scalar.ts` serves a
+third-party shell, so both sit outside the convention.
+
 ## One entry pair — `src/app.tsx` and `src/document.tsx`
 
 Why authored entries and a second HTML shell duplicate the hydration surface. Solve let start mode
