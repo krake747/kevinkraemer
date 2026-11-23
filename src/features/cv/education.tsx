@@ -3,6 +3,7 @@ import { CvDates } from "@features/cv/dates"
 import { CvRole } from "@features/cv/role"
 import { CvRowHeader } from "@features/cv/row-header"
 import { CvSection } from "@features/cv/section"
+import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
@@ -48,7 +49,8 @@ const EDUCATION_ENTRIES: Education[] = [
 
 export function CvEducation() {
     return (
-        <CvSection id="education" heading="Education">
+        <CvSection id="education">
+            <CvSectionHeading>Education</CvSectionHeading>
             <Stack>
                 <For each={EDUCATION_ENTRIES}>
                     {(item) => (
