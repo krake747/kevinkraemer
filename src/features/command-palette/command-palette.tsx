@@ -1,11 +1,10 @@
-import { createBrowserValue } from "@pattern/create-browser-value"
 import { WindowEventListener } from "@solid-primitives/event-listener"
 import { ariaKeyshortcuts, formatShortcut, matchesShortcut } from "@ui-sdk/core"
 import { anchor } from "@ui/anchor"
 import { cx } from "@ui/cva.config"
 import { Search } from "@ui/icon"
 import { Kbd } from "@ui/kbd"
-import { Loading, Show, createSignal, lazy } from "solid-js"
+import { Loading, Show, createSignal, lazy, onSettled } from "solid-js"
 
 const PaletteDialog = lazy(() =>
     import("@features/command-palette/dialog").then((module) => ({
@@ -16,10 +15,13 @@ const PaletteDialog = lazy(() =>
 export function CommandPalette() {
     const [open, setOpen] = createSignal(false)
     const [mounted, setMounted] = createSignal(false)
-    const shortcutHint = createBrowserValue(
-        { label: formatShortcut("mod+k", false), aria: ariaKeyshortcuts("mod+k", false) },
-        () => ({ label: formatShortcut("mod+k"), aria: ariaKeyshortcuts("mod+k") }),
-    )
+    const [shortcutHint, setShortcutHint] = createSignal({
+        label: formatShortcut("mod+k", false),
+        aria: ariaKeyshortcuts("mod+k", false),
+    })
+    onSettled(() => {
+        setShortcutHint({ label: formatShortcut("mod+k"), aria: ariaKeyshortcuts("mod+k") })
+    })
 
     const ensureMounted = () => {
         if (!mounted()) {
