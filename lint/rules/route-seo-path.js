@@ -60,11 +60,12 @@ export const routeSeoPath = defineRule({
     meta: {
         type: "problem",
         docs: {
-            description: "Page routes declare Seo with the file's path",
+            description: "Route files match their path in Seo and in the defineFileRoute witness",
         },
         messages: {
             seoPath: "A page route must declare Seo with the file's path.",
             seoPathMismatch: 'Seo path "{{actual}}" does not match the route file "{{expected}}".',
+            witnessMismatch: 'defineFileRoute witness "{{actual}}" does not match the route file "{{expected}}".',
         },
     },
     create(context) {
@@ -76,6 +77,7 @@ export const routeSeoPath = defineRule({
             return {}
         }
         const found = []
+        const witnesses = []
         return {
             JSXElement(node) {
                 const name = node.openingElement.name?.name
@@ -92,6 +94,15 @@ export const routeSeoPath = defineRule({
                     }
                 }
             },
+            CallExpression(node) {
+                if (node.callee?.type !== "Identifier" || node.callee.name !== "defineFileRoute") {
+                    return
+                }
+                const [pattern] = node.arguments
+                if (pattern?.type === "Literal" && typeof pattern.value === "string") {
+                    witnesses.push(pattern.value)
+                }
+            },
             "Program:exit"(program) {
                 if (found.length === 0) {
                     context.report({ node: program, messageId: "seoPath" })
@@ -106,6 +117,16 @@ export const routeSeoPath = defineRule({
                             node: program,
                             messageId: "seoPathMismatch",
                             data: { actual: actual ?? "{expression}", expected },
+                        })
+                        return
+                    }
+                }
+                for (const actual of witnesses) {
+                    if (actual !== expected) {
+                        context.report({
+                            node: program,
+                            messageId: "witnessMismatch",
+                            data: { actual, expected },
                         })
                         return
                     }

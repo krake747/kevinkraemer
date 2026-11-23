@@ -47,6 +47,18 @@ tester.run("kk/route-seo-path", routeSeoPath, {
             filename: "src/routes/cv.spec.tsx",
             code: `import { describe, it } from "vite-plus/test"`,
         },
+        {
+            name: "route witness matching the file",
+            filename: "src/routes/cv.tsx",
+            code: `export const route = defineFileRoute("/cv", { info: { sections: [] } })
+                export default function CvRoute() { return <Seo path="/cv" /> }`,
+        },
+        {
+            name: "generated page witness skips the literal check",
+            filename: "src/routes/logs/[slug].tsx",
+            code: `export const route = defineFileRoute("/logs/:slug")
+                export default function LogRoute() { return <DetailShell seo={{ path: \`/logs/\${id}\` }} /> }`,
+        },
     ],
     invalid: [
         {
@@ -72,6 +84,13 @@ tester.run("kk/route-seo-path", routeSeoPath, {
             filename: "src/routes/logs/[slug].tsx",
             code: "export default function LogRoute() { return <DetailShell seo={{ title: id }} /> }",
             errors: [{ messageId: "seoPath" }],
+        },
+        {
+            name: "route witness drifted from the file",
+            filename: "src/routes/cv.tsx",
+            code: `export const route = defineFileRoute("/about", { info: { sections: [] } })
+                export default function CvRoute() { return <Seo path="/cv" /> }`,
+            errors: [{ messageId: "witnessMismatch" }],
         },
     ],
 })
