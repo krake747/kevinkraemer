@@ -6,7 +6,6 @@ import {
     makeProfilePageSchema,
     makeWebSiteSchema,
 } from "@core/site/jsonld"
-import { site } from "@core/site/site-meta"
 import { canonicalFor } from "@core/site/urls"
 import { HomeAbout } from "@features/home/about"
 import { HomeContact } from "@features/home/contact"
@@ -37,7 +36,6 @@ export default function HomeRoute() {
                 title="Full-stack developer"
                 description="Full-stack developer and former financial risk analyst based in Luxembourg. I automate the boring parts first, then sweat the details everyone feels but nobody can name."
                 path="/"
-                keywords={site.keywords.join(", ")}
                 extraSchemas={extraSchemas}
             />
             <HomeHero />

@@ -13,7 +13,6 @@ type SeoBase = {
     description?: string
     image?: string
     robots?: "index" | "noindex"
-    keywords?: string
     markdown?: string
     extraMeta?: JSX.MetaHTMLAttributes<HTMLMetaElement>[]
     extraSchemas?: JsonLd[]
@@ -47,7 +46,6 @@ export function Seo(props: SeoProps) {
             <Title>{fullTitle()}</Title>
             <Link rel="alternate" type="application/rss+xml" title={`${site.name} · Logs`} href={`${origin}/rss.xml`} />
             <Meta name="description" content={description()} />
-            <Show when={props.keywords}>{(keywords) => <Meta name="keywords" content={keywords()} />}</Show>
             <Show when={located()}>
                 <Link rel="canonical" href={url()} />
             </Show>
