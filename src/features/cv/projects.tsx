@@ -1,3 +1,4 @@
+import { CvSection } from "@features/cv/section"
 import { Anchor } from "@ui/anchor"
 import { ArrowUpRight } from "@ui/icon"
 import { Stack } from "@ui/stack"
@@ -30,37 +31,46 @@ const SIDE_PROJECTS: SideProject[] = [
 
 export function CvProjects() {
     return (
-        <Stack>
-            <For each={SIDE_PROJECTS}>
-                {(project) => (
-                    <StackRow class="group">
-                        <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
-                            <div class="flex items-center gap-2">
-                                <span class="text-base font-semibold text-emerald-800 dark:text-emerald-400">
-                                    {project.name}
-                                </span>
-                                <Show when={project.url}>
-                                    {(url) => (
-                                        <Anchor
-                                            href={url()}
-                                            variant="mono"
-                                            external
-                                            aria-label={`${project.name} (opens in new tab)`}
-                                            class="inline-flex"
-                                        >
-                                            <ArrowUpRight class="size-3" />
-                                        </Anchor>
-                                    )}
-                                </Show>
+        <CvSection
+            id="projects"
+            heading={
+                <Anchor href="/projects" variant="muted" class="text-xs">
+                    Projects
+                </Anchor>
+            }
+        >
+            <Stack>
+                <For each={SIDE_PROJECTS}>
+                    {(project) => (
+                        <StackRow class="group">
+                            <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-base font-semibold text-emerald-800 dark:text-emerald-400">
+                                        {project.name}
+                                    </span>
+                                    <Show when={project.url}>
+                                        {(url) => (
+                                            <Anchor
+                                                href={url()}
+                                                variant="mono"
+                                                external
+                                                aria-label={`${project.name} (opens in new tab)`}
+                                                class="inline-flex"
+                                            >
+                                                <ArrowUpRight class="size-3" />
+                                            </Anchor>
+                                        )}
+                                    </Show>
+                                </div>
                             </div>
-                        </div>
-                        <p class="mt-1 text-sm text-pretty text-stone-600 dark:text-stone-400">{project.description}</p>
-                        <p class="mt-2 font-mono text-xs text-stone-600 dark:text-stone-300">
-                            {project.tech.join(" · ")}
-                        </p>
-                    </StackRow>
-                )}
-            </For>
-        </Stack>
+                            <p class="mt-1 text-sm text-pretty text-stone-600 dark:text-stone-400">{project.description}</p>
+                            <p class="mt-2 font-mono text-xs text-stone-600 dark:text-stone-300">
+                                {project.tech.join(" · ")}
+                            </p>
+                        </StackRow>
+                    )}
+                </For>
+            </Stack>
+        </CvSection>
     )
 }
