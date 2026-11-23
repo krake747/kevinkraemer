@@ -57,6 +57,14 @@ that it is not configured.
 | `pnpm generate`            | Rebuild the generated content and ask tape                 |
 | `pnpm lint:ts`             | Generate and run `tsc --noEmit`                            |
 
+`pnpm lint` also runs the native rules `curly` (all), `typescript/consistent-type-definitions`
+(type), `typescript/consistent-type-imports` (inline type-imports), `unicorn/filename-case`
+(kebabCase), and `vitest/consistent-test-it`, plus these `kk/*` rules: cva-class-prop,
+no-describe-function-title, strict-types, no-prose-comments, feature-names, no-class-string-const,
+component-props-omit, no-styles-import, alias-imports, no-transition-all, no-raw-color, and
+no-separate-leading. `pnpm verify` runs `fallow audit`, which uses the `.fallowrc.json` `boundaries`
+and the `fallow-policy/imports.json` `edge-no-aliases` pack.
+
 Playwright browsers are a one-time install: `pnpm exec playwright install --with-deps chromium`.
 
 The generated content bundle and ask tape live in src/generated, rebuilt by `pnpm generate` on every

@@ -16,6 +16,14 @@ Solve work down this list and stop at the first rung that can settle the questio
 
 If a visual claim can be pinned as a unit test, write the test: it is cheaper and it stays.
 
+`pnpm lint` runs native rules (`curly` all, `typescript/consistent-type-definitions` type,
+`typescript/consistent-type-imports` inline type-imports, `unicorn/filename-case` kebabCase,
+`vitest/consistent-test-it`) plus `kk/*` (`lint/`): cva-class-prop, no-describe-function-title,
+strict-types, no-prose-comments, feature-names, no-class-string-const, component-props-omit,
+no-styles-import, alias-imports, no-transition-all, no-raw-color, no-separate-leading. Fallow checks
+are `fallow audit` against `.fallowrc.json` `boundaries` and `fallow-policy/imports.json`
+`edge-no-aliases`.
+
 ## A probe settles a prediction
 
 Why a probe with no stated expectation has nothing to settle, so any number reads as an answer.
