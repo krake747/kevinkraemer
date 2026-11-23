@@ -1,8 +1,6 @@
-import type { FlowName } from "@core/content/graphs"
-
 export type GraphFlowSpec =
-    | { kind: "single"; title: string; flow: FlowName }
-    | { kind: "compare"; title: string; flow: FlowName; compare: FlowName; third?: FlowName }
+    | { kind: "single"; title: string; flow: string }
+    | { kind: "compare"; title: string; flow: string; compare: string; third?: string }
 
 export type LogTocEntry = {
     id: string

@@ -8,9 +8,9 @@ import { defineHastPlugin, defineMdastPlugin, markdownToHtml } from "satteri"
 import * as v from "valibot"
 import { parse as parseYaml } from "yaml"
 
-import { namedFlows, type FlowName } from "../src/core/content/graphs.ts"
 import type { GraphFlowSpec, LogTocEntry, Project } from "../src/core/content/model.ts"
 import { prerenderPaths } from "../src/core/site/prerender-paths.ts"
+import { isFlowName, type FlowName } from "../src/features/log/flows.ts"
 
 const CONTENT = fileURLToPath(new URL("../content", import.meta.url))
 const OUT = fileURLToPath(new URL("../src/generated/content.ts", import.meta.url))
@@ -110,10 +110,6 @@ const ProjectSchema = v.object({
         [],
     ),
 })
-
-function isFlowName(value: string): value is FlowName {
-    return Object.hasOwn(namedFlows, value)
-}
 
 function parseFlow(value: string, file: string): FlowName {
     if (isFlowName(value)) {
