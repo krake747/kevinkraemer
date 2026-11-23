@@ -1,7 +1,7 @@
 import { createMediaQuery } from "@solid-primitives/media"
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { For, Show, createEffect, createSignal, omit, type Accessor, type VoidProps } from "solid-js"
+import { For, Show, createEffect, createSignal, merge, omit, type Accessor, type VoidProps } from "solid-js"
 
 export type PixelMood = "idle" | "wink" | "sleepy" | "talk" | "scan"
 type Tone = "dark" | "mid" | "lid" | "open" | "off"
@@ -147,8 +147,9 @@ function SleepyZzz() {
     )
 }
 
-export function FooterPixelAvatar(props: VoidProps<ComponentProps<"div"> & { mood?: PixelMood }>) {
-    const mood = () => props.mood ?? "idle"
+export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mood?: PixelMood }>) {
+    const props = merge({ mood: "idle" } as const, _props)
+    const mood = () => props.mood
     const prefersReducedMotion = createMediaQuery("(prefers-reduced-motion: reduce)")
     const blinking = createBlink(() => {
         if (prefersReducedMotion()) {

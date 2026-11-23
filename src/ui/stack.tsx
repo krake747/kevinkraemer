@@ -1,13 +1,14 @@
 import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { omit } from "solid-js"
+import { merge, omit } from "solid-js"
 
 type StackDivProps = ComponentProps<"div"> & { as?: "div" }
 type StackUlProps = ComponentProps<"ul"> & { as: "ul" }
 type StackDlProps = ComponentProps<"dl"> & { as: "dl" }
 
-export function Stack(props: StackDivProps | StackUlProps | StackDlProps): JSX.Element {
-    const Tag = dynamic(() => props.as ?? "div")
+export function Stack(_props: StackDivProps | StackUlProps | StackDlProps): JSX.Element {
+    const props = merge({ as: "div" } as const, _props)
+    const Tag = dynamic(() => props.as)
     const rest = omit(props, "as", "class", "children")
 
     return (

@@ -1,6 +1,6 @@
 import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { createMemo, omit } from "solid-js"
+import { createMemo, merge, omit } from "solid-js"
 
 const badge = cva({
     base: "inline-flex items-center border font-mono transition-colors",
@@ -42,15 +42,16 @@ type BadgeVariants = VariantProps<typeof badge>
 type BadgeSpanProps = BadgeVariants & ComponentProps<"span"> & { as?: "span" }
 type BadgeAnchorProps = BadgeVariants & ComponentProps<"a"> & { as: "a"; external?: boolean }
 
-export function Badge(props: BadgeSpanProps | BadgeAnchorProps): JSX.Element {
-    const Tag = dynamic(() => props.as ?? "span")
+export function Badge(_props: BadgeSpanProps | BadgeAnchorProps): JSX.Element {
+    const props = merge({ as: "span", tone: "neutral" } as const, _props)
+    const Tag = dynamic(() => props.as)
     const rest = createMemo(() => {
         if (props.as === "a") {
             return omit(props, "as", "tone", "size", "interactive", "class", "children", "external")
         }
         return omit(props, "as", "tone", "size", "interactive", "class", "children")
     })
-    const tone = () => props.tone ?? "neutral"
+    const tone = () => props.tone
     const external = () => props.as === "a" && props.external === true
     const externalAttrs = () => (external() ? { target: "_blank", rel: "noopener noreferrer" } : {})
 

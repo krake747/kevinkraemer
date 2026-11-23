@@ -1,6 +1,6 @@
 import { dynamic, type ComponentProps, type ValidComponent } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { omit } from "solid-js"
+import { merge, omit } from "solid-js"
 
 export const stackRow = cva({
     base: "border border-stone-200/80 bg-stone-100 dark:border-stone-800 dark:bg-stone-900",
@@ -24,9 +24,10 @@ export const stackRow = cva({
 })
 
 export function StackRow<T extends ValidComponent = "div">(
-    props: ComponentProps<T> & VariantProps<typeof stackRow> & { as?: T },
+    _props: ComponentProps<T> & VariantProps<typeof stackRow> & { as?: T },
 ) {
-    const Tag = dynamic(() => props.as ?? "div")
+    const props = merge({ as: "div" } as const, _props)
+    const Tag = dynamic(() => props.as)
     const rest = omit(props, "as", "size", "interactive", "class", "children")
 
     return (

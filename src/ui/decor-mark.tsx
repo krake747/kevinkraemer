@@ -1,6 +1,6 @@
 import type { ComponentProps } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { omit } from "solid-js"
+import { merge, omit } from "solid-js"
 
 const decorMark = cva({
     base: "pointer-events-none absolute z-1 size-5 shrink-0 stroke-stone-400 stroke-1 dark:stroke-stone-600",
@@ -24,9 +24,10 @@ const ARM_PATHS = {
 
 type DecorArm = keyof typeof ARM_PATHS
 
-export function DecorMark(props: ComponentProps<"svg"> & VariantProps<typeof decorMark> & { arm?: DecorArm }) {
+export function DecorMark(_props: ComponentProps<"svg"> & VariantProps<typeof decorMark> & { arm?: DecorArm }) {
+    const props = merge({ arm: "full" } as const, _props)
     const rest = omit(props, "position", "arm", "class")
-    const verticalPath = () => ARM_PATHS[props.arm ?? "full"]
+    const verticalPath = () => ARM_PATHS[props.arm]
 
     return (
         <svg

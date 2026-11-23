@@ -43,11 +43,15 @@ function marksPolymorphic(node) {
     return node.type === "TSPropertySignature" && node.key.type === "Identifier" && node.key.name === "as"
 }
 
-function isClassOmitCall(node, propsName) {
+function isClassOmitCall(node, names) {
     if (node.type !== "CallExpression" || node.callee.type !== "Identifier" || node.callee.name !== "omit") {
         return false
     }
-    if (node.arguments.length < 2 || node.arguments[0].type !== "Identifier" || node.arguments[0].name !== propsName) {
+    if (
+        node.arguments.length < 2 ||
+        node.arguments[0].type !== "Identifier" ||
+        !names.has(node.arguments[0].name)
+    ) {
         return false
     }
     return node.arguments.some((arg) => arg.type === "Literal" && arg.value === "class")
@@ -70,12 +74,41 @@ function scanAnnotation(annotation) {
     return found
 }
 
+function collectOmittableNames(body, propsName) {
+    const names = new Set([propsName])
+    walkAST(
+        body,
+        (node) => {
+            if (node.type !== "VariableDeclarator" || node.id.type !== "Identifier") {
+                return
+            }
+            const init = node.init
+            if (
+                init?.type !== "CallExpression" ||
+                init.callee.type !== "Identifier" ||
+                init.callee.name !== "merge"
+            ) {
+                return
+            }
+            const mergesProps = init.arguments.some(
+                (arg) => arg.type === "Identifier" && arg.name === propsName,
+            )
+            if (mergesProps) {
+                names.add(node.id.name)
+            }
+        },
+        new Set(),
+    )
+    return names
+}
+
 function usesOmitSpread(body, propsName) {
+    const names = collectOmittableNames(body, propsName)
     const used = { omit: false, spread: false }
     walkAST(
         body,
         (node) => {
-            if (isClassOmitCall(node, propsName)) {
+            if (isClassOmitCall(node, names)) {
                 used.omit = true
             }
             if (node.type === "JSXSpreadAttribute") {

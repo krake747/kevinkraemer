@@ -27,12 +27,23 @@ tester.run("kk/component-props-omit", componentPropsOmit, {
             filename: "src/features/log/card.tsx",
             code: `import type { ComponentProps } from "@solidjs/web"\nexport function LogCard(props: ComponentProps<"div">) {\nreturn <div />\n}`,
         },
+        {
+            name: "single host with merged defaults omits from the merged object",
+            filename: "src/ui/decor-mark.tsx",
+            code: `import type { ComponentProps } from "@solidjs/web"\nimport { merge, omit } from "solid-js"\nexport function DecorMark(_props: ComponentProps<"svg"> & { arm?: "full" }) {\nconst props = merge({ arm: "full" } as const, _props)\nconst rest = omit(props, "arm", "class", "children")\nreturn <svg {...rest} />\n}`,
+        },
     ],
     invalid: [
         {
             name: "single host without omit and spread",
             filename: "src/ui/panel-label.tsx",
             code: `import type { ComponentProps } from "@solidjs/web"\nexport function PanelLabel(props: ComponentProps<"div">) {\nreturn <div class="mb-3" />\n}`,
+            errors: [{ messageId: "missingOmit" }],
+        },
+        {
+            name: "single host with merged defaults but no omit",
+            filename: "src/ui/decor-mark.tsx",
+            code: `import type { ComponentProps } from "@solidjs/web"\nimport { merge } from "solid-js"\nexport function DecorMark(_props: ComponentProps<"svg"> & { arm?: "full" }) {\nconst props = merge({ arm: "full" } as const, _props)\nreturn <svg class="mark" />\n}`,
             errors: [{ messageId: "missingOmit" }],
         },
     ],

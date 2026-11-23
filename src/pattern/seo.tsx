@@ -3,7 +3,7 @@ import { buildTitle, seoDefaults } from "@core/site/seo"
 import { site } from "@core/site/site-meta"
 import { canonicalFor, origin } from "@core/site/urls"
 import { Head, Link, Meta, Script, Title } from "@solidjs/meta"
-import { For, Show, type VoidProps } from "solid-js"
+import { For, Show, merge, type VoidProps } from "solid-js"
 
 type SeoBase = {
     title: string
@@ -34,7 +34,8 @@ export function BreadcrumbSchema(props: VoidProps<{ items: Crumb[] }>) {
     return <Script type="application/ld+json">{JSON.stringify(toJsonLd(makeBreadcrumbListSchema(props.items)))}</Script>
 }
 
-export function Seo(props: VoidProps<SeoProps>) {
+export function Seo(_props: VoidProps<SeoProps>) {
+    const props = merge({ type: "website" } as const, _props)
     const fullTitle = () => buildTitle(props.title)
     const description = () => props.description
     const article = (): Extract<SeoProps, { type: "article" }> | undefined =>
@@ -49,7 +50,7 @@ export function Seo(props: VoidProps<SeoProps>) {
             <Meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)" />
             <Meta property="og:title" content={fullTitle()} />
             <Meta property="og:description" content={description()} />
-            <Meta property="og:type" content={props.type ?? "website"} />
+            <Meta property="og:type" content={props.type} />
             <Meta property="og:site_name" content={site.name} />
             <Meta property="og:image" content={seoDefaults.image} />
             <Meta property="og:image:width" content={String(site.imageDimensions.width)} />
