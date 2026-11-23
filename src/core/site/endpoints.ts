@@ -477,7 +477,7 @@ export const endpoints: Endpoint[] = [
                         name: "question",
                         in: "query",
                         required: true,
-                        description: "Plain-language question, up to 500 characters.",
+                        description: `Plain-language question, up to ${ASK_QUESTION_MAX_LENGTH} characters.`,
                         schema: {
                             type: "string",
                             minLength: ASK_QUESTION_MIN_LENGTH,
@@ -506,8 +506,7 @@ export const endpoints: Endpoint[] = [
                     },
                     "400": {
                         summary: "Invalid question",
-                        description:
-                            "The question failed validation (missing, blank, or over 500 characters); JSON variant carries code INVALID_QUESTION.",
+                        description: `The question failed validation (missing, blank, or over ${ASK_QUESTION_MAX_LENGTH} characters); JSON variant carries code INVALID_QUESTION.`,
                         content: { ...problemContent("UpstreamProblem") },
                     },
                     ...notFoundInline(

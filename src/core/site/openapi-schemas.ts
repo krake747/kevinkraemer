@@ -1,5 +1,5 @@
 import type { AskAnswer } from "@core/ask/ask"
-import { askRequestSchema } from "@core/ask/request"
+import { ASK_QUESTION_MAX_LENGTH, askRequestSchema } from "@core/ask/request"
 import type { TapePrint } from "@core/ask/tape"
 import type { AgentView, FileDescriptor, PageDescriptor } from "@core/site/descriptors"
 import type { SchemaRefOrObject } from "@core/site/openapi-types"
@@ -159,8 +159,7 @@ const askQuestionField: SchemaRefOrObject = {
 
 export const askRequestDocumentSchema: SchemaRefOrObject = {
     ...askRequestFields,
-    description:
-        "Question to answer from the site's published content. Matches the ask tool input: a non-blank question of up to 500 characters; omit summarize for pages plus a written answer.",
+    description: `Question to answer from the site's published content. Matches the ask tool input: a non-blank question of up to ${ASK_QUESTION_MAX_LENGTH} characters; omit summarize for pages plus a written answer.`,
     properties: { ...askRequestProperties, question: askQuestionField },
     additionalProperties: false,
 }

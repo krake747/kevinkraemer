@@ -1,3 +1,4 @@
+import { ASK_QUESTION_MAX_LENGTH } from "@core/ask/request"
 import { apiVersion } from "@core/site/api-version"
 import type {
     HeaderParameterObject,
@@ -141,8 +142,8 @@ export const invalidRequestProblemSchema = encodedProblem({
     title: "Bad Request",
     code: "INVALID_QUESTION",
     slug: "request validation",
-    description: "The question failed validation: missing, blank, or over 500 characters.",
-    hint: 'Send a question up to 500 characters, as ?question= or {"question"}.',
+    description: `The question failed validation: missing, blank, or over ${ASK_QUESTION_MAX_LENGTH} characters.`,
+    hint: `Send a question up to ${ASK_QUESTION_MAX_LENGTH} characters, as ?question= or {"question"}.`,
 })
 
 export function problemContent(schemaName: string) {
