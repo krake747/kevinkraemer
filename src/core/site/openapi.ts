@@ -25,40 +25,36 @@ import {
 } from "@core/site/openapi-schemas"
 import { OPENAPI_VERSION, type OpenApiDocument } from "@core/site/openapi-types"
 import { DEPRECATION_SUNSET_DAYS } from "@core/site/policy"
-import { origin as ORIGIN } from "@core/site/urls"
+import { origin } from "@core/site/urls"
 
 export const openapiDocument: OpenApiDocument = {
     openapi: OPENAPI_VERSION,
-    $self: `${ORIGIN}/openapi.json`,
+    $self: `${origin}/openapi.json`,
     info: {
         title: "Kevin Kraemer · kevinkraemer.com",
         summary: "Read-only content retrieval for agents, plus an ask endpoint and an MCP server.",
         description:
-            "Kevin Kraemer's portfolio as a public, read-only API. No keys, no accounts, no writes.\n\n" +
-            "**Every page** answers in three representations:\n\n" +
-            "- HTML by default\n" +
-            "- GitHub-flavored markdown for `Accept: text/markdown`\n" +
-            "- a typed JSON descriptor for `Accept: application/json`\n\n" +
+            `Kevin Kraemer's portfolio as a public, read-only API. No keys, no accounts, no writes.\n\n` +
+            `**Every page** answers in three representations:\n\n` +
+            `- HTML by default\n` +
+            `- GitHub-flavored markdown for \`Accept: text/markdown\`\n` +
+            `- a typed JSON descriptor for \`Accept: application/json\`\n\n` +
             "Discovery files also serve a `FileDescriptor` envelope. Responses carry `Vary: Accept, Accept-Encoding`, so cache per representation.\n\n" +
-            "**Errors and limits**\n\n" +
+            `**Errors and limits**\n\n` +
             "- Unknown paths return real 404s as RFC 9457 problems, with a stable `code` and a `hint` pointing at `/llms.txt`\n" +
             "- `/api/*` and `/v1/*` always answer JSON-first\n" +
             "- Rate limits apply per address to pages and API paths and are reported by `RateLimit-*` headers, with `Retry-After` on 429; static assets are unmetered\n\n" +
-            "**Versioning**\n\n" +
-            "- `API-Version` (currently " +
-            apiVersion +
-            ") is echoed on every machine-readable response\n" +
+            `**Versioning**\n\n` +
+            `- \`API-Version\` (currently ${apiVersion}) is echoed on every machine-readable response\n` +
             "- changes are additively only\n" +
-            "- a deprecated endpoint carries `Deprecation: true` plus a `Sunset` date at least " +
-            DEPRECATION_SUNSET_DAYS +
-            " days out\n\n" +
+            `- a deprecated endpoint carries \`Deprecation: true\` plus a \`Sunset\` date at least ${DEPRECATION_SUNSET_DAYS} days out\n\n` +
             "The financial-market presentation across the site is a design metaphor: no market data is real or live.",
         version: apiVersion,
-        contact: { name: "Kevin Kraemer", url: `${ORIGIN}/contact` },
+        contact: { name: "Kevin Kraemer", url: `${origin}/contact` },
         license: { name: "Mozilla Public License 2.0", identifier: "MPL-2.0" },
     },
-    externalDocs: { url: `${ORIGIN}/developers`, description: "Developer documentation and retrieval quickstart" },
-    servers: [{ url: ORIGIN, description: "Canonical origin; every other origin redirects here." }],
+    externalDocs: { url: `${origin}/developers`, description: "Developer documentation and retrieval quickstart" },
+    servers: [{ url: origin, description: "Canonical origin; every other origin redirects here." }],
     tags: [
         {
             name: "Pages",
