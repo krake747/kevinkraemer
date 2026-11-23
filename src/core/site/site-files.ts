@@ -11,6 +11,8 @@ export type SkillFile = {
 const skillNamePattern = /^(?!.*--)[a-z0-9][a-z0-9-]{0,63}$/
 const skillFrontmatter = /^---\r?\n([\s\S]*?)\r?\n---/
 const skillOrder = new Intl.Collator("en")
+const textEncoder = new TextEncoder()
+const SKILL_DESCRIPTION_MAX_LENGTH = 1024
 
 export async function buildSkillsIndex(skills: SkillFile[]) {
     const entries = await Promise.all(
@@ -70,14 +72,14 @@ function skillDescriptionEntry(name: string, value: unknown): string {
     if (typeof value !== "string" || value.trim().length === 0) {
         throw new Error(`Skill ${name} needs a description`)
     }
-    if (value.length > 1024) {
-        throw new Error(`Skill ${name} needs a description of at most 1024 characters`)
+    if (value.length > SKILL_DESCRIPTION_MAX_LENGTH) {
+        throw new Error(`Skill ${name} needs a description of at most ${SKILL_DESCRIPTION_MAX_LENGTH} characters`)
     }
     return value
 }
 
 async function digest(markdown: string): Promise<string> {
-    const bytes = new TextEncoder().encode(markdown)
+    const bytes = textEncoder.encode(markdown)
     const hash = await crypto.subtle.digest("SHA-256", bytes)
     return [...new Uint8Array(hash)].map((byte) => byte.toString(16).padStart(2, "0")).join("")
 }
