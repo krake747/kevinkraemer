@@ -1,4 +1,4 @@
-import { formatDateLong, formatDateShort } from "@core/time/date"
+import { compareDatesDesc, formatDateLong, formatDateShort } from "@core/time/date"
 import { describe, expect, it } from "vite-plus/test"
 
 describe("dates", () => {
@@ -15,5 +15,16 @@ describe("dates", () => {
     it("formats short variant", () => {
         expect(formatDateShort("2025-04-28T00:00:00.000Z")).toBe("Apr 28, 2025")
         expect(formatDateShort(new Date("2025-04-28T00:00:00.000Z"))).toBe("Apr 28, 2025")
+    })
+})
+
+describe("date comparison", () => {
+    it("orders newer dates first", () => {
+        expect(compareDatesDesc("2025-04-28T00:00:00.000Z", "2025-01-01T00:00:00.000Z")).toBeLessThan(0)
+        expect(compareDatesDesc("2025-01-01T00:00:00.000Z", "2025-04-28T00:00:00.000Z")).toBeGreaterThan(0)
+    })
+
+    it("treats the same instant as equal across string and Date", () => {
+        expect(compareDatesDesc("2025-04-28T00:00:00.000Z", new Date("2025-04-28T00:00:00.000Z"))).toBe(0)
     })
 })

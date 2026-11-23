@@ -1,3 +1,5 @@
+import { compareDatesDesc } from "@core/time/date"
+
 export type GraphFlowSpec =
     | { kind: "single"; title: string; flow: string }
     | { kind: "compare"; title: string; flow: string; compare: string; third?: string }
@@ -116,7 +118,7 @@ export function findById<T extends { id: string }>(items: readonly T[], id: stri
 }
 
 function compareByDateDesc(a: { date: string }, b: { date: string }): number {
-    return new Date(b.date).valueOf() - new Date(a.date).valueOf()
+    return compareDatesDesc(a.date, b.date)
 }
 
 export function sortByDateDesc<T extends { date: string }>(items: readonly T[]): T[] {

@@ -18,3 +18,7 @@ export function formatDateLong(date: string | Date): string {
 export function formatDateShort(date: string | Date): string {
     return formatShort(date)
 }
+
+export function compareDatesDesc(a: string | Date, b: string | Date): number {
+    return new Date(b).valueOf() - new Date(a).valueOf()
+}
