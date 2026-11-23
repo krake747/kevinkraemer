@@ -1,6 +1,6 @@
 import { sortByOrder } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
-import { isNonEmpty } from "@core/non-empty"
+import { mapToNonEmpty } from "@core/non-empty"
 import { UsesSection } from "@features/uses/section"
 import { ProseShell } from "@pattern/prose-shell"
 import { Seo } from "@pattern/seo"
@@ -9,13 +9,14 @@ import { For } from "solid-js"
 
 const SORTED_SECTIONS = sortByOrder(siteContent.uses)
 
-const SECTION_LINKS = SORTED_SECTIONS.map((section) => ({
-    label: `#${section.id}`,
-    href: `/uses#${section.id}`,
-}))
-if (!isNonEmpty(SECTION_LINKS)) {
-    throw new Error("uses sections are empty")
-}
+const SECTION_LINKS = mapToNonEmpty(
+    SORTED_SECTIONS,
+    (section) => ({
+        label: `#${section.id}`,
+        href: `/uses#${section.id}`,
+    }),
+    "uses sections",
+)
 
 export const route = defineFileRoute("/uses", { info: { sections: SECTION_LINKS } })
 
