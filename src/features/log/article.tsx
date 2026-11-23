@@ -1,4 +1,4 @@
-import { formatLogDateLong } from "@core/content/log-date"
+import { formatDateLong } from "@core/time/date"
 import { formatWordCount, getReadTime } from "@core/time/read-time"
 import { LogBody } from "@features/log/body"
 import type { LogDetail } from "@features/log/detail"
@@ -30,7 +30,7 @@ export function LogArticle(props: VoidProps<{ detail: LogDetail }>) {
                         <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400">
                             <span class="flex items-center gap-1.5">
                                 <FileText class="size-3 shrink-0" />
-                                {formatLogDateLong(entry().date)}
+                                {formatDateLong(entry().date)}
                             </span>{" "}
                             <span class="flex items-center gap-1.5">
                                 <Clock class="size-3 shrink-0" />

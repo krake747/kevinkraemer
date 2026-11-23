@@ -1,5 +1,5 @@
-import { formatLogDateLong } from "@core/content/log-date"
 import type { LogSummary } from "@core/content/log-summaries"
+import { formatDateLong } from "@core/time/date"
 import { ArrowRight } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
 import type { VoidProps } from "solid-js"
@@ -16,7 +16,7 @@ export function LogCard(props: VoidProps<{ entry: LogSummary }>) {
                         {props.entry.description}
                     </p>
                     <div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400">
-                        <span>{formatLogDateLong(props.entry.date)}</span>
+                        <span>{formatDateLong(props.entry.date)}</span>
                         <span>{props.entry.readTime}</span>
                     </div>
                 </div>

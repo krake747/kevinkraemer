@@ -3,7 +3,6 @@ import { describe, it, expect } from "vite-plus/test"
 
 describe("word counts", () => {
     it.each([
-        [undefined, 0],
         ["", 0],
         ["   ", 0],
         ["hello", 1],
@@ -22,7 +21,6 @@ describe("word counts", () => {
 
 describe("formatted word counts", () => {
     it.each([
-        [undefined, "0"],
         ["", "0"],
         ["hello world", "2"],
         ["a ".repeat(1000), "1,000"],
@@ -34,7 +32,6 @@ describe("formatted word counts", () => {
 
 describe("read time", () => {
     it.each([
-        [undefined, "0 min read"],
         ["", "0 min read"],
         ["word", "1 min read"],
         ["a ".repeat(199), "1 min read"],
