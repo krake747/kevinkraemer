@@ -3,6 +3,7 @@ import { LogArticle } from "@features/log/article"
 import { resolveLogDetail } from "@features/log/detail"
 import { LogNotFound } from "@features/log/not-found"
 import { sectionTrail, DetailShell } from "@pattern/detail-shell"
+import { BreadcrumbSchema } from "@pattern/seo"
 import { type RouteProps } from "@solidjs/router"
 import { defineFileRoute } from "@solidjs/router/fs"
 import { Show, createMemo } from "solid-js"
@@ -27,9 +28,9 @@ export default function LogRoute(props: RouteProps<typeof route>) {
                             type: "article",
                             publishedTime: entry().date,
                             tags: entry().tags,
-                            breadcrumbs: sectionTrail("Logs", "/logs", entry().title),
                         }}
                     >
+                        <BreadcrumbSchema items={sectionTrail("Logs", "/logs", entry().title)} />
                         <LogArticle detail={found()} />
                     </DetailShell>
                 )

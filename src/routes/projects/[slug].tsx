@@ -3,6 +3,7 @@ import { siteContent } from "@core/content/site-content"
 import { ProjectArticle } from "@features/project/article"
 import { ProjectNotFound } from "@features/project/not-found"
 import { sectionTrail, DetailShell } from "@pattern/detail-shell"
+import { BreadcrumbSchema } from "@pattern/seo"
 import { type RouteProps } from "@solidjs/router"
 import { defineFileRoute } from "@solidjs/router/fs"
 import { Show } from "solid-js"
@@ -20,9 +21,9 @@ export default function ProjectRoute(props: RouteProps<typeof route>) {
                         title: `${entry().name} · Projects`,
                         description: entry().tagline,
                         path: `/projects/${entry().id}`,
-                        breadcrumbs: sectionTrail("Projects", "/projects", entry().name),
                     }}
                 >
+                    <BreadcrumbSchema items={sectionTrail("Projects", "/projects", entry().name)} />
                     <ProjectArticle project={entry()} />
                 </DetailShell>
             )}

@@ -6,10 +6,8 @@ import { Head, Link, Meta, Script, Title } from "@solidjs/meta"
 import { For, Show } from "solid-js"
 
 type SeoBase = {
-    title?: string
-    description?: string
-    robots?: "noindex"
-    breadcrumbs?: { name: string; url?: string }[]
+    title: string
+    description: string
 }
 
 type SeoPage = SeoBase & {
@@ -21,14 +19,24 @@ type SeoArticle = SeoBase & {
     type: "article"
     path: string
     publishedTime: string
-    tags?: string[]
+    tags: string[]
 }
 
 type SeoProps = SeoPage | SeoArticle
 
+export type Crumb = { name: string; url: string } | { name: string }
+
+export function NoIndex() {
+    return <Meta name="robots" content="noindex, nofollow" />
+}
+
+export function BreadcrumbSchema(props: { items: Crumb[] }) {
+    return <Script type="application/ld+json">{JSON.stringify(toJsonLd(makeBreadcrumbListSchema(props.items)))}</Script>
+}
+
 export function Seo(props: SeoProps) {
-    const fullTitle = () => buildTitle(props.title ?? seoDefaults.title)
-    const description = () => props.description ?? seoDefaults.description
+    const fullTitle = () => buildTitle(props.title)
+    const description = () => props.description
     const article = (): Extract<SeoProps, { type: "article" }> | undefined =>
         props.type === "article" ? props : undefined
 
@@ -68,9 +76,9 @@ export function Seo(props: SeoProps) {
                         <Meta property="article:published_time" content={post().publishedTime} />
                         <Meta property="article:author" content={seoDefaults.author} />
                         <Meta property="article:section" content="Technology" />
-                        <For each={post().tags ?? []}>{(tag) => <Meta property="article:tag" content={tag} />}</For>
+                        <For each={post().tags}>{(tag) => <Meta property="article:tag" content={tag} />}</For>
                         <Meta data-pagefind-filter="type:article" />
-                        <For each={post().tags ?? []}>{(tag) => <Meta data-pagefind-filter={`tag:${tag}`} />}</For>
+                        <For each={post().tags}>{(tag) => <Meta data-pagefind-filter={`tag:${tag}`} />}</For>
                         <Script type="application/ld+json">
                             {JSON.stringify(
                                 toJsonLd(
@@ -88,16 +96,6 @@ export function Seo(props: SeoProps) {
                         </Script>
                     </>
                 )}
-            </Show>
-            <Show when={props.breadcrumbs}>
-                {(breadcrumbs) => (
-                    <Script type="application/ld+json">
-                        {JSON.stringify(toJsonLd(makeBreadcrumbListSchema(breadcrumbs())))}
-                    </Script>
-                )}
-            </Show>
-            <Show when={props.robots === "noindex"}>
-                <Meta name="robots" content="noindex, nofollow" />
             </Show>
         </Head>
     )
