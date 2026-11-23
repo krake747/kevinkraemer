@@ -2,7 +2,7 @@ pre-commit:
   parallel: true
   commands:
     lint:
-      glob: "*.{ts,tsx}"
+      glob: "*.{ts,tsx,js,mjs,cjs,mts}"
       exclude:
         - "scripts/**"
       run: pnpm lint {staged_files}
@@ -12,7 +12,7 @@ pre-commit:
       run: pnpm lint {staged_files}
       stage_fixed: true
     fmt:
-      glob: "*.{ts,tsx,css,md,json,yaml,yml,toml}"
+      glob: "*.{ts,tsx,js,mjs,cjs,mts,css,md,json,yaml,yml,toml}"
       run: pnpm exec vp fmt {staged_files}
       stage_fixed: true
     prose-cliches:

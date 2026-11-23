@@ -47,11 +47,7 @@ function isClassOmitCall(node, names) {
     if (node.type !== "CallExpression" || node.callee.type !== "Identifier" || node.callee.name !== "omit") {
         return false
     }
-    if (
-        node.arguments.length < 2 ||
-        node.arguments[0].type !== "Identifier" ||
-        !names.has(node.arguments[0].name)
-    ) {
+    if (node.arguments.length < 2 || node.arguments[0].type !== "Identifier" || !names.has(node.arguments[0].name)) {
         return false
     }
     return node.arguments.some((arg) => arg.type === "Literal" && arg.value === "class")
@@ -83,16 +79,10 @@ function collectOmittableNames(body, propsName) {
                 return
             }
             const init = node.init
-            if (
-                init?.type !== "CallExpression" ||
-                init.callee.type !== "Identifier" ||
-                init.callee.name !== "merge"
-            ) {
+            if (init?.type !== "CallExpression" || init.callee.type !== "Identifier" || init.callee.name !== "merge") {
                 return
             }
-            const mergesProps = init.arguments.some(
-                (arg) => arg.type === "Identifier" && arg.name === propsName,
-            )
+            const mergesProps = init.arguments.some((arg) => arg.type === "Identifier" && arg.name === propsName)
             if (mergesProps) {
                 names.add(node.id.name)
             }
