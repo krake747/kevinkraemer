@@ -7,15 +7,7 @@ const rootLink = /\]\((\/[^)\s]*)\)/g
 
 export function logEntryMarkdown(entry: LogEntry, base: string): string {
     const origin = base.replace(/\/+$/, "")
-    const frontmatter = [
-        "---",
-        `title: ${JSON.stringify(entry.title)}`,
-        `description: ${JSON.stringify(entry.description)}`,
-        `date: ${entry.date.slice(0, 10)}`,
-        `tags: ${JSON.stringify(entry.tags)}`,
-        `canonical: ${origin}/logs/${entry.id}`,
-        "---",
-    ].join("\n")
+    const frontmatter = `---\ntitle: ${JSON.stringify(entry.title)}\ndescription: ${JSON.stringify(entry.description)}\ndate: ${entry.date.slice(0, 10)}\ntags: ${JSON.stringify(entry.tags)}\ncanonical: ${origin}/logs/${entry.id}\n---`
     return `${frontmatter}\n\n${absolutizeLinks(stripGraphDirectives(entry.body), origin)}\n`
 }
 
