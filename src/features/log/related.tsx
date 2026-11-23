@@ -1,5 +1,5 @@
 import type { LogEntry } from "@core/content/model"
-import { formatLogDateShort } from "@core/time/log-date"
+import { formatDateShort } from "@core/time/date"
 import { ArrowRight } from "@ui/icon"
 import { SectionHeading } from "@ui/section-heading"
 import { Stack } from "@ui/stack"
@@ -23,7 +23,7 @@ export function LogRelated(props: VoidProps<{ entries: LogEntry[] }>) {
                                             </span>
                                             <span class="mt-0.5 block font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400">
                                                 {" "}
-                                                {formatLogDateShort(item.date)}
+                                                {formatDateShort(item.date)}
                                             </span>
                                         </div>
                                         <ArrowRight class="size-3 shrink-0 text-stone-400 transition-[color,translate] duration-150 ease-out-quart group-hover:text-emerald-700 dark:text-stone-500 dark:group-hover:text-emerald-400 group-hover:pointer-fine:translate-x-1" />

@@ -1,4 +1,4 @@
-export function formatLogDateLong(date: string | Date): string {
+export function formatDateLong(date: string | Date): string {
     return new Intl.DateTimeFormat("en-US", {
         year: "numeric",
         month: "long",
@@ -7,7 +7,7 @@ export function formatLogDateLong(date: string | Date): string {
     }).format(new Date(date))
 }
 
-export function formatLogDateShort(date: string | Date): string {
+export function formatDateShort(date: string | Date): string {
     return new Intl.DateTimeFormat("en-US", {
         year: "numeric",
         month: "short",
