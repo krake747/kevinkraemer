@@ -1,17 +1,21 @@
 import { getCurrentPageLabel, isActiveFor, TOP_NAV, type SectionLink } from "@core/site/navigation"
 import { CommandPalette } from "@features/command-palette/command-palette"
 import { ThemeToggle } from "@features/theme/toggle"
-import { useLocation, useRouteMatches } from "@solidjs/router"
+import { useLocation, useRouteMatches, type RouteMatch } from "@solidjs/router"
 import { anchor } from "@ui/anchor"
 import { cx } from "@ui/cva.config"
 import { DecorMark } from "@ui/decor-mark"
 import { For, Show, createMemo } from "solid-js"
 
+function currentSections(matches: readonly RouteMatch[]): SectionLink[] {
+    return matches.at(-1)?.route.info?.sections ?? []
+}
+
 export function Header() {
     const location = useLocation()
     const pageLabel = createMemo(() => getCurrentPageLabel(location.pathname))
     const matches = useRouteMatches()
-    const sectionLinks: () => SectionLink[] = () => matches().at(-1)?.route.info?.sections ?? []
+    const sectionLinks = () => currentSections(matches())
 
     return (
         <header
