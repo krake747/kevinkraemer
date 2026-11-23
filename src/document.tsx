@@ -1,7 +1,7 @@
 import { HydrationScript } from "@solidjs/web"
-import type { JSX } from "@solidjs/web"
+import type { ParentProps } from "solid-js"
 
-export default function Document(props: { children?: JSX.Element }) {
+export default function Document(props: ParentProps) {
     return (
         <html lang="en" class="kk-scrollbar">
             <head>
