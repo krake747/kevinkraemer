@@ -1,8 +1,8 @@
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { omit, type ParentProps } from "solid-js"
+import { omit } from "solid-js"
 
-export function Input(props: ParentProps<ComponentProps<"input">>) {
+export function Input(props: ComponentProps<"input">) {
     const rest = omit(props, "class", "children", "ref")
 
     return (
