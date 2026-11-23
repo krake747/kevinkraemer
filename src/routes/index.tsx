@@ -12,14 +12,16 @@ import { HomeContact } from "@features/home/contact"
 import { HomeHero } from "@features/home/hero"
 import { HomeLogs } from "@features/home/logs"
 import { LogSubscribe } from "@features/log/subscribe"
-import { PageSections, type SectionLink } from "@pattern/section-nav"
 import { Seo } from "@pattern/seo"
+import { defineFileRoute } from "@solidjs/router/fs"
 
-const SECTION_LINKS: SectionLink[] = [
+const SECTION_LINKS = [
     { label: "#story", href: "/#story" },
     { label: "#logs", href: "/#logs" },
     { label: "#contact", href: "/#contact" },
-]
+] as const
+
+export const route = defineFileRoute("/", { info: { sections: [...SECTION_LINKS] } })
 
 export default function HomeRoute() {
     const recentLogs = getRecentLogEntries(siteContent.logs, HOMEPAGE_RECENT_LOG_COUNT)
@@ -45,7 +47,6 @@ export default function HomeRoute() {
                 path="/"
                 extraSchemas={extraSchemas}
             />
-            <PageSections links={SECTION_LINKS} />
             <HomeHero />
             <HomeAbout id="story" />
             <HomeLogs entries={recentLogs} id="logs">

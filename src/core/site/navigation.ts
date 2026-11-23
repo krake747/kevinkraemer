@@ -103,3 +103,15 @@ export function isActiveFor(entry: NavEntry, pathname: string): boolean {
         }
     }
 }
+
+export type SectionLink = {
+    label: string
+    href: string
+}
+
+declare module "@solidjs/router" {
+    // oxlint-disable-next-line typescript/consistent-type-definitions
+    interface RouteInfo {
+        sections?: SectionLink[]
+    }
+}

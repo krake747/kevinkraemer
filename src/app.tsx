@@ -3,7 +3,6 @@ import { colorScheme } from "@core/theme"
 import { Footer } from "@features/footer/footer"
 import { Header } from "@features/header/header"
 import { registerWebMcpTools } from "@features/webmcp/register"
-import { SectionNavProvider } from "@pattern/section-nav"
 import { createRouter, useNavigate } from "@solidjs/router"
 import { fileRoutes } from "@solidjs/router/fs"
 import { isServer } from "@solidjs/web"
@@ -48,13 +47,7 @@ export default function App() {
 
     return (
         <Preferences preferences={[colorScheme]}>
-            <Router>
-                {(props) => (
-                    <SectionNavProvider>
-                        <Layout>{props.children}</Layout>
-                    </SectionNavProvider>
-                )}
-            </Router>
+            <Router>{(props) => <Layout>{props.children}</Layout>}</Router>
         </Preferences>
     )
 }

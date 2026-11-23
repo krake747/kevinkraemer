@@ -7,15 +7,17 @@ import { CvProjects } from "@features/cv/projects"
 import { CvSkills } from "@features/cv/skills"
 import { CvSummary } from "@features/cv/summary"
 import { PageShell } from "@pattern/page-shell"
-import { PageSections, type SectionLink } from "@pattern/section-nav"
 import { Seo } from "@pattern/seo"
+import { defineFileRoute } from "@solidjs/router/fs"
 
-const SECTION_LINKS: SectionLink[] = [
+const SECTION_LINKS = [
     { label: "#experience", href: "/cv#experience" },
     { label: "#skills", href: "/cv#skills" },
     { label: "#projects", href: "/cv#projects" },
     { label: "#education", href: "/cv#education" },
-]
+] as const
+
+export const route = defineFileRoute("/cv", { info: { sections: [...SECTION_LINKS] } })
 
 export default function CvRoute() {
     const canonical = canonicalFor("/cv")
@@ -28,7 +30,6 @@ export default function CvRoute() {
                 path="/cv"
                 extraSchemas={[makePersonSchema(canonical)]}
             />
-            <PageSections links={SECTION_LINKS} />
             <PageShell class="print:py-8">
                 <div class="mx-auto flex max-w-4xl flex-col gap-10 kk-cascade">
                     <CvHeader />
