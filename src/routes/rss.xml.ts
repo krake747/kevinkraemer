@@ -16,7 +16,7 @@ function item(entry: (typeof siteContent.logs)[number]): string {
         `<description>${escapeXml(entry.description)}</description>`,
         `<pubDate>${new Date(entry.date).toUTCString()}</pubDate>`,
         categories,
-        "<author>" + escapeXml(site.name) + "</author>",
+        `<author>${escapeXml(site.name)}</author>`,
         "</item>",
     ].join("")
 }
