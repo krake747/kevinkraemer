@@ -1,4 +1,5 @@
 import { CvSection } from "@features/cv/section"
+import { CvSectionHeading } from "@features/cv/section-heading"
 import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
 
@@ -24,7 +25,8 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 
 export function CvSkills() {
     return (
-        <CvSection id="skills" heading="Technical Skills">
+        <CvSection id="skills">
+            <CvSectionHeading>Technical Skills</CvSectionHeading>
             <StackRow>
                 <div class="grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2 md:grid-cols-3">
                     <For each={SKILL_CATEGORIES}>
