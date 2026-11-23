@@ -5,6 +5,7 @@ import {
     makeHomepageOrganizationSchema,
     makeProfilePageSchema,
     makeWebSiteSchema,
+    toJsonLd,
 } from "@core/site/jsonld"
 import { canonicalFor } from "@core/site/urls"
 import { HomeAbout } from "@features/home/about"
@@ -13,7 +14,9 @@ import { HomeHero } from "@features/home/hero"
 import { HomeLogs } from "@features/home/logs"
 import { LogSubscribe } from "@features/log/subscribe"
 import { Seo } from "@pattern/seo"
+import { Script } from "@solidjs/meta"
 import { defineFileRoute } from "@solidjs/router/fs"
+import { For } from "solid-js"
 
 const SECTION_LINKS = [
     { label: "#story", href: "/#story" },
@@ -25,7 +28,7 @@ export const route = defineFileRoute("/", { info: { sections: [...SECTION_LINKS]
 
 export default function HomeRoute() {
     const recentLogs = getRecentLogEntries(siteContent.logs, HOMEPAGE_RECENT_LOG_COUNT)
-    const extraSchemas = [
+    const homepageSchemas = [
         makeProfilePageSchema(),
         makeWebSiteSchema(),
         makeHomepageOrganizationSchema(),
@@ -45,8 +48,10 @@ export default function HomeRoute() {
                 title="Full-stack developer"
                 description="Full-stack developer and former financial risk analyst based in Luxembourg. I automate the boring parts first, then sweat the details everyone feels but nobody can name."
                 path="/"
-                extraSchemas={extraSchemas}
             />
+            <For each={homepageSchemas}>
+                {(schema) => <Script type="application/ld+json">{JSON.stringify(toJsonLd(schema))}</Script>}
+            </For>
             <HomeHero />
             <HomeAbout id="story" />
             <HomeLogs entries={recentLogs} id="logs">

@@ -24,14 +24,9 @@ export default function LogRoute(props: RouteProps<typeof route>) {
                             title: `${entry().title} · Logs`,
                             description: entry().description,
                             path: `/logs/${entry().id}`,
-                            markdown: `/logs/${entry().id}.md`,
                             type: "article",
                             publishedTime: entry().date,
                             tags: entry().tags,
-                            extraMeta: [
-                                { "data-pagefind-filter": "type:article" },
-                                ...entry().tags.map((tag) => ({ "data-pagefind-filter": `tag:${tag}` })),
-                            ],
                             breadcrumbs: sectionTrail("Logs", "/logs", entry().title),
                         }}
                     >
