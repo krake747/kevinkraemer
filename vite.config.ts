@@ -144,6 +144,7 @@ export default defineConfig({
                 files: [
                     "**/*.spec.ts",
                     "**/*.spec.tsx",
+                    "e2e/prerendered-routes.ts",
                     "vite.config.ts",
                     "vitest.config.ts",
                     "vitest.setup.ts",
