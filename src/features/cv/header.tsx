@@ -18,7 +18,9 @@ export function CvHeader() {
             <header>
                 <div class="flex flex-col gap-1">
                     <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                        <h1 class="text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100">{CV_NAME}</h1>
+                        <h1 class="text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100">
+                            {CV_NAME}
+                        </h1>
                         <Badge as="a" href="https://www.simpleip.com" external tone="emerald" interactive class="w-fit">
                             Building @ Simple IP
                         </Badge>

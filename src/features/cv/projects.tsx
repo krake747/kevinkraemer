@@ -62,7 +62,9 @@ export function CvProjects() {
                                     </Show>
                                 </div>
                             </div>
-                            <p class="mt-1 text-sm text-pretty text-stone-600 dark:text-stone-400">{project.description}</p>
+                            <p class="mt-1 text-sm text-pretty text-stone-600 dark:text-stone-400">
+                                {project.description}
+                            </p>
                             <p class="mt-2 font-mono text-xs text-stone-600 dark:text-stone-300">
                                 {project.tech.join(" · ")}
                             </p>
