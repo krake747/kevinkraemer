@@ -28,12 +28,12 @@ export function SectionNavProvider(props: ParentProps) {
     return <SectionNavContext value={{ links, setLinks }}>{props.children}</SectionNavContext>
 }
 
-export function useSectionLinks(): Accessor<SectionLink[]> {
-    return useContext(SectionNavContext).links
+export function useSectionNav(): SectionNav {
+    return useContext(SectionNavContext)
 }
 
 export function PageSections(props: { links: SectionLink[] }) {
-    const { setLinks } = useContext(SectionNavContext)
+    const { setLinks } = useSectionNav()
     createEffect(
         () => props.links,
         (links) => {

@@ -1,4 +1,4 @@
-import { PageSections, SectionNavProvider, useSectionLinks, type SectionLink } from "@pattern/section-nav"
+import { PageSections, SectionNavProvider, useSectionNav, type SectionLink } from "@pattern/section-nav"
 import { renderToContainer } from "@testing/render"
 import { createSignal, flush, Show } from "solid-js"
 import { describe, expect, it } from "vite-plus/test"
@@ -9,7 +9,7 @@ const LINKS: SectionLink[] = [
 ]
 
 function Rail() {
-    const links = useSectionLinks()
+    const { links } = useSectionNav()
     return (
         <nav>
             {links()
