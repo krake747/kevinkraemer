@@ -1,4 +1,4 @@
-import { formatLogDateLong } from "@core/content/log-date"
+import { formatLogDateLong } from "@core/time/log-date"
 import { formatWordCount, getReadTime } from "@core/time/read-time"
 import { LogBody } from "@features/log/body"
 import type { LogDetail } from "@features/log/detail"

@@ -1,5 +1,5 @@
-import { formatLogDateShort } from "@core/content/log-date"
 import type { LogEntry } from "@core/content/model"
+import { formatLogDateShort } from "@core/time/log-date"
 import { ArrowRight } from "@ui/icon"
 import { SectionHeading } from "@ui/section-heading"
 import { Stack } from "@ui/stack"

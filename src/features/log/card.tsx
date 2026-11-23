@@ -1,5 +1,5 @@
-import { formatLogDateLong } from "@core/content/log-date"
 import type { LogSummary } from "@core/content/log-summaries"
+import { formatLogDateLong } from "@core/time/log-date"
 import { ArrowRight } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
 import type { VoidProps } from "solid-js"

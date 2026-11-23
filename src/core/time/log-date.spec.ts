@@ -1,4 +1,4 @@
-import { formatLogDateLong, formatLogDateShort } from "@core/content/log-date"
+import { formatLogDateLong, formatLogDateShort } from "@core/time/log-date"
 import { describe, expect, it } from "vite-plus/test"
 
 describe("log dates", () => {
