@@ -1,3 +1,4 @@
+import { ASK_UPSTREAM_RETRY } from "@core/ask/ask"
 import { AskUpstream } from "@core/ask/errors"
 import type { TapePrint } from "@core/ask/tape"
 import { Result } from "better-result"
@@ -28,7 +29,7 @@ export const answerWith =
             },
             {
                 signal,
-                retry: { times: 1, delayMs: 1000, backoff: "constant" },
+                retry: ASK_UPSTREAM_RETRY,
             },
         )
     }

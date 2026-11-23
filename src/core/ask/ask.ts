@@ -16,6 +16,8 @@ export type AskAnswer = {
 const relevanceFloor = 0.85
 const answerabilityFloor = 0.85
 
+export const ASK_UPSTREAM_RETRY = { times: 1, delayMs: 1000, backoff: "constant" } as const
+
 export const askSourceExclusions = ["/"]
 
 type RankedSelection = { kind: "supported"; sources: NonEmpty<TapePrint> } | { kind: "unsupported" }

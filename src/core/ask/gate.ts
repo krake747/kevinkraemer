@@ -1,4 +1,4 @@
-import type { AskPageJudgment } from "@core/ask/ask"
+import { ASK_UPSTREAM_RETRY, type AskPageJudgment } from "@core/ask/ask"
 import { AskMalformedResponse, AskUpstream } from "@core/ask/errors"
 import type { TapePrint } from "@core/ask/tape"
 import { TypeSafeClient, noul } from "@typesafe-ai/sdk"
@@ -122,7 +122,7 @@ export const judgeWith =
                     },
                     {
                         signal,
-                        retry: { times: 1, delayMs: 1000, backoff: "constant" },
+                        retry: ASK_UPSTREAM_RETRY,
                     },
                 ),
             )
