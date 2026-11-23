@@ -29,7 +29,7 @@ function Layout(props: ParentProps) {
     return (
         <>
             <Header />
-            <main id="main-content" data-pagefind-body class="flex flex-1 flex-col pb-10">
+            <main id="main" data-pagefind-body class="flex flex-1 flex-col pb-10">
                 {props.children}
             </main>
             <Footer />

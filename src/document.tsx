@@ -30,7 +30,7 @@ export default function Document(props: ParentProps) {
             </head>
             <body class="flex min-h-dvh flex-col selection:bg-emerald-200 selection:text-stone-900 dark:selection:bg-emerald-700 dark:selection:text-white">
                 <a
-                    href="#main-content"
+                    href="#main"
                     class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-emerald-700 focus:px-4 focus:py-2 focus:text-sm focus:text-white"
                 >
                     Skip to content
