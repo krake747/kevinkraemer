@@ -13,7 +13,7 @@ function stripFallbackSpans(html: string): string {
     return [
         /<!--[\s\S]*?-->/g,
         /<span[^>]*class="[^"]*lambda[^"]*"[^>]*>[\s\S]*?<\/span>/gi,
-        /<span[^>]*>\|<\/span>/gi,
+        /<span[^>]*>\s*\|\s*<\/span>/gi,
     ].reduce((cleaned, pattern) => cleaned.replace(pattern, ""), html)
 }
 

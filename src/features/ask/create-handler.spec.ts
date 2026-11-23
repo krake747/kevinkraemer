@@ -7,7 +7,7 @@ import { tapeResult } from "@core/ask/tape-data"
 import { createAskHandler } from "@features/ask/create-handler"
 import { Result } from "better-result"
 import * as v from "valibot"
-import { describe, expect, it } from "vite-plus/test"
+import { describe, expect, it, vi } from "vite-plus/test"
 
 const askResponseSchema = v.object({
     sources: v.array(v.object({ path: v.string() })),
@@ -203,21 +203,27 @@ describe("ask handler", () => {
     })
 
     it("500s when a defect escapes the pipeline", async () => {
-        const handler = makeHandler({
-            deps: () => {
-                return {
-                    judge: async () => {
-                        throw new Error("gate exploded")
-                    },
-                    answer: async () => {
-                        return Result.ok("unreachable")
-                    },
-                }
-            },
-        })
-        const response = await handler(get("experience?"))
-        expect(response.status).toBe(500)
-        expect(await codeOf(response)).toBe("INTERNAL_ERROR")
+        const logged = vi.spyOn(console, "error").mockImplementation(() => {})
+        try {
+            const handler = makeHandler({
+                deps: () => {
+                    return {
+                        judge: async () => {
+                            throw new Error("gate exploded")
+                        },
+                        answer: async () => {
+                            return Result.ok("unreachable")
+                        },
+                    }
+                },
+            })
+            const response = await handler(get("experience?"))
+            expect(response.status).toBe(500)
+            expect(await codeOf(response)).toBe("INTERNAL_ERROR")
+            expect(logged).toHaveBeenCalledWith("ask defect", expect.any(Error))
+        } finally {
+            logged.mockRestore()
+        }
     })
 })
 

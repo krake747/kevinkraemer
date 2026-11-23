@@ -1,8 +1,8 @@
 # Testing
 
-Source of truth: `vitest.config.ts` (unit `happy-dom`), `playwright.config.ts` (e2e against the
-built stack), `vitest.setup.ts`. This file caches only the unwritten why and the gotcha the config
-cannot say.
+Source of truth: `vitest.config.ts` (projects `unit` on `node`, `browser` on Chromium via
+`@vitest/browser-playwright`), `playwright.config.ts` (e2e against the built stack),
+`vitest.setup.ts`. This file caches only the unwritten why and the gotcha the config cannot say.
 
 A test is done when it asserts `black-box` behavior, defines expected independently, and stays
 `deterministic`.
@@ -38,13 +38,14 @@ paste the passing run. The PR Evidence section carries both.
 
 ## Tiers — one branch per target
 
-- **Logic `src/core/**`, `netlify/**`** Why pure `happy-dom` suffices. Solve keep in `happy-dom`,
+- **Logic `src/core/**`, `netlify/**`** Why pure `node` suffices. Solve keep in the `unit` project,
   parameterize with `test.each`, inject RNG and time.
-- **Components `src/features/**`, `src/ui/**`** Why component behavior needs DOM and user events.
-  Solve mount with `renderToContainer` from `@testing/render` (`search-outcome-view.spec.tsx`),
-  which renders into a detached container and disposes it after each test, then assert on text and
-  structure (`querySelector`, `querySelectorAll`); a rendered component test needs no engine beyond
-  `happy-dom`.
+- **Components `src/features/**`, `src/ui/**`** Why component behavior needs a real browser, not a
+  DOM simulation. Solve mount with `renderToContainer` from `@testing/render`
+  (`search-outcome-view.spec.tsx`), which renders into a detached container and disposes it after
+  each test, then assert on text and structure (`querySelector`, `querySelectorAll`); every
+  `*.spec.tsx` plus the DOM-dependent `*.spec.ts` files live in the `browser` project
+  (`vitest.config.ts` `browserSpecs`).
 - **E2E `e2e/**`** Why smoke proves wiring across pages, hydration, and the edge function. Solve
   `playwright.config.ts` `webServer: pnpm preview` (the Netlify CLI builds and serves the production
   stack), wait on `html[data-hydrated]` — set by `onHydrationEnd` in `src/app.tsx` — before

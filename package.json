@@ -64,6 +64,7 @@
         "@testing-library/jest-dom": "^8.0.0",
         "@types/node": "^26.6.6",
         "@types/turndown": "^5.0.6",
+        "@vitest/browser-playwright": "5.1.0",
         "@vitest/coverage-v8": "catalog:",
         "eslint-plugin-solid": "~0.20.1",
         "fallow": "^3.45.0",
