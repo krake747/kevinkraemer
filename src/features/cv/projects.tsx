@@ -1,4 +1,5 @@
 import { CvSection } from "@features/cv/section"
+import { CvSectionHeading } from "@features/cv/section-heading"
 import { Anchor } from "@ui/anchor"
 import { ArrowUpRight } from "@ui/icon"
 import { Stack } from "@ui/stack"
@@ -31,14 +32,12 @@ const SIDE_PROJECTS: SideProject[] = [
 
 export function CvProjects() {
     return (
-        <CvSection
-            id="projects"
-            heading={
+        <CvSection id="projects">
+            <CvSectionHeading>
                 <Anchor href="/projects" variant="muted" class="text-xs">
                     Projects
                 </Anchor>
-            }
-        >
+            </CvSectionHeading>
             <Stack>
                 <For each={SIDE_PROJECTS}>
                     {(project) => (
