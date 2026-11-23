@@ -2,19 +2,20 @@ const STRIP_SELECTORS = ["head", "script", "style", "noscript", "nav", "footer",
 
 const COLLAPSE_BLANK = /\n{3,}/g
 
+const TAG_PATTERNS = STRIP_SELECTORS.map((tag) => new RegExp(`<${tag}[^>]*>[\\s\\S]*?<\\/${tag}>`, "gi"))
+
+const SPAN_PATTERNS = [
+    /<!--[\s\S]*?-->/g,
+    /<span[^>]*class="[^"]*lambda[^"]*"[^>]*>[\s\S]*?<\/span>/gi,
+    /<span[^>]*>\s*\|\s*<\/span>/gi,
+]
+
 function stripFallbackTags(html: string): string {
-    return STRIP_SELECTORS.reduce(
-        (cleaned, tag) => cleaned.replace(new RegExp(`<${tag}[^>]*>[\\s\\S]*?<\\/${tag}>`, "gi"), ""),
-        html,
-    )
+    return TAG_PATTERNS.reduce((cleaned, pattern) => cleaned.replace(pattern, ""), html)
 }
 
 function stripFallbackSpans(html: string): string {
-    return [
-        /<!--[\s\S]*?-->/g,
-        /<span[^>]*class="[^"]*lambda[^"]*"[^>]*>[\s\S]*?<\/span>/gi,
-        /<span[^>]*>\s*\|\s*<\/span>/gi,
-    ].reduce((cleaned, pattern) => cleaned.replace(pattern, ""), html)
+    return SPAN_PATTERNS.reduce((cleaned, pattern) => cleaned.replace(pattern, ""), html)
 }
 
 function cleanWithoutDom(html: string): string {
