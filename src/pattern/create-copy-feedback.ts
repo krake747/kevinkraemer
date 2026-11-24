@@ -32,27 +32,29 @@ export function createCopyFeedback(): CopyFeedback {
 
     const copyLabel = () => LABEL[status()]
 
-    const settleCopy = (id: number, outcome: CopyOutcome) => {
-        if (id !== latestRequestId) {
-            return
+    const isCurrent = (id: number): boolean => {
+        return id === latestRequestId
+    }
+
+    const settleCopy = (id: number, outcome: CopyOutcome): CopyOutcome => {
+        if (!isCurrent(id)) {
+            return outcome
         }
         setStatus(outcome.kind)
         announce(ANNOUNCEMENT[outcome.kind])
         clearTimeout(resetTimer)
         resetTimer = setTimeout(() => setStatus("idle"), CONFIRM_RESET_MS)
+        return outcome
     }
 
-    const copy = async (text: string): Promise<CopyOutcome> => {
+    const copy = (text: string): Promise<CopyOutcome> => {
         const id = ++latestRequestId
-        let outcome: CopyOutcome
-        try {
-            await navigator.clipboard.writeText(text)
-            outcome = { kind: "copied" }
-        } catch {
-            outcome = { kind: "failed" }
-        }
-        settleCopy(id, outcome)
-        return outcome
+        return Promise.resolve()
+            .then(() => navigator.clipboard.writeText(text))
+            .then(
+                () => settleCopy(id, { kind: "copied" }),
+                () => settleCopy(id, { kind: "failed" }),
+            )
     }
 
     return { copyLabel, copy }
