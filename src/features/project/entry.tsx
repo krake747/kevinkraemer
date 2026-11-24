@@ -1,7 +1,7 @@
 import type { Project } from "@core/content/model"
 import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
-import { ReturnToRegister } from "@pattern/register"
+import { Register, ReturnToRegister } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
@@ -64,7 +64,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
             </Show>
             <Show when={props.project.changelog.length > 0}>
                 <ProjectSection id="changelog" title="Changelog">
-                    <Stack as="ul" class="mt-4">
+                    <Register as="ul" class="mt-4">
                         <For each={props.project.changelog}>
                             {(item) => (
                                 <StackRow
@@ -88,7 +88,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                                 </StackRow>
                             )}
                         </For>
-                    </Stack>
+                    </Register>
                 </ProjectSection>
             </Show>
             <p class="mt-10">
