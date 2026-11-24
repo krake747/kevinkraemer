@@ -5,7 +5,7 @@ import { For, Show, createMemo, type VoidProps } from "solid-js"
 export function ProjectList(props: VoidProps<{ projects: Project[] }>) {
     const ordered = createMemo(() => sortByOrder(props.projects))
     return (
-        <section aria-label="Case files" class="animate-fade-up [animation-delay:100ms]">
+        <section aria-label="Case files" class="animate-fade-up">
             <Show
                 when={ordered().length > 0}
                 fallback={
