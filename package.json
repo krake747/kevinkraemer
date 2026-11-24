@@ -75,6 +75,7 @@
         "netlify": "^27.20.1",
         "pagefind": "^1.6.0",
         "playwright": "^1.65.1",
+        "puppeteer-core": "^25.18.1",
         "satteri": "^0.11.7",
         "tsrs": "7.1.0-beta.tsrs4",
         "typescript": "^7.0.2",

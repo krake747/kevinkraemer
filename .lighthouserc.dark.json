@@ -1,0 +1,38 @@
+{
+    "ci": {
+        "collect": {
+            "url": [
+                "http://localhost:4321/",
+                "http://localhost:4321/cv",
+                "http://localhost:4321/logs",
+                "http://localhost:4321/logs/something-visible",
+                "http://localhost:4321/about",
+                "http://localhost:4321/contact",
+                "http://localhost:4321/privacy",
+                "http://localhost:4321/uses",
+                "http://localhost:4321/developers",
+                "http://localhost:4321/projects",
+                "http://localhost:4321/projects/kevinkraemer-com",
+                "http://localhost:4321/search"
+            ],
+            "numberOfRuns": 3,
+            "startServerCommand": "pnpm preview --port 4321",
+            "startServerReadyPattern": "Local dev server ready",
+            "startServerReadyTimeout": 180000,
+            "puppeteerScript": "scripts/lighthouse/seed-dark-mode.cjs"
+        },
+        "assert": {
+            "assertions": {
+                "categories:performance": ["warn", { "minScore": 0.95 }],
+                "categories:accessibility": ["error", { "minScore": 0.95 }],
+                "categories:best-practices": ["warn", { "minScore": 0.9 }],
+                "first-contentful-paint": ["warn", { "maxNumericValue": 1800 }],
+                "largest-contentful-paint": ["warn", { "maxNumericValue": 2500 }],
+                "cumulative-layout-shift": ["error", { "maxNumericValue": 0.1 }]
+            }
+        },
+        "upload": {
+            "target": "temporary-public-storage"
+        }
+    }
+}

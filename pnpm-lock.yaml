@@ -331,6 +331,9 @@ importers:
       playwright:
         specifier: ^1.65.1
         version: 1.65.1
+      puppeteer-core:
+        specifier: ^25.18.1
+        version: 25.18.1(proxy-agent@8.0.3(supports-color@7.2.0))(yauzl@3.4.0)
       satteri:
         specifier: ^0.11.7
         version: 0.11.7
