@@ -32,25 +32,35 @@ function removeLambdaSpans(doc: Document): void {
     doc.querySelectorAll('span[class*="lambda"]').forEach((element) => element.remove())
 }
 
+function isPipeSpan(element: Element): boolean {
+    return element.textContent?.trim() === "|"
+}
+
 function removePipeSpans(doc: Document): void {
     doc.querySelectorAll("span").forEach((element) => {
-        if (element.textContent?.trim() === "|") {
+        if (isPipeSpan(element)) {
             element.remove()
         }
     })
 }
 
-function removeComments(doc: Document): void {
-    const walker = doc.createTreeWalker(doc, NodeFilter.SHOW_COMMENT)
-    const comments: Comment[] = []
-    let current: Node | null = walker.nextNode()
+function* walkNodes(walker: TreeWalker): Generator<Node> {
+    let current = walker.nextNode()
     while (current !== null) {
-        if (current instanceof Comment) {
-            comments.push(current)
-        }
+        yield current
         current = walker.nextNode()
     }
-    comments.forEach((comment) => comment.remove())
+}
+
+function isComment(node: Node): node is Comment {
+    return node instanceof Comment
+}
+
+function removeComments(doc: Document): void {
+    const walker = doc.createTreeWalker(doc, NodeFilter.SHOW_COMMENT)
+    for (const comment of [...walkNodes(walker)].filter(isComment)) {
+        comment.remove()
+    }
 }
 
 const cleaners: ((doc: Document) => void)[] = [removeSelectors, removeLambdaSpans, removePipeSpans, removeComments]
