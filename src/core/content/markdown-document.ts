@@ -18,25 +18,31 @@ export function stripGraphDirectives(markdown: string): string {
         .trim()
 }
 
+type FenceState = { inFence: boolean; out: string[] }
+
+function absolutizeLine(line: string, origin: string): string {
+    return line
+        .split(codeSpan)
+        .map((segment, index) => (index % 2 === 0 ? absolutizeSegment(segment, origin) : segment))
+        .join("")
+}
+
+function stepLine(origin: string): (state: FenceState, line: string) => FenceState {
+    return (state, line) => {
+        if (fenceLine.test(line)) {
+            return { inFence: !state.inFence, out: [...state.out, line] }
+        }
+        if (state.inFence) {
+            return { inFence: state.inFence, out: [...state.out, line] }
+        }
+        return { inFence: state.inFence, out: [...state.out, absolutizeLine(line, origin)] }
+    }
+}
+
 export function absolutizeLinks(markdown: string, base: string): string {
     const origin = base.replace(/\/+$/, "")
-    let inFence = false
-    return markdown
-        .split("\n")
-        .map((line) => {
-            if (fenceLine.test(line)) {
-                inFence = !inFence
-                return line
-            }
-            if (inFence) {
-                return line
-            }
-            return line
-                .split(codeSpan)
-                .map((segment, index) => (index % 2 === 0 ? absolutizeSegment(segment, origin) : segment))
-                .join("")
-        })
-        .join("\n")
+    const { out } = markdown.split("\n").reduce<FenceState>(stepLine(origin), { inFence: false, out: [] })
+    return out.join("\n")
 }
 
 function absolutizeSegment(segment: string, origin: string): string {
