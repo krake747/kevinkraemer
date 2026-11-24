@@ -57,7 +57,10 @@ export function CvEducation(props: VoidProps<{ id: string }>) {
                         <StackRow as="article" class="break-inside-avoid">
                             <CvRowHeader title={item.institution} meta={item.location} />
                             <CvRole>{item.degree}</CvRole>
-                            <CvDates start={item.startDate} end={item.endDate} separator="to" />
+                            <CvDates
+                                period={{ kind: "past", start: item.startDate, end: item.endDate }}
+                                separator="to"
+                            />
                             {item.details !== undefined && item.details.length > 0 ? (
                                 <CvBullets items={item.details} />
                             ) : null}

@@ -29,6 +29,8 @@ export type AboutEntry = {
     graphs: GraphFlowSpec[]
 }
 
+export type EmploymentPeriod = { kind: "current"; start: string } | { kind: "past"; start: string; end: string }
+
 export type ExperienceEntry = {
     id: string
     company: string

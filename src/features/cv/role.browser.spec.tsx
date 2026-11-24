@@ -1,11 +1,19 @@
+import type { EmploymentPeriod } from "@core/content/model"
 import { CvEntry } from "@features/cv/entry"
 import { CvRole } from "@features/cv/role"
 import { renderToContainer } from "@testing/render"
 import { describe, expect, it } from "vite-plus/test"
 
+function periodOf(current: boolean | undefined): EmploymentPeriod {
+    if (current === true) {
+        return { kind: "current", start: "Jan 2020" }
+    }
+    return { kind: "past", start: "Jan 2018", end: "Dec 2019" }
+}
+
 function mounted(current: boolean | undefined, tone?: "active" | "past"): HTMLElement {
     return renderToContainer(() => (
-        <CvEntry current={current}>
+        <CvEntry period={periodOf(current)}>
             <CvRole tone={tone}>Engineer</CvRole>
         </CvEntry>
     ))

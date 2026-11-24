@@ -1,4 +1,4 @@
-import { sortByOrder } from "@core/content/model"
+import { sortByOrder, type EmploymentPeriod, type ExperienceEntry } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
 import { CvBullets } from "@features/cv/bullets"
 import { CvDates } from "@features/cv/dates"
@@ -13,22 +13,32 @@ import { For, type VoidProps } from "solid-js"
 
 const EXPERIENCE_ENTRIES = sortByOrder(siteContent.experience)
 
+function toPeriod(item: ExperienceEntry): EmploymentPeriod {
+    if (item.endDate === null) {
+        return { kind: "current", start: item.startDate }
+    }
+    return { kind: "past", start: item.startDate, end: item.endDate }
+}
+
 export function CvExperience(props: VoidProps<{ id: string }>) {
     return (
         <CvSection id={props.id}>
             <CvSectionHeading>Experience</CvSectionHeading>
             <Stack>
                 <For each={EXPERIENCE_ENTRIES}>
-                    {(item) => (
-                        <CvEntry current={item.endDate === null}>
-                            <StackRow as="article" class="break-inside-avoid">
-                                <CvRowHeader title={item.company} meta={item.location} />
-                                <CvRole>{item.role}</CvRole>
-                                <CvDates start={item.startDate} end={item.endDate} />
-                                <CvBullets items={item.responsibilities} />
-                            </StackRow>
-                        </CvEntry>
-                    )}
+                    {(item) => {
+                        const period = toPeriod(item)
+                        return (
+                            <CvEntry period={period}>
+                                <StackRow as="article" class="break-inside-avoid">
+                                    <CvRowHeader title={item.company} meta={item.location} />
+                                    <CvRole>{item.role}</CvRole>
+                                    <CvDates period={period} />
+                                    <CvBullets items={item.responsibilities} />
+                                </StackRow>
+                            </CvEntry>
+                        )
+                    }}
                 </For>
             </Stack>
         </CvSection>
