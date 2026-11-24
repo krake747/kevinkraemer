@@ -55,7 +55,7 @@ describe("relevance judgments", () => {
 describe("the gate prompt", () => {
     it("sends page content so relevance is judged on more than titles", () => {
         const state = buildGateState("Where can I reach Kevin?", pages)
-        expect(state.visitor_question).toBe("Where can I reach Kevin?")
+        expect(state.passer_by_question).toBe("Where can I reach Kevin?")
         expect(state.pages.map((page) => page.url)).toEqual(["/cv", "/logs"])
         expect(state.pages[0]?.content).toBe("Career facts content")
     })

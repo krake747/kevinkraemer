@@ -22,7 +22,7 @@ type GatePage = {
 }
 
 type GateState = {
-    visitor_question: string
+    passer_by_question: string
     pages: GatePage[]
 }
 
@@ -30,7 +30,7 @@ const MAX_GATE_CONTENT = 6000
 
 export function buildGateState(question: string, pages: TapePrint[]): GateState {
     return {
-        visitor_question: question,
+        passer_by_question: question,
         pages: pages.map((page) => {
             return {
                 url: page.path,
@@ -92,7 +92,7 @@ export const judgeWith =
                                     state: buildGateState(question, pages),
                                     questions: {
                                         [answerabilityKey]: noul(
-                                            "Can the visitor's question be answered from the supplied site content?",
+                                            "Can the passer-by's question be answered from the supplied site content?",
                                             {
                                                 true: "The site content states or clearly implies enough information to answer the question.",
                                                 false: "The site content does not provide enough information to answer the question.",
@@ -105,11 +105,11 @@ export const judgeWith =
                                                     {
                                                         page_url: page.path,
                                                         question:
-                                                            "Does the site page with a `url` matching `page_url` contain information that helps answer `visitor_question`?",
+                                                            "Does the site page with a `url` matching `page_url` contain information that helps answer `passer_by_question`?",
                                                     },
                                                     {
-                                                        true: "The page contains specific information that supports an answer to the visitor's question.",
-                                                        false: "The page is unrelated or does not provide information useful for answering the visitor's question.",
+                                                        true: "The page contains specific information that supports an answer to the passer-by's question.",
+                                                        false: "The page is unrelated or does not provide information useful for answering the passer-by's question.",
                                                     },
                                                 ),
                                             ]),
