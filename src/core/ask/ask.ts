@@ -22,16 +22,32 @@ export const askSourceExclusions = ["/"]
 
 type RankedSelection = { kind: "supported"; sources: NonEmpty<TapePrint> } | { kind: "unsupported" }
 
+const notExcluded =
+    (excludedPaths: string[]) =>
+    ({ page }: AskPageJudgment["pageRelevance"][number]): boolean => {
+        return !excludedPaths.includes(page.path)
+    }
+
+const isRelevant = ({ probability }: AskPageJudgment["pageRelevance"][number]): boolean => {
+    return probability > relevanceFloor
+}
+
+const byScoreDesc = (
+    a: AskPageJudgment["pageRelevance"][number],
+    b: AskPageJudgment["pageRelevance"][number],
+): number => {
+    return b.probability - a.probability
+}
+
+const selectPage = ({ page }: AskPageJudgment["pageRelevance"][number]): TapePrint => page
+
 export function rankSources(
     judgment: AskPageJudgment,
     summarize: boolean,
     excludedPaths: string[] = askSourceExclusions,
 ): RankedSelection {
-    const ranked = judgment.pageRelevance
-        .filter(({ page }) => !excludedPaths.includes(page.path))
-        .filter(({ probability }) => probability > relevanceFloor)
-        .toSorted((a, b) => b.probability - a.probability)
-    const sources = ranked.map(({ page }) => page)
+    const ranked = judgment.pageRelevance.filter(notExcluded(excludedPaths)).filter(isRelevant).toSorted(byScoreDesc)
+    const sources = ranked.map(selectPage)
     if (!isNonEmpty(sources) || (summarize && judgment.answerability <= answerabilityFloor)) {
         return { kind: "unsupported" }
     }
