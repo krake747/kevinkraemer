@@ -68,7 +68,7 @@ const organizationFields = {
 
 const organizationSchema = v.object(organizationFields)
 
-const blogPostingSchema = v.object({
+const logEntrySchema = v.object({
     context: v.literal("https://schema.org"),
     kind: v.literal("BlogPosting"),
     headline: text(),
@@ -138,7 +138,7 @@ const profilePageSchema = v.object({
     }),
 })
 
-const homepageBlogSchema = v.object({
+const logsHomepageSchema = v.object({
     context: v.literal("https://schema.org"),
     kind: v.literal("Blog"),
     name: text(),
@@ -204,7 +204,7 @@ describe("the person schema", () => {
     })
 })
 
-describe("the blog schema", () => {
+describe("the Log Entry schema", () => {
     it("produces a valid BlogPosting that satisfies the consumer contract", () => {
         const schema = makeBlogSchema({
             headline: "Hello",
@@ -215,7 +215,7 @@ describe("the blog schema", () => {
             author: site.name,
             tags: ["solid"],
         })
-        expect(schema).toEqual(expect.schemaMatching(blogPostingSchema))
+        expect(schema).toEqual(expect.schemaMatching(logEntrySchema))
     })
 
     it("includes dateModified and keywords only when present", () => {
@@ -229,7 +229,7 @@ describe("the blog schema", () => {
         })
         expect(without).not.toHaveProperty("dateModified")
         expect(without).not.toHaveProperty("keywords")
-        expect(without).toEqual(expect.schemaMatching(blogPostingSchema))
+        expect(without).toEqual(expect.schemaMatching(logEntrySchema))
 
         const withModified = makeBlogSchema({
             headline: "Hello",
@@ -243,7 +243,7 @@ describe("the blog schema", () => {
         })
         expect(withModified).toHaveProperty("dateModified", "2026-02-01T00:00:00.000Z")
         expect(withModified).toHaveProperty("keywords", "a, b")
-        expect(withModified).toEqual(expect.schemaMatching(blogPostingSchema))
+        expect(withModified).toEqual(expect.schemaMatching(logEntrySchema))
     })
 
     it("omits keywords for empty tags", () => {
@@ -257,7 +257,7 @@ describe("the blog schema", () => {
             tags: [],
         })
         expect(schema).not.toHaveProperty("keywords")
-        expect(schema).toEqual(expect.schemaMatching(blogPostingSchema))
+        expect(schema).toEqual(expect.schemaMatching(logEntrySchema))
     })
 })
 
@@ -311,7 +311,7 @@ describe("the profile page schema", () => {
     })
 })
 
-describe("the homepage blog schema", () => {
+describe("the Logs homepage schema", () => {
     const entries = [
         {
             title: "Hello",
@@ -323,7 +323,7 @@ describe("the homepage blog schema", () => {
 
     it("lists exactly the entries the Logs section renders", () => {
         const schema = makeHomepageBlogSchema(entries)
-        expect(schema).toEqual(expect.schemaMatching(homepageBlogSchema))
+        expect(schema).toEqual(expect.schemaMatching(logsHomepageSchema))
         expect(schema["url"]).toBe(`${origin}/logs`)
         expect(schema["blogPost"].length).toBe(entries.length)
     })
