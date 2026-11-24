@@ -45,6 +45,7 @@ export function CvHeader() {
                             href={CV_PDF_PATH}
                             variant="muted"
                             download
+                            rel="external"
                             aria-label="Download CV as PDF"
                             class="hit-area-y-3"
                         >
