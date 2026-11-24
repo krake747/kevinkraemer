@@ -1,6 +1,6 @@
 import { origin } from "@core/site/urls"
-import { DevelopersNumeral } from "@features/developers/numeral"
 import { DevelopersLead } from "@features/developers/lead"
+import { DevelopersNumeral } from "@features/developers/numeral"
 import { DevelopersProse } from "@features/developers/prose"
 import { CodeBlock } from "@pattern/code-block"
 import { InlineCode } from "@ui/inline-code"
