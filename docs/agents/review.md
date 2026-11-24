@@ -58,9 +58,9 @@ the route, and keeps two parts from reading the same in a grep. Solve name the r
 `{Name}Route` (`SearchRoute`, `CvRoute`, `DevelopersRoute` in `src/routes`) and compose feature
 parts there; the page root in features is the part itself (`SearchInterface` in
 `src/features/search/interface.tsx`), or `{Name}Layout` when it wraps rather than owns the page
-(`ContactLayout`); prefix every part with the same stem (`CvHeader`, `CvSummary`, `CvTimeline`,
-`ProjectList`); end a section wrapper in `Section` (`AboutSection`, `UsesGroupSection`). Omit the
-parts a page does not have. A part that two pages need moves down to `src/pattern` or `src/ui`
+(`NotFoundLayout`); prefix every part with the same stem (`CvHeader`, `CvSummary`, `CvExperience`,
+`ProjectList`); end a section wrapper in `Section` (`CvSection`, `UsesSection`). Omit the parts a
+page does not have. A part that two pages need moves down to `src/pattern` or `src/ui`
 (`architecture.md`) instead of losing its stem in place. Check via `pnpm lint` (`kk/feature-names`)
 — a component without its page stem is the smell.
 
@@ -142,9 +142,9 @@ both sides. Pass a prop that inserts JSX as an element and render it directly (`
 production strips the warnings — and load every route with the console open:
 `Hydration tag mismatch`, `Hydration structure mismatch`, or an "unclaimed server-rendered node"
 warning means an id moved. Search parameters are the other way to shift markup: they are absent
-while prerendering, so gate `useSearchParams` reads with `createHydrated()` from
-`@pattern/create-browser-value` (used in `src/pattern/create-url-query.ts` and
-`src/features/log/create-filter.ts`) and filter only after that.
+while prerendering, so gate `useSearchParams` reads behind a `createSignal(false)` that `onSettled`
+sets to `true` (as in `src/pattern/create-url-query.ts` and `src/features/log/create-filter.ts`) and
+filter only after that.
 
 ## Polymorphism — `as` is first-party, `render` is ui-sdk
 
