@@ -127,7 +127,7 @@ function PixelRow(props: VoidProps<{ cells: readonly Tone[]; closed: boolean }>)
                 {(cell) => (
                     <span
                         class={cx(
-                            "size-1 transition-colors duration-75 ease-out-quart",
+                            "size-1 transition-colors duration-150 ease-out-quart",
                             pixelClass(props.closed, cell),
                         )}
                     />
