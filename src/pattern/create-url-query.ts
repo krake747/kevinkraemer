@@ -11,11 +11,11 @@ type UrlQueryOptions = {
     wait: number
 }
 
-function paramValue(value: string | string[] | undefined): string {
+function paramValue(value: string | string[] | undefined): string | undefined {
     if (Array.isArray(value)) {
-        return value[0] ?? ""
+        return value[0]
     }
-    return value ?? ""
+    return value
 }
 
 export function createUrlQuery({ param, wait }: UrlQueryOptions) {
@@ -24,14 +24,14 @@ export function createUrlQuery({ param, wait }: UrlQueryOptions) {
     onSettled(() => {
         setHydrated(true)
     })
-    const committed = () => (isHydrated() ? paramValue(searchParams[param]) : "")
+    const committed = (): string | undefined => (isHydrated() ? paramValue(searchParams[param]) : undefined)
     const { input, update, reset } = createDebouncedInput({
         commit: (value) => {
             const next: UrlParams = { [param]: value.length > 0 ? value : undefined }
             setSearchParams(next, { replace: true })
         },
         wait,
-        source: committed,
+        source: () => committed() ?? "",
     })
     const clear = (extra: ClearParams = {}) => {
         reset()

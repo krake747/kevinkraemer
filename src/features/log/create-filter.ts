@@ -37,10 +37,10 @@ export function createLogFilter(entries: () => LogEntry[]) {
         query.clear({ tag: undefined })
     }
 
-    const hasActiveFilters = createMemo(() => selectedTags().length > 0 || query.query().length > 0)
+    const hasActiveFilters = createMemo(() => selectedTags().length > 0 || (query.query() ?? "").length > 0)
 
     const visibleEntries = createMemo(() =>
-        sortByDateDesc(filterLogEntries(summaries(), selectedTags(), query.query())),
+        sortByDateDesc(filterLogEntries(summaries(), selectedTags(), query.query() ?? "")),
     )
 
     const counts = createMemo<LogFilterCounts>(() => ({
