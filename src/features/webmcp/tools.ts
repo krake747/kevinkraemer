@@ -185,20 +185,28 @@ export function webMcpTools(entries: readonly LogEntry[], navigate: Navigate): W
     ]
 }
 
-function withTagEnum(schema: JsonSchema, tags: readonly string[]): JsonSchema {
-    const tagSchema = schema.properties?.["tags"]
-    if (tagSchema === undefined || typeof tagSchema === "boolean") {
-        return schema
+function tagItemsSchema(schema: JsonSchema): { tag: JsonSchema; items: JsonSchema } | undefined {
+    const tag = schema.properties?.["tags"]
+    if (tag === undefined || typeof tag === "boolean") {
+        return undefined
     }
-    const items = tagSchema.items
+    const items = tag.items
     if (items === undefined || typeof items === "boolean" || Array.isArray(items)) {
+        return undefined
+    }
+    return { tag, items }
+}
+
+function withTagEnum(schema: JsonSchema, tags: readonly string[]): JsonSchema {
+    const found = tagItemsSchema(schema)
+    if (found === undefined) {
         return schema
     }
     return {
         ...schema,
         properties: {
             ...schema.properties,
-            tags: { ...tagSchema, items: { ...items, enum: [...tags] } },
+            tags: { ...found.tag, items: { ...found.items, enum: [...tags] } },
         },
     }
 }
