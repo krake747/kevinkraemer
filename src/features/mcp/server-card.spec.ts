@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs"
-import path from "node:path"
+import { resolve } from "node:path"
 
 import { apiVersion } from "@core/site/api-version"
 import { canonicalFor } from "@core/site/urls"
@@ -27,7 +27,7 @@ const cardSchema = v.object({
 })
 
 function readCard() {
-    const raw = readFileSync(path.resolve(process.cwd(), "public", "mcp", "server-card"), "utf8")
+    const raw = readFileSync(resolve(process.cwd(), "public", "mcp", "server-card"), "utf8")
     return v.parse(cardSchema, JSON.parse(raw))
 }
 

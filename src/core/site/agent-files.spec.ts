@@ -1,5 +1,5 @@
 import { readdirSync, readFileSync } from "node:fs"
-import path from "node:path"
+import { resolve } from "node:path"
 
 import { apiVersion } from "@core/site/api-version"
 import { catalogEntries } from "@core/site/catalog"
@@ -7,7 +7,7 @@ import * as v from "valibot"
 import { describe, expect, it } from "vite-plus/test"
 
 function readPublic(relativePath: string): string {
-    return readFileSync(path.resolve(process.cwd(), "public", relativePath), "utf8")
+    return readFileSync(resolve(process.cwd(), "public", relativePath), "utf8")
 }
 
 const DISCOVERABLE_FILES = [
@@ -196,7 +196,7 @@ describe("the logs guide", () => {
 
 describe("the deployment", () => {
     it("keeps test files out of the Netlify edge-function entrypoint directory", () => {
-        const edgeFunctionFiles = readdirSync(path.resolve(process.cwd(), "netlify/edge-functions"))
+        const edgeFunctionFiles = readdirSync(resolve(process.cwd(), "netlify/edge-functions"))
         const testFiles = edgeFunctionFiles.filter((file) => /\.(spec|test)\.ts$/.test(file))
 
         expect(testFiles).toEqual([])
