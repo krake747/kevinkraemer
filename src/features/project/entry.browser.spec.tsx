@@ -1,5 +1,5 @@
 import type { Project } from "@core/content/model"
-import { ProjectArticle } from "@features/project/article"
+import { ProjectEntry } from "@features/project/entry"
 import { renderToContainer } from "@testing/render"
 import { describe, expect, it } from "vite-plus/test"
 
@@ -21,10 +21,10 @@ const project: Project = {
 }
 
 function mounted(): HTMLElement {
-    return renderToContainer(() => <ProjectArticle project={project} />)
+    return renderToContainer(() => <ProjectEntry project={project} />)
 }
 
-describe("the project article", () => {
+describe("the project entry", () => {
     it("composes the problem and decisions under their headings", () => {
         const view = mounted()
         expect(view.querySelector("#problem-heading")?.textContent).toBe("Problem and point of view")

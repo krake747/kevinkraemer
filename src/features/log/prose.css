@@ -2,72 +2,72 @@
 @reference "../../app.css";
 
 @layer components {
-    .blog-post {
+    .log-entry {
         max-width: var(--max-width-prose);
         line-height: 1.8;
     }
 
-    .blog-post h1,
-    .blog-post h2,
-    .blog-post h3,
-    .blog-post h4 {
+    .log-entry h1,
+    .log-entry h2,
+    .log-entry h3,
+    .log-entry h4 {
         @apply mt-8 mb-2 font-semibold tracking-tight text-stone-900 dark:text-stone-100;
     }
 
-    .blog-post h1 {
+    .log-entry h1 {
         @apply mt-12 text-3xl;
     }
 
-    .blog-post h2 {
+    .log-entry h2 {
         @apply mt-10 text-2xl;
     }
 
-    .blog-post h3 {
+    .log-entry h3 {
         @apply mt-8 text-xl;
     }
 
-    .blog-post p {
+    .log-entry p {
         @apply mb-4 dark:text-stone-400;
     }
 
-    .blog-post ul,
-    .blog-post ol {
+    .log-entry ul,
+    .log-entry ol {
         @apply mb-4 list-disc pl-6 dark:text-stone-400;
     }
 
-    .blog-post ol {
+    .log-entry ol {
         list-style-type: decimal;
     }
 
-    .blog-post li {
+    .log-entry li {
         @apply mb-2 dark:text-stone-400;
     }
 
-    .blog-post blockquote {
+    .log-entry blockquote {
         @apply my-6 border-l-2 border-emerald-500 pl-4 text-stone-600 italic dark:text-stone-400;
     }
 
-    .blog-post a {
+    .log-entry a {
         @apply text-emerald-700 underline decoration-emerald-500/30 decoration-from-font underline-offset-2 [text-underline-position:from-font] dark:text-emerald-400 dark:decoration-emerald-400/30;
     }
 
-    .blog-post :not(pre) > code {
+    .log-entry :not(pre) > code {
         @apply rounded bg-stone-100 px-1.5 py-0.5 text-sm font-normal text-emerald-700 dark:bg-stone-800 dark:text-emerald-400;
     }
 
-    .blog-post pre {
+    .log-entry pre {
         @apply my-6 overflow-x-auto border border-stone-200 bg-stone-900 dark:border-stone-800 dark:bg-stone-950;
     }
 
-    .blog-post pre code {
+    .log-entry pre code {
         @apply block p-4 font-mono text-sm text-stone-200;
     }
 
-    .blog-post strong {
+    .log-entry strong {
         @apply font-semibold text-stone-900 dark:text-stone-100;
     }
 
-    .blog-post hr {
+    .log-entry hr {
         @apply my-8 border-0 border-t border-stone-200 dark:border-stone-800;
     }
 }

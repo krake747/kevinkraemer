@@ -110,7 +110,7 @@ export default defineConfig({
             "shadcn/no-unknown-classes": [
                 "warn",
                 {
-                    allow: ["blog-post", "hero-intro", "not-prose", "reveal-section"],
+                    allow: ["log-entry", "hero-intro", "not-prose", "reveal-section"],
                 },
             ],
             "no-restricted-properties": [

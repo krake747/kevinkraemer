@@ -1,6 +1,6 @@
 import { findById } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
-import { ProjectArticle } from "@features/project/article"
+import { ProjectEntry } from "@features/project/entry"
 import { ProjectNotFound } from "@features/project/not-found"
 import { sectionTrail, DetailShell } from "@pattern/detail-shell"
 import { BreadcrumbSchema } from "@pattern/seo"
@@ -24,7 +24,7 @@ export default function ProjectRoute(props: RouteProps<typeof route>) {
                     }}
                 >
                     <BreadcrumbSchema items={sectionTrail("Projects", "/projects", entry().name)} />
-                    <ProjectArticle project={entry()} />
+                    <ProjectEntry project={entry()} />
                 </DetailShell>
             )}
         </Show>

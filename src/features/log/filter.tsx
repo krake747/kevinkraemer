@@ -1,5 +1,5 @@
 import type { LogEntry } from "@core/content/model"
-import { LogCard } from "@features/log/card"
+import { LogEntryPanel } from "@features/log/entry-panel"
 import { LogFilterDisclosure } from "@features/log/filter-disclosure"
 import { LogFilterEmpty } from "@features/log/filter-empty"
 import { LogFilterProvider, useLogFilter } from "@features/log/filter-provider"
@@ -22,7 +22,7 @@ function LogFilterList() {
             <For each={state.visibleEntries()} keyed={(entry) => entry.id}>
                 {(entry) => (
                     <div class="filter-enter">
-                        <LogCard entry={entry()} />
+                        <LogEntryPanel entry={entry()} />
                     </div>
                 )}
             </For>

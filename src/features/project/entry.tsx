@@ -21,7 +21,7 @@ function ProjectSection(props: ParentProps<{ id: string; title: string }>) {
     )
 }
 
-export function ProjectArticle(props: VoidProps<{ project: Project }>) {
+export function ProjectEntry(props: VoidProps<{ project: Project }>) {
     return (
         <article class="mx-auto max-w-prose">
             <ProjectHeader project={props.project} />

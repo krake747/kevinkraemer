@@ -12,7 +12,7 @@ import { ChevronLeft, Clock, FileText } from "@ui/icon"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { For, type VoidProps } from "solid-js"
 
-export function LogArticle(props: VoidProps<{ detail: LogDetail }>) {
+export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
     const entry = () => props.detail.entry
 
     return (
@@ -55,7 +55,7 @@ export function LogArticle(props: VoidProps<{ detail: LogDetail }>) {
                         ) : null}
                     </div>
                     <LogTocDisclosure entries={entry().toc} />
-                    <LogBody html={entry().html} graphs={entry().graphs} class="blog-post" />
+                    <LogBody html={entry().html} graphs={entry().graphs} class="log-entry" />
                     <LogRelated entries={props.detail.related} />
                     <LogPager older={props.detail.older} newer={props.detail.newer} />
                     <div class="mt-10 flex flex-wrap items-center justify-between gap-4">

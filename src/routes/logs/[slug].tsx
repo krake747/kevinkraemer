@@ -1,6 +1,6 @@
 import { siteContent } from "@core/content/site-content"
-import { LogArticle } from "@features/log/article"
 import { resolveLogDetail } from "@features/log/detail"
+import { LogEntry } from "@features/log/entry"
 import { LogNotFound } from "@features/log/not-found"
 import { sectionTrail, DetailShell } from "@pattern/detail-shell"
 import { BreadcrumbSchema } from "@pattern/seo"
@@ -31,7 +31,7 @@ export default function LogRoute(props: RouteProps<typeof route>) {
                         }}
                     >
                         <BreadcrumbSchema items={sectionTrail("Logs", "/logs", entry().title)} />
-                        <LogArticle detail={found()} />
+                        <LogEntry detail={found()} />
                     </DetailShell>
                 )
             }}

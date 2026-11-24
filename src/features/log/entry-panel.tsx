@@ -4,7 +4,7 @@ import { ArrowRight } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
 import type { VoidProps } from "solid-js"
 
-export function LogCard(props: VoidProps<{ entry: LogSummary }>) {
+export function LogEntryPanel(props: VoidProps<{ entry: LogSummary }>) {
     return (
         <StackRow as="article" interactive>
             <a href={`/logs/${props.entry.id}`} class="flex items-center justify-between gap-4">

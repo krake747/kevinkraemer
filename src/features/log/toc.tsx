@@ -55,7 +55,7 @@ export function LogToc(props: VoidProps<{ entries: LogTocEntry[] }>) {
     const [active, setActive] = createSignal<string | undefined>(undefined)
 
     onSettled(() => {
-        const headings = [...document.querySelectorAll(".blog-post h2[id]")]
+        const headings = [...document.querySelectorAll(".log-entry h2[id]")]
         if (headings.length > 0) {
             const hash = window.location.hash.slice(1)
             if (hash.length > 0) {
