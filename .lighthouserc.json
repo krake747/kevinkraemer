@@ -10,7 +10,10 @@
                 "http://localhost:4321/contact",
                 "http://localhost:4321/privacy",
                 "http://localhost:4321/uses",
-                "http://localhost:4321/developers"
+                "http://localhost:4321/developers",
+                "http://localhost:4321/projects",
+                "http://localhost:4321/projects/kevinkraemer-com",
+                "http://localhost:4321/search"
             ],
             "numberOfRuns": 3,
             "startServerCommand": "pnpm preview --port 4321",

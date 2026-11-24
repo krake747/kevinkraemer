@@ -45,3 +45,6 @@ playwright/.cache/
 # generated content
 src/generated/
 .vitest/
+
+# Lighthouse CI
+.lighthouseci/
