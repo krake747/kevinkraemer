@@ -11,14 +11,14 @@ import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
 import { For, type VoidProps } from "solid-js"
 
-export function CvExperience(props: VoidProps<{ id: string }>) {
-    const experienceEntries = sortByOrder(siteContent.experience)
+const EXPERIENCE_ENTRIES = sortByOrder(siteContent.experience)
 
+export function CvExperience(props: VoidProps<{ id: string }>) {
     return (
         <CvSection id={props.id}>
             <CvSectionHeading>Experience</CvSectionHeading>
             <Stack>
-                <For each={experienceEntries}>
+                <For each={EXPERIENCE_ENTRIES}>
                     {(item) => (
                         <CvEntry current={item.endDate === null}>
                             <StackRow as="article" class="break-inside-avoid">
