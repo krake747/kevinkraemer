@@ -12,7 +12,7 @@ export default function SearchRoute() {
         >
             <Seo
                 title="Search"
-                description="Search through all articles and content on kevinkraemer.com"
+                description="Search through all log entries and content on kevinkraemer.com"
                 path="/search"
             />
             <NoIndex />

@@ -17,7 +17,7 @@ const SIDE_PROJECTS: SideProject[] = [
     {
         name: "kevinkraemer",
         description:
-            "Terminal-inspired personal site. The CV, logs and case files render from Markdown at build time, and the theme follows the visitor's system setting.",
+            "Terminal-inspired personal site. The CV, logs and case files render from Markdown at build time, and the theme follows the system setting.",
         tech: ["Solid", "TypeScript", "Tailwind CSS"],
         url: "https://kevinkraemer.com",
     },

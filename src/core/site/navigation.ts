@@ -37,7 +37,7 @@ export type NavEntry = {
 export const NAV_ENTRIES: NavEntry[] = [
     { label: "~/portfolio", href: "/", keywords: ["home", "start"], topNav: true, active: "home" },
     { label: "~/cv", href: "/cv", keywords: ["cv", "resume", "experience"], topNav: true, active: "cv" },
-    { label: "~/logs", href: "/logs", keywords: ["logs", "blog", "posts"], topNav: true, active: "logs" },
+    { label: "~/logs", href: "/logs", keywords: ["logs", "entries", "writing"], topNav: true, active: "logs" },
     { label: "~/search", href: "/search", keywords: ["search", "find", "grep"], active: "exact" },
     { label: "~/about", href: "/about", keywords: ["bio", "story", "who"], active: "exact" },
     { label: "~/contact", href: "/contact", keywords: ["email", "reach", "touch"], active: "exact" },

@@ -295,7 +295,7 @@ export const endpoints: Endpoint[] = [
             operationId: "getLogsIndex",
             summary: "Writing index",
             description:
-                "All log entries (the blog) newest first, with titles, dates, and reading times. Entry bodies live at /logs/{slug}.",
+                "All log entries newest first, with titles, dates, and reading times. Entry bodies live at /logs/{slug}.",
         }),
     },
     {
@@ -430,7 +430,7 @@ export const endpoints: Endpoint[] = [
             operationId: "getLogEntry",
             summary: "Single log entry",
             description:
-                "One article from the Logs archive in full. Slugs are stable; discover them via getLogsRssFeed, getSitemapIndex, or getLogsIndex. The authored Markdown version lives at /logs/{slug}.md with YAML front matter and absolute links.",
+                "One log entry from the Logs archive in full. Slugs are stable; discover them via getLogsRssFeed, getSitemapIndex, or getLogsIndex. The authored Markdown version lives at /logs/{slug}.md with YAML front matter and absolute links.",
             parameters: [
                 {
                     name: "slug",
