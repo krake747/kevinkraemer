@@ -1,5 +1,5 @@
 import type { Ask } from "@core/ask/create-ask"
-import { askProblem, defectProblem, malformedBodyProblem } from "@core/ask/problem"
+import { askProblem, defectProblem, invalidSummarizeProblem, malformedBodyProblem } from "@core/ask/problem"
 import { apiVersion } from "@core/site/api-version"
 import { problemResponse } from "@core/site/problem"
 import { Panic } from "better-result"
@@ -21,7 +21,12 @@ const jsonHeaders = {
 const FALSE_TOKENS = new Set(["false", "0"])
 const TRUE_TOKENS = new Set(["true", "1"])
 
-type RequestInput = { kind: "parsed"; value: unknown } | { kind: "malformed" }
+type RequestInput =
+    | { kind: "parsed"; value: unknown }
+    | { kind: "malformed" }
+    | { kind: "invalid-summarize"; raw: string }
+
+type SummarizeToken = { kind: "value"; value: boolean } | { kind: "invalid"; raw: string }
 
 function parseBodyText(body: string): RequestInput {
     if (body.length === 0) {
@@ -39,23 +44,27 @@ function readPostInput(request: Request): Promise<RequestInput> {
     return request.text().then(parseBodyText)
 }
 
-function parseSummarizeToken(summarize: string | null): boolean | string {
+function parseSummarizeToken(summarize: string | null): SummarizeToken {
     if (summarize === null || TRUE_TOKENS.has(summarize)) {
-        return true
+        return { kind: "value", value: true }
     }
     if (FALSE_TOKENS.has(summarize)) {
-        return false
+        return { kind: "value", value: false }
     }
-    return summarize
+    return { kind: "invalid", raw: summarize }
 }
 
 function readGetInput(request: Request): RequestInput {
     const params = new URL(request.url).searchParams
+    const token = parseSummarizeToken(params.get("summarize"))
+    if (token.kind === "invalid") {
+        return { kind: "invalid-summarize", raw: token.raw }
+    }
     return {
         kind: "parsed",
         value: {
             question: params.get("question") ?? undefined,
-            summarize: parseSummarizeToken(params.get("summarize")),
+            summarize: token.value,
         },
     }
 }
@@ -92,6 +101,9 @@ export function createAskHandler(ask: Ask): (request: Request) => Promise<Respon
         const input = await readInput(request)
         if (input.kind === "malformed") {
             return problemResponse(malformedBodyProblem(), corsHeaders)
+        }
+        if (input.kind === "invalid-summarize") {
+            return problemResponse(invalidSummarizeProblem(input.raw), corsHeaders)
         }
 
         try {

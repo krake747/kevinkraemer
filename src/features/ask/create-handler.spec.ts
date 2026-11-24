@@ -104,6 +104,14 @@ describe("ask handler", () => {
         expect(body.detail).toBe("The request body is not valid JSON.")
     })
 
+    it("400s when summarize is not a boolean token, naming summarize", async () => {
+        const response = await makeHandler()(get("experience?", "bogus"))
+        expect(response.status).toBe(400)
+        const body: { code?: unknown; detail?: unknown } = await response.json()
+        expect(body.code).toBe("INVALID_QUESTION")
+        expect(body.detail).toBe('Summarize takes "true", "false", "1", or "0", not "bogus".')
+    })
+
     it("accepts a POST JSON body", async () => {
         const handler = makeHandler({
             deps: () => {

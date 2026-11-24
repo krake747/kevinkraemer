@@ -15,6 +15,15 @@ export function malformedBodyProblem(): Problem {
     }
 }
 
+export function invalidSummarizeProblem(raw: string): Problem {
+    return {
+        status: 400,
+        detail: `Summarize takes "true", "false", "1", or "0", not ${JSON.stringify(raw)}.`,
+        code: "INVALID_QUESTION",
+        hint,
+    }
+}
+
 export function defectProblem(): Problem {
     return {
         status: 500,
