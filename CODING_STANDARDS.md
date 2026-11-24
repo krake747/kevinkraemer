@@ -21,7 +21,9 @@ How we judge project and code quality.
    source, import from the defining module, no barrels. Declare a shape once; narrow it at the use
    site with `Pick`, `Omit`, `Parameters`, `ReturnType`, or `typeof`, and with `v.InferOutput` where
    a schema owns it. Encode absence as `?` on props and params; reserve `null` for serialization and
-   DOM boundaries; never `""` for a missing value.
+   DOM boundaries; never `""` for a missing value. Exception: `declare module` augmentation uses
+   `interface` because TypeScript declaration merging cannot use `type`
+   (`src/core/site/navigation.ts`).
 
 6. **Explicit machines.** Flag combinations that must agree are a discriminated union, not booleans.
    Why: independent flags admit impossible states. Solve: one `kind` field, transitions in one
