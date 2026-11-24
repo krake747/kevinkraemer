@@ -51,9 +51,7 @@ export function createMcpHandler(env: unknown): (request: Request) => Promise<Re
                 inputSchema: askInputSchema,
                 annotations: askToolAnnotations,
             },
-            async (args: AskRequestInput, ctx: ServerContext) => {
-                return askTool(args, ctx.mcpReq.signal)
-            },
+            async (args: AskRequestInput, ctx: ServerContext) => askTool(args, ctx.mcpReq.signal),
         )
 
         for (const resource of listResources(prints)) {
@@ -80,7 +78,5 @@ export function createMcpHandler(env: unknown): (request: Request) => Promise<Re
 
     const handler = createSdkMcpHandler(createServer, { legacy: "stateless", responseMode: "json" })
 
-    return (request) => {
-        return handler.fetch(request)
-    }
+    return (request) => handler.fetch(request)
 }

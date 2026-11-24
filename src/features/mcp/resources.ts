@@ -16,21 +16,17 @@ function resourceBody(page: TapePrint): string {
 }
 
 export function listResources(prints: TapePrint[]): McpResource[] {
-    return prints.map((page) => {
-        return {
-            name: page.path,
-            uri: canonicalFor(page.path),
-            title: page.title,
-            description: page.description,
-            mimeType: "text/markdown",
-        }
-    })
+    return prints.map((page) => ({
+        name: page.path,
+        uri: canonicalFor(page.path),
+        title: page.title,
+        description: page.description,
+        mimeType: "text/markdown",
+    }))
 }
 
 export function readResource(prints: TapePrint[], uri: string): McpResourceText | undefined {
-    const page = prints.find((candidate) => {
-        return canonicalFor(candidate.path) === uri
-    })
+    const page = prints.find((candidate) => canonicalFor(candidate.path) === uri)
     if (page === undefined) {
         return undefined
     }

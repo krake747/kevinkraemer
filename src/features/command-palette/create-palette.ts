@@ -108,9 +108,11 @@ function toCommandGroup(
     commands: CommandPaletteCommand[],
     deps: CommandPaletteDeps,
 ): (label: readonly ["pages" | "actions", string]) => CommandPaletteGroup {
-    return ([key, label]) => {
-        return { key, label, rows: commands.filter((command) => command.group === key).map(toCommandRow(deps)) }
-    }
+    return ([key, label]) => ({
+        key,
+        label,
+        rows: commands.filter((command) => command.group === key).map(toCommandRow(deps)),
+    })
 }
 
 export function buildCommandPaletteGroups(

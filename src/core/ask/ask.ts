@@ -28,18 +28,10 @@ export function rankSources(
     excludedPaths: string[] = askSourceExclusions,
 ): RankedSelection {
     const ranked = judgment.pageRelevance
-        .filter(({ page }) => {
-            return !excludedPaths.includes(page.path)
-        })
-        .filter(({ probability }) => {
-            return probability > relevanceFloor
-        })
-        .toSorted((a, b) => {
-            return b.probability - a.probability
-        })
-    const sources = ranked.map(({ page }) => {
-        return page
-    })
+        .filter(({ page }) => !excludedPaths.includes(page.path))
+        .filter(({ probability }) => probability > relevanceFloor)
+        .toSorted((a, b) => b.probability - a.probability)
+    const sources = ranked.map(({ page }) => page)
     if (!isNonEmpty(sources) || (summarize && judgment.answerability <= answerabilityFloor)) {
         return { kind: "unsupported" }
     }
