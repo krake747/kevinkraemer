@@ -7,24 +7,32 @@ type Segment = { kind: "html"; html: string } | { kind: "graph"; slot: number }
 
 const SLOT = /<div data-graph-slot="(\d+)"><\/div>/g
 
+function matchStart(match: RegExpMatchArray): number {
+    return match.index ?? 0
+}
+
+function matchEnd(match: RegExpMatchArray): number {
+    return (match.index ?? 0) + match[0].length
+}
+
+function prefixSegment(html: string, from: number, to: number): Segment[] {
+    if (to <= from) {
+        return []
+    }
+    return [{ kind: "html", html: html.slice(from, to) }]
+}
+
 function toSegments(html: string): Segment[] {
-    const segments: Segment[] = []
-    let cursor = 0
-
-    for (const match of html.matchAll(SLOT)) {
-        const matchStart = match.index
-        if (matchStart > cursor) {
-            segments.push({ kind: "html", html: html.slice(cursor, matchStart) })
-        }
-        segments.push({ kind: "graph", slot: Number(match[1]) })
-        cursor = matchStart + match[0].length
-    }
-
-    if (cursor < html.length) {
-        segments.push({ kind: "html", html: html.slice(cursor) })
-    }
-
-    return segments
+    const matches = [...html.matchAll(SLOT)]
+    const body = matches.flatMap((match, index): Segment[] => {
+        const start = matchStart(match)
+        const previous = matches[index - 1]
+        const previousEnd = previous === undefined ? 0 : matchEnd(previous)
+        return [...prefixSegment(html, previousEnd, start), { kind: "graph", slot: Number(match[1]) }]
+    })
+    const last = matches[matches.length - 1]
+    const lastEnd = last === undefined ? 0 : matchEnd(last)
+    return [...body, ...prefixSegment(html, lastEnd, html.length)]
 }
 
 export function LogBody(props: VoidProps<ComponentProps<"div"> & { html: string; graphs: GraphFlowSpec[] }>) {
