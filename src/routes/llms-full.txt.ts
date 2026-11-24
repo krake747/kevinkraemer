@@ -7,6 +7,9 @@ import { origin } from "@core/site/urls"
 
 type CatalogPage = (typeof catalogEntries)[number]
 
+const SORTED_LOGS = sortByDateDesc(siteContent.logs)
+const SORTED_PROJECTS = sortByOrder(siteContent.projects)
+
 function formatPageEntry(page: CatalogPage): string {
     return `- [${page.title}](${origin}${page.path}): ${page.description}`
 }
@@ -98,11 +101,11 @@ export function GET(): Response {
             "",
             "## Logs",
             "",
-            ...sortByDateDesc(siteContent.logs).flatMap(formatLogEntry),
+            ...SORTED_LOGS.flatMap(formatLogEntry),
             "",
             "## Projects",
             "",
-            ...sortByOrder(siteContent.projects).flatMap(formatProjectEntry),
+            ...SORTED_PROJECTS.flatMap(formatProjectEntry),
         ].join("\n"),
     )
 }

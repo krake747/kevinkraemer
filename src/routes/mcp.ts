@@ -3,6 +3,7 @@ import { problemResponse } from "@core/site/problem"
 import { createMcpHandler } from "@features/mcp/create-handler"
 
 const methods = ["POST", "OPTIONS"]
+const ALLOW_METHODS = methods.join(", ")
 
 const handle = createMcpHandler({
     TYPESAFE_API_KEY: process.env.TYPESAFE_API_KEY,
@@ -17,7 +18,7 @@ function methodNotAllowed(): Response {
             detail: "MCP is a JSON-RPC protocol carried over POST.",
             hint: "Send a JSON-RPC message with POST and Accept: application/json, text/event-stream.",
         },
-        { Allow: methods.join(", ") },
+        { Allow: ALLOW_METHODS },
     )
 }
 

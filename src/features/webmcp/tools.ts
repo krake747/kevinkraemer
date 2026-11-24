@@ -73,6 +73,7 @@ const openPageInputSchema = v.object({
 export type LogSearchInput = v.InferOutput<typeof searchInputSchema>
 
 const emptySearchInput: LogSearchInput = v.parse(searchInputSchema, {})
+const searchInputJsonSchema = toJsonSchema(searchInputSchema)
 const readLogInputJsonSchema = toJsonSchema(readLogInputSchema)
 const openPageInputJsonSchema = toJsonSchema(openPageInputSchema)
 
@@ -146,7 +147,7 @@ export function webMcpTools(entries: readonly LogEntry[], navigate: Navigate): W
             title: "Search log entries",
             description:
                 "Search Kevin Kraemer's log entries about software architecture, type systems, finance, and developer tooling. Returns the newest matches with their canonical URL and a Markdown URL to read.",
-            inputSchema: withTagEnum(toJsonSchema(searchInputSchema), getAllTags(entries)),
+            inputSchema: withTagEnum(searchInputJsonSchema, getAllTags(entries)),
             annotations: { readOnlyHint: true },
             execute: async (input) => searchLogEntries(entries, input),
         },

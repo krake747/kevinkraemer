@@ -14,23 +14,21 @@ function headingId(id: string): string {
     return `story-${id}-heading`
 }
 
-function columns(): Column[] {
-    const sorted = sortByOrder(siteContent.about)
-    const byId = (id: string): AboutEntry => {
-        const found = sorted.find((entry) => entry.id === id)
-        if (found === undefined) {
-            throw new Error(`Missing about entry: ${id}`)
-        }
-        return found
-    }
+const SORTED_ABOUT = sortByOrder(siteContent.about)
+const ABOUT_BY_ID = new Map(SORTED_ABOUT.map((entry) => [entry.id, entry] as const))
 
-    return [
-        { entries: [byId("intro"), byId("current-role")], class: "flex flex-col gap-12 lg:col-span-5" },
-        { entries: [byId("philosophy"), byId("elsewhere")], class: "flex flex-col gap-12 lg:col-span-7 lg:pl-12" },
-    ]
+function byId(id: string): AboutEntry {
+    const found = ABOUT_BY_ID.get(id)
+    if (found === undefined) {
+        throw new Error(`Missing about entry: ${id}`)
+    }
+    return found
 }
 
-const ABOUT_COLUMNS = columns()
+const ABOUT_COLUMNS: Column[] = [
+    { entries: [byId("intro"), byId("current-role")], class: "flex flex-col gap-12 lg:col-span-5" },
+    { entries: [byId("philosophy"), byId("elsewhere")], class: "flex flex-col gap-12 lg:col-span-7 lg:pl-12" },
+]
 
 export function HomeAbout(props: VoidProps<{ id: string }>) {
     return (

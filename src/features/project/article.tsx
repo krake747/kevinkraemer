@@ -1,14 +1,13 @@
 import type { Project } from "@core/content/model"
 import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
-import type { JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { ChevronLeft } from "@ui/icon"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
-import { For, Show, type VoidProps } from "solid-js"
+import { For, Show, type ParentProps, type VoidProps } from "solid-js"
 
-function ProjectSection(props: { id: string; title: string; children: JSX.Element }) {
+function ProjectSection(props: ParentProps<{ id: string; title: string }>) {
     return (
         <section class="mb-12" aria-labelledby={`${props.id}-heading`}>
             <h2
