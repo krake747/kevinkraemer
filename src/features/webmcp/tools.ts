@@ -78,12 +78,12 @@ const readLogInputJsonSchema = toJsonSchema(readLogInputSchema)
 const openPageInputJsonSchema = toJsonSchema(openPageInputSchema)
 
 function textField(input: unknown, name: string): string | undefined {
-    const value = fieldOf(input, name)
+    const value = fieldOf(input)(name)
     return typeof value === "string" ? value : undefined
 }
 
-function fieldOf(input: unknown, name: string): unknown {
-    return hasField(input, name) ? input[name] : undefined
+function fieldOf(input: unknown): (name: string) => unknown {
+    return (name) => (hasField(input, name) ? input[name] : undefined)
 }
 
 function clampedLimit(value: unknown): unknown {
@@ -94,11 +94,12 @@ function clampedLimit(value: unknown): unknown {
 }
 
 export function parseSearchInput(value: unknown): LogSearchInput {
+    const field = fieldOf(value)
     const candidate = isInput(value)
         ? {
-              query: fieldOf(value, "query"),
-              tags: fieldOf(value, "tags"),
-              limit: clampedLimit(fieldOf(value, "limit")),
+              query: field("query"),
+              tags: field("tags"),
+              limit: clampedLimit(field("limit")),
           }
         : value
     const parsed = v.safeParse(v.optional(searchInputSchema, emptySearchInput), candidate)
