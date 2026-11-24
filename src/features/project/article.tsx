@@ -6,7 +6,7 @@ import { Anchor } from "@ui/anchor"
 import { ChevronLeft } from "@ui/icon"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
-import { For, Show } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
 function ProjectSection(props: { id: string; title: string; children: JSX.Element }) {
     return (
@@ -22,7 +22,7 @@ function ProjectSection(props: { id: string; title: string; children: JSX.Elemen
     )
 }
 
-export function ProjectArticle(props: { project: Project }) {
+export function ProjectArticle(props: VoidProps<{ project: Project }>) {
     return (
         <article class="mx-auto max-w-prose">
             <ProjectHeader project={props.project} />

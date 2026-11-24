@@ -1,7 +1,8 @@
 import type { Project } from "@core/content/model"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
+import type { VoidProps } from "solid-js"
 
-export function ProjectHeader(props: { project: Project }) {
+export function ProjectHeader(props: VoidProps<{ project: Project }>) {
     return (
         <header class="mb-10">
             <TerminalCommandHeader command={`cat ${props.project.id}.md`} class="mb-4" />
