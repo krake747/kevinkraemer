@@ -21,7 +21,7 @@ export function HomeLogs(props: ParentProps<{ entries: LogEntry[]; id: string }>
                                         <span class="block truncate font-semibold text-stone-900 group-hover:text-emerald-800 dark:text-stone-100 dark:group-hover:text-emerald-400">
                                             {entry.title}
                                         </span>
-                                        <span class="mt-1 line-clamp-2 block text-sm/relaxed text-stone-600 dark:text-stone-400">
+                                        <span class="mt-1 line-clamp-1 block text-sm/relaxed text-stone-600 dark:text-stone-400">
                                             {" "}
                                             {entry.description}
                                         </span>
