@@ -3,7 +3,7 @@ import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
-import { merge, omit, Show, type ParentProps, type VoidProps } from "solid-js"
+import { merge, omit, Show, isStatic, type ParentProps, type VoidProps } from "solid-js"
 
 type RegisterDivProps = ComponentProps<"div"> & { as?: "div" }
 type RegisterUlProps = ComponentProps<"ul"> & { as: "ul" }
@@ -12,7 +12,7 @@ type RegisterDlProps = ComponentProps<"dl"> & { as: "dl" }
 export function Register(props: RegisterDivProps | RegisterUlProps | RegisterDlProps) {
     const merged = merge({ as: "div" } as const, props)
     const rest = omit(merged, "as", "class", "children")
-    const Tag = dynamic(() => merged.as)
+    const Tag = dynamic(() => merged.as, { static: isStatic(props, "as") })
     return (
         <Tag {...rest} class={cx("m-0 flex list-none flex-col gap-2 p-0", merged.class)}>
             {merged.children}
@@ -38,7 +38,7 @@ export function RegisterRow(props: RegisterRowProps) {
         }
         return "line-clamp-2"
     }
-    const Title = dynamic(() => props.titleAs ?? "span")
+    const Title = dynamic(() => props.titleAs ?? "span", { static: isStatic(props, "titleAs") })
     return (
         <StackRow as={props.as ?? "div"} interactive class={cx("flex items-center justify-between", props.class)}>
             <a href={props.href} class="flex min-w-0 flex-1 items-center justify-between gap-4">

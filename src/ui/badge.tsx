@@ -1,6 +1,6 @@
 import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { createMemo, merge, omit } from "solid-js"
+import { createMemo, isStatic, merge, omit } from "solid-js"
 
 const badge = cva({
     base: "inline-flex items-center border font-mono transition-colors",
@@ -61,7 +61,7 @@ type BadgeAnchorProps = BadgeVariants & Omit<ComponentProps<"a">, "target"> & { 
 
 export function Badge(_props: BadgeSpanProps | BadgeAnchorProps): JSX.Element {
     const props = merge({ as: "span", tone: "neutral" } as const, _props)
-    const Tag = dynamic(() => props.as)
+    const Tag = dynamic(() => props.as, { static: isStatic(_props, "as") })
     const rest = createMemo(() => {
         if (props.as === "a") {
             return omit(props, "as", "tone", "size", "interactive", "class", "children", "target")
