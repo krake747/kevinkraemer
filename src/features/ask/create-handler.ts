@@ -5,6 +5,7 @@ import { problemResponse } from "@core/site/problem"
 import { Panic } from "better-result"
 
 const ASK_METHODS = ["GET", "POST", "OPTIONS"]
+const ALLOW_METHODS = ALLOW_METHODS
 
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
@@ -70,7 +71,7 @@ export function createAskHandler(ask: Ask): (request: Request) => Promise<Respon
                 status: 204,
                 headers: {
                     ...jsonHeaders,
-                    "Access-Control-Allow-Methods": ASK_METHODS.join(", "),
+                    "Access-Control-Allow-Methods": ALLOW_METHODS,
                     "Access-Control-Allow-Headers": "Content-Type, API-Version",
                 },
             })
@@ -81,10 +82,10 @@ export function createAskHandler(ask: Ask): (request: Request) => Promise<Respon
                 {
                     status: 405,
                     code: "METHOD_NOT_ALLOWED",
-                    detail: `Use one of: ${ASK_METHODS.join(", ")}.`,
+                    detail: `Use one of: ${ALLOW_METHODS}.`,
                     hint: "Send a question to /ask with GET or POST.",
                 },
-                { ...corsHeaders, Allow: ASK_METHODS.join(", ") },
+                { ...corsHeaders, Allow: ALLOW_METHODS },
             )
         }
 
