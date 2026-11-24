@@ -10,11 +10,18 @@ import { createPagefindSearch } from "@pattern/create-pagefind-search"
 import type { Component } from "solid-js"
 import { createMemo, createSignal } from "solid-js"
 
+type CommandPaletteRowFlash = { kind: "flash"; id: CommandPaletteActionId; label: string } | { kind: "none" }
+
+type CommandPaletteRowAction =
+    | { kind: "navigate"; href: string }
+    | { kind: "external"; href: string }
+    | { kind: "runAction"; id: CommandPaletteActionId }
+
 export type CommandPaletteRow = {
     rowId: string
     label: string
     icon: Component<{ class?: string }> | null
-    flash?: { id: CommandPaletteActionId; label: string }
+    flash: CommandPaletteRowFlash
     run: () => void
 }
 
@@ -40,24 +47,39 @@ function commandRowId(command: CommandPaletteCommand): string {
     return command.kind === "action" ? `cmd-action-${command.id}` : `cmd-${command.kind}-${command.href}`
 }
 
-function commandRun(command: CommandPaletteCommand, deps: CommandPaletteDeps): () => void {
-    switch (command.kind) {
-        case "route": {
-            return () => {
-                deps.close()
-                deps.navigate(command.href)
-            }
+function executeRowAction(action: CommandPaletteRowAction, deps: CommandPaletteDeps): void {
+    switch (action.kind) {
+        case "navigate": {
+            deps.close()
+            deps.navigate(action.href)
+            return
         }
         case "external": {
-            return () => {
-                deps.close()
-                deps.openExternal(command.href)
-            }
+            deps.close()
+            deps.openExternal(action.href)
+            return
+        }
+        case "runAction": {
+            deps.runAction(action.id)
+            return
+        }
+        default: {
+            const exhaustive: never = action
+            return exhaustive
+        }
+    }
+}
+
+function rowAction(command: CommandPaletteCommand): CommandPaletteRowAction {
+    switch (command.kind) {
+        case "route": {
+            return { kind: "navigate", href: command.href }
+        }
+        case "external": {
+            return { kind: "external", href: command.href }
         }
         case "action": {
-            return () => {
-                deps.runAction(command.id)
-            }
+            return { kind: "runAction", id: command.id }
         }
         default: {
             const exhaustive: never = command
@@ -66,29 +88,32 @@ function commandRun(command: CommandPaletteCommand, deps: CommandPaletteDeps): (
     }
 }
 
+function rowFlash(command: CommandPaletteCommand): CommandPaletteRowFlash {
+    if (command.kind === "action" && command.flashLabel !== undefined) {
+        return { kind: "flash", id: command.id, label: command.flashLabel }
+    }
+    return { kind: "none" }
+}
+
 function commandRow(command: CommandPaletteCommand, deps: CommandPaletteDeps): CommandPaletteRow {
-    const flash =
-        command.kind === "action" && command.flashLabel !== undefined
-            ? { id: command.id, label: command.flashLabel }
-            : undefined
+    const action = rowAction(command)
     return {
         rowId: commandRowId(command),
         label: command.label,
         icon: command.icon,
-        flash,
-        run: commandRun(command, deps),
+        flash: rowFlash(command),
+        run: () => executeRowAction(action, deps),
     }
 }
 
 function hitRow(hit: SearchHit, deps: CommandPaletteDeps): CommandPaletteRow {
+    const action: CommandPaletteRowAction = { kind: "navigate", href: hit.href }
     return {
         rowId: `hit-${hit.href}`,
         label: hit.title,
         icon: null,
-        run: () => {
-            deps.close()
-            deps.navigate(hit.href)
-        },
+        flash: { kind: "none" },
+        run: () => executeRowAction(action, deps),
     }
 }
 

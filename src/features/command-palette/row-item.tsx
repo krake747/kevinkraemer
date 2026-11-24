@@ -9,7 +9,7 @@ export function CommandPaletteRowItem(props: VoidProps<{ row: CommandPaletteRow 
     const { state } = useCommandPalette()
     const label = createMemo(() => {
         const flash = props.row.flash
-        if (flash !== undefined && flash.id === state.flashedAction()) {
+        if (flash.kind === "flash" && flash.id === state.flashedAction()) {
             return { text: flash.label, flashed: true }
         }
         return { text: props.row.label, flashed: false }

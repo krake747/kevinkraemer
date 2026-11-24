@@ -69,9 +69,10 @@ describe("palette rows", () => {
         const { deps } = makeDeps()
         const rows = buildCommandPaletteGroups(getCommandPaletteCommands(), [], deps).flatMap((group) => group.rows)
         expect(rows.find((row) => row.label === "copy email")?.flash).toEqual({
+            kind: "flash",
             id: "copy-email",
             label: "email copied",
         })
-        expect(rows.find((row) => row.label === "download cv")?.flash).toBeUndefined()
+        expect(rows.find((row) => row.label === "download cv")?.flash).toEqual({ kind: "none" })
     })
 })
