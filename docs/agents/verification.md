@@ -37,8 +37,7 @@ Why a server per edit spends the session on noise (HMR reloads, timing) and dupl
 Solve start it when the developer asked, when the claim needs measurement the source cannot give
 (wrapping, overlap, viewport-relative sizing, motion over time), or when the prediction failed in a
 way the source cannot explain. Nothing needs probing before an edit. When one is warranted, follow
-the server rule in [testing.md](testing.md): reuse a server that is already up, never kill one you
-did not start.
+the server rule in [testing.md](testing.md).
 
 ## What the gates already run
 
