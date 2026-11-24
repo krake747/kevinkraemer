@@ -1,10 +1,9 @@
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSection } from "@pattern/document-section"
+import { ProseSectionBody } from "@ui/prose-section"
 
 export function PrivacyLocalStorage() {
     return (
-        <ProseSection aria-labelledby="privacy-localstorage-heading">
-            <SectionHeading id="privacy-localstorage-heading">local storage</SectionHeading>
+        <DocumentSection id="privacy-localstorage-heading" title="local storage">
             <ProseSectionBody>
                 <p>
                     One display preference is saved in your browser's localStorage: the color theme (light or dark),
@@ -16,6 +15,6 @@ export function PrivacyLocalStorage() {
                     back to its defaults.
                 </p>
             </ProseSectionBody>
-        </ProseSection>
+        </DocumentSection>
     )
 }

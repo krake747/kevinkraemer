@@ -1,8 +1,8 @@
 import { DevelopersLead } from "@features/developers/lead"
 import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
-import { SectionHeading } from "@ui/section-heading"
-import { Stack } from "@ui/stack"
+import { DocumentSection } from "@pattern/document-section"
+import { Register } from "@pattern/register"
 import { For } from "solid-js"
 
 type ResponseRow = {
@@ -31,9 +31,8 @@ const RESPONSE_ROWS: ResponseRow[] = [
 
 export function DevelopersResponses() {
     return (
-        <section aria-labelledby="responses-heading">
-            <SectionHeading id="responses-heading">responses</SectionHeading>
-            <Stack as="ul">
+        <DocumentSection id="responses-heading" title="responses">
+            <Register as="ul">
                 <For each={RESPONSE_ROWS}>
                     {(row) => (
                         <DevelopersRow>
@@ -52,7 +51,7 @@ export function DevelopersResponses() {
                         Served untouched, or as a typed JSON FileDescriptor for application/json.
                     </DevelopersProse>
                 </DevelopersRow>
-            </Stack>
-        </section>
+            </Register>
+        </DocumentSection>
     )
 }

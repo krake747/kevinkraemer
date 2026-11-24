@@ -3,8 +3,8 @@ import { DevelopersLead } from "@features/developers/lead"
 import { DevelopersNumeral } from "@features/developers/numeral"
 import { DevelopersProse } from "@features/developers/prose"
 import { CodeBlock } from "@pattern/code-block"
+import { DocumentSection } from "@pattern/document-section"
 import { InlineCode } from "@ui/inline-code"
-import { SectionHeading } from "@ui/section-heading"
 import { For } from "solid-js"
 
 type QuickstartStep = {
@@ -48,8 +48,7 @@ const QUICKSTART_STEPS: QuickstartStep[] = [
 
 export function DevelopersQuickstart() {
     return (
-        <section aria-labelledby="quickstart-heading">
-            <SectionHeading id="quickstart-heading">quickstart</SectionHeading>
+        <DocumentSection id="quickstart-heading" title="quickstart">
             <ol class="flex flex-col gap-6">
                 <For each={QUICKSTART_STEPS}>
                     {(step, index) => (
@@ -69,6 +68,6 @@ export function DevelopersQuickstart() {
                 Send <InlineCode>Accept: application/json</InlineCode> anywhere for a typed descriptor, or an RFC 9457
                 problem response with <InlineCode>code</InlineCode> and <InlineCode>hint</InlineCode> fields.
             </DevelopersProse>
-        </section>
+        </DocumentSection>
     )
 }

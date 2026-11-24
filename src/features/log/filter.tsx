@@ -6,14 +6,14 @@ import { LogFilterProvider, useLogFilter } from "@features/log/filter-provider"
 import { LogFilterRail } from "@features/log/filter-rail"
 import { LogFilterSearch } from "@features/log/filter-search"
 import { LogFilterTags } from "@features/log/filter-tags"
-import { Stack } from "@ui/stack"
+import { Register } from "@pattern/register"
 import { For, type VoidProps } from "solid-js"
 
 function LogFilterList() {
     const { state } = useLogFilter()
 
     return (
-        <Stack
+        <Register
             ref={(element) => {
                 element.setAttribute("data-settled", "")
             }}
@@ -26,7 +26,7 @@ function LogFilterList() {
                     </div>
                 )}
             </For>
-        </Stack>
+        </Register>
     )
 }
 

@@ -2,16 +2,15 @@ import { DEPRECATION_SUNSET_DAYS } from "@core/site/policy"
 import { DevelopersLead } from "@features/developers/lead"
 import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
+import { DocumentSection } from "@pattern/document-section"
+import { Register } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
 import { InlineCode } from "@ui/inline-code"
-import { SectionHeading } from "@ui/section-heading"
-import { Stack } from "@ui/stack"
 
 export function DevelopersStability() {
     return (
-        <section aria-labelledby="stability-heading">
-            <SectionHeading id="stability-heading">stability</SectionHeading>
-            <Stack as="ul">
+        <DocumentSection id="stability-heading" title="stability">
+            <Register as="ul">
                 <DevelopersRow>
                     <DevelopersLead>Versioning</DevelopersLead>{" "}
                     <DevelopersProse>
@@ -52,7 +51,7 @@ export function DevelopersStability() {
                         over polling pages.
                     </DevelopersProse>
                 </DevelopersRow>
-            </Stack>
-        </section>
+            </Register>
+        </DocumentSection>
     )
 }

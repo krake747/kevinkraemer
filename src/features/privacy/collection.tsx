@@ -1,10 +1,9 @@
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSection } from "@pattern/document-section"
+import { ProseSectionBody } from "@ui/prose-section"
 
 export function PrivacyCollection() {
     return (
-        <ProseSection aria-labelledby="privacy-collection-heading">
-            <SectionHeading id="privacy-collection-heading">what is collected</SectionHeading>
+        <DocumentSection id="privacy-collection-heading" title="what is collected">
             <ProseSectionBody>
                 <p>
                     Nothing by the site itself. There are no analytics scripts, no tracking pixels, no advertising, no
@@ -17,6 +16,6 @@ export function PrivacyCollection() {
                     Netlify's control and are not used by this site for profiling or marketing.
                 </p>
             </ProseSectionBody>
-        </ProseSection>
+        </DocumentSection>
     )
 }

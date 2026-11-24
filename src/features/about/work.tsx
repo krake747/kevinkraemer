@@ -1,10 +1,9 @@
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSection } from "@pattern/document-section"
+import { ProseSectionBody } from "@ui/prose-section"
 
 export function AboutWork() {
     return (
-        <ProseSection aria-labelledby="about-work-heading">
-            <SectionHeading id="about-work-heading">how i work</SectionHeading>
+        <DocumentSection id="about-work-heading" title="how i work">
             <ProseSectionBody>
                 <p>
                     Finance still shapes how I work. Decisions happen with partial information and a tradeoff. Building
@@ -12,6 +11,6 @@ export function AboutWork() {
                     what they choose, and I still ask it when I build.
                 </p>
             </ProseSectionBody>
-        </ProseSection>
+        </DocumentSection>
     )
 }

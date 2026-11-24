@@ -1,8 +1,8 @@
 import type { Project } from "@core/content/model"
 import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
+import { ReturnToRegister } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
-import { ChevronLeft } from "@ui/icon"
 import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
 import { For, Show, type ParentProps, type VoidProps } from "solid-js"
@@ -92,10 +92,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                 </ProjectSection>
             </Show>
             <p class="mt-10">
-                <Anchor href="/projects" variant="muted" class="inline-flex items-center gap-1.5">
-                    <ChevronLeft class="size-3 shrink-0" />
-                    Back to all case files
-                </Anchor>
+                <ReturnToRegister href="/projects" label="Back to all case files" />
             </p>
         </article>
     )

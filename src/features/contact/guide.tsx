@@ -1,10 +1,9 @@
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSection } from "@pattern/document-section"
+import { ProseSectionBody } from "@ui/prose-section"
 
 export function ContactGuide() {
     return (
-        <ProseSection aria-labelledby="contact-write-heading">
-            <SectionHeading id="contact-write-heading">what to include</SectionHeading>
+        <DocumentSection id="contact-write-heading" title="what to include">
             <ProseSectionBody>
                 <p>
                     Write about anything: a role, a project, or a detail from this site or my experience you want to
@@ -16,6 +15,6 @@ export function ContactGuide() {
                     data.
                 </p>
             </ProseSectionBody>
-        </ProseSection>
+        </DocumentSection>
     )
 }

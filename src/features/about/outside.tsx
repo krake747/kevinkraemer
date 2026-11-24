@@ -1,10 +1,9 @@
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSection } from "@pattern/document-section"
+import { ProseSectionBody } from "@ui/prose-section"
 
 export function AboutOutside() {
     return (
-        <ProseSection aria-labelledby="about-outside-heading">
-            <SectionHeading id="about-outside-heading">outside work</SectionHeading>
+        <DocumentSection id="about-outside-heading" title="outside work">
             <ProseSectionBody>
                 <p>
                     Road or gravel bike when the weather allows, and working through the local food scene with friends.
@@ -12,6 +11,6 @@ export function AboutOutside() {
                     markets I no longer have to hedge.
                 </p>
             </ProseSectionBody>
-        </ProseSection>
+        </DocumentSection>
     )
 }

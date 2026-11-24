@@ -49,3 +49,15 @@ specimens, borrowing Bloomberg Terminal density without nostalgia. Defined in fu
 `docs/design/system.md`. _Avoid_: card, dashboard
 
 **StackRow**: The `src/ui` framed-row primitive.
+
+**Register**: A browsable list of entries presented as uniform framed rows (the logs index, related
+entries, search hits). One `RegisterRow` per entry. _Avoid_: list, grid, card deck, table
+
+**RecordRow**: One labeled record in a case file or reference (role, stack, status). Label width is
+a variant, never a call-site class. _Avoid_: key-value row, metadata row, field
+
+**DossierHead**: The opening block of a page: `Terminal Command Header`, title, lede, optional meta.
+_Avoid_: page header, hero, title block
+
+**DocumentSection**: A labeled section: `section` plus `SectionHeading` plus a caller-chosen body.
+_Avoid_: section wrapper, content block

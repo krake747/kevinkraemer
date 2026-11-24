@@ -11,10 +11,10 @@ Why a page composed inside a feature hides the route's shape and locks sections 
 Solve compose in `src/routes`: read params, then `PageShell`/`Seo` plus feature sections in order.
 `src/features` exports sections and stateful interfaces behind domain names, never a `page`.
 Sections and interactive pieces live in `src/features`, drop-in shared UI and generic behavior in
-`src/pattern` (imports only `core`, `ui`, `pattern`; takes data via props, names no domain), styled
-primitives in `src/ui`, pure logic in `src/core` with data in `content`, edge code in
-`netlify/edge-functions` with relative imports only. A `feature` that two slices need moves down to
-`pattern`; never import across `features` when `pattern` fits.
+`src/pattern` (imports only `core`, `ui`, `pattern`; takes data via props; names use `GLOSSARY.md`
+domain terms), styled primitives in `src/ui`, pure logic in `src/core` with data in `content`, edge
+code in `netlify/edge-functions` with relative imports only. A `feature` that two slices need moves
+down to `pattern`; never import across `features` when `pattern` fits.
 
 ## Keep `src/ui` Solid only
 

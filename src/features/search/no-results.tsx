@@ -1,25 +1,31 @@
-import { SearchPanelNote, SearchPanelTitle } from "@features/search/panel"
+import { EmptyRegister } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
 import { Button } from "@ui/button"
-import { StackRow } from "@ui/stack-row"
 import type { VoidProps } from "solid-js"
 
 export function SearchNoResults(props: VoidProps<{ query: string; onClear: () => void }>) {
     return (
-        <StackRow size="spacious" class="text-center">
-            <SearchPanelTitle>
-                <span class="text-stone-600 dark:text-stone-400">command not found:</span> {props.query}
-            </SearchPanelTitle>
-            <SearchPanelNote class="mt-2">
-                No hits. Try a broader term, or browse{" "}
-                <Anchor href="/logs" variant="prose">
-                    ~/logs
-                </Anchor>
-                .
-            </SearchPanelNote>
-            <Button intent="link" class="mt-4" onClick={() => props.onClear()}>
-                clear query
-            </Button>
-        </StackRow>
+        <EmptyRegister
+            size="spacious"
+            title={
+                <>
+                    <span class="text-stone-600 dark:text-stone-400">command not found:</span> {props.query}
+                </>
+            }
+            note={
+                <>
+                    No hits. Try a broader term, or browse{" "}
+                    <Anchor href="/logs" variant="prose">
+                        ~/logs
+                    </Anchor>
+                    .
+                </>
+            }
+            action={
+                <Button intent="link" onClick={() => props.onClear()}>
+                    clear query
+                </Button>
+            }
+        />
     )
 }

@@ -1,8 +1,8 @@
 import { origin } from "@core/site/urls"
 import { DevelopersProse } from "@features/developers/prose"
 import { CodeBlock } from "@pattern/code-block"
+import { DocumentSection } from "@pattern/document-section"
 import { InlineCode } from "@ui/inline-code"
-import { SectionHeading } from "@ui/section-heading"
 
 const JSON_ERROR_EXAMPLE = `curl -H "Accept: application/json" \
   ${origin}/path-that-does-not-exist`
@@ -18,8 +18,7 @@ const JSON_ERROR_BODY = `{
 
 export function DevelopersJsonErrors() {
     return (
-        <section aria-labelledby="json-errors-heading">
-            <SectionHeading id="json-errors-heading">json errors</SectionHeading>
+        <DocumentSection id="json-errors-heading" title="json errors">
             <div class="grid gap-6">
                 <CodeBlock>{JSON_ERROR_EXAMPLE}</CodeBlock>
                 <DevelopersProse>
@@ -28,6 +27,6 @@ export function DevelopersJsonErrors() {
                 </DevelopersProse>
                 <CodeBlock>{JSON_ERROR_BODY}</CodeBlock>
             </div>
-        </section>
+        </DocumentSection>
     )
 }

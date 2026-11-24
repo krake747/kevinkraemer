@@ -1,11 +1,10 @@
+import { DocumentSection } from "@pattern/document-section"
 import { Anchor } from "@ui/anchor"
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { ProseSectionBody } from "@ui/prose-section"
 
 export function AboutElsewhere() {
     return (
-        <ProseSection aria-labelledby="about-elsewhere-heading">
-            <SectionHeading id="about-elsewhere-heading">elsewhere</SectionHeading>
+        <DocumentSection id="about-elsewhere-heading" title="elsewhere">
             <ProseSectionBody>
                 <p>
                     The professional version lives on the{" "}
@@ -23,6 +22,6 @@ export function AboutElsewhere() {
                     page.
                 </p>
             </ProseSectionBody>
-        </ProseSection>
+        </DocumentSection>
     )
 }
