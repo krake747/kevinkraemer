@@ -42,12 +42,14 @@ export type ExperienceEntry = {
     responsibilities: string[]
 }
 
-export type UsesItem = {
+type UsesItemBase = {
     name: string
-    href?: string
     note: string
-    ariaLabel?: string
 }
+
+export type UsesItem =
+    | (UsesItemBase & { kind: "link"; href: string; ariaLabel?: string })
+    | (UsesItemBase & { kind: "text" })
 
 export type UsesGroupLayout = "rows" | "daily" | "hardware" | "plain"
 

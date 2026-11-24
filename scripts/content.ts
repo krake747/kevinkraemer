@@ -8,7 +8,7 @@ import { defineHastPlugin, defineMdastPlugin, markdownToHtml } from "satteri"
 import * as v from "valibot"
 import { parse as parseYaml } from "yaml"
 
-import type { GraphFlowSpec, LogTocEntry, Project } from "../src/core/content/model.ts"
+import type { GraphFlowSpec, LogTocEntry, Project, UsesItem, UsesSection } from "../src/core/content/model.ts"
 import { prerenderPaths } from "../src/core/site/prerender-paths.ts"
 import { isFlowName, type FlowName } from "../src/features/log/flows.ts"
 
@@ -195,6 +195,25 @@ async function loadProjects() {
     }))
 }
 
+type UsesFile = v.InferOutput<typeof UsesSchema>
+
+function toUsesItem(item: UsesFile["groups"][number]["items"][number]): UsesItem {
+    if (item.href === undefined) {
+        return { kind: "text", name: item.name, note: item.note }
+    }
+    if (item.ariaLabel === undefined) {
+        return { kind: "link", name: item.name, href: item.href, note: item.note }
+    }
+    return { kind: "link", name: item.name, href: item.href, note: item.note, ariaLabel: item.ariaLabel }
+}
+
+function toUsesSection(section: UsesFile & { id: string }): UsesSection & { id: string } {
+    return {
+        ...section,
+        groups: section.groups.map((group) => ({ ...group, items: group.items.map(toUsesItem) })),
+    }
+}
+
 const REPO_ROOT = fileURLToPath(new URL("..", import.meta.url))
 
 function readUsesUpdated(): string {
@@ -254,7 +273,7 @@ const content = {
     logs,
     about: await loadAbout(),
     experience: await loadJson("experience", ExperienceSchema),
-    uses: await loadJson("uses", UsesSchema),
+    uses: (await loadJson("uses", UsesSchema)).map(toUsesSection),
     projects,
 }
 

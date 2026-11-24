@@ -6,13 +6,12 @@ import { StackRow } from "@ui/stack-row"
 import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
 function toolName(item: UsesItem, variant: "channel" | "muted") {
-    const href = item.href
-    if (href === undefined) {
+    if (item.kind === "text") {
         return <span class="font-mono text-sm font-medium text-stone-900 dark:text-stone-100">{item.name}</span>
     }
     return (
         <Anchor
-            href={href}
+            href={item.href}
             variant={variant}
             target={{ kind: "external" }}
             aria-label={item.ariaLabel}
