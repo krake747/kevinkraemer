@@ -21,7 +21,14 @@ export function CvHeader() {
                         <h1 class="text-2xl font-semibold tracking-tight text-stone-900 dark:text-stone-100">
                             {CV_NAME}
                         </h1>
-                        <Badge as="a" href="https://www.simpleip.com" external tone="emerald" interactive class="w-fit">
+                        <Badge
+                            as="a"
+                            href="https://www.simpleip.com"
+                            target={{ kind: "external" }}
+                            tone="emerald"
+                            interactive
+                            class="w-fit"
+                        >
                             Building @ Simple IP
                         </Badge>
                     </div>
@@ -35,7 +42,7 @@ export function CvHeader() {
                         <Anchor
                             href={`https://github.com/${CV_CONTACT.github}`}
                             variant="muted"
-                            external
+                            target={{ kind: "external" }}
                             class="hit-area-y-3"
                         >
                             github.com/{CV_CONTACT.github}

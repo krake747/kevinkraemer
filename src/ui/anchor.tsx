@@ -21,22 +21,43 @@ export const anchor = cva({
     },
 })
 
+export type AnchorTarget = { kind: "internal" } | { kind: "external" }
+
+function targetAttrs(target: AnchorTarget, rel: string | undefined): { target?: "_blank"; rel?: string } {
+    switch (target.kind) {
+        case "internal": {
+            return { rel }
+        }
+        case "external": {
+            return {
+                target: "_blank",
+                rel: rel === undefined ? "noopener noreferrer" : `noopener noreferrer ${rel}`,
+            }
+        }
+        default: {
+            const exhaustive: never = target
+            return exhaustive
+        }
+    }
+}
+
 export function Anchor(
-    props: Omit<ComponentProps<"a">, "target"> & VariantProps<typeof anchor> & { external?: boolean },
+    props: Omit<ComponentProps<"a">, "target"> & VariantProps<typeof anchor> & { target?: AnchorTarget },
 ) {
-    const rest = omit(props, "variant", "class", "children", "external")
-    const external = () => props.external === true
-    const securityRel = () => (external() ? `noopener noreferrer ${rest.rel ?? ""}`.trim() : rest.rel)
+    const target = (): AnchorTarget => props.target ?? { kind: "internal" }
+    const rel = (): string | undefined => (typeof props.rel === "string" ? props.rel : undefined)
+    const attrs = (): { target?: "_blank"; rel?: string } => targetAttrs(target(), rel())
+    const rest = omit(props, "variant", "class", "children", "target", "rel")
 
     return (
         <a
             {...rest}
-            target={external() ? "_blank" : undefined}
-            rel={securityRel()}
+            target={attrs().target}
+            rel={attrs().rel}
             class={cx(anchor({ variant: props.variant, class: props.class }))}
         >
             {props.children}
-            {props.external === true ? <span class="sr-only"> (opens in a new tab)</span> : null}
+            {target().kind === "external" ? <span class="sr-only"> (opens in a new tab)</span> : null}
         </a>
     )
 }

@@ -52,7 +52,7 @@ export function CvProjects(props: VoidProps<{ id: string }>) {
                                             <Anchor
                                                 href={url()}
                                                 variant="mono"
-                                                external
+                                                target={{ kind: "external" }}
                                                 aria-label={`${project.name} (opens in new tab)`}
                                                 class="inline-flex"
                                             >

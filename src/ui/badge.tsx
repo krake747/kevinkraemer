@@ -38,31 +38,49 @@ const badge = cva({
     ],
 })
 
+type BadgeTarget = { kind: "internal" } | { kind: "external" }
+
+function badgeTargetAttrs(target: BadgeTarget): { target?: "_blank"; rel?: string } {
+    switch (target.kind) {
+        case "internal": {
+            return {}
+        }
+        case "external": {
+            return { target: "_blank", rel: "noopener noreferrer" }
+        }
+        default: {
+            const exhaustive: never = target
+            return exhaustive
+        }
+    }
+}
+
 type BadgeVariants = VariantProps<typeof badge>
 type BadgeSpanProps = BadgeVariants & ComponentProps<"span"> & { as?: "span" }
-type BadgeAnchorProps = BadgeVariants & ComponentProps<"a"> & { as: "a"; external?: boolean }
+type BadgeAnchorProps = BadgeVariants & Omit<ComponentProps<"a">, "target"> & { as: "a"; target?: BadgeTarget }
 
 export function Badge(_props: BadgeSpanProps | BadgeAnchorProps): JSX.Element {
     const props = merge({ as: "span", tone: "neutral" } as const, _props)
     const Tag = dynamic(() => props.as)
     const rest = createMemo(() => {
         if (props.as === "a") {
-            return omit(props, "as", "tone", "size", "interactive", "class", "children", "external")
+            return omit(props, "as", "tone", "size", "interactive", "class", "children", "target")
         }
         return omit(props, "as", "tone", "size", "interactive", "class", "children")
     })
-    const tone = () => props.tone
-    const external = () => props.as === "a" && props.external === true
-    const externalAttrs = () => (external() ? { target: "_blank", rel: "noopener noreferrer" } : {})
+    const target = (): BadgeTarget => (props.as === "a" ? (props.target ?? { kind: "internal" }) : { kind: "internal" })
+    const isExternal = () => props.as === "a" && target().kind === "external"
 
     return (
         <Tag
             {...rest()}
-            {...externalAttrs()}
-            class={cx(badge({ tone: tone(), size: props.size, interactive: props.interactive, class: props.class }))}
+            {...badgeTargetAttrs(target())}
+            class={cx(
+                badge({ tone: props.tone, size: props.size, interactive: props.interactive, class: props.class }),
+            )}
         >
             {props.children}
-            {external() ? <span class="sr-only"> (opens in a new tab)</span> : null}
+            {isExternal() ? <span class="sr-only"> (opens in a new tab)</span> : null}
         </Tag>
     )
 }

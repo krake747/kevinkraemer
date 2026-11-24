@@ -72,7 +72,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                                     class="grid gap-1 sm:grid-cols-[minmax(0,16rem)_1fr] sm:items-baseline sm:gap-4"
                                 >
                                     {item.href ? (
-                                        <Anchor href={item.href} variant="muted" external>
+                                        <Anchor href={item.href} variant="muted" target={{ kind: "external" }}>
                                             {item.label}
                                         </Anchor>
                                     ) : (

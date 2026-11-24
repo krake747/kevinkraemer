@@ -25,7 +25,7 @@ export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
                 {(liveUrl) => (
                     <ProjectMetadataRow label="Live">
                         <dd>
-                            <Anchor href={liveUrl()} variant="channel" external>
+                            <Anchor href={liveUrl()} variant="channel" target={{ kind: "external" }}>
                                 {liveUrl().replace(/^https?:\/\//, "")}
                             </Anchor>
                         </dd>
@@ -36,7 +36,7 @@ export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
                 {(repoUrl) => (
                     <ProjectMetadataRow label="Repo">
                         <dd>
-                            <Anchor href={repoUrl()} variant="muted" external>
+                            <Anchor href={repoUrl()} variant="muted" target={{ kind: "external" }}>
                                 {repoUrl().replace(/^https?:\/\//, "")}
                             </Anchor>
                         </dd>

@@ -11,7 +11,13 @@ function toolName(item: UsesItem, variant: "channel" | "muted") {
         return <span class="font-mono text-sm font-medium text-stone-900 dark:text-stone-100">{item.name}</span>
     }
     return (
-        <Anchor href={href} variant={variant} external aria-label={item.ariaLabel} class="hit-area-y-2">
+        <Anchor
+            href={href}
+            variant={variant}
+            target={{ kind: "external" }}
+            aria-label={item.ariaLabel}
+            class="hit-area-y-2"
+        >
             {item.name}
         </Anchor>
     )

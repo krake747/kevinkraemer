@@ -4,18 +4,18 @@ import { SectionHeading } from "@ui/section-heading"
 import { For } from "solid-js"
 
 const HERO_CONTACTS = [
-    { label: "Email", href: `mailto:${site.email}`, display: site.email, external: false },
+    { label: "Email", href: `mailto:${site.email}`, display: site.email, target: { kind: "internal" } },
     {
         label: "Github",
         href: site.socials.github,
         display: "github.com/krake747",
-        external: true,
+        target: { kind: "external" },
     },
     {
         label: "Linkedin",
         href: site.socials.linkedin,
         display: "linkedin.com/in/kevin-kraemer",
-        external: true,
+        target: { kind: "external" },
     },
 ] as const
 
@@ -30,12 +30,7 @@ export function HomeHeroContact() {
                             <span class="w-20 tracking-widest text-stone-600 uppercase dark:text-stone-300">
                                 {contact.label}
                             </span>
-                            <Anchor
-                                href={contact.href}
-                                variant="channel"
-                                external={contact.external}
-                                class="hit-area-y-2"
-                            >
+                            <Anchor href={contact.href} variant="channel" target={contact.target} class="hit-area-y-2">
                                 {contact.display}
                             </Anchor>
                         </div>
