@@ -53,12 +53,11 @@ function removeComments(doc: Document): void {
     comments.forEach((comment) => comment.remove())
 }
 
+const cleaners: ((doc: Document) => void)[] = [removeSelectors, removeLambdaSpans, removePipeSpans, removeComments]
+
 function cleanWithDom(html: string): string {
     const doc = new DOMParser().parseFromString(html, "text/html")
-    removeSelectors(doc)
-    removeLambdaSpans(doc)
-    removePipeSpans(doc)
-    removeComments(doc)
+    cleaners.forEach((clean) => clean(doc))
     return (doc.body?.innerHTML ?? "").replace(COLLAPSE_BLANK, "\n\n")
 }
 
