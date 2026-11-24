@@ -5,12 +5,12 @@ const LAST_NAME_CHARS = ["K", "r", "a", "e", "m", "e", "r"]
 
 const TYPE_CADENCE_MS = [26, 18, 44, 22, 96, 30, 20, 52, 24, 18, 34, 110]
 
+const CHAR_DELAYS_MS = TYPE_CADENCE_MS.map((_, index) =>
+    TYPE_CADENCE_MS.slice(0, index).reduce((at, cadence) => at + cadence, 0),
+)
+
 function charDelayStyle(index: number): string {
-    let at = 0
-    for (let i = 0; i < index; i++) {
-        at += TYPE_CADENCE_MS[i % TYPE_CADENCE_MS.length] ?? 28
-    }
-    return `animation-delay: ${at}ms`
+    return `animation-delay: ${CHAR_DELAYS_MS[index % CHAR_DELAYS_MS.length] ?? 28}ms`
 }
 
 export function HomeHeroName() {
