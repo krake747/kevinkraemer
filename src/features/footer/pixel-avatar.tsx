@@ -120,7 +120,7 @@ function createGlance(active: () => boolean): Accessor<boolean> {
     return left
 }
 
-function PixelRow(props: { cells: readonly Tone[]; closed: boolean }) {
+function PixelRow(props: VoidProps<{ cells: readonly Tone[]; closed: boolean }>) {
     return (
         <div class="flex">
             <For each={props.cells}>

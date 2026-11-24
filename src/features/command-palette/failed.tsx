@@ -1,4 +1,6 @@
-export function CommandPaletteFailed(props: { message: string; onRetry: () => void }) {
+import type { VoidProps } from "solid-js"
+
+export function CommandPaletteFailed(props: VoidProps<{ message: string; onRetry: () => void }>) {
     return (
         <div class="px-4 py-6 text-center font-mono text-xs">
             <p class="text-stone-600 dark:text-stone-300">$ grep: search failed</p>
