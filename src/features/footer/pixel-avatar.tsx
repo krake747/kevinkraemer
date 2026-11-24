@@ -46,14 +46,14 @@ const FACES = {
     scan: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
 } as const satisfies Record<PixelMood, Face>
 
+const SCAN_LEFT_ROWS: readonly [readonly Tone[], readonly Tone[]] = [
+    ["dark", "lid", "mid", "lid", "mid", "dark"],
+    ["dark", "mid", "dark", "mid", "mid", "dark"],
+]
+const SCAN_RIGHT_ROWS: readonly [readonly Tone[], readonly Tone[]] = [EYES_OPEN, MOUTH_FLAT]
+
 function scanRows(left: boolean): readonly [readonly Tone[], readonly Tone[]] {
-    if (left) {
-        return [
-            ["dark", "lid", "mid", "lid", "mid", "dark"],
-            ["dark", "mid", "dark", "mid", "mid", "dark"],
-        ]
-    }
-    return [EYES_OPEN, MOUTH_FLAT]
+    return left ? SCAN_LEFT_ROWS : SCAN_RIGHT_ROWS
 }
 
 function createBlink(active: () => boolean): Accessor<boolean> {
