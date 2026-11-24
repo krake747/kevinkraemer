@@ -1,5 +1,5 @@
 import { origin } from "@core/site/urls"
-import { DevelopersIndex } from "@features/developers/index"
+import { DevelopersNumeral } from "@features/developers/numeral"
 import { DevelopersLead } from "@features/developers/lead"
 import { DevelopersProse } from "@features/developers/prose"
 import { CodeBlock } from "@pattern/code-block"
@@ -55,7 +55,7 @@ export function DevelopersQuickstart() {
                     {(step, index) => (
                         <li class="grid gap-2">
                             <DevelopersProse>
-                                <DevelopersIndex index={index()} class="mr-2" />{" "}
+                                <DevelopersNumeral index={index()} class="mr-2" />{" "}
                                 <DevelopersLead>{step.title}</DevelopersLead>
                                 <span class="text-stone-500 dark:text-stone-400"> {step.hint}</span>
                             </DevelopersProse>

@@ -1,4 +1,4 @@
-import { DevelopersIndex } from "@features/developers/index"
+import { DevelopersNumeral } from "@features/developers/numeral"
 import { Anchor } from "@ui/anchor"
 import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
@@ -18,7 +18,7 @@ export function DevelopersOnThisPage() {
                 <For each={ON_THIS_PAGE}>
                     {(item, index) => (
                         <li class="flex items-center gap-2">
-                            <DevelopersIndex index={index()} />{" "}
+                            <DevelopersNumeral index={index()} />{" "}
                             <Anchor href={item.href} variant="channel" class="hit-area-y-2">
                                 {item.label}
                             </Anchor>
