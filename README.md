@@ -6,12 +6,19 @@ A terminal-inspired portfolio: a CV, logs, uses, contact, and a machine-readable
 (`llms.txt`, `openapi.json`, `/mcp`). Solid 2 with prerendered pages, Tailwind CSS v4, Pagefind, and
 Netlify functions for the on-demand endpoints.
 
+## Features
+
+- Command Palette (`Cmd+K`): page navigation plus full-text search
+- `/ask`: questions over site content, with sources
+- Machine surface: `llms.txt`, `openapi.json`, `/mcp`, and API docs at `/scalar`
+- Logs with RSS feed, plus CV, projects, uses, and contact pages
+- Light and dark theme, follows the system until the visitor chooses
+
 Production: [www.kevinkraemer.com](https://www.kevinkraemer.com)
 
 ## Run it locally
 
-Local setup is contributor work. Follow [CONTRIBUTING](CONTRIBUTING.md) for install, secrets, and
-verification.
+To run it locally, follow [CONTRIBUTING](CONTRIBUTING.md) for setup, secrets, and checks.
 
 ## Learn more
 
@@ -20,8 +27,8 @@ verification.
 - [docs/agents/](docs/agents/README.md): architecture, testing, review, prose
 - [docs/design/](docs/design/system.md): the design system (system, tokens, structure, motion)
 - [docs/adr/](docs/adr/README.md): recorded decisions
-- [docs/](docs/discovery.md): crawler policy, SEO, feeds, AI retrieval; [runtime](docs/runtime.md):
-  edge negotiation, on-demand routes
+- [docs/](docs/discovery.md): crawler policy, SEO, feeds, AI retrieval
+- [docs/runtime.md](docs/runtime.md): edge negotiation, on-demand routes
 
 ## License
 
