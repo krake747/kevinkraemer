@@ -5,6 +5,7 @@ import { dirname, join, resolve } from "node:path"
 const root = new URL("../..", import.meta.url).pathname
 
 const IGNORED_PREFIXES = [".agents/", ".opencode/"]
+const IGNORED_PATHS = ["src/generated"]
 const PATH_PATTERN = /`((?:src|docs|scripts|netlify|e2e)\/[A-Za-z0-9_./-]+?)`/g
 const LINK_PATTERN = /\]\(([^)\s]+)\)/g
 
@@ -31,6 +32,9 @@ function markdownFiles() {
 function checkProjectPaths(file, text) {
     for (const match of text.matchAll(PATH_PATTERN)) {
         const candidate = match[1].replace(/\/$/, "")
+        if (IGNORED_PATHS.some((prefix) => candidate === prefix || candidate.startsWith(`${prefix}/`))) {
+            continue
+        }
         if (!existsSync(join(root, candidate))) {
             failures.push(`dead path: ${candidate} (in ${file})`)
         }
