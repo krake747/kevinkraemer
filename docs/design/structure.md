@@ -99,7 +99,8 @@ A prose section composes three parts, in this order:
   is what splitting the anchor from the label costs, and duplicating it is correct.
 - `ProseSectionBody` is the measure column (`max-w-prose`), `flex-col gap-4`, stone-600 body. It is
   the only place the prose measure is declared.
-- `CvSection` takes its `heading` as a prop and uses a `$` prompt instead of the `#` hash (`cv.md`).
+- `CvSection` takes `id` and wraps the section. `CvSectionHeading` takes the heading as children and
+  uses a `$` prompt instead of the `#` hash.
 - The landing story is the one prose grid that is deliberately unequal: `lg:col-span-5` +
   `lg:col-span-7 lg:pl-12`. The narrow left column is the design, not a measure bug; the right
   column lands on the prose measure, the left runs shorter.

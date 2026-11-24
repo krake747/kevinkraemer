@@ -16,7 +16,7 @@ export function CommandPaletteDialog(props: VoidProps<{ open: boolean; onOpenCha
     )
 }
 
-function CommandPaletteDialogBody(props: { open: boolean; onOpenChange: (next: boolean) => void }) {
+function CommandPaletteDialogBody(props: VoidProps<{ open: boolean; onOpenChange: (next: boolean) => void }>) {
     const { state, actions } = useCommandPalette()
     const close = () => props.onOpenChange(false)
     const isCoarsePointer = createMediaQuery("(pointer: coarse)")
