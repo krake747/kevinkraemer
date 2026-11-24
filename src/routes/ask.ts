@@ -18,6 +18,3 @@ function respond(event: { request: Request }): Promise<Response> {
 export const GET = respond
 export const POST = respond
 export const OPTIONS = respond
-export const PUT = respond
-export const DELETE = respond
-export const PATCH = respond
