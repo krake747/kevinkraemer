@@ -1,4 +1,4 @@
-import { searchHits, type SearchHit, type SearchOutcome } from "@core/search/pagefind"
+import type { SearchHit, SearchOutcome } from "@core/search/pagefind"
 import { SearchOutcomeView } from "@features/search/outcome-view"
 import { renderToContainer } from "@testing/render"
 import { describe, expect, it } from "vite-plus/test"
@@ -21,10 +21,14 @@ describe("search outcomes", () => {
     })
 
     it("lists hits when present", () => {
-        expect(mounted(searchHits([hit], 1), "solid").textContent).toContain("A guide to Solid")
+        expect(mounted({ kind: "hits", hits: [hit], total: 1 }, "solid").textContent).toContain("A guide to Solid")
     })
 
     it("names the query when nothing matches", () => {
-        expect(mounted(searchHits([], 0), "zzz").textContent).toContain("zzz")
+        expect(mounted({ kind: "empty" }, "zzz").textContent).toContain("zzz")
+    })
+
+    it("renders nothing before the first query", () => {
+        expect(mounted({ kind: "idle" }, "").textContent).toBe("")
     })
 })

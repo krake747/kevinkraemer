@@ -1,3 +1,4 @@
+import { isNonEmpty, type NonEmpty } from "@core/non-empty"
 import * as v from "valibot"
 
 export type SearchHit = {
@@ -9,7 +10,9 @@ export type SearchHit = {
 export type SearchFailure = "unavailable"
 
 export type SearchOutcome =
-    | { kind: "hits"; hits: SearchHit[]; total: number }
+    | { kind: "idle" }
+    | { kind: "hits"; hits: NonEmpty<SearchHit>; total: number }
+    | { kind: "empty" }
     | { kind: "failure"; failure: SearchFailure }
 
 export const PAGEFIND_DEBOUNCE_MS = 120
@@ -47,7 +50,7 @@ export function toSearchHit(data: PagefindResultData): SearchHit {
     }
 }
 
-export function searchHits(hits: SearchHit[], total: number): SearchOutcome {
+function searchHits(hits: NonEmpty<SearchHit>, total: number): SearchOutcome {
     return { kind: "hits", hits, total }
 }
 
@@ -56,5 +59,9 @@ export function toSearchOutcome(raw: unknown, total: number): SearchOutcome {
     if (!entries.success) {
         return { kind: "failure", failure: "unavailable" }
     }
-    return searchHits(entries.output.map(toSearchHit), total)
+    const hits = entries.output.map(toSearchHit)
+    if (!isNonEmpty(hits)) {
+        return { kind: "empty" }
+    }
+    return searchHits(hits, total)
 }

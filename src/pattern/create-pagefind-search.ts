@@ -1,6 +1,5 @@
 import {
     MIN_QUERY_LENGTH,
-    searchHits,
     toSearchOutcome,
     type PagefindResultData,
     type SearchHit,
@@ -56,7 +55,7 @@ async function searchPagefind(query: string, limit = 5): Promise<SearchOutcome> 
 
 export function createPagefindSearch(query: Accessor<string>, limit?: number) {
     const outcome = createMemo<SearchOutcome>(() =>
-        query().length < MIN_QUERY_LENGTH ? searchHits([], 0) : searchPagefind(query(), limit),
+        query().length < MIN_QUERY_LENGTH ? { kind: "idle" } : searchPagefind(query(), limit),
     )
 
     const hits = createMemo<SearchHit[]>(() => {
@@ -65,9 +64,6 @@ export function createPagefindSearch(query: Accessor<string>, limit?: number) {
     })
 
     const total = createMemo<number | null>(() => {
-        if (query().length < MIN_QUERY_LENGTH) {
-            return null
-        }
         const result = outcome()
         return result.kind === "hits" ? result.total : null
     })
