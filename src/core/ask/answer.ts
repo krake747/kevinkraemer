@@ -2,7 +2,7 @@ import { ASK_UPSTREAM_RETRY } from "@core/ask/ask"
 import { AskUpstream } from "@core/ask/errors"
 import type { TapePrint } from "@core/ask/tape"
 import { Result } from "better-result"
-import OpenAI from "openai"
+import { OpenAI } from "openai"
 
 const ANSWER_MODEL = "gpt-6-luna"
 
