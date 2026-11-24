@@ -1,6 +1,6 @@
 import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
-import { cx } from "@ui/cva.config"
+import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
 import { merge, omit, Show, type ParentProps, type VoidProps } from "solid-js"
@@ -69,6 +69,37 @@ export function RegisterRow(props: RegisterRowProps) {
                 </span>
             </a>
         </StackRow>
+    )
+}
+
+const railMain = cva({
+    base: "flex min-w-0 flex-col",
+    variants: {
+        spacing: {
+            tight: "gap-6",
+            loose: "gap-10",
+        },
+    },
+    defaultVariants: {
+        spacing: "tight",
+    },
+})
+
+type RegisterWithRailProps = ParentProps<
+    {
+        rail: JSX.Element
+        class?: string
+    } & VariantProps<typeof railMain>
+>
+
+export function RegisterWithRail(props: RegisterWithRailProps) {
+    return (
+        <div class={cx("grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem]", props.class)}>
+            <div class={cx(railMain({ spacing: props.spacing }))}>{props.children}</div>
+            <aside class="hidden lg:block">
+                <div class="sticky top-[calc(var(--header-h)+1rem)] flex flex-col gap-4">{props.rail}</div>
+            </aside>
+        </div>
     )
 }
 

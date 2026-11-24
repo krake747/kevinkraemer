@@ -51,7 +51,8 @@ specimens, borrowing Bloomberg Terminal density without nostalgia. Defined in fu
 **StackRow**: The `src/ui` framed-row primitive.
 
 **Register**: A browsable list of entries presented as uniform framed rows (the logs index, related
-entries, search hits). One `RegisterRow` per entry. _Avoid_: list, grid, card deck, table
+entries, search hits). One `RegisterRow` per entry. A `Register` with a side rail uses
+`RegisterWithRail`. _Avoid_: list, grid, card deck, table
 
 **RecordRow**: One labeled record in a case file or reference (role, stack, status). Label width is
 a variant, never a call-site class. _Avoid_: key-value row, metadata row, field

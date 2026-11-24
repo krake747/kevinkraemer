@@ -28,11 +28,9 @@ export function ContactStatus(props: VoidProps<{ as: "details" | "aside" }>) {
         <Show
             when={props.as === "details"}
             fallback={
-                <div class="sticky top-[calc(var(--header-h)+1rem)] flex flex-col gap-4">
-                    <div>
-                        <PanelLabel class="border-b border-stone-200 pb-2 dark:border-stone-800">status</PanelLabel>
-                        <ContactStatusRows />
-                    </div>
+                <div>
+                    <PanelLabel class="border-b border-stone-200 pb-2 dark:border-stone-800">status</PanelLabel>
+                    <ContactStatusRows />
                 </div>
             }
         >
