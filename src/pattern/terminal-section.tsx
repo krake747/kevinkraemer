@@ -4,11 +4,11 @@ import { cx } from "@ui/cva.config"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { omit } from "solid-js"
 
-type LandingSectionProps = ComponentProps<"section"> & {
+type TerminalSectionProps = ComponentProps<"section"> & {
     command: string
 }
 
-export function LandingSection(props: LandingSectionProps) {
+export function TerminalSection(props: TerminalSectionProps) {
     const commandId = (): string | undefined => {
         if (props.id) {
             return `${props.id}-command`

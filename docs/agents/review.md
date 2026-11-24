@@ -72,7 +72,7 @@ domain word from an invention. Solve name every shared component in two slots: a
 leading word. The kind comes from a closed vocabulary — `Page`, `Section`, `Row`, `Panel`, `Header`,
 `Heading`, `Column`, `Frame`, `Label`, `Rail` — and a new kind earns its place only by being
 documented in `docs/design/structure.md` first. The leading word is either already spoken — in site
-copy, `docs/design/**`, or `GLOSSARY.md` (`Register`, `Record`, `Document`, `Landing`) — or the
+copy, `docs/design/**`, or `GLOSSARY.md` (`Register`, `Record`, `Document`, `Terminal`) — or the
 industry's word for the shape (`PageHeader` per Primer, `Stack` per Chakra, `Disclosure` per the
 WAI-APG pattern). Compounds are parent plus part (`RegisterRow`, `ProseSectionBody`); a part whose
 parent does not exist is the invention to kill. One-caller wrappers collapse into the call site

@@ -77,7 +77,7 @@ an Index route (`TerminalCommandHeader`, `h1`, Geist lede) and then goes straigh
 The fixed header's height is `--header-h`. `scroll-margin-top` and the sticky rails derive from it;
 never hard-code a second clearance number.
 
-Landing sections use the full `max-w-6xl` column (`LandingSection`), because the log rows need the
+Landing sections use the full `max-w-6xl` column (`TerminalSection`), because the log rows need the
 width. Every `PageColumn` route nests `max-w-4xl` inside it, so prose pages start 128px further in.
 That difference is the layout, not drift: do not "fix" it by widening a prose page or narrowing the
 landing rows.
@@ -143,7 +143,7 @@ Elements mean what the spec says, so the tag must match the content, not the sty
 - Polymorphic `as` stays inside one family: `ul` takes `li`, `dl` takes `dt`/`dd` groups (a plain
   `div` may wrap one group), `details` takes exactly one leading `summary`. Never cross families.
 - Every `section` carries a name. `DocumentSection` pairs `aria-labelledby` with its `h2`;
-  `LandingSection` names itself with its command.
+  `TerminalSection` names itself with its command.
 - One `h1` per page from `PageHeader`, then step by one. No heading inside `li`.
 - `RecordRow` labels stay plain text; values live in `dd`. Order decides the list: unordered entries
   `ul`, meaningful order `ol`, name-value `dl`.
