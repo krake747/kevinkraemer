@@ -88,6 +88,7 @@ const railMain = cva({
 type RegisterWithRailProps = ParentProps<
     {
         rail: JSX.Element
+        labelledby?: string
         class?: string
     } & VariantProps<typeof railMain>
 >
@@ -96,7 +97,7 @@ export function RegisterWithRail(props: RegisterWithRailProps) {
     return (
         <div class={cx("grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem]", props.class)}>
             <div class={cx(railMain({ spacing: props.spacing }))}>{props.children}</div>
-            <aside class="hidden lg:block">
+            <aside class="hidden lg:block" aria-labelledby={props.labelledby}>
                 <div class="sticky top-[calc(var(--header-h)+1rem)] flex flex-col gap-4">{props.rail}</div>
             </aside>
         </div>

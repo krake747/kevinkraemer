@@ -19,7 +19,7 @@ export default function ContactRoute() {
             />
             <div class="flex flex-col gap-10">
                 <ContactChannels />
-                <RegisterWithRail spacing="loose" rail={<ContactStatus as="aside" />}>
+                <RegisterWithRail spacing="loose" labelledby="contact-status-label" rail={<ContactStatus as="aside" />}>
                     <ContactStatus as="details" />
                     <ContactGuide />
                 </RegisterWithRail>

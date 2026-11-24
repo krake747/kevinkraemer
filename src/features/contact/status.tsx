@@ -29,7 +29,9 @@ export function ContactStatus(props: VoidProps<{ as: "details" | "aside" }>) {
             when={props.as === "details"}
             fallback={
                 <div>
-                    <PanelLabel class="border-b border-stone-200 pb-2 dark:border-stone-800">status</PanelLabel>
+                    <PanelLabel id="contact-status-label" class="border-b border-stone-200 pb-2 dark:border-stone-800">
+                        status
+                    </PanelLabel>
                     <ContactStatusRows />
                 </div>
             }

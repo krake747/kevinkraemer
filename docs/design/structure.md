@@ -136,6 +136,21 @@ Two ruled exceptions keep their own shape: `/projects` divides entries with a si
 frame (`docs/design/projects.md`), and `/cv` keeps its compact `$`-marked sections for print. Record
 rows with linked labels stay hand-rolled: `RecordRow` takes a plain-text label only.
 
+## Content models
+
+Elements mean what the spec says, so the tag must match the content, not the styling:
+
+- Polymorphic `as` stays inside one family: `ul` takes `li`, `dl` takes `dt`/`dd` groups (a plain
+  `div` may wrap one group), `details` takes exactly one leading `summary`. Never cross families.
+- Every `section` carries a name. `DocumentSection` pairs `aria-labelledby` with its `h2`;
+  `LandingSection` names itself with its command.
+- One `h1` per page from `PageHeader`, then step by one. No heading inside `li`.
+- `RecordRow` labels stay plain text; values live in `dd`. Order decides the list: unordered entries
+  `ul`, meaningful order `ol`, name-value `dl`.
+- Disclosure is native `details`/`summary` only — never bolt button semantics onto a summary.
+- Name every exposed landmark: rail `aside`s point `aria-labelledby` at their rail label, and search
+  operations sit in `search`.
+
 ## Panel headers
 
 A panel header is `PanelLabel`, not a heading: uppercase, mono, loosened tracking, stone-600

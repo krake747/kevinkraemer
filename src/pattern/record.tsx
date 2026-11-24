@@ -19,14 +19,13 @@ const recordRow = cva({
 type RecordRowProps = ParentProps<
     {
         label: string
-        as?: "div" | "li"
         class?: string
     } & VariantProps<typeof recordRow>
 >
 
 export function RecordRow(props: RecordRowProps) {
     return (
-        <StackRow as={props.as ?? "div"} class={cx(recordRow({ width: props.width, class: props.class }))}>
+        <StackRow as="div" class={cx(recordRow({ width: props.width, class: props.class }))}>
             <dt class="font-mono text-xs tracking-widest text-stone-600 uppercase dark:text-stone-400">
                 {props.label}
             </dt>

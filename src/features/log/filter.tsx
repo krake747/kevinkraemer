@@ -34,16 +34,19 @@ export function LogFilter(props: VoidProps<{ entries: LogEntry[] }>) {
     return (
         <LogFilterProvider entries={props.entries}>
             <RegisterWithRail
+                labelledby="log-filter-label"
                 rail={
                     <LogFilterRail>
                         <LogFilterTags />
                     </LogFilterRail>
                 }
             >
-                <LogFilterSearch />
-                <LogFilterDisclosure>
-                    <LogFilterTags />
-                </LogFilterDisclosure>
+                <search aria-label="Filter logs" class="flex min-w-0 flex-col gap-6">
+                    <LogFilterSearch />
+                    <LogFilterDisclosure>
+                        <LogFilterTags />
+                    </LogFilterDisclosure>
+                </search>
                 <LogFilterList />
                 <LogFilterEmpty />
             </RegisterWithRail>

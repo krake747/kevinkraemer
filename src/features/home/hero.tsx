@@ -6,7 +6,7 @@ import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export function HomeHero() {
     return (
-        <ViewportFrame as="section" class="hero-intro min-h-[90dvh]">
+        <ViewportFrame class="hero-intro min-h-[90dvh]">
             <div class="mx-auto max-w-6xl">
                 <div class="mb-12 animate-fade-up [animation-delay:0ms]">
                     <TerminalCommandHeader command="whoami" />

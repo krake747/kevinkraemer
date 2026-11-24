@@ -62,8 +62,8 @@ _Avoid_: ProseShell, shell, template
 **DetailPage**: An entry page: `PageColumn` plus `Seo`. The route passes breadcrumbs through
 `sectionTrail`. _Avoid_: DetailShell, shell, template
 
-**LandingSection**: A landing section: full-width rule, reveal, exactly one `TerminalCommandHeader`.
-_Avoid_: SectionShell, shell, block
+**LandingSection**: A landing section: full-width rule, reveal, exactly one `TerminalCommandHeader`,
+which also names it. _Avoid_: SectionShell, shell, block
 
 **Register**: A browsable list of entries presented as uniform framed rows (the logs index, related
 entries, search hits). One `RegisterRow` per entry. A `Register` with a side rail uses

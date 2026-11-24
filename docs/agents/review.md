@@ -76,8 +76,9 @@ copy, `docs/design/**`, or `GLOSSARY.md` (`Register`, `Record`, `Document`, `Lan
 industry's word for the shape (`PageHeader` per Primer, `Stack` per Chakra, `Disclosure` per the
 WAI-APG pattern). Compounds are parent plus part (`RegisterRow`, `ProseSectionBody`); a part whose
 parent does not exist is the invention to kill. One-caller wrappers collapse into the call site
-instead of earning a name. Check via `grep -rin` of the leading word across `content/`,
-`src/routes/`, and `docs/` — no hits outside the component is the smell.
+instead of earning a name. Element mapping lives in `docs/agents/html-semantics.md`. Check via
+`grep -rin` of the leading word across `content/`, `src/routes/`, and `docs/` — no hits outside the
+component is the smell.
 
 ## Import alias — use `@` except `edge`
 
