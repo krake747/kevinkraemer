@@ -40,25 +40,44 @@ function commandRowId(command: CommandPaletteCommand): string {
     return command.kind === "action" ? `cmd-action-${command.id}` : `cmd-${command.kind}-${command.href}`
 }
 
-function commandRow(command: CommandPaletteCommand, deps: CommandPaletteDeps): CommandPaletteRow {
-    const run = () => {
-        if (command.kind === "route") {
-            deps.close()
-            deps.navigate(command.href)
-            return
+function commandRun(command: CommandPaletteCommand, deps: CommandPaletteDeps): () => void {
+    switch (command.kind) {
+        case "route": {
+            return () => {
+                deps.close()
+                deps.navigate(command.href)
+            }
         }
-        if (command.kind === "external") {
-            deps.close()
-            deps.openExternal(command.href)
-            return
+        case "external": {
+            return () => {
+                deps.close()
+                deps.openExternal(command.href)
+            }
         }
-        deps.runAction(command.id)
+        case "action": {
+            return () => {
+                deps.runAction(command.id)
+            }
+        }
+        default: {
+            const exhaustive: never = command
+            return exhaustive
+        }
     }
+}
+
+function commandRow(command: CommandPaletteCommand, deps: CommandPaletteDeps): CommandPaletteRow {
     const flash =
         command.kind === "action" && command.flashLabel !== undefined
             ? { id: command.id, label: command.flashLabel }
             : undefined
-    return { rowId: commandRowId(command), label: command.label, icon: command.icon, flash, run }
+    return {
+        rowId: commandRowId(command),
+        label: command.label,
+        icon: command.icon,
+        flash,
+        run: commandRun(command, deps),
+    }
 }
 
 function hitRow(hit: SearchHit, deps: CommandPaletteDeps): CommandPaletteRow {
@@ -73,22 +92,40 @@ function hitRow(hit: SearchHit, deps: CommandPaletteDeps): CommandPaletteRow {
     }
 }
 
+function hasRows(group: CommandPaletteGroup): boolean {
+    return group.rows.length > 0
+}
+
+function toCommandRow(deps: CommandPaletteDeps): (command: CommandPaletteCommand) => CommandPaletteRow {
+    return (command) => {
+        return commandRow(command, deps)
+    }
+}
+
+function toHitRow(deps: CommandPaletteDeps): (hit: SearchHit) => CommandPaletteRow {
+    return (hit) => {
+        return hitRow(hit, deps)
+    }
+}
+
+function toCommandGroup(
+    commands: CommandPaletteCommand[],
+    deps: CommandPaletteDeps,
+): (label: readonly ["pages" | "actions", string]) => CommandPaletteGroup {
+    return ([key, label]) => {
+        return { key, label, rows: commands.filter((command) => command.group === key).map(toCommandRow(deps)) }
+    }
+}
+
 export function buildCommandPaletteGroups(
     commands: CommandPaletteCommand[],
     hits: SearchHit[],
     deps: CommandPaletteDeps,
 ): CommandPaletteGroup[] {
-    const groups: CommandPaletteGroup[] = []
-    for (const [key, label] of GROUP_LABELS) {
-        const rows = commands.filter((command) => command.group === key).map((command) => commandRow(command, deps))
-        if (rows.length > 0) {
-            groups.push({ key, label, rows })
-        }
-    }
-    if (hits.length > 0) {
-        groups.push({ key: "hits", label: "$ grep -r", rows: hits.map((hit) => hitRow(hit, deps)) })
-    }
-    return groups
+    return [
+        ...GROUP_LABELS.map(toCommandGroup(commands, deps)),
+        { key: "hits", label: "$ grep -r", rows: hits.map(toHitRow(deps)) },
+    ].filter(hasRows)
 }
 
 export function createCommandPalette(deps: CommandPaletteDeps) {
