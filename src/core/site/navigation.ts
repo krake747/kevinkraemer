@@ -74,13 +74,16 @@ type LabelKind = keyof typeof ACTIVE_LABEL_FALLBACK
 
 const LABEL_KINDS = ["home", "cv"] as const satisfies readonly LabelKind[]
 
+function labelFor(kind: LabelKind): string {
+    return NAV_ENTRIES.find((entry) => entry.active === kind)?.label ?? ACTIVE_LABEL_FALLBACK[kind]
+}
+
 export function getCurrentPageLabel(pathname: string): string {
-    for (const kind of LABEL_KINDS) {
-        if (ACTIVE_MATCH[kind](pathname)) {
-            return NAV_ENTRIES.find((entry) => entry.active === kind)?.label ?? ACTIVE_LABEL_FALLBACK[kind]
-        }
+    const match = LABEL_KINDS.find((kind) => ACTIVE_MATCH[kind](pathname))
+    if (match === undefined) {
+        return "~/"
     }
-    return "~/"
+    return labelFor(match)
 }
 
 export function isActiveFor(entry: NavEntry, pathname: string): boolean {
