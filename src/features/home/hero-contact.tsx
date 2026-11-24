@@ -29,7 +29,7 @@ export function HomeHeroContact() {
                         <div class="flex items-baseline gap-4">
                             <span class="w-20 tracking-widest text-stone-600 uppercase dark:text-stone-300">
                                 {contact.label}
-                            </span>{" "}
+                            </span>
                             <Anchor
                                 href={contact.href}
                                 variant="channel"

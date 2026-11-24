@@ -22,7 +22,6 @@ export function LogRelated(props: VoidProps<{ entries: LogEntry[] }>) {
                                                 {item.title}
                                             </span>
                                             <span class="mt-0.5 block font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400">
-                                                {" "}
                                                 {formatDateShort(item.date)}
                                             </span>
                                         </div>

@@ -41,7 +41,7 @@ export function CvSkills(props: VoidProps<{ id: string }>) {
                                             <div class="flex items-center gap-2">
                                                 <span class="font-mono text-xs text-emerald-600 dark:text-emerald-400">
                                                     #
-                                                </span>{" "}
+                                                </span>
                                                 <span class="text-sm text-stone-700 dark:text-stone-300">{skill}</span>
                                             </div>
                                         )}

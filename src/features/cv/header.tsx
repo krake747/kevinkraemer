@@ -30,8 +30,8 @@ export function CvHeader() {
                     <div class="flex flex-col gap-2 pt-2 font-mono text-sm sm:flex-row sm:items-center sm:gap-3 sm:pt-0">
                         <Anchor href={`mailto:${CV_CONTACT.email}`} variant="mono" class="hit-area-y-3">
                             {CV_CONTACT.email}
-                        </Anchor>{" "}
-                        <span class="hidden text-stone-300 sm:inline dark:text-stone-600">·</span>{" "}
+                        </Anchor>
+                        <span class="hidden text-stone-300 sm:inline dark:text-stone-600">·</span>
                         <Anchor
                             href={`https://github.com/${CV_CONTACT.github}`}
                             variant="muted"
@@ -39,8 +39,8 @@ export function CvHeader() {
                             class="hit-area-y-3"
                         >
                             github.com/{CV_CONTACT.github}
-                        </Anchor>{" "}
-                        <span class="hidden text-stone-300 sm:inline dark:text-stone-600">·</span>{" "}
+                        </Anchor>
+                        <span class="hidden text-stone-300 sm:inline dark:text-stone-600">·</span>
                         <Anchor
                             href={CV_PDF_PATH}
                             variant="muted"
