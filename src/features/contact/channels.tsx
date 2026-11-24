@@ -105,6 +105,21 @@ const CHANNELS: Channel[] = [
     },
 ]
 
+function linkAttrs(channel: Channel): { target?: "_blank"; rel?: string } {
+    switch (channel.kind) {
+        case "email": {
+            return {}
+        }
+        case "external": {
+            return { target: "_blank", rel: "me noopener noreferrer" }
+        }
+        default: {
+            const exhaustive: never = channel
+            return exhaustive
+        }
+    }
+}
+
 export function ContactChannels() {
     return (
         <section aria-labelledby="contact-channels-heading">
@@ -112,20 +127,19 @@ export function ContactChannels() {
             <ul class="grid border border-stone-300 md:grid-cols-3 dark:border-stone-700">
                 <For each={CHANNELS}>
                     {(channel) => {
-                        const external = channel.kind === "external"
-                        const address = channel.kind === "email" ? channel.address : undefined
+                        const attrs = linkAttrs(channel)
                         return (
                             <li class="border-t border-stone-300 first:border-t-0 md:border-t-0 md:border-l md:first:border-l-0 dark:border-stone-700">
                                 <a
                                     href={channel.href}
-                                    target={external ? "_blank" : undefined}
-                                    rel={external ? "me noopener noreferrer" : undefined}
+                                    target={attrs.target}
+                                    rel={attrs.rel}
                                     class={contactCell({ primary: channel.primary })}
                                 >
                                     <div>
                                         <span class={contactTitle({ primary: channel.primary })}>{channel.label}</span>
                                         <span class={contactNote({ primary: channel.primary })}>{channel.note}</span>
-                                        <Show when={address}>
+                                        <Show when={channel.kind === "email" ? channel.address : undefined}>
                                             {(shown) => (
                                                 <span class="mt-2 block font-mono text-xs wrap-break-word text-stone-400">
                                                     {shown()}
@@ -135,7 +149,7 @@ export function ContactChannels() {
                                     </div>
                                     <span class={contactAction({ primary: channel.primary })}>
                                         {channel.action}
-                                        <Show when={external}>
+                                        <Show when={channel.kind === "external"}>
                                             <span class="sr-only"> (opens in a new tab)</span>
                                         </Show>
                                         <ArrowUpRight class={contactArrow({ primary: channel.primary })} />
