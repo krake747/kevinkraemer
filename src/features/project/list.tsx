@@ -45,7 +45,7 @@ export function ProjectList(props: VoidProps<{ projects: Project[] }>) {
                                     <p class="max-w-prose text-base/relaxed text-stone-700 dark:text-stone-300">
                                         {project.tagline}
                                     </p>
-                                    <p class="font-mono text-sm/relaxed text-stone-600 dark:text-stone-400">
+                                    <p class="font-mono text-xs/relaxed text-stone-600 dark:text-stone-400">
                                         {project.role} · {project.stack.join(" · ")}
                                     </p>
                                 </div>
