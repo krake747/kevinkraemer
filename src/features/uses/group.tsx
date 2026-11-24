@@ -17,7 +17,7 @@ function toolName(item: UsesItem, variant: "channel" | "muted") {
     )
 }
 
-function UsesRow(props: { item: UsesItem }) {
+function UsesRow(props: VoidProps<{ item: UsesItem }>) {
     return (
         <StackRow as="li" size="compact" class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
             <span class="sm:w-56 sm:shrink-0">{toolName(props.item, "muted")}</span>
@@ -26,7 +26,7 @@ function UsesRow(props: { item: UsesItem }) {
     )
 }
 
-function UsesRows(props: { items: UsesItem[] }) {
+function UsesRows(props: VoidProps<{ items: UsesItem[] }>) {
     return (
         <Stack as="ul">
             <For each={props.items}>{(item) => <UsesRow item={item} />}</For>
@@ -34,7 +34,7 @@ function UsesRows(props: { items: UsesItem[] }) {
     )
 }
 
-function UsesDailyPanel(props: { items: UsesItem[] }) {
+function UsesDailyPanel(props: VoidProps<{ items: UsesItem[] }>) {
     return (
         <StackRow size="relaxed">
             <ul class="m-0 grid list-none gap-6 p-0 sm:grid-cols-3">
@@ -51,7 +51,7 @@ function UsesDailyPanel(props: { items: UsesItem[] }) {
     )
 }
 
-function UsesHardware(props: { items: UsesItem[] }) {
+function UsesHardware(props: VoidProps<{ items: UsesItem[] }>) {
     return (
         <StackRow size="relaxed">
             <dl class="m-0 grid gap-x-8 gap-y-5 sm:grid-cols-2">
@@ -72,7 +72,7 @@ function UsesHardware(props: { items: UsesItem[] }) {
     )
 }
 
-function UsesPlain(props: { items: UsesItem[] }) {
+function UsesPlain(props: VoidProps<{ items: UsesItem[] }>) {
     return (
         <dl class="m-0 grid gap-x-8 gap-y-4 sm:grid-cols-2">
             <For each={props.items}>
