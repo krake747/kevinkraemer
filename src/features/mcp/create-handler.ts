@@ -1,5 +1,4 @@
 import { createAsk } from "@core/ask/create-ask"
-import { askDeps } from "@core/ask/deps"
 import type { AskRequestInput } from "@core/ask/request"
 import { tapeResult } from "@core/ask/tape-data"
 import { apiVersion } from "@core/site/api-version"
@@ -30,7 +29,7 @@ export function createMcpHandler(env: unknown): (request: Request) => Promise<Re
             throw error
         },
     })
-    const askTool = createAskTool(createAsk({ tape: tapeResult, env, makeDeps: askDeps }))
+    const askTool = createAskTool(createAsk({ tape: tapeResult, env }))
 
     const createServer: McpServerFactory = async () => {
         const server = new McpServer({ name: serverName, version: apiVersion } satisfies Implementation, {

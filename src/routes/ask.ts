@@ -1,5 +1,4 @@
 import { createAsk } from "@core/ask/create-ask"
-import { askDeps } from "@core/ask/deps"
 import { tapeResult } from "@core/ask/tape-data"
 import { createAskHandler } from "@features/ask/create-handler"
 
@@ -7,7 +6,6 @@ const handle = createAskHandler(
     createAsk({
         tape: tapeResult,
         env: { TYPESAFE_API_KEY: process.env.TYPESAFE_API_KEY, OPENAI_API_KEY: process.env.OPENAI_API_KEY },
-        makeDeps: askDeps,
     }),
 )
 
