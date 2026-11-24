@@ -23,7 +23,7 @@ export function SearchInterface() {
 
     return (
         <div class="flex flex-col gap-6">
-            <search aria-label="Search site" class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+            <search aria-label="Site search" class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                 <Input
                     ref={input}
                     value={latest(query.input)}
