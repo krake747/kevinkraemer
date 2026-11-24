@@ -1,6 +1,6 @@
-import type { FlowStep } from "@core/content/graphs"
+import type { FlowName, FlowStep } from "@core/content/graphs"
+import { namedFlows } from "@core/content/graphs"
 import type { GraphFlowSpec } from "@core/content/model"
-import { isFlowName, namedFlows, type FlowName } from "@features/log/flows"
 import { For, type VoidProps } from "solid-js"
 
 type Lane = {
@@ -16,9 +16,9 @@ function toLane(name: FlowName): Lane {
 
 function lanesFor(spec: GraphFlowSpec): Lane[] {
     if (spec.kind === "single") {
-        return isFlowName(spec.flow) ? [{ caption: spec.title, steps: namedFlows[spec.flow] }] : []
+        return [{ caption: spec.title, steps: namedFlows[spec.flow] }]
     }
-    return [spec.flow, spec.compare, spec.third].filter(isFlowName).map(toLane)
+    return [spec.flow, spec.compare, ...(spec.third === undefined ? [] : [spec.third])].map(toLane)
 }
 
 function gridClass(spec: GraphFlowSpec): string {

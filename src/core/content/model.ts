@@ -1,8 +1,9 @@
+import type { FlowName } from "@core/content/graphs"
 import { compareDatesDesc } from "@core/time/date"
 
 export type GraphFlowSpec =
-    | { kind: "single"; title: string; flow: string }
-    | { kind: "compare"; title: string; flow: string; compare: string; third?: string }
+    | { kind: "single"; title: string; flow: FlowName }
+    | { kind: "compare"; title: string; flow: FlowName; compare: FlowName; third?: FlowName }
 
 export type LogTocEntry = {
     id: string
