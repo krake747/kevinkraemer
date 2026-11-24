@@ -15,14 +15,7 @@ type PathEntry = { path: string; method: string; operation: OperationObject }
 type PageEntry = { path: string; operation: OperationObject }
 
 function getMethods(item: (typeof openapiDocument.paths)[string]): ("get" | "post")[] {
-    const methods: ("get" | "post")[] = []
-    if (item.get !== undefined) {
-        methods.push("get")
-    }
-    if (item.post !== undefined) {
-        methods.push("post")
-    }
-    return methods
+    return (["get", "post"] as const).filter((method) => item[method] !== undefined)
 }
 
 export function operations(): PathEntry[] {
@@ -194,36 +187,46 @@ export function badNotFounds(): string[] {
         .map(({ path }) => path)
 }
 
+type DeclaredParameter = ParameterObject | HeaderParameterObject
+
+function parameterNameIssues(parameter: DeclaredParameter): string[] {
+    return parameter.name.length === 0 ? ["parameter without name"] : []
+}
+
+function parameterDescriptionIssues(parameter: DeclaredParameter): string[] {
+    return parameter.description.length === 0 ? [`parameter ${parameter.name} without description`] : []
+}
+
+function parameterSchemaIssues(parameter: DeclaredParameter): string[] {
+    try {
+        inlineSchema(parameter.schema, `parameter ${parameter.name}`)
+        return []
+    } catch {
+        return [`parameter ${parameter.name} without inline schema`]
+    }
+}
+
+function describeParameter(parameter: DeclaredParameter): string[] {
+    return [
+        ...parameterNameIssues(parameter),
+        ...parameterDescriptionIssues(parameter),
+        ...parameterSchemaIssues(parameter),
+    ]
+}
+
+function pathParameterIssues(parameter: DeclaredParameter): string[] {
+    return parameter.in === "path" && !parameter.required ? [`path parameter ${parameter.name} is optional`] : []
+}
+
 export function parameterIssues(): string[] {
     const resolved = allResolvedParameters()
     if (resolved.length === 0) {
         return ["no parameters declared"]
     }
-    const issues: string[] = []
     const parameters = resolved.map(({ ref, resolved: value }) => required(value, `parameter ${ref ?? "inline"}`))
-    for (const parameter of parameters) {
-        if (parameter.name.length === 0) {
-            issues.push("parameter without name")
-        }
-        if (parameter.description.length === 0) {
-            issues.push(`parameter ${parameter.name} without description`)
-        }
-        try {
-            inlineSchema(parameter.schema, `parameter ${parameter.name}`)
-        } catch {
-            issues.push(`parameter ${parameter.name} without inline schema`)
-        }
-    }
     const pathParameters = parameters.filter((parameter) => parameter.in === "path")
-    if (pathParameters.length === 0) {
-        issues.push("no path parameters declared")
-    }
-    for (const parameter of pathParameters) {
-        if (!parameter.required) {
-            issues.push(`path parameter ${parameter.name} is optional`)
-        }
-    }
-    return issues
+    const missingPath = pathParameters.length === 0 ? ["no path parameters declared"] : []
+    return [...parameters.flatMap(describeParameter), ...missingPath, ...pathParameters.flatMap(pathParameterIssues)]
 }
 
 export function schemaIssues(): string[] {
@@ -246,12 +249,8 @@ function propertyIssues(name: string, resolved: SchemaRefOrObject): string[] {
 
 function propertyEntryIssues(name: string, property: string, value: SchemaRefOrObject): string[] {
     const propertySchema = inlineSchema(value, `${name}.${property}`)
-    const issues: string[] = []
-    if ((propertySchema.description?.length ?? 0) === 0) {
-        issues.push(`schema ${name}.${property} without description`)
-    }
-    if (!("type" in propertySchema)) {
-        issues.push(`schema ${name}.${property} without type`)
-    }
-    return issues
+    const missingDescription =
+        (propertySchema.description?.length ?? 0) === 0 ? [`schema ${name}.${property} without description`] : []
+    const missingType = "type" in propertySchema ? [] : [`schema ${name}.${property} without type`]
+    return [...missingDescription, ...missingType]
 }
