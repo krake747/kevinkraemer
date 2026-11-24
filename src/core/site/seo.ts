@@ -1,9 +1,6 @@
 import { site } from "@core/site/site-meta"
 
-export const seoDefaults: {
-    image: string
-    author: string
-} = {
+export const seoDefaults = {
     image: site.image,
     author: site.name,
 }

@@ -37,10 +37,14 @@ export async function buildSkillsIndex(skills: SkillFile[]) {
 function skillAttributes(name: string, markdown: string): { name: string; description: string } {
     const attributes = skillFrontmatterAttributes(name, markdown)
     return {
-        name: skillNameEntry(name, attributes.name),
-        description: skillDescriptionEntry(name, attributes.description),
+        name: skillNameEntry({ directory: name, value: attributes.name }),
+        description: skillDescriptionEntry({ name, value: attributes.description }),
     }
 }
+
+const SkillNameSchema = v.pipe(v.string(), v.regex(skillNamePattern))
+
+const SkillDescriptionSchema = v.pipe(v.string(), v.trim(), v.minLength(1), v.maxLength(SKILL_DESCRIPTION_MAX_LENGTH))
 
 const SkillFrontmatterSchema = v.object({ name: v.unknown(), description: v.unknown() })
 
@@ -58,24 +62,24 @@ function skillFrontmatterAttributes(name: string, markdown: string): SkillFrontm
     return parsed.output
 }
 
-function skillNameEntry(directory: string, value: unknown): string {
-    if (typeof value !== "string" || !skillNamePattern.test(value)) {
-        throw new Error(`Skill ${directory} needs a lowercase, hyphenated name`)
+function skillNameEntry(input: { directory: string; value: unknown }): string {
+    if (!v.is(SkillNameSchema, input.value)) {
+        throw new Error(`Skill ${input.directory} needs a lowercase, hyphenated name`)
     }
-    if (value !== directory) {
-        throw new Error(`Skill ${directory} needs a name that matches its directory`)
+    if (input.value !== input.directory) {
+        throw new Error(`Skill ${input.directory} needs a name that matches its directory`)
     }
-    return value
+    return input.value
 }
 
-function skillDescriptionEntry(name: string, value: unknown): string {
-    if (typeof value !== "string" || value.trim().length === 0) {
-        throw new Error(`Skill ${name} needs a description`)
+function skillDescriptionEntry(input: { name: string; value: unknown }): string {
+    if (!v.is(SkillDescriptionSchema, input.value)) {
+        if (typeof input.value !== "string" || input.value.trim().length === 0) {
+            throw new Error(`Skill ${input.name} needs a description`)
+        }
+        throw new Error(`Skill ${input.name} needs a description of at most ${SKILL_DESCRIPTION_MAX_LENGTH} characters`)
     }
-    if (value.length > SKILL_DESCRIPTION_MAX_LENGTH) {
-        throw new Error(`Skill ${name} needs a description of at most ${SKILL_DESCRIPTION_MAX_LENGTH} characters`)
-    }
-    return value
+    return input.value
 }
 
 async function digest(markdown: string): Promise<string> {

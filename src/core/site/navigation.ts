@@ -70,8 +70,12 @@ const ACTIVE_MATCH: Record<ActiveKind, (pathname: string) => boolean> = {
 
 const ACTIVE_LABEL_FALLBACK = { home: "~/portfolio", cv: "~/cv" } as const
 
+type LabelKind = keyof typeof ACTIVE_LABEL_FALLBACK
+
+const LABEL_KINDS = ["home", "cv"] as const satisfies readonly LabelKind[]
+
 export function getCurrentPageLabel(pathname: string): string {
-    for (const kind of ["home", "cv"] as const) {
+    for (const kind of LABEL_KINDS) {
         if (ACTIVE_MATCH[kind](pathname)) {
             return NAV_ENTRIES.find((entry) => entry.active === kind)?.label ?? ACTIVE_LABEL_FALLBACK[kind]
         }

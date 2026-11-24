@@ -5,7 +5,7 @@ const PERSON_BIO = "Full-stack developer and former financial risk analyst based
 const JOB_TITLE = "Full-stack Developer"
 const PERSON_KNOWS_ABOUT = [...site.keywords].slice(1)
 
-export function makePersonSchema(personUrl: string, knowsAbout: string[] = PERSON_KNOWS_ABOUT) {
+export function makePersonSchema(personUrl: string, knowsAbout: readonly string[] = PERSON_KNOWS_ABOUT) {
     return {
         context: "https://schema.org",
         kind: "Person",
@@ -14,7 +14,7 @@ export function makePersonSchema(personUrl: string, knowsAbout: string[] = PERSO
         jobTitle: JOB_TITLE,
         sameAs: [site.socials.github, site.socials.linkedin],
         description: PERSON_BIO,
-        knowsAbout,
+        knowsAbout: [...knowsAbout],
     }
 }
 
@@ -44,7 +44,7 @@ function makeOrganizationSchema() {
 export function makeHomepageOrganizationSchema() {
     return {
         ...makeOrganizationSchema(),
-        knowsAbout: PERSON_KNOWS_ABOUT,
+        knowsAbout: [...PERSON_KNOWS_ABOUT],
         makesOffer: {
             kind: "Offer",
             itemOffered: {
