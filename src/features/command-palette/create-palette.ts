@@ -97,15 +97,11 @@ function hasRows(group: CommandPaletteGroup): boolean {
 }
 
 function toCommandRow(deps: CommandPaletteDeps): (command: CommandPaletteCommand) => CommandPaletteRow {
-    return (command) => {
-        return commandRow(command, deps)
-    }
+    return (command) => commandRow(command, deps)
 }
 
 function toHitRow(deps: CommandPaletteDeps): (hit: SearchHit) => CommandPaletteRow {
-    return (hit) => {
-        return hitRow(hit, deps)
-    }
+    return (hit) => hitRow(hit, deps)
 }
 
 function toCommandGroup(
