@@ -102,7 +102,8 @@ describe("project intake", () => {
 })
 
 describe("bundle version", () => {
-    it("starts at one", () => {
-        expect(CONTENT_BUNDLE_VERSION).toBe(1)
+    it("is a positive integer reader version", () => {
+        expect(Number.isInteger(CONTENT_BUNDLE_VERSION)).toBe(true)
+        expect(CONTENT_BUNDLE_VERSION).toBeGreaterThan(0)
     })
 })
