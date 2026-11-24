@@ -4,11 +4,11 @@ import { cx } from "@ui/cva.config"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { omit } from "solid-js"
 
-type SectionShellProps = ComponentProps<"section"> & {
+type LandingSectionProps = ComponentProps<"section"> & {
     command: string
 }
 
-export function SectionShell(props: SectionShellProps) {
+export function LandingSection(props: LandingSectionProps) {
     const rest = omit(props, "command", "class", "children")
     const reveal = createScrollReveal()
     return (

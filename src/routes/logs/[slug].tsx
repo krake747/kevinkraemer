@@ -2,7 +2,7 @@ import { siteContent } from "@core/content/site-content"
 import { resolveLogDetail } from "@features/log/detail"
 import { LogEntry } from "@features/log/entry"
 import { LogNotFound } from "@features/log/not-found"
-import { sectionTrail, DetailShell } from "@pattern/detail-shell"
+import { sectionTrail, DetailPage } from "@pattern/detail-page"
 import { BreadcrumbSchema } from "@pattern/seo"
 import { type RouteProps } from "@solidjs/router"
 import { defineFileRoute } from "@solidjs/router/fs"
@@ -20,7 +20,7 @@ export default function LogRoute(props: RouteProps<typeof route>) {
             {(found) => {
                 const entry = () => found().entry
                 return (
-                    <DetailShell
+                    <DetailPage
                         seo={{
                             title: `${entry().title} · Logs`,
                             description: entry().description,
@@ -32,7 +32,7 @@ export default function LogRoute(props: RouteProps<typeof route>) {
                     >
                         <BreadcrumbSchema items={sectionTrail("Logs", "/logs", entry().title)} />
                         <LogEntry detail={found()} />
-                    </DetailShell>
+                    </DetailPage>
                 )
             }}
         </Show>

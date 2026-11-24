@@ -2,12 +2,12 @@ import { AboutBackground } from "@features/about/background"
 import { AboutElsewhere } from "@features/about/elsewhere"
 import { AboutOutside } from "@features/about/outside"
 import { AboutWork } from "@features/about/work"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
 import { Seo } from "@pattern/seo"
 
 export default function AboutRoute() {
     return (
-        <ProseShell
+        <DocumentPage
             command="cat story.md"
             title="Hi, I'm Kevin."
             lede="Full-stack developer in Luxembourg. I started in financial risk; now I build the tools instead of the reports."
@@ -21,6 +21,6 @@ export default function AboutRoute() {
             <AboutWork />
             <AboutOutside />
             <AboutElsewhere />
-        </ProseShell>
+        </DocumentPage>
     )
 }

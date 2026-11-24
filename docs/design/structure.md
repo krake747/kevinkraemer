@@ -1,7 +1,7 @@
 # Structure — commands, headings, page open
 
 Source of truth: `terminal-command-header.tsx`, `section-heading.tsx`, `panel-label.tsx`,
-`prose-section.tsx`, `src/pattern/prose-shell.tsx`, and the shipped pages.
+`prose-section.tsx`, `src/pattern/document-page.tsx`, and the shipped pages.
 
 How a page and a section announce themselves. The terminal is the medium, so the opening is
 structural (chrome, error, or exit) before it is decorative.
@@ -52,33 +52,33 @@ the section label.
 
 Every page opens one of three ways, and the first is enforced by code:
 
-| Page kind                                          | Open with                                                                                                                                  |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ProseShell` route (`src/pattern/prose-shell.tsx`) | The layout itself: `command` prop (required) → `TerminalCommandHeader`, then `h1`, then the `lede` slot in Geist `text-sm leading-relaxed` |
-| Index route (not `ProseShell`)                     | `TerminalCommandHeader`, `h1`, then a Geist lede at `text-sm max-w-2xl leading-relaxed`                                                    |
-| Entry route (`/logs/[slug]`)                       | `TerminalCommandHeader`, `h1`, then the description at `leading-relaxed` inside `max-w-prose`                                              |
+| Page kind                                              | Open with                                                                                                                                  |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `DocumentPage` route (`src/pattern/document-page.tsx`) | The layout itself: `command` prop (required) → `TerminalCommandHeader`, then `h1`, then the `lede` slot in Geist `text-sm leading-relaxed` |
+| Index route (not `DocumentPage`)                       | `TerminalCommandHeader`, `h1`, then a Geist lede at `text-sm max-w-2xl leading-relaxed`                                                    |
+| Entry route (`/logs/[slug]`)                           | `TerminalCommandHeader`, `h1`, then the description at `leading-relaxed` inside `max-w-prose`                                              |
 
-Why the layout owns it: `ProseShell` takes `command` as a required prop, so a ProseShell page
+Why the layout owns it: `DocumentPage` takes `command` as a required prop, so a DocumentPage page
 physically cannot ship without exactly one command. Hand-rolling that header re-implements the h1
-size, the lede treatment, and the `kk-cascade` column, and will drift from all seven `ProseShell`
+size, the lede treatment, and the `kk-cascade` column, and will drift from all seven `DocumentPage`
 pages.
 
 **A short intro above a list is the `lede` slot, not a `ProseSection`.** The three-part prose
 anatomy is for sections with a heading that earns its place; a two-sentence intro on a page that
 then lists rows has no heading to give. Put it in `lede` and stop. Do not invent a heading so the
-measure is allowed, and do not hand-roll a measure column on a page intro: `ProseShell` already sets
-it.
+measure is allowed, and do not hand-roll a measure column on a page intro: `DocumentPage` already
+sets it.
 
 A page whose entire body is one list needs **no** section heading: the `h1` already names it, and a
 `SectionHeading` would repeat the page title one line lower. A register that is not `/cv` opens as
 an Index route (`TerminalCommandHeader`, `h1`, Geist lede) and then goes straight to its list: a
-`Stack` of rows, or the ruled entries of `/projects`.
+`Register` of rows, or the ruled entries of `/projects`.
 
 The fixed header's height is `--header-h`. `scroll-margin-top` and the sticky rails derive from it;
 never hard-code a second clearance number.
 
-Landing sections use the full `max-w-6xl` column (`SectionShell`), because the log rows need the
-width. Every `PageShell` route nests `max-w-4xl` inside it, so prose pages start 128px further in.
+Landing sections use the full `max-w-6xl` column (`LandingSection`), because the log rows need the
+width. Every `PageColumn` route nests `max-w-4xl` inside it, so prose pages start 128px further in.
 That difference is the layout, not drift: do not "fix" it by widening a prose page or narrowing the
 landing rows.
 

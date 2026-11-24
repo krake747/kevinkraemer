@@ -1,11 +1,11 @@
 import { SearchNoScript } from "@features/search/no-script"
 import { SearchQuerySection } from "@features/search/query-section"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
 import { NoIndex, Seo } from "@pattern/seo"
 
 export default function SearchRoute() {
     return (
-        <ProseShell
+        <DocumentPage
             command="grep -r"
             title="Search"
             lede="Find anything across the site: logs, CV, and docs. Results update as you type."
@@ -18,6 +18,6 @@ export default function SearchRoute() {
             <NoIndex />
             <SearchQuerySection />
             <SearchNoScript />
-        </ProseShell>
+        </DocumentPage>
     )
 }

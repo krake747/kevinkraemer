@@ -2,12 +2,12 @@ import { PrivacyCollection } from "@features/privacy/collection"
 import { PrivacyFooter } from "@features/privacy/footer"
 import { PrivacyLocalStorage } from "@features/privacy/local-storage"
 import { PrivacyQuestions } from "@features/privacy/questions"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
 import { Seo } from "@pattern/seo"
 
 export default function PrivacyRoute() {
     return (
-        <ProseShell
+        <DocumentPage
             command="cat privacy.txt"
             title="Privacy"
             lede="This site collects as little as a website reasonably can. Here is exactly what happens when you visit."
@@ -21,6 +21,6 @@ export default function PrivacyRoute() {
             <PrivacyLocalStorage />
             <PrivacyQuestions />
             <PrivacyFooter />
-        </ProseShell>
+        </DocumentPage>
     )
 }

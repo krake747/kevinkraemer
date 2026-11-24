@@ -8,7 +8,7 @@ A change is done when every file sits behind its `boundary`.
 ## Place code by `boundary` — `route` vs `feature` vs `pattern` vs `core`
 
 Why a page composed inside a feature hides the route's shape and locks sections to one ordering.
-Solve compose in `src/routes`: read params, then `PageShell`/`Seo` plus feature sections in order.
+Solve compose in `src/routes`: read params, then `PageColumn`/`Seo` plus feature sections in order.
 `src/features` exports sections and stateful interfaces behind domain names, never a `page`.
 Sections and interactive pieces live in `src/features`, drop-in shared UI and generic behavior in
 `src/pattern` (imports only `core`, `ui`, `pattern`; takes data via props; names use `GLOSSARY.md`
@@ -36,7 +36,7 @@ file; the handler lives in `src/features/<name>/` behind a `Request -> Response`
 Why a route file that mixes page composition with handler plumbing hides which surface it serves,
 and a page whose Seo path drifts from its filename ships the wrong canonical. Solve keep two shapes
 in `src/routes`: a page (`.tsx`) default-exports a `*Route` component and declares Seo with the
-file's path, inline (`<Seo path>`) or through a shell (`DetailShell seo`); an endpoint (`.ts`)
+file's path, inline (`<Seo path>`) or through a shell (`DetailPage seo`); an endpoint (`.ts`)
 exports method handlers and no page shell, with document endpoints also listed in the prerender
 artifact list. `[...404].tsx` carries no canonical path by nature and `scalar.ts` serves a
 third-party shell, so both sit outside the convention.

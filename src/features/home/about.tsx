@@ -1,6 +1,6 @@
 import { sortByOrder, type AboutEntry } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
-import { SectionShell } from "@pattern/section-shell"
+import { LandingSection } from "@pattern/landing-section"
 import { ProseSectionBody } from "@ui/prose-section"
 import { SectionHeading } from "@ui/section-heading"
 import { For, type VoidProps } from "solid-js"
@@ -32,7 +32,7 @@ const ABOUT_COLUMNS: Column[] = [
 
 export function HomeAbout(props: VoidProps<{ id: string }>) {
     return (
-        <SectionShell id={props.id} command="cat story.md">
+        <LandingSection id={props.id} command="cat story.md">
             <div class="grid gap-12 lg:grid-cols-12">
                 <For each={ABOUT_COLUMNS}>
                     {(column) => (
@@ -51,6 +51,6 @@ export function HomeAbout(props: VoidProps<{ id: string }>) {
                     )}
                 </For>
             </div>
-        </SectionShell>
+        </LandingSection>
     )
 }

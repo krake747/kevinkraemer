@@ -33,8 +33,8 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Index (`/projects`)
 
-- `ProseShell`: `TerminalCommandHeader` `ls ~/projects`, title “Projects”, optional Geist lede (omit
-  the element when empty), then one plain `ul` of entries from the `projects` collection
+- `DocumentPage`: `TerminalCommandHeader` `ls ~/projects`, title “Projects”, optional Geist lede
+  (omit the element when empty), then one plain `ul` of entries from the `projects` collection
   (`sortByOrder`). An empty collection renders a `py-20 text-center` block with one mono `text-sm`
   line instead of the list.
 - Each entry is an `li` on a two-column grid (`md`, `minmax(0,15rem)` and the rest) with a single
@@ -52,7 +52,7 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Case page (`/projects/[slug]`)
 
-- `DetailShell` wrapping `ProjectArticle`, inside the layout that stretches to fill the viewport so
+- `DetailPage` wrapping `ProjectArticle`, inside the layout that stretches to fill the viewport so
   the footer stays at the bottom: reading column `max-w-prose` on the `article` itself.
 - One `TerminalCommandHeader` `cat {id}.md`, title `text-2xl`, mono tagline, then metadata as a
   `Stack` (`as="dl"`) of `ProjectMetadataRow`s (record rows, no row hover; links inside keep their

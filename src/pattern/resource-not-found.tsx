@@ -1,5 +1,5 @@
 import { DossierHead } from "@pattern/dossier-head"
-import { PageShell } from "@pattern/page-shell"
+import { PageColumn } from "@pattern/page-column"
 import { ReturnToRegister } from "@pattern/register"
 import type { VoidProps } from "solid-js"
 
@@ -11,9 +11,9 @@ type ResourceNotFoundProps = {
 
 export function ResourceNotFound(props: VoidProps<ResourceNotFoundProps>) {
     return (
-        <PageShell>
+        <PageColumn>
             <DossierHead command="cat missing.txt" title={props.title} />
             <ReturnToRegister href={props.backHref} label={props.backLabel} class="mt-6" />
-        </PageShell>
+        </PageColumn>
     )
 }

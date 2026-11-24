@@ -4,7 +4,7 @@ import { CvHeader } from "@features/cv/header"
 import { CvProjects } from "@features/cv/projects"
 import { CvSkills } from "@features/cv/skills"
 import { CvSummary } from "@features/cv/summary"
-import { PageShell } from "@pattern/page-shell"
+import { PageColumn } from "@pattern/page-column"
 import { Seo } from "@pattern/seo"
 import { defineFileRoute } from "@solidjs/router/fs"
 
@@ -25,7 +25,7 @@ export default function CvRoute() {
                 description="Full-stack developer. Former financial risk analyst building modern web applications with React, TypeScript, Go, and cloud-native technologies."
                 path="/cv"
             />
-            <PageShell class="print:py-8">
+            <PageColumn class="print:py-8">
                 <div class="mx-auto flex max-w-4xl flex-col gap-10 kk-cascade">
                     <CvHeader />
                     <CvSummary />
@@ -34,7 +34,7 @@ export default function CvRoute() {
                     <CvProjects id="projects" />
                     <CvEducation id="education" />
                 </div>
-            </PageShell>
+            </PageColumn>
         </>
     )
 }

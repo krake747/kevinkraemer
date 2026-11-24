@@ -1,5 +1,5 @@
 import { canonicalFor } from "@core/site/urls"
-import { PageShell } from "@pattern/page-shell"
+import { PageColumn } from "@pattern/page-column"
 import { Seo } from "@pattern/seo"
 import type { ComponentProps } from "@solidjs/web"
 import type { ParentProps } from "solid-js"
@@ -14,15 +14,15 @@ export function sectionTrail(sectionName: string, sectionPath: string, currentNa
     ]
 }
 
-type DetailShellProps = ParentProps<{
+type DetailPageProps = ParentProps<{
     seo: ComponentProps<typeof Seo>
 }>
 
-export function DetailShell(props: DetailShellProps) {
+export function DetailPage(props: DetailPageProps) {
     return (
-        <PageShell>
+        <PageColumn>
             <Seo {...props.seo} />
             {props.children}
-        </PageShell>
+        </PageColumn>
     )
 }

@@ -2,7 +2,7 @@ import { findById } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
 import { ProjectEntry } from "@features/project/entry"
 import { ProjectNotFound } from "@features/project/not-found"
-import { sectionTrail, DetailShell } from "@pattern/detail-shell"
+import { sectionTrail, DetailPage } from "@pattern/detail-page"
 import { BreadcrumbSchema } from "@pattern/seo"
 import { type RouteProps } from "@solidjs/router"
 import { defineFileRoute } from "@solidjs/router/fs"
@@ -16,7 +16,7 @@ export default function ProjectRoute(props: RouteProps<typeof route>) {
     return (
         <Show when={project()} fallback={<ProjectNotFound />}>
             {(entry) => (
-                <DetailShell
+                <DetailPage
                     seo={{
                         title: `${entry().name} · Projects`,
                         description: entry().tagline,
@@ -25,7 +25,7 @@ export default function ProjectRoute(props: RouteProps<typeof route>) {
                 >
                     <BreadcrumbSchema items={sectionTrail("Projects", "/projects", entry().name)} />
                     <ProjectEntry project={entry()} />
-                </DetailShell>
+                </DetailPage>
             )}
         </Show>
     )

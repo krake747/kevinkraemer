@@ -1,13 +1,13 @@
 import { ContactChannels } from "@features/contact/channels"
 import { ContactGuide } from "@features/contact/guide"
 import { ContactStatus } from "@features/contact/status"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
 import { RegisterWithRail } from "@pattern/register"
 import { Seo } from "@pattern/seo"
 
 export default function ContactRoute() {
     return (
-        <ProseShell
+        <DocumentPage
             command={'echo "Get in touch"'}
             title="Contact"
             lede="Email is the fastest route. It lands directly with me, and I usually reply within a couple of business days."
@@ -24,6 +24,6 @@ export default function ContactRoute() {
                     <ContactGuide />
                 </RegisterWithRail>
             </div>
-        </ProseShell>
+        </DocumentPage>
     )
 }

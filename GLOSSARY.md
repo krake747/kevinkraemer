@@ -50,6 +50,21 @@ specimens, borrowing Bloomberg Terminal density without nostalgia. Defined in fu
 
 **StackRow**: The `src/ui` framed-row primitive.
 
+**ViewportFrame**: The viewport padding and fixed-header clearance every page sits in. _Avoid_:
+wrapper, container, page padding
+
+**PageColumn**: The centered `max-w-6xl` column. Index, register, and custom pages compose on it
+directly; document and detail pages get it through their page component. _Avoid_: shell, wrapper
+
+**DocumentPage**: A prose document page: `PageColumn`, narrow measure, required `DossierHead`.
+_Avoid_: ProseShell, shell, template
+
+**DetailPage**: An entry page: `PageColumn` plus `Seo`. The route passes breadcrumbs through
+`sectionTrail`. _Avoid_: DetailShell, shell, template
+
+**LandingSection**: A landing section: full-width rule, reveal, exactly one `TerminalCommandHeader`.
+_Avoid_: SectionShell, shell, block
+
 **Register**: A browsable list of entries presented as uniform framed rows (the logs index, related
 entries, search hits). One `RegisterRow` per entry. A `Register` with a side rail uses
 `RegisterWithRail`. _Avoid_: list, grid, card deck, table

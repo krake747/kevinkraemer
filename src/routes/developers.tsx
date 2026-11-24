@@ -5,13 +5,13 @@ import { DevelopersQuickstart } from "@features/developers/quickstart"
 import { DevelopersResources } from "@features/developers/resources"
 import { DevelopersResponses } from "@features/developers/responses"
 import { DevelopersStability } from "@features/developers/stability"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
 import { Seo } from "@pattern/seo"
 import { Anchor } from "@ui/anchor"
 
 export default function DevelopersRoute() {
     return (
-        <ProseShell
+        <DocumentPage
             command="cat developers.md"
             title="Developer documentation"
             lede={
@@ -36,6 +36,6 @@ export default function DevelopersRoute() {
             <DevelopersResponses />
             <DevelopersStability />
             <DevelopersFooter />
-        </ProseShell>
+        </DocumentPage>
     )
 }
