@@ -30,11 +30,13 @@ function columns(): Column[] {
     ]
 }
 
+const ABOUT_COLUMNS = columns()
+
 export function HomeAbout(props: VoidProps<{ id: string }>) {
     return (
         <SectionShell id={props.id} command="cat story.md">
             <div class="grid gap-12 lg:grid-cols-12">
-                <For each={columns()}>
+                <For each={ABOUT_COLUMNS}>
                     {(column) => (
                         <div class={column.class}>
                             <For each={column.entries}>
