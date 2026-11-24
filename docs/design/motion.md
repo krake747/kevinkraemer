@@ -79,8 +79,9 @@ A staggered reveal is a property of the **container**, not of each child:
 - `kk-cascade` sets `animation-delay` on children 1–8, then holds the 9th step for everything after.
 - Override the step with the `--kk-cascade-step` custom property. The default lives in
   `@utility kk-cascade`; the 404 page overrides the step to a tighter value.
-- The hero is the exception: its blocks use explicit `[animation-delay:*]` literals and `HeroName`
-  sets a per-character delay, because character timing cannot come from a child index.
+- The hero is the exception: its blocks use explicit `[animation-delay:*]` literals and
+  `HomeHeroName` sets a per-character delay, because character timing cannot come from a child
+  index.
 - The hero lede, about block, and contact block use `animate-rise`, not `animate-fade-up`, as do the
   `ProseShell` and CV headers. A fade starts at `opacity: 0`, and the browser does not count an
   invisible element as painted, so the entrance would push LCP to the end of the animation. Rise

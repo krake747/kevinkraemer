@@ -1,4 +1,6 @@
-export function CvRowHeader(props: { title: string; meta: string }) {
+import type { VoidProps } from "solid-js"
+
+export function CvRowHeader(props: VoidProps<{ title: string; meta: string }>) {
     return (
         <div class="mb-2 flex flex-wrap items-baseline gap-x-3">
             <h3 class="text-base font-semibold text-stone-900 dark:text-stone-100">{props.title}</h3>
