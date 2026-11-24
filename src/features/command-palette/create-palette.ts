@@ -92,6 +92,7 @@ export function buildCommandPaletteGroups(
 }
 
 export function createCommandPalette(deps: CommandPaletteDeps) {
+    const commands = getCommandPaletteCommands()
     const [query, setQuery] = createSignal("")
     const {
         input,
@@ -104,7 +105,7 @@ export function createCommandPalette(deps: CommandPaletteDeps) {
     })
     const { hits, isLoading } = createPagefindSearch(query)
     const groups = createMemo(() =>
-        buildCommandPaletteGroups(matchCommandPaletteCommands(input(), getCommandPaletteCommands()), hits(), deps),
+        buildCommandPaletteGroups(matchCommandPaletteCommands(input(), commands), hits(), deps),
     )
     const rows = createMemo(() => groups().flatMap((group) => group.rows))
     const run = (rowId: string) => {
