@@ -1,8 +1,8 @@
-import { DossierHead } from "@pattern/dossier-head"
+import { PageHeader } from "@pattern/page-header"
 
 export function LogHeader() {
     return (
-        <DossierHead
+        <PageHeader
             command="cd ~/logs"
             title="Logs"
             lede="What I'm figuring out about building software, written down as I go."

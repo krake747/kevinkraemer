@@ -1,10 +1,10 @@
 import type { Project } from "@core/content/model"
-import { DossierHead } from "@pattern/dossier-head"
+import { PageHeader } from "@pattern/page-header"
 import type { VoidProps } from "solid-js"
 
 export function ProjectHeader(props: VoidProps<{ project: Project }>) {
     return (
-        <DossierHead
+        <PageHeader
             command={`cat ${props.project.id}.md`}
             title={props.project.name}
             lede={props.project.tagline}

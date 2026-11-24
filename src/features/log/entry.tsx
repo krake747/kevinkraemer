@@ -7,7 +7,7 @@ import { LogReadingProgress } from "@features/log/reading-progress"
 import { LogRelated } from "@features/log/related"
 import { LogSubscribe } from "@features/log/subscribe"
 import { LogToc, LogTocDisclosure } from "@features/log/toc"
-import { DossierHead } from "@pattern/dossier-head"
+import { PageHeader } from "@pattern/page-header"
 import { ReturnToRegister } from "@pattern/register"
 import { Badge } from "@ui/badge"
 import { Clock, FileText } from "@ui/icon"
@@ -22,7 +22,7 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
             <div class="lg:grid lg:grid-cols-[200px_minmax(0,1fr)] lg:gap-10">
                 <LogToc entries={entry().toc} />
                 <div class="mx-auto w-full max-w-prose lg:mx-0">
-                    <DossierHead
+                    <PageHeader
                         command={`cat ${entry().id}.md`}
                         title={entry().title}
                         lede={entry().description}

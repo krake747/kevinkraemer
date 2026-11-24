@@ -8,15 +8,16 @@ Source of truth: `tsconfig.json` paths, `src/features/**` and `src/pattern/**` f
 
 A diff is done when names and imports sit behind their `boundary`.
 
-## Pattern — mechanism, not domain
+## Pattern — generic behavior, glossary names
 
 Why a shared folder drifts into a second features tree: anything used by two slices looks homeless,
 but a component that hardcodes domain copy couples every consumer to that domain. Solve keep
-`src/pattern/**` to mechanism with no domain names — copy behavior (`create-copy-feedback.ts`),
-scroll behavior (`create-scroll-reveal.ts`), generic display (`code-block.tsx`); a component that
-names a route, a feed, or a site narrative (`/cv`, RSS, chain-vs-now) lives in the feature that owns
-it, even with two consumers. Check via `grep -rn 'href="/' src/pattern` — a hardcoded route is the
-smell.
+`src/pattern/**` free of hardcoded routes, feeds, and narrative copy — behavior
+(`create-copy-feedback.ts`), scroll (`create-scroll-reveal.ts`), generic display (`code-block.tsx`);
+structural components take their names from `GLOSSARY.md` (`Register`, `RecordRow`, `PageHeader`)
+and all page content through props and slots. A component that names a route, a feed, or a site
+narrative (`/cv`, RSS, chain-vs-now) lives in the feature that owns it, even with two consumers.
+Check via `grep -rn 'href="/' src/pattern` — a hardcoded route is the smell.
 
 ## Change shape — smallest deletion-first diff
 
@@ -63,6 +64,18 @@ parts there; the page root in features is the part itself (`SearchInterface` in
 page does not have. A part that two pages need moves down to `src/pattern` or `src/ui`
 (`architecture.md`) instead of losing its stem in place. Check via `pnpm lint` (`kk/feature-names`)
 — a component without its page stem is the smell.
+
+## Shared names — spoken, industry, never invented
+
+Why compounded names drift into private language: a reader who was not in the room cannot tell a
+domain word from an invention. Solve build every shared component name from one kind suffix (`Page`,
+`Section`, `Row`, `Panel`, `Header`, `Column`, `Frame`) plus a leading word that is either already
+spoken — in site copy, `docs/design/**`, or `GLOSSARY.md` (`Register`, `Record`, `Document`,
+`Landing`) — or the industry's word for the shape (`PageHeader` per Primer: title, description,
+actions). Compounds are parent plus part (`RegisterRow`, `ProseSectionBody`); a leading word with
+zero hits outside the component itself is the invention to kill. Check via `grep -rin` of the
+leading word across `content/`, `src/routes/`, and `docs/` — no hits outside the component is the
+smell.
 
 ## Import alias — use `@` except `edge`
 

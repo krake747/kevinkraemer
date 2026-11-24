@@ -56,7 +56,7 @@ wrapper, container, page padding
 **PageColumn**: The centered `max-w-6xl` column. Index, register, and custom pages compose on it
 directly; document and detail pages get it through their page component. _Avoid_: shell, wrapper
 
-**DocumentPage**: A prose document page: `PageColumn`, narrow measure, required `DossierHead`.
+**DocumentPage**: A prose document page: `PageColumn`, narrow measure, required `PageHeader`.
 _Avoid_: ProseShell, shell, template
 
 **DetailPage**: An entry page: `PageColumn` plus `Seo`. The route passes breadcrumbs through
@@ -72,8 +72,9 @@ entries, search hits). One `RegisterRow` per entry. A `Register` with a side rai
 **RecordRow**: One labeled record in a case file or reference (role, stack, status). Label width is
 a variant, never a call-site class. _Avoid_: key-value row, metadata row, field
 
-**DossierHead**: The opening block of a page: `Terminal Command Header`, title, lede, optional meta.
-_Avoid_: page header, hero, title block
+**PageHeader**: The opening block of a page: `TerminalCommandHeader`, title, lede, optional meta.
+The industry shape (Primer: title, description, actions); the `command` slot is this site's terminal
+twist. _Avoid_: page hero, title block
 
 **DocumentSection**: A labeled section: `section` plus `SectionHeading` plus a caller-chosen body.
 _Avoid_: section wrapper, content block
