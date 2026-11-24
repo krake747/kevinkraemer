@@ -124,20 +124,28 @@ export function logIdFromPath(pathname: string): string | undefined {
     return logPath.exec(pathname)?.[1]
 }
 
-export function logPagePath(value: unknown): string {
-    const page = textField(value, "page")
-    if (page === "log") {
-        const id = textField(value, "id")
-        if (id === undefined || !slugPattern.test(id)) {
-            throw new Error('The "log" page needs the id of a log entry.')
-        }
-        return `/logs/${id}`
+function logEntryPath(value: unknown): string {
+    const id = textField(value, "id")
+    if (id === undefined || !slugPattern.test(id)) {
+        throw new Error('The "log" page needs the id of a log entry.')
     }
+    return `/logs/${id}`
+}
+
+function staticPagePath(page: string | undefined): string {
     const path = page === undefined ? undefined : logPathByPage.get(page)
     if (path === undefined) {
         throw new Error(`The page must be one of ${pageNames.map((name) => `"${name}"`).join(", ")}.`)
     }
     return path
+}
+
+export function logPagePath(value: unknown): string {
+    const page = textField(value, "page")
+    if (page === "log") {
+        return logEntryPath(value)
+    }
+    return staticPagePath(page)
 }
 
 export function webMcpTools(entries: readonly LogEntry[], navigate: Navigate): WebMcpTool[] {
