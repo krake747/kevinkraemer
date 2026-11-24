@@ -73,6 +73,8 @@ const openPageInputSchema = v.object({
 export type LogSearchInput = v.InferOutput<typeof searchInputSchema>
 
 const emptySearchInput: LogSearchInput = v.parse(searchInputSchema, {})
+const readLogInputJsonSchema = toJsonSchema(readLogInputSchema)
+const openPageInputJsonSchema = toJsonSchema(openPageInputSchema)
 
 function textField(input: unknown, name: string): string | undefined {
     const value = fieldOf(input, name)
@@ -153,7 +155,7 @@ export function webMcpTools(entries: readonly LogEntry[], navigate: Navigate): W
             title: "Read a log entry",
             description:
                 "Read a log entry as the authored Markdown, including YAML front matter. Omit the id to read the entry that is currently open.",
-            inputSchema: toJsonSchema(readLogInputSchema),
+            inputSchema: readLogInputJsonSchema,
             annotations: { readOnlyHint: true },
             execute: async (input) => readLogEntry(entries, input),
         },
@@ -162,7 +164,7 @@ export function webMcpTools(entries: readonly LogEntry[], navigate: Navigate): W
             title: "Open a page",
             description:
                 "Open a page of the site in the browser: the home page, the log index, one log entry, the CV, about, projects, or contact.",
-            inputSchema: toJsonSchema(openPageInputSchema),
+            inputSchema: openPageInputJsonSchema,
             annotations: { readOnlyHint: false },
             execute: async (input) => {
                 const path = logPagePath(input)
