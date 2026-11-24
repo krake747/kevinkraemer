@@ -23,11 +23,11 @@ const PagefindModuleSchema = v.object({
 
 type PagefindCache = { status: "cold" } | { status: "ready"; module: PagefindModule }
 
-let cache: PagefindCache = { status: "cold" }
+const pagefindCache: { current: PagefindCache } = { current: { status: "cold" } }
 
 async function loadPagefind(): Promise<PagefindModule | null> {
-    if (cache.status === "ready") {
-        return cache.module
+    if (pagefindCache.current.status === "ready") {
+        return pagefindCache.current.module
     }
     const moduleUrl = "/pagefind/pagefind.js"
     try {
@@ -36,7 +36,7 @@ async function loadPagefind(): Promise<PagefindModule | null> {
         if (!parsed.success) {
             return null
         }
-        cache = { status: "ready", module: parsed.output }
+        pagefindCache.current = { status: "ready", module: parsed.output }
         return parsed.output
     } catch {
         return null
