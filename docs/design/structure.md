@@ -125,6 +125,17 @@ Incorrect — a hand-rolled heading and a raw measure:
 </section>
 ```
 
+## Registers and rails
+
+Most browsable lists are a `Register` of `RegisterRow`s with one action per row. Empty states are
+`EmptyRegister`; the way back is `ReturnToRegister`. A page with a side rail composes
+`RegisterWithRail`: main content (including the mobile disclosure) plus shell-less rail content; the
+grid, the sticky offset, and the desktop-only aside stay in the component.
+
+Two ruled exceptions keep their own shape: `/projects` divides entries with a single rule and no
+frame (`docs/design/projects.md`), and `/cv` keeps its compact `$`-marked sections for print. Record
+rows with linked labels stay hand-rolled: `RecordRow` takes a plain-text label only.
+
 ## Panel headers
 
 A panel header is `PanelLabel`, not a heading: uppercase, mono, loosened tracking, stone-600

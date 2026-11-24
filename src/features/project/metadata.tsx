@@ -1,5 +1,5 @@
 import type { Project } from "@core/content/model"
-import { ProjectMetadataRow } from "@features/project/metadata-row"
+import { RecordRow } from "@pattern/record"
 import { Register } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
 import { Show, type VoidProps } from "solid-js"
@@ -7,40 +7,40 @@ import { Show, type VoidProps } from "solid-js"
 export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
     return (
         <Register as="dl" aria-label="Project metadata" class="mb-12">
-            <ProjectMetadataRow label="Role">
+            <RecordRow label="Role">
                 <dd class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">{props.project.role}</dd>
-            </ProjectMetadataRow>
-            <ProjectMetadataRow label="Stack">
+            </RecordRow>
+            <RecordRow label="Stack">
                 <dd class="font-mono text-sm text-stone-600 tabular-nums dark:text-stone-400">
                     {props.project.stack.join(" · ")}
                 </dd>
-            </ProjectMetadataRow>
-            <ProjectMetadataRow label="Status">
+            </RecordRow>
+            <RecordRow label="Status">
                 <dd class="font-mono text-sm text-stone-600 tabular-nums dark:text-stone-400">
                     <span class="tracking-widest uppercase">{props.project.status}</span>
                     {props.project.year !== undefined ? ` · ${props.project.year}` : ""}
                 </dd>
-            </ProjectMetadataRow>
+            </RecordRow>
             <Show when={props.project.liveUrl}>
                 {(liveUrl) => (
-                    <ProjectMetadataRow label="Live">
+                    <RecordRow label="Live">
                         <dd>
                             <Anchor href={liveUrl()} variant="channel" target={{ kind: "external" }}>
                                 {liveUrl().replace(/^https?:\/\//, "")}
                             </Anchor>
                         </dd>
-                    </ProjectMetadataRow>
+                    </RecordRow>
                 )}
             </Show>
             <Show when={props.project.repoUrl}>
                 {(repoUrl) => (
-                    <ProjectMetadataRow label="Repo">
+                    <RecordRow label="Repo">
                         <dd>
                             <Anchor href={repoUrl()} variant="muted" target={{ kind: "external" }}>
                                 {repoUrl().replace(/^https?:\/\//, "")}
                             </Anchor>
                         </dd>
-                    </ProjectMetadataRow>
+                    </RecordRow>
                 )}
             </Show>
         </Register>
