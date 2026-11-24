@@ -2,18 +2,6 @@ import { createDebouncedInput } from "@pattern/create-debounced-input"
 import { createRoot, createSignal, flush } from "solid-js"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vite-plus/test"
 
-vi.mock("@solid-primitives/scheduled", () => ({
-    debounce: (callback: (value: string) => void, wait: number) => {
-        let timeoutId: ReturnType<typeof setTimeout> | undefined
-        const clear = () => clearTimeout(timeoutId)
-        const debounced = (value: string) => {
-            clear()
-            timeoutId = setTimeout(() => callback(value), wait)
-        }
-        return Object.assign(debounced, { clear })
-    },
-}))
-
 const WAIT = 300
 
 const mount = (commit = vi.fn<(value: string) => void>(), source: () => string = () => "") =>
