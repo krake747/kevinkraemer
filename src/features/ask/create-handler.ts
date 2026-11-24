@@ -5,7 +5,7 @@ import { problemResponse } from "@core/site/problem"
 import { Panic } from "better-result"
 
 const ASK_METHODS = ["GET", "POST", "OPTIONS"]
-const ALLOW_METHODS = ALLOW_METHODS
+const ALLOW_METHODS = ASK_METHODS.join(", ")
 
 const corsHeaders = {
     "Access-Control-Allow-Origin": "*",
