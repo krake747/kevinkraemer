@@ -38,7 +38,7 @@ export function DevelopersResponses() {
                     {(row) => (
                         <DevelopersRow>
                             <DevelopersLead class="tabular-nums">
-                                {row.code} <span class="text-stone-500 dark:text-stone-400">· {row.title}</span>
+                                {row.code} <span class="text-stone-600 dark:text-stone-400">· {row.title}</span>
                             </DevelopersLead>{" "}
                             <DevelopersProse>{row.body}</DevelopersProse>
                         </DevelopersRow>
@@ -46,7 +46,7 @@ export function DevelopersResponses() {
                 </For>
                 <DevelopersRow>
                     <DevelopersLead>
-                        Files <span class="text-stone-500 dark:text-stone-400">: *.txt, *.xml</span>
+                        Files <span class="text-stone-600 dark:text-stone-400">: *.txt, *.xml</span>
                     </DevelopersLead>{" "}
                     <DevelopersProse>
                         Served untouched, or as a typed JSON FileDescriptor for application/json.

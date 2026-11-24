@@ -20,10 +20,10 @@ export function DevelopersResources() {
                                 {resource.path}
                             </Anchor>
                             <p class="max-w-prose text-sm/relaxed text-stone-600 dark:text-stone-400">
-                                <span class="font-mono text-xs text-stone-500 dark:text-stone-400">
+                                <span class="font-mono text-xs text-stone-600 dark:text-stone-400">
                                     {resource.type}
                                 </span>{" "}
-                                <span aria-hidden="true" class="mx-2 text-stone-400 dark:text-stone-500">
+                                <span aria-hidden="true" class="mx-2 text-stone-400 dark:text-stone-400">
                                     /
                                 </span>{" "}
                                 {resource.description}

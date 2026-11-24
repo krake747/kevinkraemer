@@ -8,7 +8,7 @@ export function DevelopersNumeral(props: VoidProps<ComponentProps<"span"> & { in
         <span
             {...rest}
             aria-hidden="true"
-            class={cx("font-mono text-xs text-stone-400 tabular-nums dark:text-stone-600", props.class)}
+            class={cx("font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400", props.class)}
         >
             {String(props.index + 1).padStart(2, "0")}
         </span>
