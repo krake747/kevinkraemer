@@ -43,7 +43,7 @@ component whose body never reads `props.children` but whose props lack `VoidProp
 
 Why repeating the feature in every file makes `log/log-card.tsx` read twice and puts the same word
 in the path and the identifier. Solve name every file in `src/features/{feature}/` after its part,
-not the feature: `log/card.tsx` exports `LogCard`, `developers/footer.tsx` exports
+not the feature: `log/entry-panel.tsx` exports `LogEntryPanel`, `developers/footer.tsx` exports
 `DevelopersFooter`, `command-palette/row-item.tsx` exports `CommandPaletteRowItem`. The file named
 exactly `{feature}.ts(x)` is the feature entry and exports the component of that name (`header.tsx`
 → `Header`, `footer.tsx` → `Footer`, `command-palette.tsx` → `CommandPalette`). Name a builder
@@ -141,9 +141,10 @@ Why a loading flag or a `{ failure }` union turns every reader into a branch. So
 body return the promise, put `Loading` around the first value and `isPending` on a refetch, and
 throw when the response is unusable so the nearest `Errored` renders the retry (`SearchFailed` in
 `src/features/search/interface.tsx`, `CommandPaletteFailed` in `command-palette/failed.tsx`). Keep a
-value only for an expected outcome the caller renders differently (`SearchOutcome` `"unavailable"`,
-`CopyOutcome`). Check via `grep -n "Errored\|isPending" src` — an async read with a hand-rolled
-loading boolean is the smell.
+value only for an expected outcome the caller renders differently (`SearchOutcome`, which is
+`idle | hits | empty | { kind: "failure"; failure: "unavailable" }` in
+`src/core/search/pagefind.ts`; `CopyOutcome`). Check via `grep -n "Errored\|isPending" src` — an
+async read with a hand-rolled loading boolean is the smell.
 
 ## Commit scope — attributable hunks, named behavior changes
 
