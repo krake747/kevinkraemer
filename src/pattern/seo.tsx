@@ -24,11 +24,7 @@ type SeoArticle = SeoBase & {
 
 type SeoProps = SeoPage | SeoArticle
 
-export type Crumb = { name: string; url: string } | { name: string }
-
-export function NoIndex() {
-    return <Meta name="robots" content="noindex, nofollow" />
-}
+type Crumb = { name: string; url: string } | { name: string }
 
 export function BreadcrumbSchema(props: VoidProps<{ items: Crumb[] }>) {
     return <Script type="application/ld+json">{JSON.stringify(toJsonLd(makeBreadcrumbListSchema(props.items)))}</Script>

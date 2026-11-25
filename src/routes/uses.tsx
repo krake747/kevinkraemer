@@ -2,7 +2,7 @@ import { sortByOrder } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
 import { mapToNonEmpty } from "@core/non-empty"
 import { UsesSection } from "@features/uses/section"
-import { DocumentPage, PageHeader, PageHeaderTitle } from "@pattern/page"
+import { DocumentPage, PageHeaderTitle } from "@pattern/page"
 import { Seo } from "@pattern/seo"
 import { TerminalCommandHeader } from "@pattern/terminal"
 import { defineFileRoute } from "@solidjs/router/fs"
@@ -24,10 +24,10 @@ export const route = defineFileRoute("/uses", { info: { sections: SECTION_LINKS 
 export default function UsesRoute() {
     return (
         <DocumentPage>
-            <PageHeader class="animate-rise">
+            <header class="animate-rise">
                 <TerminalCommandHeader command="cat uses.md" class="mb-4" />
                 <PageHeaderTitle>The setup.</PageHeaderTitle>
-            </PageHeader>
+            </header>
             <Seo
                 title="Uses: the tools I run"
                 description="The setup: the tools I run, and why. Editor, terminal, OS, languages, models, hardware, and what I'm exploring."

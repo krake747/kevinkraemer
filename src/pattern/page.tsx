@@ -11,15 +11,6 @@ export function PageColumn(props: ParentProps<{ class?: string }>) {
     )
 }
 
-export function PageHeader(props: ComponentProps<"header">) {
-    const rest = omit(props, "class", "children")
-    return (
-        <header {...rest} class={cx(props.class)}>
-            {props.children}
-        </header>
-    )
-}
-
 export function PageHeaderTitle(props: ComponentProps<"h1">) {
     const rest = omit(props, "class", "children")
     return (
@@ -29,15 +20,6 @@ export function PageHeaderTitle(props: ComponentProps<"h1">) {
         >
             {props.children}
         </h1>
-    )
-}
-
-export function PageHeaderMeta(props: ComponentProps<"div">) {
-    const rest = omit(props, "class", "children")
-    return (
-        <div {...rest} class={cx("mt-4", props.class)}>
-            {props.children}
-        </div>
     )
 }
 
