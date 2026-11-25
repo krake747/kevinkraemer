@@ -20,11 +20,12 @@ const recordRow = cva({
 type RecordRowProps = ParentProps<
     {
         class?: string
+        render?: never
     } & VariantProps<typeof recordRow>
 >
 
 export function RecordRow(props: RecordRowProps) {
-    const rest = omit(props, "class", "children", "width")
+    const rest = omit(props, "class", "children", "width", "render")
     return (
         <StackRow {...rest} class={cx(recordRow({ width: props.width, class: props.class }))}>
             {props.children}
