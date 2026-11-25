@@ -1,12 +1,9 @@
 import { createScrollReveal } from "@pattern/create-scroll-reveal"
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { omit } from "solid-js"
 
-type TerminalSectionProps = ComponentProps<"section"> & {
-    command: string
-}
+type TerminalSectionProps = ComponentProps<"section">
 
 export function TerminalSection(props: TerminalSectionProps) {
     const commandId = (): string | undefined => {
@@ -15,7 +12,7 @@ export function TerminalSection(props: TerminalSectionProps) {
         }
         return undefined
     }
-    const rest = omit(props, "command", "class", "children")
+    const rest = omit(props, "class", "children")
     const reveal = createScrollReveal()
     return (
         <section
@@ -27,10 +24,7 @@ export function TerminalSection(props: TerminalSectionProps) {
                 props.class,
             )}
         >
-            <div class="mx-auto max-w-6xl">
-                <TerminalCommandHeader id={commandId()} command={props.command} class="reveal-item mb-8" />
-                {props.children}
-            </div>
+            <div class="mx-auto max-w-6xl">{props.children}</div>
         </section>
     )
 }

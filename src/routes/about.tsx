@@ -3,11 +3,17 @@ import { AboutElsewhere } from "@features/about/elsewhere"
 import { AboutOutside } from "@features/about/outside"
 import { AboutWork } from "@features/about/work"
 import { DocumentPage } from "@pattern/document-page"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export default function AboutRoute() {
     return (
-        <DocumentPage command="cat story.md" title="Hi, I'm Kevin.">
+        <DocumentPage>
+            <PageHeader class="animate-rise">
+                <TerminalCommandHeader command="cat story.md" class="mb-4" />
+                <PageHeaderTitle>Hi, I'm Kevin.</PageHeaderTitle>
+            </PageHeader>
             <Seo
                 title="About"
                 description="Full-stack developer in Luxembourg. I came to software from financial risk, where the small tools I wrote were the part I looked forward to."

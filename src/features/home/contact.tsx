@@ -1,10 +1,16 @@
 import { site } from "@core/site/site-meta"
 import { TerminalSection } from "@pattern/terminal-section"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import type { VoidProps } from "solid-js"
 
 export function HomeContact(props: VoidProps<{ id: string }>) {
     return (
-        <TerminalSection id={props.id} command={'echo "Get in touch"'}>
+        <TerminalSection id={props.id}>
+            <TerminalCommandHeader
+                id={`${props.id}-command`}
+                command={'echo "Get in touch"'}
+                class="reveal-item mb-8"
+            />
             <div class="flex max-w-prose flex-col gap-6">
                 <p class="reveal-item text-base/[1.8] text-stone-600 dark:text-stone-400">
                     Got something you want to build, a role to fill, or feel like talking shop? Write me. I reply to

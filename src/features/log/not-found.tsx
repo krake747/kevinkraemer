@@ -1,7 +1,18 @@
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { ReturnToRegister } from "@pattern/register"
 import { ResourceNotFound } from "@pattern/resource-not-found"
 import { httpStatus } from "@solidjs/web"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export function LogNotFound() {
     httpStatus(404)
-    return <ResourceNotFound title="Log not found" backHref="/logs" backLabel="Back to all logs" />
+    return (
+        <ResourceNotFound>
+            <PageHeader>
+                <TerminalCommandHeader command="cat missing.txt" class="mb-4" />
+                <PageHeaderTitle>Log not found</PageHeaderTitle>
+            </PageHeader>
+            <ReturnToRegister href="/logs" label="Back to all logs" class="mt-6" />
+        </ResourceNotFound>
+    )
 }

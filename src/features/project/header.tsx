@@ -1,7 +1,13 @@
 import type { Project } from "@core/content/model"
-import { PageHeader } from "@pattern/page-header"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import type { VoidProps } from "solid-js"
 
 export function ProjectHeader(props: VoidProps<{ project: Project }>) {
-    return <PageHeader command={`cat ${props.project.id}.md`} title={props.project.name} class="mb-10" />
+    return (
+        <PageHeader class="mb-10">
+            <TerminalCommandHeader command={`cat ${props.project.id}.md`} class="mb-4" />
+            <PageHeaderTitle>{props.project.name}</PageHeaderTitle>
+        </PageHeader>
+    )
 }

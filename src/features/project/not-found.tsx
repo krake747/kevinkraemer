@@ -1,7 +1,18 @@
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { ReturnToRegister } from "@pattern/register"
 import { ResourceNotFound } from "@pattern/resource-not-found"
 import { httpStatus } from "@solidjs/web"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export function ProjectNotFound() {
     httpStatus(404)
-    return <ResourceNotFound title="Case file not found" backHref="/projects" backLabel="Back to all case files" />
+    return (
+        <ResourceNotFound>
+            <PageHeader>
+                <TerminalCommandHeader command="cat missing.txt" class="mb-4" />
+                <PageHeaderTitle>Case file not found</PageHeaderTitle>
+            </PageHeader>
+            <ReturnToRegister href="/projects" label="Back to all case files" class="mt-6" />
+        </ResourceNotFound>
+    )
 }

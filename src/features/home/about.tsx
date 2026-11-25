@@ -3,6 +3,7 @@ import { siteContent } from "@core/content/site-content"
 import { DocumentSectionBody } from "@pattern/document-section"
 import { TerminalSection } from "@pattern/terminal-section"
 import { SectionHeading } from "@ui/section-heading"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { For, type VoidProps } from "solid-js"
 
 type Column = {
@@ -32,7 +33,8 @@ const ABOUT_COLUMNS: Column[] = [
 
 export function HomeAbout(props: VoidProps<{ id: string }>) {
     return (
-        <TerminalSection id={props.id} command="cat story.md">
+        <TerminalSection id={props.id}>
+            <TerminalCommandHeader id={`${props.id}-command`} command="cat story.md" class="reveal-item mb-8" />
             <div class="grid gap-12 lg:grid-cols-12">
                 <For each={ABOUT_COLUMNS}>
                     {(column) => (

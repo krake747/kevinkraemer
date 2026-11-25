@@ -6,11 +6,17 @@ import { DevelopersResources } from "@features/developers/resources"
 import { DevelopersResponses } from "@features/developers/responses"
 import { DevelopersStability } from "@features/developers/stability"
 import { DocumentPage } from "@pattern/document-page"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export default function DevelopersRoute() {
     return (
-        <DocumentPage command="cat developers.md" title="Developer documentation">
+        <DocumentPage>
+            <PageHeader class="animate-rise">
+                <TerminalCommandHeader command="cat developers.md" class="mb-4" />
+                <PageHeaderTitle>Developer documentation</PageHeaderTitle>
+            </PageHeader>
             <Seo
                 title="Developers"
                 description="Machine-readable endpoints, OpenAPI specification, markdown content negotiation, and retrieval quickstart for agents and tooling on kevinkraemer.com."

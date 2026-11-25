@@ -3,8 +3,10 @@ import { siteContent } from "@core/content/site-content"
 import { mapToNonEmpty } from "@core/non-empty"
 import { UsesSection } from "@features/uses/section"
 import { DocumentPage } from "@pattern/document-page"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
 import { defineFileRoute } from "@solidjs/router/fs"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { For } from "solid-js"
 
 const SORTED_SECTIONS = sortByOrder(siteContent.uses)
@@ -22,7 +24,11 @@ export const route = defineFileRoute("/uses", { info: { sections: SECTION_LINKS 
 
 export default function UsesRoute() {
     return (
-        <DocumentPage command="cat uses.md" title="The setup.">
+        <DocumentPage>
+            <PageHeader class="animate-rise">
+                <TerminalCommandHeader command="cat uses.md" class="mb-4" />
+                <PageHeaderTitle>The setup.</PageHeaderTitle>
+            </PageHeader>
             <Seo
                 title="Uses: the tools I run"
                 description="The setup: the tools I run, and why. Editor, terminal, OS, languages, models, hardware, and what I'm exploring."

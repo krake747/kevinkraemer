@@ -1,5 +1,11 @@
-import { PageHeader } from "@pattern/page-header"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export function LogHeader() {
-    return <PageHeader command="cd ~/logs" title="Logs" class="mb-12" />
+    return (
+        <PageHeader class="mb-12">
+            <TerminalCommandHeader command="cd ~/logs" class="mb-4" />
+            <PageHeaderTitle>Logs</PageHeaderTitle>
+        </PageHeader>
+    )
 }
