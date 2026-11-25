@@ -5,6 +5,7 @@ import { componentPropsOmit } from "./rules/component-props-omit.js"
 import { cvaClassProp } from "./rules/cva-class-prop.js"
 import { featureNames } from "./rules/feature-names.js"
 import { noClassStringConst } from "./rules/no-class-string-const.js"
+import { noContentElementProps } from "./rules/no-content-element-props.js"
 import { noDescribeFunctionTitle } from "./rules/no-describe-function-title.js"
 import { noProseComments } from "./rules/no-prose-comments.js"
 import { noRawColor } from "./rules/no-raw-color.js"
@@ -20,6 +21,7 @@ export default definePlugin({
     rules: {
         "alias-imports": aliasImports,
         "component-props-omit": componentPropsOmit,
+        "no-content-element-props": noContentElementProps,
         "cva-class-prop": cvaClassProp,
         "feature-names": featureNames,
         "no-class-string-const": noClassStringConst,

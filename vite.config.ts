@@ -71,6 +71,7 @@ export default defineConfig({
             "kk/feature-names": "error",
             "kk/no-class-string-const": "error",
             "kk/component-props-omit": "error",
+            "kk/no-content-element-props": "error",
             "kk/no-styles-import": "error",
             "kk/alias-imports": "error",
             "kk/no-transition-all": "error",
