@@ -1,11 +1,9 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { renderElement, type RenderProps } from "@ui/render"
+import { renderElement, type WithRender } from "@ui/render"
 import { merge, omit } from "solid-js"
 
-type StackProps = ComponentProps<"div"> & {
-    render?: (props: RenderProps) => JSX.Element
-}
+type StackProps = ComponentProps<"div"> & WithRender
 
 export function Stack(props: StackProps): JSX.Element {
     const rest = omit(props, "class", "children", "render")
@@ -41,12 +39,7 @@ export const stackRow = cva({
     },
 })
 
-export function StackRow(
-    props: ComponentProps<"div"> &
-        VariantProps<typeof stackRow> & {
-            render?: (props: RenderProps) => JSX.Element
-        },
-): JSX.Element {
+export function StackRow(props: ComponentProps<"div"> & VariantProps<typeof stackRow> & WithRender): JSX.Element {
     const rest = omit(props, "size", "interactive", "class", "children", "render")
     const merged = merge(rest, {
         get class() {

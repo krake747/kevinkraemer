@@ -1,6 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { renderElement, type RenderProps } from "@ui/render"
+import { renderElement, type WithRender } from "@ui/render"
 import { merge, omit } from "solid-js"
 
 export function DocumentSection(props: ComponentProps<"section">) {
@@ -12,9 +12,7 @@ export function DocumentSection(props: ComponentProps<"section">) {
     )
 }
 
-type DocumentSectionBodyProps = ComponentProps<"div"> & {
-    render?: (props: RenderProps) => JSX.Element
-}
+type DocumentSectionBodyProps = ComponentProps<"div"> & WithRender
 
 export function DocumentSectionBody(props: DocumentSectionBodyProps): JSX.Element {
     const rest = omit(props, "class", "children", "render")
