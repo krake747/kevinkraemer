@@ -1,6 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { Show, merge, omit } from "solid-js"
+import { Show, createMemo, merge, omit } from "solid-js"
 
 const badge = cva({
     base: "inline-flex items-center border font-mono transition-colors",
@@ -66,13 +66,14 @@ type BadgeProps = BadgeVariants &
 export function Badge(props: BadgeProps): JSX.Element {
     const rest = omit(props, "tone", "size", "interactive", "class", "children", "render", "target")
     const target = (): BadgeTarget => props.target ?? { kind: "internal" }
+    const attrs = createMemo(() => badgeTargetAttrs(target()))
     const isExternal = (): boolean => target().kind === "external"
     const merged = merge(rest, {
         get target() {
-            return badgeTargetAttrs(target()).target
+            return attrs().target
         },
         get rel() {
-            return badgeTargetAttrs(target()).rel
+            return attrs().rel
         },
         get class() {
             return cx(badge({ tone: props.tone, size: props.size, interactive: props.interactive, class: props.class }))
