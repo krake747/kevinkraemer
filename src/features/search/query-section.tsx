@@ -1,6 +1,5 @@
 import { SearchInterface } from "@features/search/interface"
-import { DocumentSection } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
+import { DocumentSection, SectionHeading } from "@pattern/section"
 
 export function SearchQuerySection() {
     return (

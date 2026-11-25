@@ -33,8 +33,8 @@ Allowed, in this order of preference:
 
 1. **A `src/ui` or `src/pattern` component with a variant prop.** First choice, always. `Anchor`,
    `Button`, `Badge`, `Chip`, `Input`, `InlineCode`, `Kbd`, `DecorMark` live in `src/ui`; `Stack`,
-   `StackRow`, `TerminalCommandHeader`, `SectionHeading`, `PanelLabel` live in `src/pattern`. The
-   variant union is the source of truth for what exists.
+   `StackRow`, `TerminalCommandHeader`, `SectionHeading`, `PanelLabel` live in `src/pattern`
+   (`terminal.tsx`, `section.tsx`). The variant union is the source of truth for what exists.
 2. **Tailwind scale classes** — `stone-*` for grounds, borders, and text; `emerald-*` for signal;
    `amber-*` for warning. Exact values and mix percentages: `src/app.css` and the `src/ui` variants.
 3. **`@theme` tokens** — `--ease-out-quart` and the other easing curves, `--graph-accent`,

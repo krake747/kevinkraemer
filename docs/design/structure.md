@@ -1,7 +1,7 @@
 # Structure — commands, headings, page open
 
-Source of truth: `terminal-command-header.tsx`, `section-heading.tsx`, `panel-label.tsx`,
-`src/pattern/document-section.tsx`, `src/pattern/document-page.tsx`, and the shipped pages.
+Source of truth: `src/pattern/terminal.tsx`, `src/pattern/section.tsx`, `src/pattern/page.tsx`, and
+the shipped pages.
 
 How a page and a section announce themselves. The terminal is the medium, so the opening is
 structural (chrome, error, or exit) before it is decorative.
@@ -52,11 +52,11 @@ the section label.
 
 Every page opens one of three ways, and the first is enforced by code:
 
-| Page kind                                              | Open with                                                                                     |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
-| `DocumentPage` route (`src/pattern/document-page.tsx`) | The route composes a `PageHeader` as a child: `TerminalCommandHeader`, then `PageHeaderTitle` |
-| Index route (not `DocumentPage`)                       | `TerminalCommandHeader`, then `PageHeaderTitle`                                               |
-| Entry route (`/logs/[slug]`)                           | `TerminalCommandHeader`, then `PageHeaderTitle`, with optional `PageHeaderMeta`               |
+| Page kind                                     | Open with                                                                                     |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `DocumentPage` route (`src/pattern/page.tsx`) | The route composes a `PageHeader` as a child: `TerminalCommandHeader`, then `PageHeaderTitle` |
+| Index route (not `DocumentPage`)              | `TerminalCommandHeader`, then `PageHeaderTitle`                                               |
+| Entry route (`/logs/[slug]`)                  | `TerminalCommandHeader`, then `PageHeaderTitle`, with optional `PageHeaderMeta`               |
 
 Why the route owns it: `DocumentPage` is the column and the measure, not the header. The caller
 writes the command and the title as children, the same way it already composes `DocumentSection`.

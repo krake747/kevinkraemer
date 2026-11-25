@@ -1,7 +1,6 @@
 import { catalogEntries } from "@core/site/catalog"
 import { CV_PDF_PATH, origin } from "@core/site/urls"
-import { DocumentSection } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
+import { DocumentSection, SectionHeading } from "@pattern/section"
 import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { For } from "solid-js"

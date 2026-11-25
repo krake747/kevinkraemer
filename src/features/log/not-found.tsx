@@ -1,5 +1,4 @@
-import { PageColumn } from "@pattern/page-column"
-import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { PageColumn, PageHeader, PageHeaderTitle } from "@pattern/page"
 import { ReturnToRegister } from "@pattern/register"
 import { TerminalCommandHeader } from "@pattern/terminal"
 import { httpStatus } from "@solidjs/web"

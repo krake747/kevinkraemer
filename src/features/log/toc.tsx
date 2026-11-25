@@ -1,6 +1,6 @@
 import type { LogTocEntry } from "@core/content/model"
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
-import { PanelLabel } from "@pattern/panel-label"
+import { PanelLabel } from "@pattern/section"
 import { cva } from "@ui/cva.config"
 import { For, Show, createSignal, onSettled, type VoidProps } from "solid-js"
 

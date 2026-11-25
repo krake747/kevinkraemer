@@ -1,6 +1,15 @@
+import { Seo } from "@pattern/seo"
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { omit } from "solid-js"
+import { omit, type ParentProps } from "solid-js"
+
+export function PageColumn(props: ParentProps<{ class?: string }>) {
+    return (
+        <div class={cx("flex-1 px-4 pt-page-top pb-24 sm:px-6 md:px-12 lg:px-24", props.class)}>
+            <div class="mx-auto max-w-6xl">{props.children}</div>
+        </div>
+    )
+}
 
 export function PageHeader(props: ComponentProps<"header">) {
     const rest = omit(props, "class", "children")
@@ -29,5 +38,26 @@ export function PageHeaderMeta(props: ComponentProps<"div">) {
         <div {...rest} class={cx("mt-4", props.class)}>
             {props.children}
         </div>
+    )
+}
+
+export function DocumentPage(props: ParentProps) {
+    return (
+        <PageColumn>
+            <div class="mx-auto flex max-w-4xl flex-col gap-8 kk-cascade">{props.children}</div>
+        </PageColumn>
+    )
+}
+
+export function DetailPage(
+    props: ParentProps<{
+        seo: ComponentProps<typeof Seo>
+    }>,
+) {
+    return (
+        <PageColumn>
+            <Seo {...props.seo} />
+            {props.children}
+        </PageColumn>
     )
 }

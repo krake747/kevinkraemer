@@ -4,7 +4,7 @@ import { CvHeader } from "@features/cv/header"
 import { CvProjects } from "@features/cv/projects"
 import { CvSkills } from "@features/cv/skills"
 import { CvSummary } from "@features/cv/summary"
-import { PageColumn } from "@pattern/page-column"
+import { PageColumn } from "@pattern/page"
 import { Seo } from "@pattern/seo"
 import { defineFileRoute } from "@solidjs/router/fs"
 

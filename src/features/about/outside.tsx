@@ -1,6 +1,4 @@
-import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
-
+import { DocumentSection, DocumentSectionBody, SectionHeading } from "@pattern/section"
 export function AboutOutside() {
     return (
         <DocumentSection aria-labelledby="about-outside-heading">

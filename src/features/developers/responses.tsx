@@ -1,8 +1,7 @@
 import { DevelopersLead } from "@features/developers/lead"
 import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
-import { DocumentSection } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
+import { DocumentSection, SectionHeading } from "@pattern/section"
 import { Stack } from "@pattern/stack"
 import { For } from "solid-js"
 

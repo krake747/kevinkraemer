@@ -3,7 +3,7 @@ import { canonicalFor } from "@core/site/urls"
 import { LogFilter } from "@features/log/filter"
 import { LogHeader } from "@features/log/header"
 import { LogNoScript } from "@features/log/no-script"
-import { PageColumn } from "@pattern/page-column"
+import { PageColumn } from "@pattern/page"
 import { BreadcrumbSchema, Seo } from "@pattern/seo"
 
 export default function LogsRoute() {

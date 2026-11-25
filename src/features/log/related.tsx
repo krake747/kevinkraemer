@@ -1,7 +1,7 @@
 import type { LogEntry } from "@core/content/model"
 import { formatDateShort } from "@core/time/date"
 import { RegisterRow, RegisterRowMeta, RegisterRowTitle } from "@pattern/register"
-import { SectionHeading } from "@pattern/section-heading"
+import { SectionHeading } from "@pattern/section"
 import { Stack } from "@pattern/stack"
 import { For, Show, type VoidProps } from "solid-js"
 

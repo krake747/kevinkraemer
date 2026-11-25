@@ -1,6 +1,4 @@
-import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
-
+import { DocumentSection, DocumentSectionBody, SectionHeading } from "@pattern/section"
 export function ContactGuide() {
     return (
         <DocumentSection aria-labelledby="contact-write-heading">

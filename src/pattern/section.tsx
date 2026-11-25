@@ -1,5 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
+import { Hash } from "@ui/icon"
 import { renderElement, type WithRender } from "@ui/render"
 import { merge, omit } from "solid-js"
 
@@ -30,4 +31,32 @@ export function DocumentSectionBody(props: ComponentProps<"div"> & WithRender): 
         },
     })
     return renderElement({ defaultTag: "div", render: () => props.render, props: () => merged })
+}
+
+export function SectionHeading(props: ComponentProps<"h2">) {
+    const rest = omit(props, "class", "children")
+    return (
+        <h2
+            {...rest}
+            class={cx("mb-4 flex items-center gap-2 font-mono text-xs text-stone-600 dark:text-stone-300", props.class)}
+        >
+            <Hash class="size-3 text-emerald-800 dark:text-emerald-400" />
+            <span>{props.children}</span>
+        </h2>
+    )
+}
+
+export function PanelLabel(props: ComponentProps<"div">) {
+    const rest = omit(props, "class", "children")
+    return (
+        <div
+            {...rest}
+            class={cx(
+                "mb-3 flex items-center gap-1.5 font-mono text-xs tracking-widest text-stone-600 uppercase dark:text-stone-400",
+                props.class,
+            )}
+        >
+            {props.children}
+        </div>
+    )
 }

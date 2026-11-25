@@ -1,7 +1,6 @@
 import { SearchNoScript } from "@features/search/no-script"
 import { SearchQuerySection } from "@features/search/query-section"
-import { DocumentPage } from "@pattern/document-page"
-import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { DocumentPage, PageHeader, PageHeaderTitle } from "@pattern/page"
 import { NoIndex, Seo } from "@pattern/seo"
 import { TerminalCommandHeader } from "@pattern/terminal"
 

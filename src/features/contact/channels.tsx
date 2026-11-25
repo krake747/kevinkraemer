@@ -1,6 +1,5 @@
 import { site } from "@core/site/site-meta"
-import { DocumentSection } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
+import { DocumentSection, SectionHeading } from "@pattern/section"
 import { cva } from "@ui/cva.config"
 import { ArrowUpRight } from "@ui/icon"
 import { For, Show } from "solid-js"

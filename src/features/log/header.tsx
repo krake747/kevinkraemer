@@ -1,4 +1,4 @@
-import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { PageHeader, PageHeaderTitle } from "@pattern/page"
 import { TerminalCommandHeader } from "@pattern/terminal"
 
 export function LogHeader() {

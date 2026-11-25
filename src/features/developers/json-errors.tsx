@@ -1,8 +1,7 @@
 import { origin } from "@core/site/urls"
 import { DevelopersProse } from "@features/developers/prose"
 import { CodeBlock } from "@pattern/code-block"
-import { DocumentSection } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
+import { DocumentSection, SectionHeading } from "@pattern/section"
 import { InlineCode } from "@ui/inline-code"
 
 const JSON_ERROR_EXAMPLE = `curl -H "Accept: application/json" \

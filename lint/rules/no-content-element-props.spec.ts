@@ -24,7 +24,7 @@ tester.run("kk/no-content-element-props", noContentElementProps, {
         },
         {
             name: "parent props with a return type stay allowed",
-            filename: "src/pattern/page-column.tsx",
+            filename: "src/pattern/page.tsx",
             code: `import type { JSX } from "@solidjs/web"\nimport type { ParentProps } from "solid-js"\nexport function PageColumn(props: ParentProps<{ class?: string }>): JSX.Element {\nreturn <div />\n}`,
         },
         {

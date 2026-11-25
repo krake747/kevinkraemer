@@ -1,7 +1,6 @@
 import { siteContent } from "@core/content/site-content"
 import { ProjectList } from "@features/project/list"
-import { DocumentPage } from "@pattern/document-page"
-import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { DocumentPage, PageHeader, PageHeaderTitle } from "@pattern/page"
 import { Seo } from "@pattern/seo"
 import { TerminalCommandHeader } from "@pattern/terminal"
 

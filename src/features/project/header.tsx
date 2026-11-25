@@ -1,5 +1,5 @@
 import type { Project } from "@core/content/model"
-import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
+import { PageHeader, PageHeaderTitle } from "@pattern/page"
 import { TerminalCommandHeader } from "@pattern/terminal"
 import type { VoidProps } from "solid-js"
 

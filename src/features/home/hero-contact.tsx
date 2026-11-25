@@ -1,5 +1,5 @@
 import { site } from "@core/site/site-meta"
-import { SectionHeading } from "@pattern/section-heading"
+import { SectionHeading } from "@pattern/section"
 import { Anchor } from "@ui/anchor"
 import { For } from "solid-js"
 

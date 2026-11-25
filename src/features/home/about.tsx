@@ -1,7 +1,6 @@
 import { sortByOrder, type AboutEntry } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
-import { DocumentSectionBody } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
+import { DocumentSectionBody, SectionHeading } from "@pattern/section"
 import { TerminalCommandHeader, TerminalSection } from "@pattern/terminal"
 import { For, type VoidProps } from "solid-js"
 

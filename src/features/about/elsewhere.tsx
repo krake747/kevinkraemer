@@ -1,5 +1,4 @@
-import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
-import { SectionHeading } from "@pattern/section-heading"
+import { DocumentSection, DocumentSectionBody, SectionHeading } from "@pattern/section"
 import { Anchor } from "@ui/anchor"
 
 export function AboutElsewhere() {
