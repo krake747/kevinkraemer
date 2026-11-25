@@ -75,6 +75,6 @@ a variant, never a call-site class. _Avoid_: key-value row, metadata row, field
 The industry shape (Primer: title, description, actions); the `command` slot is this site's terminal
 twist. _Avoid_: page hero, title block
 
-**DocumentSection**: A labeled section: `section` plus `SectionHeading` plus `DocumentSectionBody`
-as the measure-column body. `DocumentSectionBody` takes `as`: `"div"` (default) or `"p"` for a
+**DocumentSection**: A labeled section: the caller composes `SectionHeading` and the body as
+children of `DocumentSection`. `DocumentSectionBody` takes `as`: `"div"` (default) or `"p"` for a
 single paragraph. _Avoid_: section wrapper, content block

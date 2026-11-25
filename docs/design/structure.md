@@ -84,19 +84,20 @@ landing rows.
 
 ## Prose block anatomy
 
-A prose section is a `DocumentSection` with a `DocumentSectionBody`:
+A prose section is a `DocumentSection` with a `SectionHeading` and a `DocumentSectionBody`:
 
 ```tsx
-<DocumentSection id="story-heading" title="story">
+<DocumentSection aria-labelledby="story-heading">
+  <SectionHeading id="story-heading">story</SectionHeading>
   <DocumentSectionBody>{/* paragraphs */}</DocumentSectionBody>
 </DocumentSection>
 ```
 
-- `DocumentSection` is a `<section>` with the reveal animation. It takes `id` and `title`, renders
-  `SectionHeading` inside, and passes `aria-labelledby` with the heading `id` — it is a native
-  attribute and flows through to the section.
-- `SectionHeading` takes the same value as its own `id`. The string appears twice on purpose — that
-  is what splitting the anchor from the label costs, and duplicating it is correct.
+- `DocumentSection` is a `<section>` with the reveal animation. The caller passes `aria-labelledby`
+  pointing at the heading `id` — it is a native attribute and flows through to the section.
+- `SectionHeading` takes the heading `id` as its own `id`. The string appears twice on purpose — on
+  the heading and as `aria-labelledby` on the section — that is what splitting the anchor from the
+  label costs, and duplicating it is correct.
 - `DocumentSectionBody` is the measure column (`max-w-prose`), stone-600 body. It is the only place
   the prose measure is declared. It takes `as`: `"div"` (default) for several paragraphs, with
   `flex-col gap-4`, or `"p"` for a single-paragraph body, without the flex layout so inline links
@@ -107,10 +108,11 @@ A prose section is a `DocumentSection` with a `DocumentSectionBody`:
   `lg:col-span-7 lg:pl-12`. The narrow left column is the design, not a measure bug; the right
   column lands on the prose measure, the left runs shorter.
 
-Correct — `DocumentSection` owns the heading id and `aria-labelledby`:
+Correct — the caller composes the heading and the body, with the heading id twice on purpose:
 
 ```tsx
-<DocumentSection id="philosophy-heading" title="philosophy">
+<DocumentSection aria-labelledby="philosophy-heading">
+  <SectionHeading id="philosophy-heading">philosophy</SectionHeading>
   <DocumentSectionBody as="p">I build in small vertical slices.</DocumentSectionBody>
 </DocumentSection>
 ```
