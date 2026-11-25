@@ -1,12 +1,12 @@
 import type { Project } from "@core/content/model"
 import { RecordRow, RecordRowLabel } from "@pattern/record"
-import { Register } from "@pattern/register"
+import { Stack } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { Show, type VoidProps } from "solid-js"
 
 export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
     return (
-        <Register render={(renderProps) => <dl {...renderProps} />} aria-label="Project metadata" class="mb-12">
+        <Stack render={(renderProps) => <dl {...renderProps} />} aria-label="Project metadata" class="mb-12">
             <RecordRow>
                 <RecordRowLabel>Role</RecordRowLabel>
                 <dd class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">{props.project.role}</dd>
@@ -48,6 +48,6 @@ export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
                     </RecordRow>
                 )}
             </Show>
-        </Register>
+        </Stack>
     )
 }

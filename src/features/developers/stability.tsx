@@ -3,8 +3,8 @@ import { DevelopersLead } from "@features/developers/lead"
 import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
 import { DocumentSection } from "@pattern/document-section"
-import { Register } from "@pattern/register"
 import { SectionHeading } from "@pattern/section-heading"
+import { Stack } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { InlineCode } from "@ui/inline-code"
 
@@ -12,7 +12,7 @@ export function DevelopersStability() {
     return (
         <DocumentSection aria-labelledby="stability-heading">
             <SectionHeading id="stability-heading">stability</SectionHeading>
-            <Register render={(renderProps) => <ul {...renderProps} />}>
+            <Stack render={(renderProps) => <ul {...renderProps} />}>
                 <DevelopersRow>
                     <DevelopersLead>Versioning</DevelopersLead>{" "}
                     <DevelopersProse>
@@ -53,7 +53,7 @@ export function DevelopersStability() {
                         over polling pages.
                     </DevelopersProse>
                 </DevelopersRow>
-            </Register>
+            </Stack>
         </DocumentSection>
     )
 }

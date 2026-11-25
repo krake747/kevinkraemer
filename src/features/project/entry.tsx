@@ -1,7 +1,7 @@
 import type { Project } from "@core/content/model"
 import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
-import { Register, ReturnToRegister } from "@pattern/register"
+import { ReturnToRegister } from "@pattern/register"
 import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { For, Show, type ParentProps, type VoidProps } from "solid-js"
@@ -63,7 +63,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
             </Show>
             <Show when={props.project.changelog.length > 0}>
                 <ProjectSection id="changelog" title="Changelog">
-                    <Register render={(renderProps) => <ul {...renderProps} />} class="mt-4">
+                    <Stack render={(renderProps) => <ul {...renderProps} />} class="mt-4">
                         <For each={props.project.changelog}>
                             {(item) => (
                                 <StackRow
@@ -94,7 +94,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                                 </StackRow>
                             )}
                         </For>
-                    </Register>
+                    </Stack>
                 </ProjectSection>
             </Show>
             <p class="mt-10">

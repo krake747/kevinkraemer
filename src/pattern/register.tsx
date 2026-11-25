@@ -1,18 +1,10 @@
-import { Stack, StackRow } from "@pattern/stack"
+import { StackRow } from "@pattern/stack"
 import type { ComponentProps, JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
 import type { RenderProps } from "@ui/render"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
-
-type RegisterProps = ComponentProps<"div"> & {
-    render?: (props: RenderProps) => JSX.Element
-}
-
-export function Register(props: RegisterProps) {
-    return <Stack {...props} />
-}
 
 type RegisterRowProps = ParentProps<{
     href: string

@@ -1,7 +1,6 @@
 import type { UsesGroup as UsesGroupData, UsesItem } from "@core/content/model"
 import { PanelLabel } from "@pattern/panel-label"
-import { Register } from "@pattern/register"
-import { StackRow } from "@pattern/stack"
+import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
@@ -37,9 +36,9 @@ function UsesRow(props: VoidProps<{ item: UsesItem }>) {
 
 function UsesRows(props: VoidProps<{ items: UsesItem[] }>) {
     return (
-        <Register render={(renderProps) => <ul {...renderProps} />}>
+        <Stack render={(renderProps) => <ul {...renderProps} />}>
             <For each={props.items}>{(item) => <UsesRow item={item} />}</For>
-        </Register>
+        </Stack>
     )
 }
 

@@ -2,8 +2,8 @@ import { DevelopersLead } from "@features/developers/lead"
 import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
 import { DocumentSection } from "@pattern/document-section"
-import { Register } from "@pattern/register"
 import { SectionHeading } from "@pattern/section-heading"
+import { Stack } from "@pattern/stack"
 import { For } from "solid-js"
 
 type ResponseRow = {
@@ -34,7 +34,7 @@ export function DevelopersResponses() {
     return (
         <DocumentSection aria-labelledby="responses-heading">
             <SectionHeading id="responses-heading">responses</SectionHeading>
-            <Register render={(renderProps) => <ul {...renderProps} />}>
+            <Stack render={(renderProps) => <ul {...renderProps} />}>
                 <For each={RESPONSE_ROWS}>
                     {(row) => (
                         <DevelopersRow>
@@ -53,7 +53,7 @@ export function DevelopersResponses() {
                         Served untouched, or as a typed JSON FileDescriptor for application/json.
                     </DevelopersProse>
                 </DevelopersRow>
-            </Register>
+            </Stack>
         </DocumentSection>
     )
 }
