@@ -33,8 +33,8 @@ Allowed, in this order of preference:
 
 1. **A `src/ui` component with a variant prop.** First choice, always. `Anchor`, `Button`, `Badge`,
    `Chip`, `Stack`, `StackRow`, `Input`, `InlineCode`, `Kbd`, `TerminalCommandHeader`,
-   `SectionHeading`, `PanelLabel`, `ProseSection`, `DecorMark`. The variant union is the source of
-   truth for what exists.
+   `SectionHeading`, `PanelLabel`, `DecorMark`. The variant union is the source of truth for what
+   exists.
 2. **Tailwind scale classes** — `stone-*` for grounds, borders, and text; `emerald-*` for signal;
    `amber-*` for warning. Exact values and mix percentages: `src/app.css` and the `src/ui` variants.
 3. **`@theme` tokens** — `--ease-out-quart` and the other easing curves, `--graph-accent`,
@@ -51,9 +51,9 @@ Never:
 
 ## Module shape
 
-- A module is a component file holding the root plus its parts under one prefix (`ProseSection`,
-  `ProseSectionBody`), with CVA entries inline via the shared `cva.config.ts`. A fixed class string
-  stays inline; `cva({ base })` with no variants is an extra indirection for one string.
+- A module is a component file holding the root plus its parts under one prefix (`DocumentSection`,
+  `DocumentSectionBody`), with CVA entries inline via the shared `cva.config.ts`. A fixed class
+  string stays inline; `cva({ base })` with no variants is an extra indirection for one string.
 - Keep a part in the root's file while it only makes sense with the root; promote it to its own
   module once it is used alone (`SectionHeading`, `StackRow`).
 - Every leaf imports the same variants module, so HTML written by a component and HTML written

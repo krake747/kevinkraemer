@@ -1,7 +1,7 @@
 # Structure — commands, headings, page open
 
 Source of truth: `terminal-command-header.tsx`, `section-heading.tsx`, `panel-label.tsx`,
-`prose-section.tsx`, `src/pattern/document-page.tsx`, and the shipped pages.
+`src/pattern/document-section.tsx`, `src/pattern/document-page.tsx`, and the shipped pages.
 
 How a page and a section announce themselves. The terminal is the medium, so the opening is
 structural (chrome, error, or exit) before it is decorative.
@@ -63,7 +63,7 @@ physically cannot ship without exactly one command. Hand-rolling that header re-
 size, the lede treatment, and the `kk-cascade` column, and will drift from all seven `DocumentPage`
 pages.
 
-**A short intro above a list is the `lede` slot, not a `ProseSection`.** The three-part prose
+**A short intro above a list is the `lede` slot, not a `DocumentSection`.** The DocumentSection
 anatomy is for sections with a heading that earns its place; a two-sentence intro on a page that
 then lists rows has no heading to give. Put it in `lede` and stop. Do not invent a heading so the
 measure is allowed, and do not hand-roll a measure column on a page intro: `DocumentPage` already
@@ -84,36 +84,35 @@ landing rows.
 
 ## Prose block anatomy
 
-A prose section composes three parts, in this order:
+A prose section is a `DocumentSection` with a `DocumentSectionBody`:
 
 ```tsx
-<ProseSection aria-labelledby="story">
-  <SectionHeading id="story">story</SectionHeading>
-  <ProseSectionBody>{/* paragraphs */}</ProseSectionBody>
-</ProseSection>
+<DocumentSection id="story-heading" title="story">
+  <DocumentSectionBody>{/* paragraphs */}</DocumentSectionBody>
+</DocumentSection>
 ```
 
-- `ProseSection` is a `<section>` with the reveal animation. Pass `aria-labelledby` with the heading
-  `id` — it is a native attribute and flows through to the section.
+- `DocumentSection` is a `<section>` with the reveal animation. It takes `id` and `title`, renders
+  `SectionHeading` inside, and passes `aria-labelledby` with the heading `id` — it is a native
+  attribute and flows through to the section.
 - `SectionHeading` takes the same value as its own `id`. The string appears twice on purpose — that
   is what splitting the anchor from the label costs, and duplicating it is correct.
-- `ProseSectionBody` is the measure column (`max-w-prose`), `flex-col gap-4`, stone-600 body. It is
-  the only place the prose measure is declared.
+- `DocumentSectionBody` is the measure column (`max-w-prose`), stone-600 body. It is the only place
+  the prose measure is declared. It takes `as`: `"div"` (default) for several paragraphs, with
+  `flex-col gap-4`, or `"p"` for a single-paragraph body, without the flex layout so inline links
+  stay in the paragraph flow.
 - `CvSection` takes `id` and wraps the section. `CvSectionHeading` takes the heading as children and
   uses a `$` prompt instead of the `#` hash.
 - The landing story is the one prose grid that is deliberately unequal: `lg:col-span-5` +
   `lg:col-span-7 lg:pl-12`. The narrow left column is the design, not a measure bug; the right
   column lands on the prose measure, the left runs shorter.
 
-Correct — three parts, heading id on the heading and `aria-labelledby` on the section:
+Correct — `DocumentSection` owns the heading id and `aria-labelledby`:
 
 ```tsx
-<ProseSection aria-labelledby="philosophy">
-  <SectionHeading id="philosophy">philosophy</SectionHeading>
-  <ProseSectionBody>
-    <p>I build in small vertical slices.</p>
-  </ProseSectionBody>
-</ProseSection>
+<DocumentSection id="philosophy-heading" title="philosophy">
+  <DocumentSectionBody as="p">I build in small vertical slices.</DocumentSectionBody>
+</DocumentSection>
 ```
 
 Incorrect — a hand-rolled heading and a raw measure:
