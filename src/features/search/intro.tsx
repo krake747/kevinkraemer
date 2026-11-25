@@ -1,9 +1,9 @@
 import { SearchPanelNote } from "@features/search/panel"
 import { SearchShortcuts } from "@features/search/shortcuts"
+import { StackRow } from "@pattern/stack-row"
 import { formatShortcut } from "@ui-sdk/core"
 import { InlineCode } from "@ui/inline-code"
 import { Kbd } from "@ui/kbd"
-import { StackRow } from "@ui/stack-row"
 import { createSignal, onSettled } from "solid-js"
 
 export function SearchIntro() {

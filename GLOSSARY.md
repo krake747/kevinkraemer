@@ -48,7 +48,7 @@ shared link, with zero prior context about Kevin or the site. _Avoid_: audience,
 specimens, borrowing Bloomberg Terminal density without nostalgia. Defined in full in
 `docs/design/system.md`. _Avoid_: card, dashboard
 
-**StackRow**: The `src/ui` framed-row primitive.
+**StackRow**: The `src/pattern` framed-row primitive.
 
 **PageColumn**: The page column: flex-1 growth, viewport padding, centered `max-w-6xl`. Index,
 register, and custom pages compose on it directly; document and detail pages get it through their

@@ -1,8 +1,8 @@
 import type { UsesGroup as UsesGroupData, UsesItem } from "@core/content/model"
+import { PanelLabel } from "@pattern/panel-label"
 import { Register } from "@pattern/register"
+import { StackRow } from "@pattern/stack-row"
 import { Anchor } from "@ui/anchor"
-import { PanelLabel } from "@ui/panel-label"
-import { StackRow } from "@ui/stack-row"
 import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
 function toolName(item: UsesItem, variant: "channel" | "muted") {

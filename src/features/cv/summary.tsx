@@ -1,5 +1,5 @@
 import { CvFact, CvFacts } from "@features/cv/facts"
-import { StackRow } from "@ui/stack-row"
+import { StackRow } from "@pattern/stack-row"
 import { For } from "solid-js"
 
 const CV_FACTS = [

@@ -5,7 +5,7 @@ import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
 import { Seo } from "@pattern/seo"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 
 export default function ContactRoute() {
     return (

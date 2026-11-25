@@ -1,6 +1,6 @@
 import { site } from "@core/site/site-meta"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 import { TerminalSection } from "@pattern/terminal-section"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import type { VoidProps } from "solid-js"
 
 export function HomeContact(props: VoidProps<{ id: string }>) {

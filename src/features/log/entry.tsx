@@ -9,9 +9,9 @@ import { LogSubscribe } from "@features/log/subscribe"
 import { LogToc, LogTocDisclosure } from "@features/log/toc"
 import { PageHeader, PageHeaderMeta, PageHeaderTitle } from "@pattern/page-header"
 import { ReturnToRegister } from "@pattern/register"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 import { Badge } from "@ui/badge"
 import { Clock, FileText } from "@ui/icon"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { For, Show, type VoidProps } from "solid-js"
 
 export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {

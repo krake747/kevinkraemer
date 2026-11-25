@@ -1,7 +1,7 @@
 import { site } from "@core/site/site-meta"
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
 import { Anchor } from "@ui/anchor"
-import { SectionHeading } from "@ui/section-heading"
 
 export function PrivacyQuestions() {
     return (

@@ -1,5 +1,5 @@
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
-import { SectionHeading } from "@ui/section-heading"
+import { SectionHeading } from "@pattern/section-heading"
 
 export function PrivacyLocalStorage() {
     return (

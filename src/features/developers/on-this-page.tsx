@@ -1,6 +1,6 @@
 import { DevelopersNumeral } from "@features/developers/numeral"
+import { StackRow } from "@pattern/stack-row"
 import { Anchor } from "@ui/anchor"
-import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
 
 const ON_THIS_PAGE = [

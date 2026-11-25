@@ -3,7 +3,7 @@ import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
 import { DocumentSection } from "@pattern/document-section"
 import { Register } from "@pattern/register"
-import { SectionHeading } from "@ui/section-heading"
+import { SectionHeading } from "@pattern/section-heading"
 import { For } from "solid-js"
 
 type ResponseRow = {

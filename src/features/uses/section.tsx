@@ -1,7 +1,7 @@
 import type { UsesSection as UsesSectionData } from "@core/content/model"
 import { UsesGroup } from "@features/uses/group"
 import { DocumentSection } from "@pattern/document-section"
-import { SectionHeading } from "@ui/section-heading"
+import { SectionHeading } from "@pattern/section-heading"
 import { For, type VoidProps } from "solid-js"
 
 export function UsesSection(props: VoidProps<{ section: UsesSectionData }>) {

@@ -1,6 +1,6 @@
+import { StackRow } from "@pattern/stack-row"
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { StackRow } from "@ui/stack-row"
 import { omit, type ParentProps } from "solid-js"
 
 export function DisclosureRow(props: ParentProps<{ class?: string }>) {

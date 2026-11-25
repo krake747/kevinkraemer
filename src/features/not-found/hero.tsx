@@ -1,4 +1,4 @@
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 
 export function NotFoundHero() {
     return (

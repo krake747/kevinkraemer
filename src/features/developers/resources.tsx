@@ -2,9 +2,9 @@ import { catalogEntries } from "@core/site/catalog"
 import { CV_PDF_PATH, origin } from "@core/site/urls"
 import { DocumentSection } from "@pattern/document-section"
 import { Register } from "@pattern/register"
+import { SectionHeading } from "@pattern/section-heading"
+import { StackRow } from "@pattern/stack-row"
 import { Anchor } from "@ui/anchor"
-import { SectionHeading } from "@ui/section-heading"
-import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
 
 const RESOURCE_ENTRIES = catalogEntries.filter((entry) => entry.type !== "text/html" && entry.path !== CV_PDF_PATH)

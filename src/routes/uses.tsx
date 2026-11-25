@@ -5,8 +5,8 @@ import { UsesSection } from "@features/uses/section"
 import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 import { defineFileRoute } from "@solidjs/router/fs"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
 import { For } from "solid-js"
 
 const SORTED_SECTIONS = sortByOrder(siteContent.uses)

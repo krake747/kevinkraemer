@@ -1,9 +1,9 @@
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
+import { Stack } from "@pattern/stack"
+import { StackRow } from "@pattern/stack-row"
 import { Anchor } from "@ui/anchor"
 import { ArrowUpRight } from "@ui/icon"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
 import { For, Show, type VoidProps } from "solid-js"
 
 type SideProject = {

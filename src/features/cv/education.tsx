@@ -4,8 +4,8 @@ import { CvRole } from "@features/cv/role"
 import { CvRowHeader } from "@features/cv/row-header"
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
+import { Stack } from "@pattern/stack"
+import { StackRow } from "@pattern/stack-row"
 import { For, Show, type VoidProps } from "solid-js"
 
 type Education = {

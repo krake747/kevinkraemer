@@ -1,8 +1,8 @@
 import { HomeHeroContact } from "@features/home/hero-contact"
 import { HomeHeroName } from "@features/home/hero-name"
 import { PageColumn } from "@pattern/page-column"
-import { SectionHeading } from "@ui/section-heading"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
+import { SectionHeading } from "@pattern/section-heading"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 
 export function HomeHero() {
     return (

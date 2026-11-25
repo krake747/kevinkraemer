@@ -1,5 +1,5 @@
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 
 export function LogHeader() {
     return (

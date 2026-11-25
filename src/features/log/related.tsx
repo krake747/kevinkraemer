@@ -1,7 +1,7 @@
 import type { LogEntry } from "@core/content/model"
 import { formatDateShort } from "@core/time/date"
 import { Register, RegisterRow, RegisterRowMeta, RegisterRowTitle } from "@pattern/register"
-import { SectionHeading } from "@ui/section-heading"
+import { SectionHeading } from "@pattern/section-heading"
 import { For, Show, type VoidProps } from "solid-js"
 
 export function LogRelated(props: VoidProps<{ entries: LogEntry[] }>) {

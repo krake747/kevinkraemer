@@ -4,9 +4,9 @@ import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
 import { DocumentSection } from "@pattern/document-section"
 import { Register } from "@pattern/register"
+import { SectionHeading } from "@pattern/section-heading"
 import { Anchor } from "@ui/anchor"
 import { InlineCode } from "@ui/inline-code"
-import { SectionHeading } from "@ui/section-heading"
 
 export function DevelopersStability() {
     return (

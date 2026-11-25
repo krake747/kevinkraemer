@@ -1,6 +1,6 @@
 import { useLogFilter } from "@features/log/filter-provider"
 import { LogSubscribe } from "@features/log/subscribe"
-import { PanelLabel } from "@ui/panel-label"
+import { PanelLabel } from "@pattern/panel-label"
 import { Show, type ParentProps } from "solid-js"
 
 export function LogFilterRail(props: ParentProps) {

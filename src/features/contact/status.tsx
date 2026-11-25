@@ -1,5 +1,5 @@
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
-import { PanelLabel } from "@ui/panel-label"
+import { PanelLabel } from "@pattern/panel-label"
 import { For } from "solid-js"
 
 const STATUS_ROWS = [

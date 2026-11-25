@@ -1,9 +1,9 @@
+import { Stack } from "@pattern/stack"
+import { StackRow } from "@pattern/stack-row"
 import type { ComponentProps, JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
 
 type RegisterProps = ComponentProps<"div"> & {

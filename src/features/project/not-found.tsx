@@ -1,8 +1,8 @@
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { ReturnToRegister } from "@pattern/register"
 import { ResourceNotFound } from "@pattern/resource-not-found"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 import { httpStatus } from "@solidjs/web"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 export function ProjectNotFound() {
     httpStatus(404)

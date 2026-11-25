@@ -1,7 +1,7 @@
 # Design System: Kevin Kraemer · Portfolio
 
-Source of truth: `src/app.css`, `src/features/log/prose.css`, `src/ui/**`, `src/app.tsx`,
-`src/document.tsx`.
+Source of truth: `src/app.css`, `src/features/log/prose.css`, `src/ui/**`, `src/pattern/**`,
+`src/app.tsx`, `src/document.tsx`.
 
 The site is a **Specimen Panel**: interface elements treated as deliberate typographic specimens,
 borrowing Bloomberg Terminal density without nostalgia. Warm charcoal grounds, dark primary, light
@@ -31,10 +31,10 @@ time. Two classes for the same job is how the site stops reading as one system.
 
 Allowed, in this order of preference:
 
-1. **A `src/ui` component with a variant prop.** First choice, always. `Anchor`, `Button`, `Badge`,
-   `Chip`, `Stack`, `StackRow`, `Input`, `InlineCode`, `Kbd`, `TerminalCommandHeader`,
-   `SectionHeading`, `PanelLabel`, `DecorMark`. The variant union is the source of truth for what
-   exists.
+1. **A `src/ui` or `src/pattern` component with a variant prop.** First choice, always. `Anchor`,
+   `Button`, `Badge`, `Chip`, `Input`, `InlineCode`, `Kbd`, `DecorMark` live in `src/ui`; `Stack`,
+   `StackRow`, `TerminalCommandHeader`, `SectionHeading`, `PanelLabel` live in `src/pattern`. The
+   variant union is the source of truth for what exists.
 2. **Tailwind scale classes** — `stone-*` for grounds, borders, and text; `emerald-*` for signal;
    `amber-*` for warning. Exact values and mix percentages: `src/app.css` and the `src/ui` variants.
 3. **`@theme` tokens** — `--ease-out-quart` and the other easing curves, `--graph-accent`,
@@ -58,8 +58,8 @@ Never:
   module once it is used alone (`SectionHeading`, `StackRow`).
 - Every leaf imports the same variants module, so HTML written by a component and HTML written
   inline share one class vocabulary: `class={cx("hit-area-x-1", anchor({ variant: "nav" }))}`.
-- Imports run `features → ui` only. A variants module that a single feature consumes belongs to that
-  feature, not to `src/ui`.
+- Imports run `features → pattern, ui` only. A variants module that a single feature consumes
+  belongs to that feature, not to `src/ui`.
 - Variants are CVA, not caller overrides: a padding, tone, size, or alignment difference is a
   variant prop, never `class="py-12"` at the call site.
 - A component that owns a cva variant function takes the caller class into that function, still

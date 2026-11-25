@@ -4,8 +4,8 @@ import { DevelopersNumeral } from "@features/developers/numeral"
 import { DevelopersProse } from "@features/developers/prose"
 import { CodeBlock } from "@pattern/code-block"
 import { DocumentSection } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
 import { InlineCode } from "@ui/inline-code"
-import { SectionHeading } from "@ui/section-heading"
 import { For } from "solid-js"
 
 type QuickstartStep = {

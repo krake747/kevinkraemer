@@ -2,9 +2,9 @@ import type { Project } from "@core/content/model"
 import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
 import { Register, ReturnToRegister } from "@pattern/register"
+import { Stack } from "@pattern/stack"
+import { StackRow } from "@pattern/stack-row"
 import { Anchor } from "@ui/anchor"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
 import { For, Show, type ParentProps, type VoidProps } from "solid-js"
 
 function ProjectSection(props: ParentProps<{ id: string; title: string }>) {

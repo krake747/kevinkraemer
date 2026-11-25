@@ -1,8 +1,8 @@
 import { site } from "@core/site/site-meta"
 import { DocumentSection } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
 import { cva } from "@ui/cva.config"
 import { ArrowUpRight } from "@ui/icon"
-import { SectionHeading } from "@ui/section-heading"
 import { For, Show } from "solid-js"
 
 const contactCell = cva({

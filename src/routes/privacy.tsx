@@ -5,7 +5,7 @@ import { PrivacyQuestions } from "@features/privacy/questions"
 import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal-command-header"
 
 export default function PrivacyRoute() {
     return (

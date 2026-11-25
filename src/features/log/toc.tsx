@@ -1,7 +1,7 @@
 import type { LogTocEntry } from "@core/content/model"
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
+import { PanelLabel } from "@pattern/panel-label"
 import { cva } from "@ui/cva.config"
-import { PanelLabel } from "@ui/panel-label"
 import { For, Show, createSignal, onSettled, type VoidProps } from "solid-js"
 
 const tocLink = cva({
