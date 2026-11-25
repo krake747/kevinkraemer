@@ -1,4 +1,4 @@
-import { DisclosureRow } from "@pattern/disclosure-row"
+import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
 import { PanelLabel } from "@ui/panel-label"
 import { For, Show, type VoidProps } from "solid-js"
 
@@ -36,15 +36,14 @@ export function ContactStatus(props: VoidProps<{ as: "details" | "aside" }>) {
                 </div>
             }
         >
-            <DisclosureRow
-                summary={
-                    <>
-                        <span class="group-open:hidden">+ status</span>
-                        <span class="hidden group-open:inline">− status</span>
-                    </>
-                }
-            >
-                <ContactStatusRows />
+            <DisclosureRow>
+                <DisclosureRowSummary>
+                    <span class="group-open:hidden">+ status</span>
+                    <span class="hidden group-open:inline">− status</span>
+                </DisclosureRowSummary>
+                <DisclosureRowBody>
+                    <ContactStatusRows />
+                </DisclosureRowBody>
             </DisclosureRow>
         </Show>
     )

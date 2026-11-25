@@ -1,6 +1,7 @@
+import type { ComponentProps } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { StackRow } from "@ui/stack-row"
-import type { ParentProps } from "solid-js"
+import { omit, type ParentProps } from "solid-js"
 
 const recordRow = cva({
     base: "grid gap-1 sm:items-baseline sm:gap-4",
@@ -18,18 +19,27 @@ const recordRow = cva({
 
 type RecordRowProps = ParentProps<
     {
-        label: string
         class?: string
     } & VariantProps<typeof recordRow>
 >
 
 export function RecordRow(props: RecordRowProps) {
+    const rest = omit(props, "class", "children", "width")
     return (
-        <StackRow as="div" class={cx(recordRow({ width: props.width, class: props.class }))}>
-            <dt class="font-mono text-xs tracking-widest text-stone-600 uppercase dark:text-stone-400">
-                {props.label}
-            </dt>
+        <StackRow {...rest} as="div" class={cx(recordRow({ width: props.width, class: props.class }))}>
             {props.children}
         </StackRow>
+    )
+}
+
+export function RecordRowLabel(props: ComponentProps<"dt">) {
+    const rest = omit(props, "class", "children")
+    return (
+        <dt
+            {...rest}
+            class={cx("font-mono text-xs tracking-widest text-stone-600 uppercase dark:text-stone-400", props.class)}
+        >
+            {props.children}
+        </dt>
     )
 }

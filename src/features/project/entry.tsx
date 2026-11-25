@@ -92,7 +92,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                 </ProjectSection>
             </Show>
             <p class="mt-10">
-                <ReturnToRegister href="/projects" label="Back to all case files" />
+                <ReturnToRegister href="/projects">Back to all case files</ReturnToRegister>
             </p>
         </article>
     )

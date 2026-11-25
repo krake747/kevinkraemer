@@ -1,18 +1,17 @@
-import { EmptyRegister } from "@pattern/register"
+import { EmptyRegister, EmptyRegisterAction, EmptyRegisterNote, EmptyRegisterTitle } from "@pattern/register"
 import { Button } from "@ui/button"
 import type { VoidProps } from "solid-js"
 
 export function SearchFailed(props: VoidProps<{ message: string; onRetry: () => void }>) {
     return (
-        <EmptyRegister
-            size="relaxed"
-            title="Search failed."
-            note={props.message}
-            action={
+        <EmptyRegister size="relaxed">
+            <EmptyRegisterTitle>Search failed.</EmptyRegisterTitle>
+            <EmptyRegisterNote>{props.message}</EmptyRegisterNote>
+            <EmptyRegisterAction>
                 <Button intent="link" onClick={() => props.onRetry()}>
                     retry
                 </Button>
-            }
-        />
+            </EmptyRegisterAction>
+        </EmptyRegister>
     )
 }

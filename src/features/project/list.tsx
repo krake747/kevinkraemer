@@ -1,5 +1,5 @@
 import { sortByOrder, type Project } from "@core/content/model"
-import { EmptyRegister } from "@pattern/register"
+import { EmptyRegister, EmptyRegisterTitle } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
 import { For, Show, createMemo, type VoidProps } from "solid-js"
 
@@ -7,7 +7,14 @@ export function ProjectList(props: VoidProps<{ projects: Project[] }>) {
     const ordered = createMemo(() => sortByOrder(props.projects))
     return (
         <section aria-label="Case files" class="animate-fade-up">
-            <Show when={ordered().length > 0} fallback={<EmptyRegister title="No case files yet." size="spacious" />}>
+            <Show
+                when={ordered().length > 0}
+                fallback={
+                    <EmptyRegister size="spacious">
+                        <EmptyRegisterTitle>No case files yet.</EmptyRegisterTitle>
+                    </EmptyRegister>
+                }
+            >
                 <ul class="m-0 flex list-none flex-col p-0">
                     <For each={ordered()}>
                         {(project) => (

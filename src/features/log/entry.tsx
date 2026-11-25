@@ -60,7 +60,7 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
                     <LogRelated entries={props.detail.related} />
                     <LogPager older={props.detail.older} newer={props.detail.newer} />
                     <div class="mt-10 flex flex-wrap items-center justify-between gap-4">
-                        <ReturnToRegister href="/logs" label="Back to all logs" />
+                        <ReturnToRegister href="/logs">Back to all logs</ReturnToRegister>
                         <LogSubscribe />
                     </div>
                 </div>

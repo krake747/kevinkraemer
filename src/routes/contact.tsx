@@ -3,7 +3,7 @@ import { ContactGuide } from "@features/contact/guide"
 import { ContactStatus } from "@features/contact/status"
 import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
-import { RegisterWithRail } from "@pattern/register"
+import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
 import { Seo } from "@pattern/seo"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
@@ -21,9 +21,14 @@ export default function ContactRoute() {
             />
             <div class="flex flex-col gap-10">
                 <ContactChannels />
-                <RegisterWithRail spacing="loose" labelledby="contact-status-label" rail={<ContactStatus as="aside" />}>
-                    <ContactStatus as="details" />
-                    <ContactGuide />
+                <RegisterWithRail spacing="loose">
+                    <RegisterWithRailMain>
+                        <ContactStatus as="details" />
+                        <ContactGuide />
+                    </RegisterWithRailMain>
+                    <RegisterWithRailRail labelledby="contact-status-label">
+                        <ContactStatus as="aside" />
+                    </RegisterWithRailRail>
                 </RegisterWithRail>
             </div>
         </DocumentPage>

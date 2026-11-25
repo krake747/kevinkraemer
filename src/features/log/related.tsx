@@ -1,6 +1,6 @@
 import type { LogEntry } from "@core/content/model"
 import { formatDateShort } from "@core/time/date"
-import { Register, RegisterRow } from "@pattern/register"
+import { Register, RegisterRow, RegisterRowMeta, RegisterRowTitle } from "@pattern/register"
 import { SectionHeading } from "@ui/section-heading"
 import { For, type VoidProps } from "solid-js"
 
@@ -13,11 +13,12 @@ export function LogRelated(props: VoidProps<{ entries: LogEntry[] }>) {
                     <Register>
                         <For each={props.entries}>
                             {(item) => (
-                                <RegisterRow
-                                    href={`/logs/${item.id}`}
-                                    title={item.title}
-                                    meta={<span>{formatDateShort(item.date)}</span>}
-                                />
+                                <RegisterRow href={`/logs/${item.id}`}>
+                                    <RegisterRowTitle>{item.title}</RegisterRowTitle>
+                                    <RegisterRowMeta>
+                                        <span>{formatDateShort(item.date)}</span>
+                                    </RegisterRowMeta>
+                                </RegisterRow>
                             )}
                         </For>
                     </Register>

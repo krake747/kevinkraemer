@@ -1,23 +1,19 @@
 import { formatDateLong } from "@core/time/date"
 import type { LogSummary } from "@features/log/summaries"
-import { RegisterRow } from "@pattern/register"
+import { RegisterRow, RegisterRowDescription, RegisterRowMeta, RegisterRowTitle } from "@pattern/register"
 import type { VoidProps } from "solid-js"
 
 export function LogEntryPanel(props: VoidProps<{ entry: LogSummary }>) {
     return (
-        <RegisterRow
-            as="article"
-            titleAs="h2"
-            href={`/logs/${props.entry.id}`}
-            title={props.entry.title}
-            description={props.entry.description}
-            lines={2}
-            meta={
-                <>
-                    <span>{formatDateLong(props.entry.date)}</span>
-                    <span>{props.entry.readTime}</span>
-                </>
-            }
-        />
+        <RegisterRow as="article" href={`/logs/${props.entry.id}`}>
+            <RegisterRowTitle render={(title) => <h2 {...title}>{title.children}</h2>}>
+                {props.entry.title}
+            </RegisterRowTitle>
+            <RegisterRowDescription lines={2}>{props.entry.description}</RegisterRowDescription>
+            <RegisterRowMeta>
+                <span>{formatDateLong(props.entry.date)}</span>
+                <span>{props.entry.readTime}</span>
+            </RegisterRowMeta>
+        </RegisterRow>
     )
 }

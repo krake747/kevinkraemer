@@ -12,7 +12,9 @@ export function ProjectNotFound() {
                 <TerminalCommandHeader command="cat missing.txt" class="mb-4" />
                 <PageHeaderTitle>Case file not found</PageHeaderTitle>
             </PageHeader>
-            <ReturnToRegister href="/projects" label="Back to all case files" class="mt-6" />
+            <ReturnToRegister href="/projects" class="mt-6">
+                Back to all case files
+            </ReturnToRegister>
         </ResourceNotFound>
     )
 }

@@ -12,7 +12,9 @@ export function LogNotFound() {
                 <TerminalCommandHeader command="cat missing.txt" class="mb-4" />
                 <PageHeaderTitle>Log not found</PageHeaderTitle>
             </PageHeader>
-            <ReturnToRegister href="/logs" label="Back to all logs" class="mt-6" />
+            <ReturnToRegister href="/logs" class="mt-6">
+                Back to all logs
+            </ReturnToRegister>
         </ResourceNotFound>
     )
 }

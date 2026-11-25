@@ -17,7 +17,9 @@ export function NotFoundDiagnostics() {
                 </Anchor>
                 .
             </p>
-            <ReturnToRegister href="/" label="Return to home" class="mt-8 animate-fade-up" />
+            <ReturnToRegister href="/" class="mt-8 animate-fade-up">
+                Return to home
+            </ReturnToRegister>
         </>
     )
 }

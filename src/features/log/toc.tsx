@@ -1,5 +1,5 @@
 import type { LogTocEntry } from "@core/content/model"
-import { DisclosureRow } from "@pattern/disclosure-row"
+import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
 import { cva } from "@ui/cva.config"
 import { PanelLabel } from "@ui/panel-label"
 import { For, Show, createSignal, onSettled, type VoidProps } from "solid-js"
@@ -20,32 +20,30 @@ const tocLink = cva({
 export function LogTocDisclosure(props: VoidProps<{ entries: LogTocEntry[] }>) {
     return (
         <Show when={props.entries.length > 1}>
-            <DisclosureRow
-                class="mb-8"
-                summary={
-                    <>
-                        <span class="group-open:hidden">+ on this page</span>
-                        <span class="hidden group-open:inline">− on this page</span>
-                        <span class="text-stone-600 tabular-nums dark:text-stone-400"> · {props.entries.length}</span>
-                    </>
-                }
-            >
-                <nav aria-label="On this page">
-                    <ul class="flex flex-col gap-1">
-                        <For each={props.entries}>
-                            {(item) => (
-                                <li>
-                                    <a
-                                        href={`#${item.id}`}
-                                        class="block font-mono text-xs text-stone-600 dark:text-stone-400"
-                                    >
-                                        {item.text}
-                                    </a>
-                                </li>
-                            )}
-                        </For>
-                    </ul>
-                </nav>
+            <DisclosureRow class="mb-8">
+                <DisclosureRowSummary>
+                    <span class="group-open:hidden">+ on this page</span>
+                    <span class="hidden group-open:inline">− on this page</span>
+                    <span class="text-stone-600 tabular-nums dark:text-stone-400"> · {props.entries.length}</span>
+                </DisclosureRowSummary>
+                <DisclosureRowBody>
+                    <nav aria-label="On this page">
+                        <ul class="flex flex-col gap-1">
+                            <For each={props.entries}>
+                                {(item) => (
+                                    <li>
+                                        <a
+                                            href={`#${item.id}`}
+                                            class="block font-mono text-xs text-stone-600 dark:text-stone-400"
+                                        >
+                                            {item.text}
+                                        </a>
+                                    </li>
+                                )}
+                            </For>
+                        </ul>
+                    </nav>
+                </DisclosureRowBody>
             </DisclosureRow>
         </Show>
     )
