@@ -12,9 +12,7 @@ export function DocumentSection(props: ComponentProps<"section">) {
     )
 }
 
-type DocumentSectionBodyProps = ComponentProps<"div"> & WithRender
-
-export function DocumentSectionBody(props: DocumentSectionBodyProps): JSX.Element {
+export function DocumentSectionBody(props: ComponentProps<"div"> & WithRender): JSX.Element {
     const rest = omit(props, "class", "children", "render")
     const merged = merge(rest, {
         get class() {

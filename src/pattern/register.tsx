@@ -1,22 +1,14 @@
-import { StackRow } from "@pattern/stack"
-import type { ComponentProps, JSX } from "@solidjs/web"
+import { StackRow, type stackRow } from "@pattern/stack"
+import type { ComponentProps } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
 import { renderElement, type WithRender } from "@ui/render"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
 
-type RegisterRowProps = ParentProps<{ href: string; class?: string } & WithRender>
-
-export function RegisterRow(props: RegisterRowProps) {
-    const rest = omit(props, "class", "children", "href", "render")
+export function RegisterRow(props: ParentProps<{ href: string; class?: string } & WithRender>) {
     return (
-        <StackRow
-            {...rest}
-            render={props.render}
-            interactive
-            class={cx("flex items-center justify-between", props.class)}
-        >
+        <StackRow render={props.render} interactive class={cx("flex items-center justify-between", props.class)}>
             <a href={props.href} class="flex min-w-0 flex-1 items-center justify-between gap-4">
                 <span class="min-w-0 flex-1">{props.children}</span>
                 <span
@@ -30,11 +22,7 @@ export function RegisterRow(props: RegisterRowProps) {
     )
 }
 
-type RegisterRowTitleProps = ComponentProps<"span"> & {
-    render?: (props: { class?: string; children?: JSX.Element }) => JSX.Element
-}
-
-export function RegisterRowTitle(props: RegisterRowTitleProps) {
+export function RegisterRowTitle(props: ComponentProps<"span"> & WithRender) {
     const rest = omit(props, "class", "children", "render")
     const resolved = merge(rest, {
         get class() {
@@ -63,9 +51,7 @@ const registerRowDescription = cva({
     },
 })
 
-type RegisterRowDescriptionProps = ComponentProps<"span"> & VariantProps<typeof registerRowDescription>
-
-export function RegisterRowDescription(props: RegisterRowDescriptionProps) {
+export function RegisterRowDescription(props: ComponentProps<"span"> & VariantProps<typeof registerRowDescription>) {
     const rest = omit(props, "class", "children", "lines")
     return (
         <span {...rest} class={cx(registerRowDescription({ lines: props.lines, class: props.class }))}>
@@ -104,11 +90,7 @@ const railMain = cva({
 
 const RegisterWithRailSpacing = createContext<() => VariantProps<typeof railMain>["spacing"]>(() => undefined)
 
-type RegisterWithRailProps = ParentProps<
-    {
-        class?: string
-    } & VariantProps<typeof railMain>
->
+type RegisterWithRailProps = ComponentProps<"div"> & VariantProps<typeof railMain>
 
 export function RegisterWithRail(props: RegisterWithRailProps) {
     const rest = omit(props, "class", "children", "spacing")
@@ -124,32 +106,25 @@ export function RegisterWithRail(props: RegisterWithRailProps) {
 
 export function RegisterWithRailMain(props: ParentProps<{ class?: string }>) {
     const spacing = useContext(RegisterWithRailSpacing)
-    const rest = omit(props, "class", "children")
-    return (
-        <div {...rest} class={cx(railMain({ spacing: spacing(), class: props.class }))}>
-            {props.children}
-        </div>
-    )
+    return <div class={cx(railMain({ spacing: spacing(), class: props.class }))}>{props.children}</div>
 }
 
-export function RegisterWithRailRail(props: ParentProps<{ labelledby?: string; class?: string }>) {
-    const rest = omit(props, "class", "children", "labelledby")
+export function RegisterWithRailRail(props: ParentProps<{ labelledby: string; class?: string }>) {
     return (
-        <aside {...rest} class={cx("hidden lg:block", props.class)} aria-labelledby={props.labelledby}>
+        <aside class={cx("hidden lg:block", props.class)} aria-labelledby={props.labelledby}>
             <div class="sticky top-[calc(var(--header-h)+1rem)] flex flex-col gap-4">{props.children}</div>
         </aside>
     )
 }
 
 type EmptyRegisterProps = ParentProps<{
-    size?: "relaxed" | "spacious"
+    size?: Extract<VariantProps<typeof stackRow>["size"], "relaxed" | "spacious">
     class?: string
 }>
 
 export function EmptyRegister(props: EmptyRegisterProps) {
-    const rest = omit(props, "class", "children", "size")
     return (
-        <StackRow {...rest} size={props.size ?? "relaxed"} class={cx("text-center", props.class)}>
+        <StackRow size={props.size ?? "relaxed"} class={cx("text-center", props.class)}>
             {props.children}
         </StackRow>
     )
@@ -183,10 +158,8 @@ export function EmptyRegisterAction(props: ComponentProps<"div">) {
 }
 
 export function ReturnToRegister(props: ParentProps<{ href: string; class?: string }>) {
-    const rest = omit(props, "class", "children", "href")
     return (
         <Anchor
-            {...rest}
             href={props.href}
             variant="muted"
             class={cx("hit-area-y-2 inline-flex items-center gap-1.5", props.class)}

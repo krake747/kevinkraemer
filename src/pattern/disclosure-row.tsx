@@ -4,10 +4,8 @@ import { cx } from "@ui/cva.config"
 import { omit, type ParentProps } from "solid-js"
 
 export function DisclosureRow(props: ParentProps<{ class?: string }>) {
-    const rest = omit(props, "class", "children")
     return (
         <StackRow
-            {...rest}
             render={(renderProps) => <details {...renderProps} />}
             size="compact"
             class={cx("group accordion lg:hidden", props.class)}
@@ -33,10 +31,5 @@ export function DisclosureRowSummary(props: ComponentProps<"summary">) {
 }
 
 export function DisclosureRowBody(props: ParentProps<{ class?: string }>) {
-    const rest = omit(props, "class", "children")
-    return (
-        <div {...rest} class={cx("mt-3", props.class)}>
-            {props.children}
-        </div>
-    )
+    return <div class={cx("mt-3", props.class)}>{props.children}</div>
 }

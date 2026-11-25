@@ -22,11 +22,12 @@ type TerminalSectionProps = Omit<ComponentProps<"section">, "id"> & { id: string
 
 export function TerminalSection(props: TerminalSectionProps) {
     const commandId = (): string => `${props.id}-command`
-    const rest = omit(props, "class", "children")
+    const rest = omit(props, "class", "children", "id")
     const reveal = createScrollReveal()
     return (
         <section
             {...rest}
+            id={props.id}
             aria-labelledby={commandId()}
             ref={reveal}
             class={cx(
