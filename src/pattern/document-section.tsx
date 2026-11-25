@@ -1,7 +1,8 @@
-import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
+import { type ComponentProps, type JSX } from "@solidjs/web"
+import { createPolymorphic } from "@ui/create-polymorphic"
 import { cx } from "@ui/cva.config"
 import { SectionHeading } from "@ui/section-heading"
-import { isStatic, merge, omit, type ParentProps } from "solid-js"
+import { omit, type ParentProps } from "solid-js"
 
 type DocumentSectionProps = ParentProps<{
     id: string
@@ -30,9 +31,7 @@ type DocumentSectionBodyDivProps = ComponentProps<"div"> & { as?: "div" }
 type DocumentSectionBodyPProps = ComponentProps<"p"> & { as: "p" }
 
 export function DocumentSectionBody(_props: DocumentSectionBodyDivProps | DocumentSectionBodyPProps): JSX.Element {
-    const props = merge({ as: "div" } as const, _props)
-    const Tag = dynamic(() => props.as, { static: isStatic(_props, "as") })
-    const rest = omit(props, "as", "class", "children")
+    const { props, Tag, rest } = createPolymorphic(_props, "div")
     return (
         <Tag
             {...rest}

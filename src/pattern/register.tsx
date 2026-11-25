@@ -1,21 +1,20 @@
 import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
+import { createPolymorphic } from "@ui/create-polymorphic"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
-import { merge, omit, Show, isStatic, type ParentProps, type VoidProps } from "solid-js"
+import { isStatic, Show, type ParentProps, type VoidProps } from "solid-js"
 
 type RegisterDivProps = ComponentProps<"div"> & { as?: "div" }
 type RegisterUlProps = ComponentProps<"ul"> & { as: "ul" }
 type RegisterDlProps = ComponentProps<"dl"> & { as: "dl" }
 
-export function Register(props: RegisterDivProps | RegisterUlProps | RegisterDlProps) {
-    const merged = merge({ as: "div" } as const, props)
-    const rest = omit(merged, "as", "class", "children")
-    const Tag = dynamic(() => merged.as, { static: isStatic(props, "as") })
+export function Register(_props: RegisterDivProps | RegisterUlProps | RegisterDlProps) {
+    const { props, Tag, rest } = createPolymorphic(_props, "div")
     return (
-        <Tag {...rest} class={cx("m-0 flex list-none flex-col gap-2 p-0", merged.class)}>
-            {merged.children}
+        <Tag {...rest} class={cx("m-0 flex list-none flex-col gap-2 p-0", props.class)}>
+            {props.children}
         </Tag>
     )
 }
