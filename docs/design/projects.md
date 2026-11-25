@@ -52,12 +52,12 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Case page (`/projects/[slug]`)
 
-- `DetailPage` wrapping `ProjectArticle`, inside the layout that stretches to fill the viewport so
-  the footer stays at the bottom: reading column `max-w-prose` on the `article` itself.
+- `DetailPage` wrapping `ProjectEntry`, inside the layout that stretches to fill the viewport so the
+  footer stays at the bottom: reading column `max-w-prose` on the `article` itself.
 - One `TerminalCommandHeader` `cat {id}.md`, `PageHeaderTitle` at `text-2xl`, mono tagline, then
-  metadata as a `Stack` rendered as a `dl` of `ProjectMetadataRow`s (record rows, no row hover;
-  links inside keep their own hover): role, stack, status (and year), live, and repo when a public
-  URL exists. The tagline is not repeated as a What row.
+  metadata as a `Stack` rendered as a `dl` of `RecordRow`s (record rows, no row hover; links inside
+  keep their own hover): role, stack, status (and year), live, and repo when a public URL exists.
+  The tagline is not repeated as a What row.
 - Then sections with a real mid-level heading step (`h2`, Geist `text-xl` semibold), not only 12px
   mono `TerminalCommandHeader` or `SectionHeading`: problem and point of view; key decisions (each
   title plus reason in a record `StackRow`); evidence and changelog only when they have entries
