@@ -1,13 +1,13 @@
+import { PageColumn } from "@pattern/page-column"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { ReturnToRegister } from "@pattern/register"
-import { ResourceNotFound } from "@pattern/resource-not-found"
 import { TerminalCommandHeader } from "@pattern/terminal"
 import { httpStatus } from "@solidjs/web"
 
 export function ProjectNotFound() {
     httpStatus(404)
     return (
-        <ResourceNotFound>
+        <PageColumn>
             <PageHeader>
                 <TerminalCommandHeader command="cat missing.txt" class="mb-4" />
                 <PageHeaderTitle>Case file not found</PageHeaderTitle>
@@ -15,6 +15,6 @@ export function ProjectNotFound() {
             <ReturnToRegister href="/projects" class="mt-6">
                 Back to all case files
             </ReturnToRegister>
-        </ResourceNotFound>
+        </PageColumn>
     )
 }
