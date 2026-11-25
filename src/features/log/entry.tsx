@@ -12,7 +12,7 @@ import { ReturnToRegister } from "@pattern/register"
 import { Badge } from "@ui/badge"
 import { Clock, FileText } from "@ui/icon"
 import { TerminalCommandHeader } from "@ui/terminal-command-header"
-import { For, type VoidProps } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
 export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
     const entry = () => props.detail.entry
@@ -40,7 +40,7 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
                                     {formatWordCount(entry().body)} words
                                 </span>
                             </div>
-                            {entry().tags.length > 0 ? (
+                            <Show when={entry().tags.length > 0}>
                                 <div class="mt-3 flex flex-wrap gap-1.5">
                                     <For each={entry().tags}>
                                         {(tag) => (
@@ -62,7 +62,7 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
                                         )}
                                     </For>
                                 </div>
-                            ) : null}
+                            </Show>
                         </PageHeaderMeta>
                     </PageHeader>
                     <LogTocDisclosure entries={entry().toc} />

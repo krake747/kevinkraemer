@@ -71,20 +71,27 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                                     render={(renderProps) => <li {...renderProps} />}
                                     class="grid gap-1 sm:grid-cols-[minmax(0,16rem)_1fr] sm:items-baseline sm:gap-4"
                                 >
-                                    {item.href ? (
-                                        <Anchor href={item.href} variant="muted" target={{ kind: "external" }}>
-                                            {item.label}
-                                        </Anchor>
-                                    ) : (
-                                        <span class="font-mono text-sm text-stone-900 dark:text-stone-100">
-                                            {item.label}
-                                        </span>
-                                    )}
-                                    {item.note ? (
-                                        <span class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
-                                            {item.note}
-                                        </span>
-                                    ) : null}
+                                    <Show
+                                        when={item.href}
+                                        fallback={
+                                            <span class="font-mono text-sm text-stone-900 dark:text-stone-100">
+                                                {item.label}
+                                            </span>
+                                        }
+                                    >
+                                        {(href) => (
+                                            <Anchor href={href()} variant="muted" target={{ kind: "external" }}>
+                                                {item.label}
+                                            </Anchor>
+                                        )}
+                                    </Show>
+                                    <Show when={item.note}>
+                                        {(note) => (
+                                            <span class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
+                                                {note()}
+                                            </span>
+                                        )}
+                                    </Show>
                                 </StackRow>
                             )}
                         </For>

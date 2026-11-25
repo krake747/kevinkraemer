@@ -1,6 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { merge, omit } from "solid-js"
+import { Show, merge, omit } from "solid-js"
 
 const badge = cva({
     base: "inline-flex items-center border font-mono transition-colors",
@@ -81,7 +81,9 @@ export function Badge(props: BadgeProps): JSX.Element {
             return (
                 <>
                     {props.children}
-                    {isExternal() ? <span class="sr-only"> (opens in a new tab)</span> : null}
+                    <Show when={isExternal()}>
+                        <span class="sr-only"> (opens in a new tab)</span>
+                    </Show>
                 </>
             )
         },

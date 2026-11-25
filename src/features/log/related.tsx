@@ -2,28 +2,26 @@ import type { LogEntry } from "@core/content/model"
 import { formatDateShort } from "@core/time/date"
 import { Register, RegisterRow, RegisterRowMeta, RegisterRowTitle } from "@pattern/register"
 import { SectionHeading } from "@ui/section-heading"
-import { For, type VoidProps } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
 export function LogRelated(props: VoidProps<{ entries: LogEntry[] }>) {
     return (
-        <>
-            {props.entries.length > 0 ? (
-                <div class="mt-10">
-                    <SectionHeading id="log-related-heading">related</SectionHeading>
-                    <Register>
-                        <For each={props.entries}>
-                            {(item) => (
-                                <RegisterRow href={`/logs/${item.id}`}>
-                                    <RegisterRowTitle>{item.title}</RegisterRowTitle>
-                                    <RegisterRowMeta>
-                                        <span>{formatDateShort(item.date)}</span>
-                                    </RegisterRowMeta>
-                                </RegisterRow>
-                            )}
-                        </For>
-                    </Register>
-                </div>
-            ) : null}
-        </>
+        <Show when={props.entries.length > 0}>
+            <div class="mt-10">
+                <SectionHeading id="log-related-heading">related</SectionHeading>
+                <Register>
+                    <For each={props.entries}>
+                        {(item) => (
+                            <RegisterRow href={`/logs/${item.id}`}>
+                                <RegisterRowTitle>{item.title}</RegisterRowTitle>
+                                <RegisterRowMeta>
+                                    <span>{formatDateShort(item.date)}</span>
+                                </RegisterRowMeta>
+                            </RegisterRow>
+                        )}
+                    </For>
+                </Register>
+            </div>
+        </Show>
     )
 }
