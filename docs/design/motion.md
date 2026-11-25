@@ -83,7 +83,7 @@ A staggered reveal is a property of the **container**, not of each child:
   `HomeHeroName` sets a per-character delay, because character timing cannot come from a child
   index.
 - The hero lede, about block, and contact block use `animate-rise`, not `animate-fade-up`, as do the
-  `ProseShell` and CV headers. A fade starts at `opacity: 0`, and the browser does not count an
+  `DocumentPage` and CV headers. A fade starts at `opacity: 0`, and the browser does not count an
   invisible element as painted, so the entrance would push LCP to the end of the animation. Rise
   animates `transform` only: the text is painted on the first frame and still settles into place.
   Use `animate-rise` for any entrance that carries the page's largest text block, never a fade. The

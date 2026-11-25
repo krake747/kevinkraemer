@@ -2,16 +2,18 @@ import { PrivacyCollection } from "@features/privacy/collection"
 import { PrivacyFooter } from "@features/privacy/footer"
 import { PrivacyLocalStorage } from "@features/privacy/local-storage"
 import { PrivacyQuestions } from "@features/privacy/questions"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
+import { TerminalCommandHeader } from "@pattern/terminal"
 
 export default function PrivacyRoute() {
     return (
-        <ProseShell
-            command="cat privacy.txt"
-            title="Privacy"
-            lede="This site collects as little as a website reasonably can. Here is exactly what happens when you visit."
-        >
+        <DocumentPage>
+            <PageHeader class="animate-rise">
+                <TerminalCommandHeader command="cat privacy.txt" class="mb-4" />
+                <PageHeaderTitle>Privacy</PageHeaderTitle>
+            </PageHeader>
             <Seo
                 title="Privacy"
                 description="How kevinkraemer.com handles data: a static site with no analytics, no tracking, and no cookies; the only stored state is your theme preference in browser localStorage."
@@ -21,6 +23,6 @@ export default function PrivacyRoute() {
             <PrivacyLocalStorage />
             <PrivacyQuestions />
             <PrivacyFooter />
-        </ProseShell>
+        </DocumentPage>
     )
 }

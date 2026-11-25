@@ -1,21 +1,21 @@
 import { catalogEntries } from "@core/site/catalog"
 import { CV_PDF_PATH, origin } from "@core/site/urls"
+import { DocumentSection } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
+import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
-import { SectionHeading } from "@ui/section-heading"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
 
 const RESOURCE_ENTRIES = catalogEntries.filter((entry) => entry.type !== "text/html" && entry.path !== CV_PDF_PATH)
 
 export function DevelopersResources() {
     return (
-        <section aria-labelledby="resources-heading">
+        <DocumentSection aria-labelledby="resources-heading">
             <SectionHeading id="resources-heading">resources</SectionHeading>
-            <Stack as="ul">
+            <Stack render={(renderProps) => <ul {...renderProps} />}>
                 <For each={RESOURCE_ENTRIES}>
                     {(resource) => (
-                        <StackRow as="li" class="grid gap-1.5">
+                        <StackRow render={(renderProps) => <li {...renderProps} />} class="grid gap-1.5">
                             <Anchor href={resource.path} variant="channel" rel="external" class="hit-area-y-2">
                                 {resource.path}
                             </Anchor>
@@ -36,6 +36,6 @@ export function DevelopersResources() {
                 Canonical origin: <span class="text-stone-900 dark:text-stone-200">{origin}</span> All other origins
                 redirect here.
             </p>
-        </section>
+        </DocumentSection>
     )
 }

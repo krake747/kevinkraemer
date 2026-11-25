@@ -1,8 +1,7 @@
 import type { UsesGroup as UsesGroupData, UsesItem } from "@core/content/model"
+import { PanelLabel } from "@pattern/panel-label"
+import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
-import { PanelLabel } from "@ui/panel-label"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
 import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
 function toolName(item: UsesItem, variant: "channel" | "muted") {
@@ -24,7 +23,11 @@ function toolName(item: UsesItem, variant: "channel" | "muted") {
 
 function UsesRow(props: VoidProps<{ item: UsesItem }>) {
     return (
-        <StackRow as="li" size="compact" class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+        <StackRow
+            render={(renderProps) => <li {...renderProps} />}
+            size="compact"
+            class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4"
+        >
             <span class="sm:w-56 sm:shrink-0">{toolName(props.item, "muted")}</span>
             <span class="min-w-0 text-sm/relaxed text-stone-600 sm:flex-1 dark:text-stone-400">{props.item.note}</span>
         </StackRow>
@@ -33,7 +36,7 @@ function UsesRow(props: VoidProps<{ item: UsesItem }>) {
 
 function UsesRows(props: VoidProps<{ items: UsesItem[] }>) {
     return (
-        <Stack as="ul">
+        <Stack render={(renderProps) => <ul {...renderProps} />}>
             <For each={props.items}>{(item) => <UsesRow item={item} />}</For>
         </Stack>
     )

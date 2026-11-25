@@ -1,8 +1,8 @@
 import { site } from "@core/site/site-meta"
 import { CV_PDF_PATH } from "@core/site/urls"
+import { TerminalCommandHeader } from "@pattern/terminal"
 import { Anchor } from "@ui/anchor"
 import { Badge } from "@ui/badge"
-import { TerminalCommandHeader } from "@ui/terminal-command-header"
 
 const CV_NAME = "Kevin Kraemer"
 
@@ -22,12 +22,15 @@ export function CvHeader() {
                             {CV_NAME}
                         </h1>
                         <Badge
-                            as="a"
-                            href="https://www.simpleip.com"
-                            target={{ kind: "external" }}
                             tone="emerald"
                             interactive
                             class="w-fit"
+                            target={{ kind: "external" }}
+                            render={(renderProps) => (
+                                <a {...renderProps} href="https://www.simpleip.com">
+                                    {renderProps.children}
+                                </a>
+                            )}
                         >
                             Building @ Simple IP
                         </Badge>

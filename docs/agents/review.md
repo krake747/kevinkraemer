@@ -8,15 +8,17 @@ Source of truth: `tsconfig.json` paths, `src/features/**` and `src/pattern/**` f
 
 A diff is done when names and imports sit behind their `boundary`.
 
-## Pattern — mechanism, not domain
+## Pattern — generic behavior, glossary names
 
 Why a shared folder drifts into a second features tree: anything used by two slices looks homeless,
 but a component that hardcodes domain copy couples every consumer to that domain. Solve keep
-`src/pattern/**` to mechanism with no domain names — copy behavior (`create-copy-feedback.ts`),
-scroll behavior (`create-scroll-reveal.ts`), generic display (`code-block.tsx`); a component that
-names a route, a feed, or a site narrative (`/cv`, RSS, chain-vs-now) lives in the feature that owns
-it, even with two consumers. Check via `grep -rn 'href="/' src/pattern` — a hardcoded route is the
-smell.
+`src/pattern/**` free of hardcoded routes, feeds, and narrative copy — behavior
+(`create-copy-feedback.ts`), scroll (`create-scroll-reveal.ts`), generic display (`code-block.tsx`);
+structural components take their names from `GLOSSARY.md` (`Register`, `RecordRow`, `PageHeader`)
+and the caller fills them with children of those parts, not through content props or slots. A
+component that names a route, a feed, or a site narrative (`/cv`, RSS, chain-vs-now) lives in the
+feature that owns it, even with two consumers. Check via `grep -rn 'href="/' src/pattern` — a
+hardcoded route is the smell.
 
 ## Change shape — smallest deletion-first diff
 
@@ -63,6 +65,21 @@ parts there; the page root in features is the part itself (`SearchInterface` in
 page does not have. A part that two pages need moves down to `src/pattern` or `src/ui`
 (`architecture.md`) instead of losing its stem in place. Check via `pnpm lint` (`kk/feature-names`)
 — a component without its page stem is the smell.
+
+## Shared names — spoken, industry, never invented
+
+Why compounded names drift into private language: a reader who was not in the room cannot tell a
+domain word from an invention. Solve name every shared component in two slots: a kind suffix and a
+leading word. The kind comes from a closed vocabulary — `Page`, `Section`, `Row`, `Panel`, `Header`,
+`Heading`, `Column`, `Frame`, `Label`, `Rail` — and a new kind earns its place only by being
+documented in `docs/design/structure.md` first. The leading word is either already spoken — in site
+copy, `docs/design/**`, or `GLOSSARY.md` (`Register`, `Record`, `Document`, `Terminal`) — or the
+industry's word for the shape (`PageHeader` per Primer, `Stack` per Chakra, `Disclosure` per the
+WAI-APG pattern). Compounds are parent plus part (`RegisterRow`, `DocumentSectionBody`); a part
+whose parent does not exist is the invention to kill. One-caller wrappers collapse into the call
+site instead of earning a name. Element mapping lives in `docs/agents/html-semantics.md`. Check via
+`grep -rin` of the leading word across `content/`, `src/routes/`, and `docs/` — no hits outside the
+component is the smell.
 
 ## Import alias — use `@` except `edge`
 
@@ -113,6 +130,11 @@ derive filters and sorts in a memo over the same items (`visibleEntries` in `log
 `index()` inside JSX, never once at the top of the callback. Check via `grep -n "<For" src` — a list
 of fetched records without `keyed` is the smell.
 
+## Control flow — Show, Switch, For
+
+Control flow in JSX uses Solid's `Show`, `Switch`/`Match` and `For`, never ternaries, `&&` or
+`.map`.
+
 ## Async reads — promise in a memo, failure in `Errored`
 
 Why a loading flag or a `{ failure }` union turns every reader into a branch. Solve let the memo
@@ -138,8 +160,8 @@ creates fewer reactive primitives on the server than in the browser shifts every
 next component claims its predecessor's node and everything below it never hydrates, leaving reveal
 sections invisible with `Cannot read properties of null (reading 'nextSibling')`. Solve never
 early-return on `isServer` inside a component or hook — the primitives are SSR-safe and must run on
-both sides. Pass a prop that inserts JSX as an element and render it directly (`lede` in
-`prose-shell.tsx`); `children` is claimed in place and needs no thunk. Check via `pnpm dev` —
+both sides. Render content as children of a part (`PageHeaderMeta` inside `PageHeader`); do not pass
+JSX through a named prop. `children` is claimed in place and needs no thunk. Check via `pnpm dev` —
 production strips the warnings — and load every route with the console open:
 `Hydration tag mismatch`, `Hydration structure mismatch`, or an "unclaimed server-rendered node"
 warning means an id moved. Search parameters are the other way to shift markup: they are absent
@@ -147,8 +169,12 @@ while prerendering, so gate `useSearchParams` reads behind a `createSignal(false
 sets to `true` (as in `src/pattern/create-url-query.ts` and `src/features/log/create-filter.ts`) and
 filter only after that.
 
-## Polymorphism — `as` is first-party, `render` is ui-sdk
+## Polymorphism — one API: `render`
 
-Why two override APIs in one tree doubles the review surface. Solve first-party hosts take
-`as="tag"` (`as="li"`, never `as={<li />}`), as in `docs/design/system.md`; ui-sdk primitives take
-their `render` prop. Do not mix the two APIs.
+Why two override APIs in one tree doubles the review surface. Solve every host, first-party or
+ui-sdk, changes its element with `render`, never an `as` prop. A function passed to `render` must
+forward the supplied props, as in `node_modules/@ui-sdk/solid/docs/parts-and-composition.md`. The
+override sees the shared `RenderProps` subset (`ref` and `on*` handlers stay on the default tag so
+the props spread across element families); extend it where a host forwards more, as `Badge` does
+with `target`/`rel`. The tag still has to stay inside one semantic family
+(`docs/agents/html-semantics.md`).

@@ -1,10 +1,9 @@
 import type { Project } from "@core/content/model"
 import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
+import { ReturnToRegister } from "@pattern/register"
+import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
-import { ChevronLeft } from "@ui/icon"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
 import { For, Show, type ParentProps, type VoidProps } from "solid-js"
 
 function ProjectSection(props: ParentProps<{ id: string; title: string }>) {
@@ -52,7 +51,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                     <Stack class="mt-4">
                         <For each={props.project.evidence}>
                             {(item) => (
-                                <StackRow as="figure" size="compact">
+                                <StackRow render={(renderProps) => <figure {...renderProps} />} size="compact">
                                     <p class="font-mono text-sm/[1.8] text-stone-700 dark:text-stone-300">
                                         {item.caption}
                                     </p>
@@ -64,27 +63,34 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
             </Show>
             <Show when={props.project.changelog.length > 0}>
                 <ProjectSection id="changelog" title="Changelog">
-                    <Stack as="ul" class="mt-4">
+                    <Stack render={(renderProps) => <ul {...renderProps} />} class="mt-4">
                         <For each={props.project.changelog}>
                             {(item) => (
                                 <StackRow
-                                    as="li"
+                                    render={(renderProps) => <li {...renderProps} />}
                                     class="grid gap-1 sm:grid-cols-[minmax(0,16rem)_1fr] sm:items-baseline sm:gap-4"
                                 >
-                                    {item.href ? (
-                                        <Anchor href={item.href} variant="muted" target={{ kind: "external" }}>
-                                            {item.label}
-                                        </Anchor>
-                                    ) : (
-                                        <span class="font-mono text-sm text-stone-900 dark:text-stone-100">
-                                            {item.label}
-                                        </span>
-                                    )}
-                                    {item.note ? (
-                                        <span class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
-                                            {item.note}
-                                        </span>
-                                    ) : null}
+                                    <Show
+                                        when={item.href}
+                                        fallback={
+                                            <span class="font-mono text-sm text-stone-900 dark:text-stone-100">
+                                                {item.label}
+                                            </span>
+                                        }
+                                    >
+                                        {(href) => (
+                                            <Anchor href={href()} variant="muted" target={{ kind: "external" }}>
+                                                {item.label}
+                                            </Anchor>
+                                        )}
+                                    </Show>
+                                    <Show when={item.note}>
+                                        {(note) => (
+                                            <span class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
+                                                {note()}
+                                            </span>
+                                        )}
+                                    </Show>
                                 </StackRow>
                             )}
                         </For>
@@ -92,10 +98,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                 </ProjectSection>
             </Show>
             <p class="mt-10">
-                <Anchor href="/projects" variant="muted" class="inline-flex items-center gap-1.5">
-                    <ChevronLeft class="size-3 shrink-0" />
-                    Back to all case files
-                </Anchor>
+                <ReturnToRegister href="/projects">Back to all case files</ReturnToRegister>
             </p>
         </article>
     )

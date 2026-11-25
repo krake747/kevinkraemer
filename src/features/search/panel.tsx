@@ -2,15 +2,6 @@ import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
 import { omit } from "solid-js"
 
-export function SearchPanelTitle(props: ComponentProps<"p">) {
-    const rest = omit(props, "class", "children")
-    return (
-        <p {...rest} class={cx("font-mono text-sm text-stone-700 dark:text-stone-300", props.class)}>
-            {props.children}
-        </p>
-    )
-}
-
 export function SearchPanelNote(props: ComponentProps<"p">) {
     const rest = omit(props, "class", "children")
     return (

@@ -23,7 +23,7 @@ export function SearchInterface() {
 
     return (
         <div class="flex flex-col gap-6">
-            <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+            <search aria-label="Site search" class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                 <Input
                     ref={input}
                     value={latest(query.input)}
@@ -55,7 +55,7 @@ export function SearchInterface() {
                         </Button>
                     </Show>
                 </div>
-            </div>
+            </search>
             <Show when={committedQuery().length >= MIN_QUERY_LENGTH} fallback={<SearchIntro />}>
                 <Errored fallback={(error, retry) => <SearchFailed message={String(error())} onRetry={retry} />}>
                     <Loading fallback={<SearchSkeleton />}>

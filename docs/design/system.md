@@ -1,7 +1,7 @@
 # Design System: Kevin Kraemer · Portfolio
 
-Source of truth: `src/app.css`, `src/features/log/prose.css`, `src/ui/**`, `src/app.tsx`,
-`src/document.tsx`.
+Source of truth: `src/app.css`, `src/features/log/prose.css`, `src/ui/**`, `src/pattern/**`,
+`src/app.tsx`, `src/document.tsx`.
 
 The site is a **Specimen Panel**: interface elements treated as deliberate typographic specimens,
 borrowing Bloomberg Terminal density without nostalgia. Warm charcoal grounds, dark primary, light
@@ -31,10 +31,10 @@ time. Two classes for the same job is how the site stops reading as one system.
 
 Allowed, in this order of preference:
 
-1. **A `src/ui` component with a variant prop.** First choice, always. `Anchor`, `Button`, `Badge`,
-   `Chip`, `Stack`, `StackRow`, `Input`, `InlineCode`, `Kbd`, `TerminalCommandHeader`,
-   `SectionHeading`, `PanelLabel`, `ProseSection`, `DecorMark`. The variant union is the source of
-   truth for what exists.
+1. **A `src/ui` or `src/pattern` component with a variant prop.** First choice, always. `Anchor`,
+   `Button`, `Badge`, `Chip`, `Input`, `InlineCode`, `Kbd`, `DecorMark` live in `src/ui`; `Stack`,
+   `StackRow`, `TerminalCommandHeader`, `SectionHeading`, `PanelLabel` live in `src/pattern`. The
+   variant union is the source of truth for what exists.
 2. **Tailwind scale classes** — `stone-*` for grounds, borders, and text; `emerald-*` for signal;
    `amber-*` for warning. Exact values and mix percentages: `src/app.css` and the `src/ui` variants.
 3. **`@theme` tokens** — `--ease-out-quart` and the other easing curves, `--graph-accent`,
@@ -51,28 +51,30 @@ Never:
 
 ## Module shape
 
-- A module is a component file holding the root plus its parts under one prefix (`ProseSection`,
-  `ProseSectionBody`), with CVA entries inline via the shared `cva.config.ts`. A fixed class string
-  stays inline; `cva({ base })` with no variants is an extra indirection for one string.
+- A module is a component file holding the root plus its parts under one prefix (`DocumentSection`,
+  `DocumentSectionBody`), with CVA entries inline via the shared `cva.config.ts`. A fixed class
+  string stays inline; `cva({ base })` with no variants is an extra indirection for one string.
 - Keep a part in the root's file while it only makes sense with the root; promote it to its own
   module once it is used alone (`SectionHeading`, `StackRow`).
 - Every leaf imports the same variants module, so HTML written by a component and HTML written
   inline share one class vocabulary: `class={cx("hit-area-x-1", anchor({ variant: "nav" }))}`.
-- Imports run `features → ui` only. A variants module that a single feature consumes belongs to that
-  feature, not to `src/ui`.
+- Imports run `features → pattern, ui` only. A variants module that a single feature consumes
+  belongs to that feature, not to `src/ui`.
 - Variants are CVA, not caller overrides: a padding, tone, size, or alignment difference is a
   variant prop, never `class="py-12"` at the call site.
 - A component that owns a cva variant function takes the caller class into that function, still
   wrapped in `cx` so Tailwind conflicts merge:
   `class={cx(anchor({ variant: props.variant, class: props.class }))}`.
 - Primitive props come from the platform: `ComponentProps<"tag">` for element props,
-  `VariantProps<typeof variant>` for CVA values. A component that renders more than one tag declares
-  the attributes its call sites use (`Badge` takes `ComponentProps<"a">` when `as="a"`).
-- Polymorphism is one prop, `as`, typed to the tags the component accepts (`StackRow` takes any
-  `ValidComponent`, `Stack` takes `div`/`ul`/`dl`, `Badge` takes `span`/`a`), resolved with
-  `dynamic(() => props.as ?? defaultTag)`. The default is the component's natural tag (`"div"` for
-  `StackRow` and `Stack`, `"span"` for `Badge`). The value is a tag name (`as="li"`, `as="a"`),
-  never `as={<li />}`.
+  `VariantProps<typeof variant>` for CVA values. A part that takes `render` uses `WithRender` from
+  `@ui/render`, never a bespoke render signature. A part that reuses another component's CVA values
+  narrows them (`Extract`/`Pick`), never restates the literals. When a part's element changes with
+  `render`, the rendered tag's attributes flow through the supplied props (`Badge` as an `a` takes
+  `href` that way).
+- Change the element with ui-sdk `render`, never an `as` prop. The default remains the component's
+  natural tag (`div` for `Stack` and `StackRow`, `span` for `Badge`, `div` for
+  `DocumentSectionBody`). A function passed to `render` must forward the supplied props, as in
+  `node_modules/@ui-sdk/solid/docs/parts-and-composition.md`.
 
 ## Shared chrome
 

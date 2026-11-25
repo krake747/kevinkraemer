@@ -1,7 +1,7 @@
 # Structure — commands, headings, page open
 
 Source of truth: `terminal-command-header.tsx`, `section-heading.tsx`, `panel-label.tsx`,
-`prose-section.tsx`, `src/pattern/prose-shell.tsx`, and the shipped pages.
+`src/pattern/document-section.tsx`, `src/pattern/document-page.tsx`, and the shipped pages.
 
 How a page and a section announce themselves. The terminal is the medium, so the opening is
 structural (chrome, error, or exit) before it is decorative.
@@ -52,68 +52,67 @@ the section label.
 
 Every page opens one of three ways, and the first is enforced by code:
 
-| Page kind                                          | Open with                                                                                                                                  |
-| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ProseShell` route (`src/pattern/prose-shell.tsx`) | The layout itself: `command` prop (required) → `TerminalCommandHeader`, then `h1`, then the `lede` slot in Geist `text-sm leading-relaxed` |
-| Index route (not `ProseShell`)                     | `TerminalCommandHeader`, `h1`, then a Geist lede at `text-sm max-w-2xl leading-relaxed`                                                    |
-| Entry route (`/logs/[slug]`)                       | `TerminalCommandHeader`, `h1`, then the description at `leading-relaxed` inside `max-w-prose`                                              |
+| Page kind                                              | Open with                                                                                     |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| `DocumentPage` route (`src/pattern/document-page.tsx`) | The route composes a `PageHeader` as a child: `TerminalCommandHeader`, then `PageHeaderTitle` |
+| Index route (not `DocumentPage`)                       | `TerminalCommandHeader`, then `PageHeaderTitle`                                               |
+| Entry route (`/logs/[slug]`)                           | `TerminalCommandHeader`, then `PageHeaderTitle`, with optional `PageHeaderMeta`               |
 
-Why the layout owns it: `ProseShell` takes `command` as a required prop, so a ProseShell page
-physically cannot ship without exactly one command. Hand-rolling that header re-implements the h1
-size, the lede treatment, and the `kk-cascade` column, and will drift from all seven `ProseShell`
-pages.
+Why the route owns it: `DocumentPage` is the column and the measure, not the header. The caller
+writes the command and the title as children, the same way it already composes `DocumentSection`.
+Use `PageHeader` and `PageHeaderTitle` so the h1 size does not drift across the seven document
+pages. Do not hand-roll that header.
 
-**A short intro above a list is the `lede` slot, not a `ProseSection`.** The three-part prose
-anatomy is for sections with a heading that earns its place; a two-sentence intro on a page that
-then lists rows has no heading to give. Put it in `lede` and stop. Do not invent a heading so the
-measure is allowed, and do not hand-roll a measure column on a page intro: `ProseShell` already sets
-it.
+The DocumentSection anatomy is for sections with a heading that earns its place; a two-sentence
+intro on a page that then lists rows has no heading to give. Do not invent a heading so a short
+intro is allowed, and do not add a page intro at all.
 
 A page whose entire body is one list needs **no** section heading: the `h1` already names it, and a
 `SectionHeading` would repeat the page title one line lower. A register that is not `/cv` opens as
-an Index route (`TerminalCommandHeader`, `h1`, Geist lede) and then goes straight to its list: a
-`Stack` of rows, or the ruled entries of `/projects`.
+an Index route (`TerminalCommandHeader`, `h1`) and then goes straight to its list: a `Register` of
+rows, or the ruled entries of `/projects`.
 
 The fixed header's height is `--header-h`. `scroll-margin-top` and the sticky rails derive from it;
 never hard-code a second clearance number.
 
-Landing sections use the full `max-w-6xl` column (`SectionShell`), because the log rows need the
-width. Every `PageShell` route nests `max-w-4xl` inside it, so prose pages start 128px further in.
+Landing sections use the full `max-w-6xl` column (`TerminalSection`), because the log rows need the
+width. Every `PageColumn` route nests `max-w-4xl` inside it, so prose pages start 128px further in.
 That difference is the layout, not drift: do not "fix" it by widening a prose page or narrowing the
 landing rows.
 
 ## Prose block anatomy
 
-A prose section composes three parts, in this order:
+A prose section is a `DocumentSection` with a `SectionHeading` and a `DocumentSectionBody`:
 
 ```tsx
-<ProseSection aria-labelledby="story">
-  <SectionHeading id="story">story</SectionHeading>
-  <ProseSectionBody>{/* paragraphs */}</ProseSectionBody>
-</ProseSection>
+<DocumentSection aria-labelledby="story-heading">
+  <SectionHeading id="story-heading">story</SectionHeading>
+  <DocumentSectionBody>{/* paragraphs */}</DocumentSectionBody>
+</DocumentSection>
 ```
 
-- `ProseSection` is a `<section>` with the reveal animation. Pass `aria-labelledby` with the heading
-  `id` — it is a native attribute and flows through to the section.
-- `SectionHeading` takes the same value as its own `id`. The string appears twice on purpose — that
-  is what splitting the anchor from the label costs, and duplicating it is correct.
-- `ProseSectionBody` is the measure column (`max-w-prose`), `flex-col gap-4`, stone-600 body. It is
-  the only place the prose measure is declared.
+- `DocumentSection` is a `<section>` with the reveal animation. The caller passes `aria-labelledby`
+  pointing at the heading `id` — it is a native attribute and flows through to the section.
+- `SectionHeading` takes the heading `id` as its own `id`. The string appears twice on purpose — on
+  the heading and as `aria-labelledby` on the section — that is what splitting the anchor from the
+  label costs, and duplicating it is correct.
+- `DocumentSectionBody` is the measure column (`max-w-prose`), stone-600 body. It is the only place
+  the prose measure is declared. The default element is a `div` with `flex-col gap-4`. For a
+  single-paragraph body, change the element with `render` to a `p`, without the flex layout so
+  inline links stay in the paragraph flow.
 - `CvSection` takes `id` and wraps the section. `CvSectionHeading` takes the heading as children and
   uses a `$` prompt instead of the `#` hash.
 - The landing story is the one prose grid that is deliberately unequal: `lg:col-span-5` +
   `lg:col-span-7 lg:pl-12`. The narrow left column is the design, not a measure bug; the right
   column lands on the prose measure, the left runs shorter.
 
-Correct — three parts, heading id on the heading and `aria-labelledby` on the section:
+Correct — the caller composes the heading and the body, with the heading id twice on purpose:
 
 ```tsx
-<ProseSection aria-labelledby="philosophy">
-  <SectionHeading id="philosophy">philosophy</SectionHeading>
-  <ProseSectionBody>
-    <p>I build in small vertical slices.</p>
-  </ProseSectionBody>
-</ProseSection>
+<DocumentSection aria-labelledby="philosophy-heading">
+  <SectionHeading id="philosophy-heading">philosophy</SectionHeading>
+  <DocumentSectionBody render={(props) => <p {...props}>I build in small vertical slices.</p>} />
+</DocumentSection>
 ```
 
 Incorrect — a hand-rolled heading and a raw measure:
@@ -124,6 +123,41 @@ Incorrect — a hand-rolled heading and a raw measure:
   <h2 class="font-mono text-xs">philosophy</h2>
 </section>
 ```
+
+## Registers and rails
+
+Most browsable lists are a `Register` of `RegisterRow`s, one action per row, with the row's title,
+description, and meta written as children of those parts. Empty states are `EmptyRegister`, with its
+title, note, and action as child parts, not JSX props. The way back is `ReturnToRegister`. A page
+with a side rail composes `RegisterWithRail`: main content (including the mobile disclosure) as
+children, and the rail as a child part, not a `rail` prop. The grid, the sticky offset, and the
+desktop-only aside stay in the component.
+
+Two ruled exceptions keep their own shape: `/projects` divides entries with a single rule and no
+frame (`docs/design/projects.md`), and `/cv` keeps its compact `$`-marked sections for print. Record
+rows with linked labels stay hand-rolled: a `RecordRow` label is plain text, written as children of
+the label part, not a `label` prop.
+
+Allowed compounds are parent plus part: `RegisterRowTitle`, `RegisterRowDescription`,
+`RegisterRowMeta`, `RegisterWithRailMain`, `RegisterWithRailRail`, `EmptyRegisterTitle`,
+`EmptyRegisterNote`, `EmptyRegisterAction`, `ReturnToRegister`. No new kind is introduced; the kinds
+stay `Page`, `Section`, `Row`, `Panel`, `Header`, `Heading`, `Column`, `Frame`, `Label`, `Rail`.
+
+## Content models
+
+Elements mean what the spec says, so the tag must match the content, not the styling:
+
+- When a part's element changes with `render`, stay inside one family: `ul` takes `li`, `dl` takes
+  `dt`/`dd` groups (a plain `div` may wrap one group), `details` takes exactly one leading
+  `summary`. Never cross families.
+- Every `section` carries a name. `DocumentSection` pairs `aria-labelledby` with its `h2`;
+  `TerminalSection` names itself with its command.
+- One `h1` per page from `PageHeader`, then step by one. No heading inside `li`.
+- `RecordRow` labels stay plain text; values live in `dd`. Order decides the list: unordered entries
+  `ul`, meaningful order `ol`, name-value `dl`.
+- Disclosure is native `details`/`summary` only — never bolt button semantics onto a summary.
+- Name every exposed landmark: rail `aside`s point `aria-labelledby` at their rail label, and search
+  operations sit in `search`.
 
 ## Panel headers
 

@@ -1,8 +1,8 @@
 import { sortByOrder, type AboutEntry } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
-import { SectionShell } from "@pattern/section-shell"
-import { ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
+import { TerminalCommandHeader, TerminalSection } from "@pattern/terminal"
 import { For, type VoidProps } from "solid-js"
 
 type Column = {
@@ -32,7 +32,8 @@ const ABOUT_COLUMNS: Column[] = [
 
 export function HomeAbout(props: VoidProps<{ id: string }>) {
     return (
-        <SectionShell id={props.id} command="cat story.md">
+        <TerminalSection id={props.id}>
+            <TerminalCommandHeader id={`${props.id}-command`} command="cat story.md" class="reveal-item mb-8" />
             <div class="grid gap-12 lg:grid-cols-12">
                 <For each={ABOUT_COLUMNS}>
                     {(column) => (
@@ -41,9 +42,7 @@ export function HomeAbout(props: VoidProps<{ id: string }>) {
                                 {(entry) => (
                                     <div class="reveal-item">
                                         <SectionHeading id={headingId(entry.id)}>{entry.title}</SectionHeading>
-                                        <ProseSectionBody>
-                                            <div class="contents" innerHTML={entry.html} />
-                                        </ProseSectionBody>
+                                        <DocumentSectionBody innerHTML={entry.html} />
                                     </div>
                                 )}
                             </For>
@@ -51,6 +50,6 @@ export function HomeAbout(props: VoidProps<{ id: string }>) {
                     )}
                 </For>
             </div>
-        </SectionShell>
+        </TerminalSection>
     )
 }

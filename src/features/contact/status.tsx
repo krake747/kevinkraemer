@@ -1,6 +1,6 @@
-import { DisclosureRow } from "@pattern/disclosure-row"
-import { PanelLabel } from "@ui/panel-label"
-import { For, Show, type VoidProps } from "solid-js"
+import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
+import { PanelLabel } from "@pattern/panel-label"
+import { For } from "solid-js"
 
 const STATUS_ROWS = [
     { label: "base", value: "Luxembourg · CET" },
@@ -23,29 +23,27 @@ function ContactStatusRows() {
     )
 }
 
-export function ContactStatus(props: VoidProps<{ as: "details" | "aside" }>) {
+export function ContactStatusDisclosure() {
     return (
-        <Show
-            when={props.as === "details"}
-            fallback={
-                <div class="sticky top-[calc(var(--header-h)+1rem)] flex flex-col gap-4">
-                    <div>
-                        <PanelLabel class="border-b border-stone-200 pb-2 dark:border-stone-800">status</PanelLabel>
-                        <ContactStatusRows />
-                    </div>
-                </div>
-            }
-        >
-            <DisclosureRow
-                summary={
-                    <>
-                        <span class="group-open:hidden">+ status</span>
-                        <span class="hidden group-open:inline">− status</span>
-                    </>
-                }
-            >
+        <DisclosureRow>
+            <DisclosureRowSummary>
+                <span class="group-open:hidden">+ status</span>
+                <span class="hidden group-open:inline">− status</span>
+            </DisclosureRowSummary>
+            <DisclosureRowBody>
                 <ContactStatusRows />
-            </DisclosureRow>
-        </Show>
+            </DisclosureRowBody>
+        </DisclosureRow>
+    )
+}
+
+export function ContactStatusPanel() {
+    return (
+        <div>
+            <PanelLabel id="contact-status-label" class="border-b border-stone-200 pb-2 dark:border-stone-800">
+                status
+            </PanelLabel>
+            <ContactStatusRows />
+        </div>
     )
 }

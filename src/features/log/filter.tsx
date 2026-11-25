@@ -6,7 +6,8 @@ import { LogFilterProvider, useLogFilter } from "@features/log/filter-provider"
 import { LogFilterRail } from "@features/log/filter-rail"
 import { LogFilterSearch } from "@features/log/filter-search"
 import { LogFilterTags } from "@features/log/filter-tags"
-import { Stack } from "@ui/stack"
+import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
+import { Stack } from "@pattern/stack"
 import { For, type VoidProps } from "solid-js"
 
 function LogFilterList() {
@@ -33,19 +34,23 @@ function LogFilterList() {
 export function LogFilter(props: VoidProps<{ entries: LogEntry[] }>) {
     return (
         <LogFilterProvider entries={props.entries}>
-            <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem]">
-                <div class="flex min-w-0 flex-col gap-6">
-                    <LogFilterSearch />
-                    <LogFilterDisclosure>
-                        <LogFilterTags />
-                    </LogFilterDisclosure>
+            <RegisterWithRail>
+                <RegisterWithRailMain>
+                    <search aria-label="Filter logs" class="flex min-w-0 flex-col gap-6">
+                        <LogFilterSearch />
+                        <LogFilterDisclosure>
+                            <LogFilterTags />
+                        </LogFilterDisclosure>
+                    </search>
                     <LogFilterList />
                     <LogFilterEmpty />
-                </div>
-                <LogFilterRail>
-                    <LogFilterTags />
-                </LogFilterRail>
-            </div>
+                </RegisterWithRailMain>
+                <RegisterWithRailRail labelledby="log-filter-label">
+                    <LogFilterRail>
+                        <LogFilterTags />
+                    </LogFilterRail>
+                </RegisterWithRailRail>
+            </RegisterWithRail>
         </LogFilterProvider>
     )
 }

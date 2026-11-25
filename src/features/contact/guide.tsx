@@ -1,11 +1,11 @@
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
 
 export function ContactGuide() {
     return (
-        <ProseSection aria-labelledby="contact-write-heading">
+        <DocumentSection aria-labelledby="contact-write-heading">
             <SectionHeading id="contact-write-heading">what to include</SectionHeading>
-            <ProseSectionBody>
+            <DocumentSectionBody>
                 <p>
                     Write about anything: a role, a project, or a detail from this site or my experience you want to
                     talk about. Tell me what caught your eye and what you're after, and I can skip the first round of
@@ -15,7 +15,7 @@ export function ContactGuide() {
                     The financial-market framing across this site is a design metaphor. Nothing here is live market
                     data.
                 </p>
-            </ProseSectionBody>
-        </ProseSection>
+            </DocumentSectionBody>
+        </DocumentSection>
     )
 }

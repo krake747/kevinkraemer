@@ -8,8 +8,10 @@ How we judge project and code quality.
 2. **Composable.** Small blocks that pass the deletion test. Why: keeps callers light. Solve: a file
    stays only if deleting it moves complexity into the caller.
 
-3. **Projection first.** Slots and children over config props. Why: composes without prop growth.
-   Solve: prefer `children` and slots to boolean or label props.
+3. **Composition first.** A root plus parts, filled with children. Why: composes without prop
+   growth. Solve: render content as children of named parts. No slot or content props (no `title`,
+   `description`, `label`, `meta`, `action`, `rail`, or layout `command` props, and no `JSX.Element`
+   props). Variants via CVA. Change the element with ui-sdk `render`, never an `as` prop.
 
 4. **Single source per meaning.** One home, one import path. Why: one place to change. Solve: reuse
    the existing `ui/` component, `pattern/` drop-in, panel, token, or nav definition instead of
@@ -32,7 +34,8 @@ How we judge project and code quality.
 ## Project: Solid plus Vite
 
 Barrel for project-specific standards. Why: keeps `CODING_STANDARDS.md` small and lets each question
-load only when needed.
+load only when needed. Control flow in JSX uses Solid's `Show`, `Switch`/`Match` and `For`, never
+ternaries, `&&` or `.map`.
 
 Routing lives in `AGENTS.md ## Pointers`. Project-only extra: for errors (how failures propagate),
 see `docs/adr/0008-contracts-testing.md`.
