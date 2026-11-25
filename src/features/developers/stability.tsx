@@ -6,10 +6,12 @@ import { DocumentSection } from "@pattern/document-section"
 import { Register } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
 import { InlineCode } from "@ui/inline-code"
+import { SectionHeading } from "@ui/section-heading"
 
 export function DevelopersStability() {
     return (
-        <DocumentSection id="stability-heading" title="stability">
+        <DocumentSection aria-labelledby="stability-heading">
+            <SectionHeading id="stability-heading">stability</SectionHeading>
             <Register as="ul">
                 <DevelopersRow>
                     <DevelopersLead>Versioning</DevelopersLead>{" "}

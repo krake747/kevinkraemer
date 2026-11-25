@@ -1,8 +1,10 @@
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@ui/section-heading"
 
 export function AboutWork() {
     return (
-        <DocumentSection id="about-work-heading" title="how i work">
+        <DocumentSection aria-labelledby="about-work-heading">
+            <SectionHeading id="about-work-heading">how i work</SectionHeading>
             <DocumentSectionBody as="p">
                 Finance still shapes how I work. Decisions happen with partial information and a tradeoff. Building
                 software is mostly the same. Behavioral finance at university taught me to ask why people choose what

@@ -3,6 +3,7 @@ import { CV_PDF_PATH, origin } from "@core/site/urls"
 import { DocumentSection } from "@pattern/document-section"
 import { Register } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
+import { SectionHeading } from "@ui/section-heading"
 import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
 
@@ -10,7 +11,8 @@ const RESOURCE_ENTRIES = catalogEntries.filter((entry) => entry.type !== "text/h
 
 export function DevelopersResources() {
     return (
-        <DocumentSection id="resources-heading" title="resources">
+        <DocumentSection aria-labelledby="resources-heading">
+            <SectionHeading id="resources-heading">resources</SectionHeading>
             <Register as="ul">
                 <For each={RESOURCE_ENTRIES}>
                     {(resource) => (

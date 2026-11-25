@@ -1,27 +1,12 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { createPolymorphic } from "@ui/create-polymorphic"
 import { cx } from "@ui/cva.config"
-import { SectionHeading } from "@ui/section-heading"
-import { omit, type ParentProps } from "solid-js"
+import { omit } from "solid-js"
 
-type DocumentSectionProps = ParentProps<{
-    id: string
-    title: string
-    sectionId?: string
-    class?: string
-}>
-
-export function DocumentSection(props: DocumentSectionProps) {
-    const sectionId = (): string | undefined => {
-        if (props.sectionId) {
-            return props.sectionId
-        }
-        return undefined
-    }
-    const rest = omit(props, "id", "title", "sectionId", "class", "children")
+export function DocumentSection(props: ComponentProps<"section">) {
+    const rest = omit(props, "class", "children")
     return (
-        <section {...rest} aria-labelledby={props.id} id={sectionId()} class={cx("animate-fade-up", props.class)}>
-            <SectionHeading id={props.id}>{props.title}</SectionHeading>
+        <section {...rest} class={cx("animate-fade-up", props.class)}>
             {props.children}
         </section>
     )

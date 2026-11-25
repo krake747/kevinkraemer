@@ -1,8 +1,10 @@
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@ui/section-heading"
 
 export function ContactGuide() {
     return (
-        <DocumentSection id="contact-write-heading" title="what to include">
+        <DocumentSection aria-labelledby="contact-write-heading">
+            <SectionHeading id="contact-write-heading">what to include</SectionHeading>
             <DocumentSectionBody>
                 <p>
                     Write about anything: a role, a project, or a detail from this site or my experience you want to

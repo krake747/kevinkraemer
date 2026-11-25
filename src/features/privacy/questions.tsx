@@ -1,10 +1,12 @@
 import { site } from "@core/site/site-meta"
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
 import { Anchor } from "@ui/anchor"
+import { SectionHeading } from "@ui/section-heading"
 
 export function PrivacyQuestions() {
     return (
-        <DocumentSection id="privacy-contact-heading" title="questions">
+        <DocumentSection aria-labelledby="privacy-contact-heading">
+            <SectionHeading id="privacy-contact-heading">questions</SectionHeading>
             <DocumentSectionBody>
                 <p>
                     If you email me, I use your address and message solely to reply to you. Nothing from the

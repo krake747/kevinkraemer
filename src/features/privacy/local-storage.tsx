@@ -1,8 +1,10 @@
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@ui/section-heading"
 
 export function PrivacyLocalStorage() {
     return (
-        <DocumentSection id="privacy-localstorage-heading" title="local storage">
+        <DocumentSection aria-labelledby="privacy-localstorage-heading">
+            <SectionHeading id="privacy-localstorage-heading">local storage</SectionHeading>
             <DocumentSectionBody>
                 <p>
                     One display preference is saved in your browser's localStorage: the color theme (light or dark),

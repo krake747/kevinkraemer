@@ -1,9 +1,11 @@
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
 import { Anchor } from "@ui/anchor"
+import { SectionHeading } from "@ui/section-heading"
 
 export function AboutElsewhere() {
     return (
-        <DocumentSection id="about-elsewhere-heading" title="elsewhere">
+        <DocumentSection aria-labelledby="about-elsewhere-heading">
+            <SectionHeading id="about-elsewhere-heading">elsewhere</SectionHeading>
             <DocumentSectionBody as="p">
                 The professional version lives on the{" "}
                 <Anchor href="/cv" variant="prose">

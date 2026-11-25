@@ -1,9 +1,11 @@
 import { SearchInterface } from "@features/search/interface"
 import { DocumentSection } from "@pattern/document-section"
+import { SectionHeading } from "@ui/section-heading"
 
 export function SearchQuerySection() {
     return (
-        <DocumentSection id="search-input-heading" title="query">
+        <DocumentSection aria-labelledby="search-input-heading">
+            <SectionHeading id="search-input-heading">query</SectionHeading>
             <SearchInterface />
         </DocumentSection>
     )

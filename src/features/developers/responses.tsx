@@ -3,6 +3,7 @@ import { DevelopersProse } from "@features/developers/prose"
 import { DevelopersRow } from "@features/developers/row"
 import { DocumentSection } from "@pattern/document-section"
 import { Register } from "@pattern/register"
+import { SectionHeading } from "@ui/section-heading"
 import { For } from "solid-js"
 
 type ResponseRow = {
@@ -31,7 +32,8 @@ const RESPONSE_ROWS: ResponseRow[] = [
 
 export function DevelopersResponses() {
     return (
-        <DocumentSection id="responses-heading" title="responses">
+        <DocumentSection aria-labelledby="responses-heading">
+            <SectionHeading id="responses-heading">responses</SectionHeading>
             <Register as="ul">
                 <For each={RESPONSE_ROWS}>
                     {(row) => (

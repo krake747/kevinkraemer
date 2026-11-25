@@ -1,8 +1,10 @@
 import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@ui/section-heading"
 
 export function PrivacyCollection() {
     return (
-        <DocumentSection id="privacy-collection-heading" title="what is collected">
+        <DocumentSection aria-labelledby="privacy-collection-heading">
+            <SectionHeading id="privacy-collection-heading">what is collected</SectionHeading>
             <DocumentSectionBody>
                 <p>
                     Nothing by the site itself. There are no analytics scripts, no tracking pixels, no advertising, no

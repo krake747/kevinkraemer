@@ -5,6 +5,7 @@ import { DevelopersProse } from "@features/developers/prose"
 import { CodeBlock } from "@pattern/code-block"
 import { DocumentSection } from "@pattern/document-section"
 import { InlineCode } from "@ui/inline-code"
+import { SectionHeading } from "@ui/section-heading"
 import { For } from "solid-js"
 
 type QuickstartStep = {
@@ -48,7 +49,8 @@ const QUICKSTART_STEPS: QuickstartStep[] = [
 
 export function DevelopersQuickstart() {
     return (
-        <DocumentSection id="quickstart-heading" title="quickstart">
+        <DocumentSection aria-labelledby="quickstart-heading">
+            <SectionHeading id="quickstart-heading">quickstart</SectionHeading>
             <ol class="flex flex-col gap-6">
                 <For each={QUICKSTART_STEPS}>
                     {(step, index) => (
