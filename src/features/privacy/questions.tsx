@@ -1,12 +1,11 @@
 import { site } from "@core/site/site-meta"
-import { DocumentSection } from "@pattern/document-section"
+import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
 import { Anchor } from "@ui/anchor"
-import { ProseSectionBody } from "@ui/prose-section"
 
 export function PrivacyQuestions() {
     return (
         <DocumentSection id="privacy-contact-heading" title="questions">
-            <ProseSectionBody>
+            <DocumentSectionBody>
                 <p>
                     If you email me, I use your address and message solely to reply to you. Nothing from the
                     correspondence is published or passed to third parties.
@@ -18,7 +17,7 @@ export function PrivacyQuestions() {
                     </Anchor>
                     . Changes to this policy will be posted on this page.
                 </p>
-            </ProseSectionBody>
+            </DocumentSectionBody>
         </DocumentSection>
     )
 }

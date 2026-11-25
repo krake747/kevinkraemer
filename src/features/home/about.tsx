@@ -1,7 +1,7 @@
 import { sortByOrder, type AboutEntry } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
+import { DocumentSectionBody } from "@pattern/document-section"
 import { TerminalSection } from "@pattern/terminal-section"
-import { ProseSectionBody } from "@ui/prose-section"
 import { SectionHeading } from "@ui/section-heading"
 import { For, type VoidProps } from "solid-js"
 
@@ -41,9 +41,7 @@ export function HomeAbout(props: VoidProps<{ id: string }>) {
                                 {(entry) => (
                                     <div class="reveal-item">
                                         <SectionHeading id={headingId(entry.id)}>{entry.title}</SectionHeading>
-                                        <ProseSectionBody>
-                                            <div class="contents" innerHTML={entry.html} />
-                                        </ProseSectionBody>
+                                        <DocumentSectionBody innerHTML={entry.html} />
                                     </div>
                                 )}
                             </For>

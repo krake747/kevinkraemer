@@ -1,10 +1,9 @@
-import { DocumentSection } from "@pattern/document-section"
-import { ProseSectionBody } from "@ui/prose-section"
+import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
 
 export function PrivacyLocalStorage() {
     return (
         <DocumentSection id="privacy-localstorage-heading" title="local storage">
-            <ProseSectionBody>
+            <DocumentSectionBody>
                 <p>
                     One display preference is saved in your browser's localStorage: the color theme (light or dark),
                     which controls how this site looks on your next visit.
@@ -14,7 +13,7 @@ export function PrivacyLocalStorage() {
                     readable by other sites. Clearing your browser's site data removes it entirely, and the site falls
                     back to its defaults.
                 </p>
-            </ProseSectionBody>
+            </DocumentSectionBody>
         </DocumentSection>
     )
 }

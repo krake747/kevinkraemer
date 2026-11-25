@@ -1,10 +1,9 @@
-import { DocumentSection } from "@pattern/document-section"
-import { ProseSectionBody } from "@ui/prose-section"
+import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
 
 export function ContactGuide() {
     return (
         <DocumentSection id="contact-write-heading" title="what to include">
-            <ProseSectionBody>
+            <DocumentSectionBody>
                 <p>
                     Write about anything: a role, a project, or a detail from this site or my experience you want to
                     talk about. Tell me what caught your eye and what you're after, and I can skip the first round of
@@ -14,7 +13,7 @@ export function ContactGuide() {
                     The financial-market framing across this site is a design metaphor. Nothing here is live market
                     data.
                 </p>
-            </ProseSectionBody>
+            </DocumentSectionBody>
         </DocumentSection>
     )
 }
