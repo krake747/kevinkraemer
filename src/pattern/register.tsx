@@ -2,6 +2,7 @@ import type { ComponentProps, JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
+import { Stack } from "@ui/stack"
 import { StackRow } from "@ui/stack-row"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
 
@@ -10,16 +11,7 @@ type RegisterProps = ComponentProps<"div"> & {
 }
 
 export function Register(props: RegisterProps) {
-    const rest = omit(props, "class", "children", "render")
-    const merged = merge(rest, {
-        get class() {
-            return cx("m-0 flex list-none flex-col gap-2 p-0", props.class)
-        },
-        get children() {
-            return props.children
-        },
-    })
-    return <>{props.render?.(merged) ?? <div {...merged} />}</>
+    return <Stack {...props} />
 }
 
 type RegisterRowProps = ParentProps<{
