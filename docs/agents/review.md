@@ -130,6 +130,11 @@ derive filters and sorts in a memo over the same items (`visibleEntries` in `log
 `index()` inside JSX, never once at the top of the callback. Check via `grep -n "<For" src` — a list
 of fetched records without `keyed` is the smell.
 
+## Control flow — Show, Switch, For
+
+Control flow in JSX uses Solid's `Show`, `Switch`/`Match` and `For`, never ternaries, `&&` or
+`.map`.
+
 ## Async reads — promise in a memo, failure in `Errored`
 
 Why a loading flag or a `{ failure }` union turns every reader into a branch. Solve let the memo

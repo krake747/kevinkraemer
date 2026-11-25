@@ -34,7 +34,8 @@ How we judge project and code quality.
 ## Project: Solid plus Vite
 
 Barrel for project-specific standards. Why: keeps `CODING_STANDARDS.md` small and lets each question
-load only when needed.
+load only when needed. Control flow in JSX uses Solid's `Show`, `Switch`/`Match` and `For`, never
+ternaries, `&&` or `.map`.
 
 Routing lives in `AGENTS.md ## Pointers`. Project-only extra: for errors (how failures propagate),
 see `docs/adr/0008-contracts-testing.md`.
