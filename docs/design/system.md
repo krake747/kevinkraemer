@@ -72,9 +72,7 @@ Never:
 - Change the element with ui-sdk `render`, never an `as` prop. The default remains the component's
   natural tag (`div` for `Stack` and `StackRow`, `span` for `Badge`, `div` for
   `DocumentSectionBody`). A function passed to `render` must forward the supplied props, as in
-  `node_modules/@ui-sdk/solid/docs/parts-and-composition.md`. `createPolymorphic` and the
-  first-party `as` prop are the old shape; do not add new `as` APIs, and migrate the hosts that
-  still use them (`Stack`, `StackRow`, `Register`, `DocumentSectionBody`, `Badge`).
+  `node_modules/@ui-sdk/solid/docs/parts-and-composition.md`.
 
 ## Shared chrome
 
