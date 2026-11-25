@@ -1,4 +1,4 @@
-# `/projects` — Case File
+# `/projects`: Case File
 
 Source of truth: `src/routes/projects/`, `src/features/project/`.
 
@@ -10,9 +10,9 @@ Unless marked **Proposal**, this describes the pages as shipped. Tokens and chro
 
 ## Purpose & audience
 
-A hiring manager or peer who wants to see how a project was approached — problem, decisions, and
-evidence — without treating the work as a card deck or a metrics wall. The index is for scanning;
-the case page is for reading.
+A hiring manager or peer who wants to see how a project was approached (problem, decisions, and
+evidence) without treating the work as a card deck or a metrics wall. The index is for scanning; the
+case page is for reading.
 
 ## Mood
 
@@ -69,7 +69,7 @@ document with a metadata stack of record rows and mid-level headings.
 - Emerald is the single signal: only the primary live-site link uses `Anchor` `channel`, and the
   index name turns emerald on hover. Case-page repo, changelog, and the back link use `muted`. No
   extra palette, no shadows, no gradients, no icon grids, and one Headline Figure per project at
-  most — never a grid of numbers.
+  most, never a grid of numbers.
 
 ## Signature component
 

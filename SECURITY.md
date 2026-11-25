@@ -14,4 +14,4 @@ Expect an initial response within 7 days. There is no bug bounty; this is a solo
 ## Scope
 
 In scope: the deployed site and the code in this repo. Out of scope: third-party services (Netlify,
-Cloudflare, Doppler) — report those to the vendor.
+Cloudflare, Doppler). Report those to the vendor.

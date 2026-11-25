@@ -30,18 +30,18 @@ Doppler, never in files.
 
 Without keys, all works except `/ask`.
 
-## Daily loop — `vp` first
+## Daily loop: `vp` first
 
 Use `vp` for built-ins, `vpr` for repo scripts, `vpx` for one-off tools. The full script list is in
 `package.json`; a normal change needs only these:
 
-- `vp dev` — start the dev server
-- `vp fmt` / `vp fmt --check` — format code, or check the format
-- `vp lint --deny-warnings` — check code; the rules are in the `vite.config.ts` lint block
-- `vpr lint:ts` — check types
-- `vp test run --config vitest.config.ts` — run unit and browser tests; the test tiers are in
+- `vp dev`: start the dev server
+- `vp fmt` / `vp fmt --check`: format code, or check the format
+- `vp lint --deny-warnings`: check code; the rules are in the `vite.config.ts` lint block
+- `vpr lint:ts`: check types
+- `vp test run --config vitest.config.ts`: run unit and browser tests; the test tiers are in
   [`docs/agents/testing.md`](docs/agents/testing.md)
-- `vpx playwright test` — run e2e tests on the production build (one-time
+- `vpx playwright test`: run e2e tests on the production build (one-time
   `vpx playwright install --with-deps chromium`)
 
 `src/generated` rebuilds on dev, build, and type-check. Run `vpr generate` again if content looks

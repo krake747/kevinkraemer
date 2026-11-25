@@ -28,7 +28,7 @@
         "test:e2e": "playwright test",
         "test:vitest": "vp test run --config vitest.config.ts",
         "test:coverage": "vp test run --coverage --config vitest.config.ts",
-        "verify": "pnpm fmt:ci && pnpm lint && pnpm lint:ts && pnpm exec fallow audit --quiet && pnpm test:vitest"
+        "verify": "pnpm fmt:ci && pnpm lint && pnpm lint:ts && pnpm check:docs && pnpm exec fallow audit --quiet && pnpm test:vitest"
     },
     "dependencies": {
         "@modelcontextprotocol/server": "^2.4.0",

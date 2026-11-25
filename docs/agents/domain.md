@@ -5,12 +5,12 @@ gotcha the layout cannot say.
 
 A skill is done when it uses `GLOSSARY.md` terms and flags any ADR conflict.
 
-## Before exploring — read these
+## Before exploring: read these
 
 - `GLOSSARY.md` at the repo root; `docs/adr/` read ADRs that touch the area you will change, start
   with `docs/adr/README.md`.
 
-## Layout — single-context
+## Layout: single-context
 
 `GLOSSARY.md` plus `docs/adr/` live at the root.
 

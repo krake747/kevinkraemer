@@ -1,6 +1,6 @@
 ## Summary
 
-<diagram, diff-sketch, or tree — smallest view that makes the key point. Use domain language from
+<diagram, diff-sketch, or tree: the smallest view that makes the key point. Use domain language from
 `GLOSSARY.md`.>
 
 ## Evidence
@@ -18,4 +18,4 @@
 
 - [ ] `node scripts/checks/docs.mjs` passes (or N/A)
 - [ ] Area docs read before changing (`docs/agents/` pointer for the touched area)
-- [ ] New behavior covered by a behavioral test (or N/A — docs-only)
+- [ ] New behavior covered by a behavioral test (or N/A, docs-only)

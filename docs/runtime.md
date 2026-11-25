@@ -1,4 +1,4 @@
-# Runtime — edge negotiation, on-demand routes, preview
+# Runtime: edge negotiation, on-demand routes, preview
 
 Source of truth: `netlify/edge-functions/`, `netlify.toml`, `scripts/function.ts`, `src/routes/`.
 

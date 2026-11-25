@@ -1,4 +1,4 @@
-# Discovery — crawlers, SEO, feeds, AI retrieval
+# Discovery: crawlers, SEO, feeds, AI retrieval
 
 Source of truth: `public/robots.txt`, `src/pattern/seo.tsx`, `src/core/site/`,
 `src/routes/sitemap-*.ts`, `src/routes/llms-full.txt.ts`, `public/llms.txt`.
