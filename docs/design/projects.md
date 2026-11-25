@@ -52,7 +52,7 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Case page (`/projects/[slug]`)
 
-- `DetailShell` wrapping `ProjectArticle`, inside the layout that stretches to fill the viewport so
+- `DetailShell` wrapping `ProjectEntry`, inside the layout that stretches to fill the viewport so
   the footer stays at the bottom: reading column `max-w-prose` on the `article` itself.
 - One `TerminalCommandHeader` `cat {id}.md`, title `text-2xl`, mono tagline, then metadata as a
   `Stack` (`as="dl"`) of `ProjectMetadataRow`s (record rows, no row hover; links inside keep their

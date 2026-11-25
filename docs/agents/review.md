@@ -41,7 +41,7 @@ component whose body never reads `props.children` but whose props lack `VoidProp
 
 Why repeating the feature in every file makes `log/log-card.tsx` read twice and puts the same word
 in the path and the identifier. Solve name every file in `src/features/{feature}/` after its part,
-not the feature: `log/card.tsx` exports `LogCard`, `developers/footer.tsx` exports
+not the feature: `log/entry-panel.tsx` exports `LogEntryPanel`, `developers/footer.tsx` exports
 `DevelopersFooter`, `command-palette/row-item.tsx` exports `CommandPaletteRowItem`. The file named
 exactly `{feature}.ts(x)` is the feature entry and exports the component of that name (`header.tsx`
 → `Header`, `footer.tsx` → `Footer`, `command-palette.tsx` → `CommandPalette`). Name a builder
