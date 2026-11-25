@@ -7,11 +7,7 @@ import { Seo } from "@pattern/seo"
 
 export default function ContactRoute() {
     return (
-        <DocumentPage
-            command={'echo "Get in touch"'}
-            title="Contact"
-            lede="Email is the fastest route. It lands directly with me, and I usually reply within a couple of business days."
-        >
+        <DocumentPage command={'echo "Get in touch"'} title="Contact">
             <Seo
                 title="Contact"
                 description="Email is the fastest way to reach me. GitHub and LinkedIn work too. Based in Luxembourg, open to full-stack roles or just talking shop."

@@ -25,7 +25,6 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
                     <PageHeader
                         command={`cat ${entry().id}.md`}
                         title={entry().title}
-                        lede={entry().description}
                         class="mb-10"
                         meta={
                             <>

@@ -5,11 +5,7 @@ import { NoIndex, Seo } from "@pattern/seo"
 
 export default function SearchRoute() {
     return (
-        <DocumentPage
-            command="grep -r"
-            title="Search"
-            lede="Find anything across the site: logs, CV, and docs. Results update as you type."
-        >
+        <DocumentPage command="grep -r" title="Search">
             <Seo
                 title="Search"
                 description="Search through all log entries and content on kevinkraemer.com"

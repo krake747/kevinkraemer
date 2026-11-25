@@ -7,11 +7,7 @@ import { Seo } from "@pattern/seo"
 
 export default function PrivacyRoute() {
     return (
-        <DocumentPage
-            command="cat privacy.txt"
-            title="Privacy"
-            lede="This site collects as little as a website reasonably can. Here is exactly what happens when you visit."
-        >
+        <DocumentPage command="cat privacy.txt" title="Privacy">
             <Seo
                 title="Privacy"
                 description="How kevinkraemer.com handles data: a static site with no analytics, no tracking, and no cookies; the only stored state is your theme preference in browser localStorage."

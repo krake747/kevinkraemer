@@ -22,7 +22,7 @@ export const route = defineFileRoute("/uses", { info: { sections: SECTION_LINKS 
 
 export default function UsesRoute() {
     return (
-        <DocumentPage command="cat uses.md" title="The setup." lede="The tools I run, and why.">
+        <DocumentPage command="cat uses.md" title="The setup.">
             <Seo
                 title="Uses: the tools I run"
                 description="The setup: the tools I run, and why. Editor, terminal, OS, languages, models, hardware, and what I'm exploring."
