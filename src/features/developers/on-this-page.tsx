@@ -1,5 +1,5 @@
 import { DevelopersNumeral } from "@features/developers/numeral"
-import { StackRow } from "@pattern/stack-row"
+import { StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { For } from "solid-js"
 

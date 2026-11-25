@@ -1,7 +1,7 @@
 import type { UsesGroup as UsesGroupData, UsesItem } from "@core/content/model"
 import { PanelLabel } from "@pattern/panel-label"
 import { Register } from "@pattern/register"
-import { StackRow } from "@pattern/stack-row"
+import { StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 

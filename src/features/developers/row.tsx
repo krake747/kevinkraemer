@@ -1,4 +1,4 @@
-import { StackRow } from "@pattern/stack-row"
+import { StackRow } from "@pattern/stack"
 import type { ParentProps } from "solid-js"
 
 export function DevelopersRow(props: ParentProps) {

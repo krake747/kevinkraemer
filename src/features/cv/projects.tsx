@@ -1,7 +1,6 @@
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
-import { Stack } from "@pattern/stack"
-import { StackRow } from "@pattern/stack-row"
+import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { ArrowUpRight } from "@ui/icon"
 import { For, Show, type VoidProps } from "solid-js"

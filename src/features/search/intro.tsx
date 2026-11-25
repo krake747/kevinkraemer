@@ -1,6 +1,6 @@
 import { SearchPanelNote } from "@features/search/panel"
 import { SearchShortcuts } from "@features/search/shortcuts"
-import { StackRow } from "@pattern/stack-row"
+import { StackRow } from "@pattern/stack"
 import { formatShortcut } from "@ui-sdk/core"
 import { InlineCode } from "@ui/inline-code"
 import { Kbd } from "@ui/kbd"

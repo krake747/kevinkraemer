@@ -1,4 +1,4 @@
-import { StackRow } from "@pattern/stack-row"
+import { StackRow } from "@pattern/stack"
 import type { ComponentProps } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { omit, type ParentProps } from "solid-js"

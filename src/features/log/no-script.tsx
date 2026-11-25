@@ -1,7 +1,7 @@
 import type { LogEntry } from "@core/content/model"
 import { sortByDateDesc } from "@core/content/model"
 import { escapeXml } from "@core/site/respond"
-import { stackRow } from "@pattern/stack-row"
+import { stackRow } from "@pattern/stack"
 import type { VoidProps } from "solid-js"
 
 export function LogNoScript(props: VoidProps<{ entries: LogEntry[] }>) {
