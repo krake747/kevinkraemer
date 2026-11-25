@@ -41,11 +41,8 @@ export function SearchInterface() {
                 <div class="flex items-center justify-end gap-3 sm:contents">
                     <Loading fallback={null}>
                         <Show when={total() !== null}>
-                            <span class="shrink-0 font-mono text-xs whitespace-nowrap text-stone-600 tabular-nums dark:text-stone-400">
+                            <span class="min-w-14 shrink-0 text-right font-mono text-xs whitespace-nowrap text-stone-600 tabular-nums dark:text-stone-400">
                                 {total()} {total() === 1 ? "hit" : "hits"}
-                                <span aria-hidden="true" class="px-1.5 text-stone-400">
-                                    ·
-                                </span>
                             </span>
                         </Show>
                     </Loading>
