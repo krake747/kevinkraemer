@@ -54,8 +54,8 @@ specimens, borrowing Bloomberg Terminal density without nostalgia. Defined in fu
 register, and custom pages compose on it directly; document and detail pages get it through their
 page component. _Avoid_: shell, wrapper
 
-**DocumentPage**: A prose document page: `PageColumn`, narrow measure, required `PageHeader`.
-_Avoid_: ProseShell, shell, template
+**DocumentPage**: A prose document page: `PageColumn`, narrow measure, and a `PageHeader` the caller
+composes as a child. _Avoid_: ProseShell, shell, template
 
 **DetailPage**: An entry page: `PageColumn` plus `Seo`. The route passes breadcrumbs through
 `sectionTrail`. _Avoid_: DetailShell, shell, template
@@ -71,10 +71,11 @@ entries, search hits). One `RegisterRow` per entry. A `Register` with a side rai
 **RecordRow**: One labeled record in a case file or reference (role, stack, status). Label width is
 a variant, never a call-site class. _Avoid_: key-value row, metadata row, field
 
-**PageHeader**: The opening block of a page: `TerminalCommandHeader`, title, optional meta. The
-industry shape (Primer: title, description, actions); the `command` slot is this site's terminal
-twist. _Avoid_: page hero, title block
+**PageHeader**: The opening block of a page. A root `header`; the caller composes
+`TerminalCommandHeader`, `PageHeaderTitle`, and optional `PageHeaderMeta` as children. The industry
+shape is still a title with room for meta; this site's terminal command is a child, not a slot.
+_Avoid_: page hero, title block
 
-**DocumentSection**: A labeled section: the caller composes `SectionHeading` and the body as
-children of `DocumentSection`. `DocumentSectionBody` takes `as`: `"div"` (default) or `"p"` for a
-single paragraph. _Avoid_: section wrapper, content block
+**DocumentSection**: A labelled section: the caller composes `SectionHeading` and the body as
+children of `DocumentSection`. Change `DocumentSectionBody`'s element with `render` (`div` by
+default, or a `p` for a single paragraph). _Avoid_: section wrapper, content block

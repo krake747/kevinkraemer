@@ -49,10 +49,10 @@ URL change goes to `Anchor`; filter toggle to `Chip`; action to `Button`; label 
 variants: `prose` default, `channel`, `muted`, `title`, `nav`, `subtle`, `mono` — seven only, no
 call-site restyle. `Button` intents `quiet` / `muted` / `link`; never navigates, never disabled —
 omit instead. `Chip` is `aria-pressed` filter state only. `Badge` tones `neutral` / `emerald`, sizes
-`sm` / `xs`; `interactive` only when `as="a"`. Off-site links take the `external` prop on `Anchor`
-(`Badge as="a"` too): new tab plus the `sr-only` note, no call-site attrs. Same-site documents
-(feeds, text files, the PDF) keep `rel="external"`: the value is the router's opt-out from
-client-side navigation, not a new tab.
+`sm` / `xs`; `interactive` only when `Badge` is rendered as an `a`. Off-site links take the
+`external` prop on `Anchor` (and on a `Badge` rendered as an `a`): new tab plus the `sr-only` note,
+no call-site attrs. Same-site documents (feeds, text files, the PDF) keep `rel="external"`: the
+value is the router's opt-out from client-side navigation, not a new tab.
 
 ## Forms — `Input`, focus, hit areas
 

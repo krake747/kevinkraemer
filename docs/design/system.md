@@ -66,16 +66,15 @@ Never:
   wrapped in `cx` so Tailwind conflicts merge:
   `class={cx(anchor({ variant: props.variant, class: props.class }))}`.
 - Primitive props come from the platform: `ComponentProps<"tag">` for element props,
-  `VariantProps<typeof variant>` for CVA values. A component that renders more than one tag declares
-  the attributes its call sites use (`Badge` takes `ComponentProps<"a">` when `as="a"`).
-- Polymorphism is one prop, `as`, typed to the tags the component accepts (`StackRow` takes any
-  `ValidComponent`, `Stack` takes `div`/`ul`/`dl`, `Badge` takes `span`/`a`). The shared
-  merge/dynamic/omit shape lives in `src/ui/create-polymorphic.ts` and is what `Stack`, `StackRow`,
-  `Register`, and `DocumentSectionBody` use. `Badge` keeps the pattern inline because its merge
-  default includes `tone` and omit depends on `as`. The default is the component's natural tag
-  (`"div"` for `StackRow` and `Stack`, `"span"` for `Badge`). The value is a tag name (`as="li"`,
-  `as="a"`), never `as={<li />}`. The `static` flag is safe because every call site passes a
-  literal; an expression `as` keeps the memo.
+  `VariantProps<typeof variant>` for CVA values. When a part's element changes with `render`, the
+  rendered tag's attributes flow through the supplied props (`Badge` as an `a` takes `href` that
+  way).
+- Change the element with ui-sdk `render`, never an `as` prop. The default remains the component's
+  natural tag (`div` for `Stack` and `StackRow`, `span` for `Badge`, `div` for
+  `DocumentSectionBody`). A function passed to `render` must forward the supplied props, as in
+  `node_modules/@ui-sdk/solid/docs/parts-and-composition.md`. `createPolymorphic` and the
+  first-party `as` prop are the old shape; do not add new `as` APIs, and migrate the hosts that
+  still use them (`Stack`, `StackRow`, `Register`, `DocumentSectionBody`, `Badge`).
 
 ## Shared chrome
 

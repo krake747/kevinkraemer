@@ -52,15 +52,16 @@ the section label.
 
 Every page opens one of three ways, and the first is enforced by code:
 
-| Page kind                                              | Open with                                                                         |
-| ------------------------------------------------------ | --------------------------------------------------------------------------------- |
-| `DocumentPage` route (`src/pattern/document-page.tsx`) | The layout itself: `command` prop (required) → `TerminalCommandHeader`, then `h1` |
-| Index route (not `DocumentPage`)                       | `TerminalCommandHeader`, then `h1`                                                |
-| Entry route (`/logs/[slug]`)                           | `TerminalCommandHeader`, then `h1`, with optional `meta`                          |
+| Page kind                                              | Open with                                                                                     |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------------------- |
+| `DocumentPage` route (`src/pattern/document-page.tsx`) | The route composes a `PageHeader` as a child: `TerminalCommandHeader`, then `PageHeaderTitle` |
+| Index route (not `DocumentPage`)                       | `TerminalCommandHeader`, then `PageHeaderTitle`                                               |
+| Entry route (`/logs/[slug]`)                           | `TerminalCommandHeader`, then `PageHeaderTitle`, with optional `PageHeaderMeta`               |
 
-Why the layout owns it: `DocumentPage` takes `command` as a required prop, so a DocumentPage page
-physically cannot ship without exactly one command. Hand-rolling that header re-implements the h1
-size and the `kk-cascade` column, and will drift from all seven `DocumentPage` pages.
+Why the route owns it: `DocumentPage` is the column and the measure, not the header. The caller
+writes the command and the title as children, the same way it already composes `DocumentSection`.
+Use `PageHeader` and `PageHeaderTitle` so the h1 size does not drift across the seven document
+pages. Do not hand-roll that header.
 
 The DocumentSection anatomy is for sections with a heading that earns its place; a two-sentence
 intro on a page that then lists rows has no heading to give. Do not invent a heading so a short
@@ -96,9 +97,9 @@ A prose section is a `DocumentSection` with a `SectionHeading` and a `DocumentSe
   the heading and as `aria-labelledby` on the section — that is what splitting the anchor from the
   label costs, and duplicating it is correct.
 - `DocumentSectionBody` is the measure column (`max-w-prose`), stone-600 body. It is the only place
-  the prose measure is declared. It takes `as`: `"div"` (default) for several paragraphs, with
-  `flex-col gap-4`, or `"p"` for a single-paragraph body, without the flex layout so inline links
-  stay in the paragraph flow.
+  the prose measure is declared. The default element is a `div` with `flex-col gap-4`. For a
+  single-paragraph body, change the element with `render` to a `p`, without the flex layout so
+  inline links stay in the paragraph flow.
 - `CvSection` takes `id` and wraps the section. `CvSectionHeading` takes the heading as children and
   uses a `$` prompt instead of the `#` hash.
 - The landing story is the one prose grid that is deliberately unequal: `lg:col-span-5` +
@@ -110,7 +111,7 @@ Correct — the caller composes the heading and the body, with the heading id tw
 ```tsx
 <DocumentSection aria-labelledby="philosophy-heading">
   <SectionHeading id="philosophy-heading">philosophy</SectionHeading>
-  <DocumentSectionBody as="p">I build in small vertical slices.</DocumentSectionBody>
+  <DocumentSectionBody render={(props) => <p {...props}>I build in small vertical slices.</p>} />
 </DocumentSection>
 ```
 
@@ -125,21 +126,25 @@ Incorrect — a hand-rolled heading and a raw measure:
 
 ## Registers and rails
 
-Most browsable lists are a `Register` of `RegisterRow`s with one action per row. Empty states are
-`EmptyRegister`; the way back is `ReturnToRegister`. A page with a side rail composes
-`RegisterWithRail`: main content (including the mobile disclosure) plus shell-less rail content; the
-grid, the sticky offset, and the desktop-only aside stay in the component.
+Most browsable lists are a `Register` of `RegisterRow`s, one action per row, with the row's title,
+description, and meta written as children of those parts. Empty states are `EmptyRegister`, with its
+title, note, and action as child parts, not JSX props. The way back is `ReturnToRegister`. A page
+with a side rail composes `RegisterWithRail`: main content (including the mobile disclosure) as
+children, and the rail as a child part, not a `rail` prop. The grid, the sticky offset, and the
+desktop-only aside stay in the component.
 
 Two ruled exceptions keep their own shape: `/projects` divides entries with a single rule and no
 frame (`docs/design/projects.md`), and `/cv` keeps its compact `$`-marked sections for print. Record
-rows with linked labels stay hand-rolled: `RecordRow` takes a plain-text label only.
+rows with linked labels stay hand-rolled: a `RecordRow` label is plain text, written as children of
+the label part, not a `label` prop.
 
 ## Content models
 
 Elements mean what the spec says, so the tag must match the content, not the styling:
 
-- Polymorphic `as` stays inside one family: `ul` takes `li`, `dl` takes `dt`/`dd` groups (a plain
-  `div` may wrap one group), `details` takes exactly one leading `summary`. Never cross families.
+- When a part's element changes with `render`, stay inside one family: `ul` takes `li`, `dl` takes
+  `dt`/`dd` groups (a plain `div` may wrap one group), `details` takes exactly one leading
+  `summary`. Never cross families.
 - Every `section` carries a name. `DocumentSection` pairs `aria-labelledby` with its `h2`;
   `TerminalSection` names itself with its command.
 - One `h1` per page from `PageHeader`, then step by one. No heading inside `li`.
