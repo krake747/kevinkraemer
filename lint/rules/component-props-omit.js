@@ -39,10 +39,7 @@ function isHostPropsReference(node) {
 }
 
 function marksPolymorphic(node) {
-    if (node.type === "TSUnionType") {
-        return true
-    }
-    return node.type === "TSPropertySignature" && node.key.type === "Identifier" && node.key.name === "as"
+    return node.type === "TSUnionType"
 }
 
 function isClassOmitCall(node, names) {
