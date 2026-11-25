@@ -9,3 +9,13 @@ export const RSS_PATH = "/rss.xml"
 export function canonicalFor(path: string): string {
     return `${origin}${path}`
 }
+
+export type Crumb = { name: string; url?: string }
+
+export function sectionTrail(sectionName: string, sectionPath: string, currentName: string): Crumb[] {
+    return [
+        { name: "Home", url: canonicalFor("/") },
+        { name: sectionName, url: canonicalFor(sectionPath) },
+        { name: currentName },
+    ]
+}
