@@ -13,7 +13,7 @@ const ON_THIS_PAGE = [
 
 export function DevelopersOnThisPage() {
     return (
-        <StackRow as="nav" size="compact" aria-label="On this page">
+        <StackRow render={(renderProps) => <nav {...renderProps} />} size="compact" aria-label="On this page">
             <ol class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
                 <For each={ON_THIS_PAGE}>
                     {(item, index) => (

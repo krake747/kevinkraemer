@@ -1,6 +1,6 @@
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
 import { PanelLabel } from "@ui/panel-label"
-import { For, Show, type VoidProps } from "solid-js"
+import { For } from "solid-js"
 
 const STATUS_ROWS = [
     { label: "base", value: "Luxembourg · CET" },
@@ -23,28 +23,27 @@ function ContactStatusRows() {
     )
 }
 
-export function ContactStatus(props: VoidProps<{ as: "details" | "aside" }>) {
+export function ContactStatusDisclosure() {
     return (
-        <Show
-            when={props.as === "details"}
-            fallback={
-                <div>
-                    <PanelLabel id="contact-status-label" class="border-b border-stone-200 pb-2 dark:border-stone-800">
-                        status
-                    </PanelLabel>
-                    <ContactStatusRows />
-                </div>
-            }
-        >
-            <DisclosureRow>
-                <DisclosureRowSummary>
-                    <span class="group-open:hidden">+ status</span>
-                    <span class="hidden group-open:inline">− status</span>
-                </DisclosureRowSummary>
-                <DisclosureRowBody>
-                    <ContactStatusRows />
-                </DisclosureRowBody>
-            </DisclosureRow>
-        </Show>
+        <DisclosureRow>
+            <DisclosureRowSummary>
+                <span class="group-open:hidden">+ status</span>
+                <span class="hidden group-open:inline">− status</span>
+            </DisclosureRowSummary>
+            <DisclosureRowBody>
+                <ContactStatusRows />
+            </DisclosureRowBody>
+        </DisclosureRow>
+    )
+}
+
+export function ContactStatusPanel() {
+    return (
+        <div>
+            <PanelLabel id="contact-status-label" class="border-b border-stone-200 pb-2 dark:border-stone-800">
+                status
+            </PanelLabel>
+            <ContactStatusRows />
+        </div>
     )
 }

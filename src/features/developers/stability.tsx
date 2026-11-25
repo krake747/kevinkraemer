@@ -12,7 +12,7 @@ export function DevelopersStability() {
     return (
         <DocumentSection aria-labelledby="stability-heading">
             <SectionHeading id="stability-heading">stability</SectionHeading>
-            <Register as="ul">
+            <Register render={(renderProps) => <ul {...renderProps} />}>
                 <DevelopersRow>
                     <DevelopersLead>Versioning</DevelopersLead>{" "}
                     <DevelopersProse>

@@ -1,36 +1,39 @@
 import type { ComponentProps, JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
-import { createPolymorphic } from "@ui/create-polymorphic"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
 import { StackRow } from "@ui/stack-row"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
 
-type RegisterDivProps = ComponentProps<"div"> & { as?: "div" }
-type RegisterUlProps = ComponentProps<"ul"> & { as: "ul" }
-type RegisterDlProps = ComponentProps<"dl"> & { as: "dl" }
+type RegisterProps = ComponentProps<"div"> & {
+    render?: (props: Record<string, any>) => JSX.Element
+}
 
-export function Register(_props: RegisterDivProps | RegisterUlProps | RegisterDlProps) {
-    const { props, Tag, rest } = createPolymorphic(_props, "div")
-    return (
-        <Tag {...rest} class={cx("m-0 flex list-none flex-col gap-2 p-0", props.class)}>
-            {props.children}
-        </Tag>
-    )
+export function Register(props: RegisterProps) {
+    const rest = omit(props, "class", "children", "render")
+    const merged = merge(rest, {
+        get class() {
+            return cx("m-0 flex list-none flex-col gap-2 p-0", props.class)
+        },
+        get children() {
+            return props.children
+        },
+    })
+    return <>{props.render?.(merged) ?? <div {...merged} />}</>
 }
 
 type RegisterRowProps = ParentProps<{
     href: string
-    as?: "div" | "li" | "article"
     class?: string
+    render?: (props: Record<string, any>) => JSX.Element
 }>
 
 export function RegisterRow(props: RegisterRowProps) {
-    const rest = omit(props, "class", "children", "href", "as")
+    const rest = omit(props, "class", "children", "href", "render")
     return (
         <StackRow
             {...rest}
-            as={props.as ?? "div"}
+            render={props.render}
             interactive
             class={cx("flex items-center justify-between", props.class)}
         >

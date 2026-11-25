@@ -30,7 +30,10 @@ export function CvExperience(props: VoidProps<{ id: string }>) {
                         const period = toPeriod(item)
                         return (
                             <CvEntry period={period}>
-                                <StackRow as="article" class="break-inside-avoid">
+                                <StackRow
+                                    render={(renderProps) => <article {...renderProps} />}
+                                    class="break-inside-avoid"
+                                >
                                     <CvRowHeader title={item.company} meta={item.location} />
                                     <CvRole>{item.role}</CvRole>
                                     <CvDates period={period} />

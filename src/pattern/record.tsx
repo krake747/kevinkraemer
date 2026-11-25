@@ -26,7 +26,7 @@ type RecordRowProps = ParentProps<
 export function RecordRow(props: RecordRowProps) {
     const rest = omit(props, "class", "children", "width")
     return (
-        <StackRow {...rest} as="div" class={cx(recordRow({ width: props.width, class: props.class }))}>
+        <StackRow {...rest} class={cx(recordRow({ width: props.width, class: props.class }))}>
             {props.children}
         </StackRow>
     )

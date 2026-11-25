@@ -1,6 +1,6 @@
 import { ContactChannels } from "@features/contact/channels"
 import { ContactGuide } from "@features/contact/guide"
-import { ContactStatus } from "@features/contact/status"
+import { ContactStatusDisclosure, ContactStatusPanel } from "@features/contact/status"
 import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
@@ -23,11 +23,11 @@ export default function ContactRoute() {
                 <ContactChannels />
                 <RegisterWithRail spacing="loose">
                     <RegisterWithRailMain>
-                        <ContactStatus as="details" />
+                        <ContactStatusDisclosure />
                         <ContactGuide />
                     </RegisterWithRailMain>
                     <RegisterWithRailRail labelledby="contact-status-label">
-                        <ContactStatus as="aside" />
+                        <ContactStatusPanel />
                     </RegisterWithRailRail>
                 </RegisterWithRail>
             </div>

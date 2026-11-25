@@ -34,7 +34,7 @@ export function DevelopersResponses() {
     return (
         <DocumentSection aria-labelledby="responses-heading">
             <SectionHeading id="responses-heading">responses</SectionHeading>
-            <Register as="ul">
+            <Register render={(renderProps) => <ul {...renderProps} />}>
                 <For each={RESPONSE_ROWS}>
                     {(row) => (
                         <DevelopersRow>

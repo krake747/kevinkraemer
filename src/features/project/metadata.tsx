@@ -6,7 +6,7 @@ import { Show, type VoidProps } from "solid-js"
 
 export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
     return (
-        <Register as="dl" aria-label="Project metadata" class="mb-12">
+        <Register render={(renderProps) => <dl {...renderProps} />} aria-label="Project metadata" class="mb-12">
             <RecordRow>
                 <RecordRowLabel>Role</RecordRowLabel>
                 <dd class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">{props.project.role}</dd>

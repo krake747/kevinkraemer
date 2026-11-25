@@ -45,7 +45,17 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
                                     <For each={entry().tags}>
                                         {(tag) => (
                                             <>
-                                                <Badge as="a" href={`/search?q=${encodeURIComponent(tag)}`} interactive>
+                                                <Badge
+                                                    interactive
+                                                    render={(renderProps) => (
+                                                        <a
+                                                            {...renderProps}
+                                                            href={`/search?q=${encodeURIComponent(tag)}`}
+                                                        >
+                                                            {renderProps.children}
+                                                        </a>
+                                                    )}
+                                                >
                                                     #{tag}
                                                 </Badge>{" "}
                                             </>

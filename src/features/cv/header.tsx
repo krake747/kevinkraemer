@@ -22,12 +22,15 @@ export function CvHeader() {
                             {CV_NAME}
                         </h1>
                         <Badge
-                            as="a"
-                            href="https://www.simpleip.com"
-                            target={{ kind: "external" }}
                             tone="emerald"
                             interactive
                             class="w-fit"
+                            target={{ kind: "external" }}
+                            render={(renderProps) => (
+                                <a {...renderProps} href="https://www.simpleip.com">
+                                    {renderProps.children}
+                                </a>
+                            )}
                         >
                             Building @ Simple IP
                         </Badge>

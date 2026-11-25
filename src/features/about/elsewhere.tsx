@@ -6,7 +6,7 @@ export function AboutElsewhere() {
     return (
         <DocumentSection aria-labelledby="about-elsewhere-heading">
             <SectionHeading id="about-elsewhere-heading">elsewhere</SectionHeading>
-            <DocumentSectionBody as="p">
+            <DocumentSectionBody render={(renderProps) => <p {...renderProps} />}>
                 The professional version lives on the{" "}
                 <Anchor href="/cv" variant="prose">
                     CV

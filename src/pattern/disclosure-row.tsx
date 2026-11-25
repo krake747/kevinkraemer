@@ -6,7 +6,12 @@ import { omit, type ParentProps } from "solid-js"
 export function DisclosureRow(props: ParentProps<{ class?: string }>) {
     const rest = omit(props, "class", "children")
     return (
-        <StackRow {...rest} as="details" size="compact" class={cx("group accordion lg:hidden", props.class)}>
+        <StackRow
+            {...rest}
+            render={(renderProps) => <details {...renderProps} />}
+            size="compact"
+            class={cx("group accordion lg:hidden", props.class)}
+        >
             {props.children}
         </StackRow>
     )

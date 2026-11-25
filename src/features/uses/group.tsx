@@ -24,7 +24,11 @@ function toolName(item: UsesItem, variant: "channel" | "muted") {
 
 function UsesRow(props: VoidProps<{ item: UsesItem }>) {
     return (
-        <StackRow as="li" size="compact" class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+        <StackRow
+            render={(renderProps) => <li {...renderProps} />}
+            size="compact"
+            class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4"
+        >
             <span class="sm:w-56 sm:shrink-0">{toolName(props.item, "muted")}</span>
             <span class="min-w-0 text-sm/relaxed text-stone-600 sm:flex-1 dark:text-stone-400">{props.item.note}</span>
         </StackRow>
@@ -33,7 +37,7 @@ function UsesRow(props: VoidProps<{ item: UsesItem }>) {
 
 function UsesRows(props: VoidProps<{ items: UsesItem[] }>) {
     return (
-        <Register as="ul">
+        <Register render={(renderProps) => <ul {...renderProps} />}>
             <For each={props.items}>{(item) => <UsesRow item={item} />}</For>
         </Register>
     )

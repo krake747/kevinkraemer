@@ -5,7 +5,7 @@ import type { VoidProps } from "solid-js"
 
 export function LogEntryPanel(props: VoidProps<{ entry: LogSummary }>) {
     return (
-        <RegisterRow as="article" href={`/logs/${props.entry.id}`}>
+        <RegisterRow render={(renderProps) => <article {...renderProps} />} href={`/logs/${props.entry.id}`}>
             <RegisterRowTitle render={(title) => <h2 {...title}>{title.children}</h2>}>
                 {props.entry.title}
             </RegisterRowTitle>

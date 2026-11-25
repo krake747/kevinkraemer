@@ -1,7 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
-import { createPolymorphic } from "@ui/create-polymorphic"
 import { cx } from "@ui/cva.config"
-import { omit } from "solid-js"
+import { merge, omit } from "solid-js"
 
 export function DocumentSection(props: ComponentProps<"section">) {
     const rest = omit(props, "class", "children")
@@ -12,21 +11,26 @@ export function DocumentSection(props: ComponentProps<"section">) {
     )
 }
 
-type DocumentSectionBodyDivProps = ComponentProps<"div"> & { as?: "div" }
-type DocumentSectionBodyPProps = ComponentProps<"p"> & { as: "p" }
+type DocumentSectionBodyProps = ComponentProps<"div"> & {
+    render?: (props: Record<string, any>) => JSX.Element
+}
 
-export function DocumentSectionBody(_props: DocumentSectionBodyDivProps | DocumentSectionBodyPProps): JSX.Element {
-    const { props, Tag, rest } = createPolymorphic(_props, "div")
-    return (
-        <Tag
-            {...rest}
-            class={cx(
+export function DocumentSectionBody(props: DocumentSectionBodyProps): JSX.Element {
+    const rest = omit(props, "class", "children", "render")
+    const merged = merge(rest, {
+        get class() {
+            if (props.render) {
+                return cx("max-w-prose text-base/[1.8] text-stone-600 dark:text-stone-400", props.class)
+            }
+            return cx(
                 "max-w-prose text-base/[1.8] text-stone-600 dark:text-stone-400",
-                props.as === "div" && "flex flex-col gap-4",
+                "flex flex-col gap-4",
                 props.class,
-            )}
-        >
-            {props.children}
-        </Tag>
-    )
+            )
+        },
+        get children() {
+            return props.children
+        },
+    })
+    return <>{props.render?.(merged) ?? <div {...merged} />}</>
 }

@@ -52,7 +52,7 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                     <Stack class="mt-4">
                         <For each={props.project.evidence}>
                             {(item) => (
-                                <StackRow as="figure" size="compact">
+                                <StackRow render={(renderProps) => <figure {...renderProps} />} size="compact">
                                     <p class="font-mono text-sm/[1.8] text-stone-700 dark:text-stone-300">
                                         {item.caption}
                                     </p>
@@ -64,11 +64,11 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
             </Show>
             <Show when={props.project.changelog.length > 0}>
                 <ProjectSection id="changelog" title="Changelog">
-                    <Register as="ul" class="mt-4">
+                    <Register render={(renderProps) => <ul {...renderProps} />} class="mt-4">
                         <For each={props.project.changelog}>
                             {(item) => (
                                 <StackRow
-                                    as="li"
+                                    render={(renderProps) => <li {...renderProps} />}
                                     class="grid gap-1 sm:grid-cols-[minmax(0,16rem)_1fr] sm:items-baseline sm:gap-4"
                                 >
                                     {item.href ? (

@@ -54,7 +54,7 @@ export function CvEducation(props: VoidProps<{ id: string }>) {
             <Stack>
                 <For each={EDUCATION_ENTRIES}>
                     {(item) => (
-                        <StackRow as="article" class="break-inside-avoid">
+                        <StackRow render={(renderProps) => <article {...renderProps} />} class="break-inside-avoid">
                             <CvRowHeader title={item.institution} meta={item.location} />
                             <CvRole>{item.degree}</CvRole>
                             <CvDates

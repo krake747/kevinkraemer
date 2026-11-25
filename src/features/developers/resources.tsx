@@ -13,10 +13,10 @@ export function DevelopersResources() {
     return (
         <DocumentSection aria-labelledby="resources-heading">
             <SectionHeading id="resources-heading">resources</SectionHeading>
-            <Register as="ul">
+            <Register render={(renderProps) => <ul {...renderProps} />}>
                 <For each={RESOURCE_ENTRIES}>
                     {(resource) => (
-                        <StackRow as="li" class="grid gap-1.5">
+                        <StackRow render={(renderProps) => <li {...renderProps} />} class="grid gap-1.5">
                             <Anchor href={resource.path} variant="channel" rel="external" class="hit-area-y-2">
                                 {resource.path}
                             </Anchor>

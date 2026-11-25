@@ -4,10 +4,10 @@ import { For, type VoidProps } from "solid-js"
 
 export function SearchResults(props: VoidProps<{ hits: SearchHit[] }>) {
     return (
-        <Register as="ul">
+        <Register render={(renderProps) => <ul {...renderProps} />}>
             <For each={props.hits} keyed={(hit) => hit.href}>
                 {(hit) => (
-                    <RegisterRow as="li" href={hit().href}>
+                    <RegisterRow render={(renderProps) => <li {...renderProps} />} href={hit().href}>
                         <RegisterRowTitle>{hit().title}</RegisterRowTitle>
                         <RegisterRowDescription lines={2}>{hit().excerpt}</RegisterRowDescription>
                         <RegisterRowMeta>
