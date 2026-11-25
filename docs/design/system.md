@@ -66,9 +66,11 @@ Never:
   wrapped in `cx` so Tailwind conflicts merge:
   `class={cx(anchor({ variant: props.variant, class: props.class }))}`.
 - Primitive props come from the platform: `ComponentProps<"tag">` for element props,
-  `VariantProps<typeof variant>` for CVA values. When a part's element changes with `render`, the
-  rendered tag's attributes flow through the supplied props (`Badge` as an `a` takes `href` that
-  way).
+  `VariantProps<typeof variant>` for CVA values. A part that takes `render` uses `WithRender` from
+  `@ui/render`, never a bespoke render signature. A part that reuses another component's CVA values
+  narrows them (`Extract`/`Pick`), never restates the literals. When a part's element changes with
+  `render`, the rendered tag's attributes flow through the supplied props (`Badge` as an `a` takes
+  `href` that way).
 - Change the element with ui-sdk `render`, never an `as` prop. The default remains the component's
   natural tag (`div` for `Stack` and `StackRow`, `span` for `Badge`, `div` for
   `DocumentSectionBody`). A function passed to `render` must forward the supplied props, as in

@@ -138,6 +138,11 @@ frame (`docs/design/projects.md`), and `/cv` keeps its compact `$`-marked sectio
 rows with linked labels stay hand-rolled: a `RecordRow` label is plain text, written as children of
 the label part, not a `label` prop.
 
+Allowed compounds are parent plus part: `RegisterRowTitle`, `RegisterRowDescription`,
+`RegisterRowMeta`, `RegisterWithRailMain`, `RegisterWithRailRail`, `EmptyRegisterTitle`,
+`EmptyRegisterNote`, `EmptyRegisterAction`, `ReturnToRegister`. No new kind is introduced; the kinds
+stay `Page`, `Section`, `Row`, `Panel`, `Header`, `Heading`, `Column`, `Frame`, `Label`, `Rail`.
+
 ## Content models
 
 Elements mean what the spec says, so the tag must match the content, not the styling:
