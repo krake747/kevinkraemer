@@ -3,7 +3,7 @@ import { colorScheme } from "@core/theme"
 import { Footer } from "@features/footer/footer"
 import { Header } from "@features/header/header"
 import { registerWebMcpTools } from "@features/webmcp/register"
-import { createRouter, useNavigate } from "@solidjs/router"
+import { createRouter, intentPreload, useNavigate } from "@solidjs/router"
 import { fileRoutes } from "@solidjs/router/fs"
 import { isServer } from "@solidjs/web"
 import { Preferences } from "@ui-sdk/solid/preferences"
@@ -12,7 +12,7 @@ import { pageRoutes } from "virtual:file-routes"
 
 import "./app.css"
 
-const Router = createRouter({ routes: fileRoutes(pageRoutes) })
+const Router = createRouter({ routes: fileRoutes(pageRoutes), preloadLinks: intentPreload() })
 
 function Layout(props: ParentProps) {
     const navigate = useNavigate()

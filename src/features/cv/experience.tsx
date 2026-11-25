@@ -7,8 +7,7 @@ import { CvRole } from "@features/cv/role"
 import { CvRowHeader } from "@features/cv/row-header"
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
+import { Stack, StackRow } from "@pattern/stack"
 import { For, type VoidProps } from "solid-js"
 
 const EXPERIENCE_ENTRIES = sortByOrder(siteContent.experience)
@@ -30,7 +29,10 @@ export function CvExperience(props: VoidProps<{ id: string }>) {
                         const period = toPeriod(item)
                         return (
                             <CvEntry period={period}>
-                                <StackRow as="article" class="break-inside-avoid">
+                                <StackRow
+                                    render={(renderProps) => <article {...renderProps} />}
+                                    class="break-inside-avoid"
+                                >
                                     <CvRowHeader title={item.company} meta={item.location} />
                                     <CvRole>{item.role}</CvRole>
                                     <CvDates period={period} />

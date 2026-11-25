@@ -1,5 +1,7 @@
 import { defineRule } from "vite-plus/lint/plugins"
 
+import { isUiOrPatternTsx } from "./shared.js"
+
 function walkAST(node, onNode, seen) {
     if (node === null || typeof node !== "object" || seen.has(node)) {
         return
@@ -37,10 +39,7 @@ function isHostPropsReference(node) {
 }
 
 function marksPolymorphic(node) {
-    if (node.type === "TSUnionType") {
-        return true
-    }
-    return node.type === "TSPropertySignature" && node.key.type === "Identifier" && node.key.name === "as"
+    return node.type === "TSUnionType"
 }
 
 function isClassOmitCall(node, names) {
@@ -104,6 +103,13 @@ function usesOmitSpread(body, propsName) {
             if (node.type === "JSXSpreadAttribute") {
                 used.spread = true
             }
+            if (
+                node.type === "CallExpression" &&
+                node.callee.type === "Identifier" &&
+                node.callee.name === "renderElement"
+            ) {
+                used.spread = true
+            }
         },
         new Set(),
     )
@@ -160,10 +166,7 @@ export const componentPropsOmit = defineRule({
         },
     },
     create(context) {
-        if (!context.filename.includes("src/ui/") && !context.filename.includes("src/pattern/")) {
-            return {}
-        }
-        if (!context.filename.endsWith(".tsx")) {
+        if (!isUiOrPatternTsx(context.filename)) {
             return {}
         }
         return {

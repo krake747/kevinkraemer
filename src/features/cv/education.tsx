@@ -4,9 +4,8 @@ import { CvRole } from "@features/cv/role"
 import { CvRowHeader } from "@features/cv/row-header"
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
-import { For, type VoidProps } from "solid-js"
+import { Stack, StackRow } from "@pattern/stack"
+import { For, Show, type VoidProps } from "solid-js"
 
 type Education = {
     institution: string
@@ -54,16 +53,18 @@ export function CvEducation(props: VoidProps<{ id: string }>) {
             <Stack>
                 <For each={EDUCATION_ENTRIES}>
                     {(item) => (
-                        <StackRow as="article" class="break-inside-avoid">
+                        <StackRow render={(renderProps) => <article {...renderProps} />} class="break-inside-avoid">
                             <CvRowHeader title={item.institution} meta={item.location} />
                             <CvRole>{item.degree}</CvRole>
                             <CvDates
                                 period={{ kind: "past", start: item.startDate, end: item.endDate }}
                                 separator="to"
                             />
-                            {item.details !== undefined && item.details.length > 0 ? (
-                                <CvBullets items={item.details} />
-                            ) : null}
+                            <Show
+                                when={item.details !== undefined && item.details.length > 0 ? item.details : undefined}
+                            >
+                                {(details) => <CvBullets items={details()} />}
+                            </Show>
                         </StackRow>
                     )}
                 </For>

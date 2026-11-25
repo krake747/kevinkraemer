@@ -1,7 +1,7 @@
 import type { FlowName, FlowStep } from "@core/content/graphs"
 import { namedFlows } from "@core/content/graphs"
 import type { GraphFlowSpec } from "@core/content/model"
-import { For, type VoidProps } from "solid-js"
+import { For, Show, type VoidProps } from "solid-js"
 
 type Lane = {
     caption: string
@@ -56,11 +56,11 @@ export function LogGraphFlow(props: VoidProps<{ spec: GraphFlowSpec }>) {
                     <For each={lanesFor(props.spec)}>
                         {(lane) => (
                             <div class="flex flex-col items-center">
-                                {props.spec.kind === "compare" ? (
+                                <Show when={props.spec.kind === "compare"}>
                                     <span class="mb-3 w-full translate-x-[0.05em] text-center text-[11px] tracking-widest text-(--graph-accent)">
                                         {lane.caption}
                                     </span>
-                                ) : null}
+                                </Show>
                                 <ol class="m-0 flex list-none flex-col items-center gap-0 p-0">
                                     <For each={lane.steps}>
                                         {(step, index) => (
@@ -69,18 +69,20 @@ export function LogGraphFlow(props: VoidProps<{ spec: GraphFlowSpec }>) {
                                                     <span class="border border-dashed border-(--graph-frame) px-4 py-1.5 text-stone-800 dark:border-stone-600 dark:text-stone-100">
                                                         {step.label}
                                                     </span>
-                                                    {step.sub ? (
-                                                        <span class="mt-1 text-xs text-stone-500 dark:text-stone-400">
-                                                            {step.sub}
-                                                        </span>
-                                                    ) : null}
+                                                    <Show when={step.sub}>
+                                                        {(sub) => (
+                                                            <span class="mt-1 text-xs text-stone-500 dark:text-stone-400">
+                                                                {sub()}
+                                                            </span>
+                                                        )}
+                                                    </Show>
                                                 </li>
-                                                {index() < lane.steps.length - 1 ? (
+                                                <Show when={index() < lane.steps.length - 1}>
                                                     <li class="flex flex-col items-center py-1" aria-hidden="true">
                                                         <span class="h-5 w-px border-l border-dashed border-(--graph-accent)" />
                                                         <span class="text-[11px]/none text-(--graph-accent)">▼</span>
                                                     </li>
-                                                ) : null}
+                                                </Show>
                                             </>
                                         )}
                                     </For>

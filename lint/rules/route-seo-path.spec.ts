@@ -30,7 +30,7 @@ tester.run("kk/route-seo-path", routeSeoPath, {
         {
             name: "generated page with a content-derived path",
             filename: "src/routes/logs/[slug].tsx",
-            code: "export default function LogRoute() { return <DetailShell seo={{ path: `/logs/${id}` }} /> }",
+            code: "export default function LogRoute() { return <DetailPage seo={{ path: `/logs/${id}` }} /> }",
         },
         {
             name: "not-found page carries no canonical path",
@@ -57,7 +57,7 @@ tester.run("kk/route-seo-path", routeSeoPath, {
             name: "generated page witness skips the literal check",
             filename: "src/routes/logs/[slug].tsx",
             code: `export const route = defineFileRoute("/logs/:slug")
-                export default function LogRoute() { return <DetailShell seo={{ path: \`/logs/\${id}\` }} /> }`,
+                export default function LogRoute() { return <DetailPage seo={{ path: \`/logs/\${id}\` }} /> }`,
         },
     ],
     invalid: [
@@ -82,7 +82,7 @@ tester.run("kk/route-seo-path", routeSeoPath, {
         {
             name: "generated page without a path",
             filename: "src/routes/logs/[slug].tsx",
-            code: "export default function LogRoute() { return <DetailShell seo={{ title: id }} /> }",
+            code: "export default function LogRoute() { return <DetailPage seo={{ title: id }} /> }",
             errors: [{ messageId: "seoPath" }],
         },
         {

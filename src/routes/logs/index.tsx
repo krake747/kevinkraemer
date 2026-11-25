@@ -3,12 +3,12 @@ import { canonicalFor } from "@core/site/urls"
 import { LogFilter } from "@features/log/filter"
 import { LogHeader } from "@features/log/header"
 import { LogNoScript } from "@features/log/no-script"
-import { PageShell } from "@pattern/page-shell"
+import { PageColumn } from "@pattern/page-column"
 import { BreadcrumbSchema, Seo } from "@pattern/seo"
 
 export default function LogsRoute() {
     return (
-        <PageShell>
+        <PageColumn>
             <Seo
                 title="Logs"
                 description="Thoughts on software architecture, type systems, finance meets code, and the spaces between."
@@ -18,6 +18,6 @@ export default function LogsRoute() {
             <LogHeader />
             <LogFilter entries={siteContent.logs} />
             <LogNoScript entries={siteContent.logs} />
-        </PageShell>
+        </PageColumn>
     )
 }

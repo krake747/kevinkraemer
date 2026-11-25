@@ -1,7 +1,7 @@
 import type { GraphFlowSpec } from "@core/content/model"
 import { LogGraphFlow } from "@features/log/graph-flow"
 import type { ComponentProps } from "@solidjs/web"
-import { For, omit, Show, type VoidProps } from "solid-js"
+import { For, Match, Show, Switch, omit, type VoidProps } from "solid-js"
 
 type Segment = { kind: "html"; html: string } | { kind: "graph"; slot: number }
 
@@ -42,13 +42,20 @@ export function LogBody(props: VoidProps<ComponentProps<"div"> & { html: string;
     return (
         <div {...rest} class={props.class}>
             <For each={segments()}>
-                {(segment) =>
-                    segment.kind === "graph" ? (
-                        <Show when={props.graphs[segment.slot]}>{(spec) => <LogGraphFlow spec={spec()} />}</Show>
-                    ) : (
-                        <div innerHTML={segment.html} />
-                    )
-                }
+                {(segment) => (
+                    <Switch>
+                        <Match when={segment.kind === "graph" ? segment : undefined}>
+                            {(graph) => (
+                                <Show when={props.graphs[graph().slot]}>
+                                    {(spec) => <LogGraphFlow spec={spec()} />}
+                                </Show>
+                            )}
+                        </Match>
+                        <Match when={segment.kind === "html" ? segment : undefined}>
+                            {(html) => <div innerHTML={html().html} />}
+                        </Match>
+                    </Switch>
+                )}
             </For>
         </div>
     )

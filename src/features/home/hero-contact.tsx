@@ -1,6 +1,6 @@
 import { site } from "@core/site/site-meta"
+import { SectionHeading } from "@pattern/section-heading"
 import { Anchor } from "@ui/anchor"
-import { SectionHeading } from "@ui/section-heading"
 import { For } from "solid-js"
 
 const HERO_CONTACTS = [

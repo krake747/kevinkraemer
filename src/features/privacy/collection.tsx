@@ -1,11 +1,11 @@
-import { ProseSection, ProseSectionBody } from "@ui/prose-section"
-import { SectionHeading } from "@ui/section-heading"
+import { DocumentSection, DocumentSectionBody } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
 
 export function PrivacyCollection() {
     return (
-        <ProseSection aria-labelledby="privacy-collection-heading">
+        <DocumentSection aria-labelledby="privacy-collection-heading">
             <SectionHeading id="privacy-collection-heading">what is collected</SectionHeading>
-            <ProseSectionBody>
+            <DocumentSectionBody>
                 <p>
                     Nothing by the site itself. There are no analytics scripts, no tracking pixels, no advertising, no
                     cookies, and no account system. Fonts are self-hosted, so your browser talks only to this domain
@@ -16,7 +16,7 @@ export function PrivacyCollection() {
                     requested URL, timestamp, user agent) to serve pages and protect against abuse. These logs are under
                     Netlify's control and are not used by this site for profiling or marketing.
                 </p>
-            </ProseSectionBody>
-        </ProseSection>
+            </DocumentSectionBody>
+        </DocumentSection>
     )
 }

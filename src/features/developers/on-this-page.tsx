@@ -1,6 +1,6 @@
 import { DevelopersNumeral } from "@features/developers/numeral"
+import { StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
-import { StackRow } from "@ui/stack-row"
 import { For } from "solid-js"
 
 const ON_THIS_PAGE = [
@@ -13,7 +13,7 @@ const ON_THIS_PAGE = [
 
 export function DevelopersOnThisPage() {
     return (
-        <StackRow as="nav" size="compact" aria-label="On this page">
+        <StackRow render={(renderProps) => <nav {...renderProps} />} size="compact" aria-label="On this page">
             <ol class="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
                 <For each={ON_THIS_PAGE}>
                     {(item, index) => (

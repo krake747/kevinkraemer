@@ -1,15 +1,17 @@
 import { SearchNoScript } from "@features/search/no-script"
 import { SearchQuerySection } from "@features/search/query-section"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { NoIndex, Seo } from "@pattern/seo"
+import { TerminalCommandHeader } from "@pattern/terminal"
 
 export default function SearchRoute() {
     return (
-        <ProseShell
-            command="grep -r"
-            title="Search"
-            lede="Find anything across the site: logs, CV, and docs. Results update as you type."
-        >
+        <DocumentPage>
+            <PageHeader class="animate-rise">
+                <TerminalCommandHeader command="grep -r" class="mb-4" />
+                <PageHeaderTitle>Search</PageHeaderTitle>
+            </PageHeader>
             <Seo
                 title="Search"
                 description="Search through all log entries and content on kevinkraemer.com"
@@ -18,6 +20,6 @@ export default function SearchRoute() {
             <NoIndex />
             <SearchQuerySection />
             <SearchNoScript />
-        </ProseShell>
+        </DocumentPage>
     )
 }

@@ -1,7 +1,8 @@
 import { site } from "@core/site/site-meta"
+import { DocumentSection } from "@pattern/document-section"
+import { SectionHeading } from "@pattern/section-heading"
 import { cva } from "@ui/cva.config"
 import { ArrowUpRight } from "@ui/icon"
-import { SectionHeading } from "@ui/section-heading"
 import { For, Show } from "solid-js"
 
 const contactCell = cva({
@@ -122,7 +123,7 @@ function linkAttrs(channel: Channel): { target?: "_blank"; rel?: string } {
 
 export function ContactChannels() {
     return (
-        <section aria-labelledby="contact-channels-heading">
+        <DocumentSection aria-labelledby="contact-channels-heading">
             <SectionHeading id="contact-channels-heading">channels</SectionHeading>
             <ul class="grid border border-stone-300 md:grid-cols-3 dark:border-stone-700">
                 <For each={CHANNELS}>
@@ -160,6 +161,6 @@ export function ContactChannels() {
                     }}
                 </For>
             </ul>
-        </section>
+        </DocumentSection>
     )
 }

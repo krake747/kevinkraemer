@@ -1,10 +1,15 @@
 import { site } from "@core/site/site-meta"
-import { SectionShell } from "@pattern/section-shell"
+import { TerminalCommandHeader, TerminalSection } from "@pattern/terminal"
 import type { VoidProps } from "solid-js"
 
 export function HomeContact(props: VoidProps<{ id: string }>) {
     return (
-        <SectionShell id={props.id} command={'echo "Get in touch"'}>
+        <TerminalSection id={props.id}>
+            <TerminalCommandHeader
+                id={`${props.id}-command`}
+                command={'echo "Get in touch"'}
+                class="reveal-item mb-8"
+            />
             <div class="flex max-w-prose flex-col gap-6">
                 <p class="reveal-item text-base/[1.8] text-stone-600 dark:text-stone-400">
                     Got something you want to build, a role to fill, or feel like talking shop? Write me. I reply to
@@ -18,6 +23,6 @@ export function HomeContact(props: VoidProps<{ id: string }>) {
                 </a>
                 <p class="reveal-item font-mono text-sm text-stone-600 dark:text-stone-400">Based in Luxembourg</p>
             </div>
-        </SectionShell>
+        </TerminalSection>
     )
 }

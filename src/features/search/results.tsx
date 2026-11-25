@@ -1,13 +1,21 @@
 import type { SearchHit } from "@core/search/pagefind"
-import { SearchHitRow } from "@features/search/hit-row"
-import { Stack } from "@ui/stack"
+import { RegisterRow, RegisterRowDescription, RegisterRowMeta, RegisterRowTitle } from "@pattern/register"
+import { Stack } from "@pattern/stack"
 import { For, type VoidProps } from "solid-js"
 
 export function SearchResults(props: VoidProps<{ hits: SearchHit[] }>) {
     return (
-        <Stack as="ul">
+        <Stack render={(renderProps) => <ul {...renderProps} />}>
             <For each={props.hits} keyed={(hit) => hit.href}>
-                {(hit) => <SearchHitRow hit={hit()} />}
+                {(hit) => (
+                    <RegisterRow render={(renderProps) => <li {...renderProps} />} href={hit().href}>
+                        <RegisterRowTitle>{hit().title}</RegisterRowTitle>
+                        <RegisterRowDescription lines={2}>{hit().excerpt}</RegisterRowDescription>
+                        <RegisterRowMeta>
+                            <span>{hit().href}</span>
+                        </RegisterRowMeta>
+                    </RegisterRow>
+                )}
             </For>
         </Stack>
     )

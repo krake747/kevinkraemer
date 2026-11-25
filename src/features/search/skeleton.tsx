@@ -1,5 +1,4 @@
-import { Stack } from "@ui/stack"
-import { StackRow } from "@ui/stack-row"
+import { Stack, StackRow } from "@pattern/stack"
 import { Repeat } from "solid-js"
 
 export function SearchSkeleton() {

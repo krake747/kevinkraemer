@@ -48,4 +48,34 @@ shared link, with zero prior context about Kevin or the site. _Avoid_: audience,
 specimens, borrowing Bloomberg Terminal density without nostalgia. Defined in full in
 `docs/design/system.md`. _Avoid_: card, dashboard
 
-**StackRow**: The `src/ui` framed-row primitive.
+**StackRow**: The `src/pattern` framed-row primitive.
+
+**PageColumn**: The page column: flex-1 growth, viewport padding, centered `max-w-6xl`. Index,
+register, and custom pages compose on it directly; document and detail pages get it through their
+page component. _Avoid_: shell, wrapper
+
+**DocumentPage**: A prose document page: `PageColumn`, narrow measure, and a `PageHeader` the caller
+composes as a child. _Avoid_: ProseShell, shell, template
+
+**DetailPage**: An entry page: `PageColumn` plus `Seo`. The route passes breadcrumbs through
+`sectionTrail`. _Avoid_: DetailShell, shell, template
+
+**TerminalSection**: A command-opened section: full-width rule, reveal, exactly one
+`TerminalCommandHeader`, which also names it. Joins the terminal stem. _Avoid_: SectionShell, shell,
+block, landing section
+
+**Register**: A browsable list of entries presented as uniform framed rows (the logs index, related
+entries, search hits). One `RegisterRow` per entry. A `Register` with a side rail uses
+`RegisterWithRail`. _Avoid_: list, grid, card deck, table
+
+**RecordRow**: One labeled record in a case file or reference (role, stack, status). Label width is
+a variant, never a call-site class. _Avoid_: key-value row, metadata row, field
+
+**PageHeader**: The opening block of a page. A root `header`; the caller composes
+`TerminalCommandHeader`, `PageHeaderTitle`, and optional `PageHeaderMeta` as children. The industry
+shape is still a title with room for meta; this site's terminal command is a child, not a slot.
+_Avoid_: page hero, title block
+
+**DocumentSection**: A labelled section: the caller composes `SectionHeading` and the body as
+children of `DocumentSection`. Change `DocumentSectionBody`'s element with `render` (`div` by
+default, or a `p` for a single paragraph). _Avoid_: section wrapper, content block

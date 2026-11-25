@@ -5,12 +5,14 @@ import { componentPropsOmit } from "./rules/component-props-omit.js"
 import { cvaClassProp } from "./rules/cva-class-prop.js"
 import { featureNames } from "./rules/feature-names.js"
 import { noClassStringConst } from "./rules/no-class-string-const.js"
+import { noContentElementProps } from "./rules/no-content-element-props.js"
 import { noDescribeFunctionTitle } from "./rules/no-describe-function-title.js"
 import { noProseComments } from "./rules/no-prose-comments.js"
 import { noRawColor } from "./rules/no-raw-color.js"
 import { noSeparateLeading } from "./rules/no-separate-leading.js"
 import { noStylesImport } from "./rules/no-styles-import.js"
 import { noTransitionAll } from "./rules/no-transition-all.js"
+import { preferSolidControlFlow } from "./rules/prefer-solid-control-flow.js"
 import { routeSeoPath } from "./rules/route-seo-path.js"
 import { routeShape } from "./rules/route-shape.js"
 import { strictTypes } from "./rules/strict-types.js"
@@ -20,6 +22,7 @@ export default definePlugin({
     rules: {
         "alias-imports": aliasImports,
         "component-props-omit": componentPropsOmit,
+        "no-content-element-props": noContentElementProps,
         "cva-class-prop": cvaClassProp,
         "feature-names": featureNames,
         "no-class-string-const": noClassStringConst,
@@ -28,6 +31,7 @@ export default definePlugin({
         "no-raw-color": noRawColor,
         "no-separate-leading": noSeparateLeading,
         "no-styles-import": noStylesImport,
+        "prefer-solid-control-flow": preferSolidControlFlow,
         "no-transition-all": noTransitionAll,
         "route-seo-path": routeSeoPath,
         "route-shape": routeShape,

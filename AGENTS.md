@@ -31,7 +31,9 @@ Vite with prerendered pages and Netlify functions.
 - `Issues` tracking, see `CONTRIBUTING.md ## Workflow` (`gh` CLI; conventional commits)
 - `ui-sdk` components: follow the ui-sdk skill when installed, read
   `node_modules/@ui-sdk/solid/docs/llms.txt`; for a new component search
-  `node_modules/@ui-sdk/solid/docs/core.md` by heading, then read `rendering.md` beside it
+  `node_modules/@ui-sdk/solid/docs/core.md` by heading, then read `rendering.md` beside it.
+  First-party hosts use the same shape: a root plus parts as children, and `render` to change the
+  element, never an `as` prop.
 
 ## Reply contract
 

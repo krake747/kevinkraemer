@@ -1,6 +1,6 @@
 import type { ComponentProps } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { omit } from "solid-js"
+import { Show, omit } from "solid-js"
 
 export const anchor = cva({
     base: "transition-colors duration-150 ease-out-quart",
@@ -57,7 +57,9 @@ export function Anchor(
             class={cx(anchor({ variant: props.variant, class: props.class }))}
         >
             {props.children}
-            {target().kind === "external" ? <span class="sr-only"> (opens in a new tab)</span> : null}
+            <Show when={target().kind === "external"}>
+                <span class="sr-only"> (opens in a new tab)</span>
+            </Show>
         </a>
     )
 }

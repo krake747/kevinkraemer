@@ -2,16 +2,18 @@ import { AboutBackground } from "@features/about/background"
 import { AboutElsewhere } from "@features/about/elsewhere"
 import { AboutOutside } from "@features/about/outside"
 import { AboutWork } from "@features/about/work"
-import { ProseShell } from "@pattern/prose-shell"
+import { DocumentPage } from "@pattern/document-page"
+import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
+import { TerminalCommandHeader } from "@pattern/terminal"
 
 export default function AboutRoute() {
     return (
-        <ProseShell
-            command="cat story.md"
-            title="Hi, I'm Kevin."
-            lede="Full-stack developer in Luxembourg. I started in financial risk; now I build the tools instead of the reports."
-        >
+        <DocumentPage>
+            <PageHeader class="animate-rise">
+                <TerminalCommandHeader command="cat story.md" class="mb-4" />
+                <PageHeaderTitle>Hi, I'm Kevin.</PageHeaderTitle>
+            </PageHeader>
             <Seo
                 title="About"
                 description="Full-stack developer in Luxembourg. I came to software from financial risk, where the small tools I wrote were the part I looked forward to."
@@ -21,6 +23,6 @@ export default function AboutRoute() {
             <AboutWork />
             <AboutOutside />
             <AboutElsewhere />
-        </ProseShell>
+        </DocumentPage>
     )
 }

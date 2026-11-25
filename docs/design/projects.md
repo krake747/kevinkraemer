@@ -33,8 +33,8 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Index (`/projects`)
 
-- `ProseShell`: `TerminalCommandHeader` `ls ~/projects`, title “Projects”, optional Geist lede (omit
-  the element when empty), then one plain `ul` of entries from the `projects` collection
+- `DocumentPage`, with a child `PageHeader`: `TerminalCommandHeader` `ls ~/projects`,
+  `PageHeaderTitle` “Projects”, then one plain `ul` of entries from the `projects` collection
   (`sortByOrder`). An empty collection renders a `py-20 text-center` block with one mono `text-sm`
   line instead of the list.
 - Each entry is an `li` on a two-column grid (`md`, `minmax(0,15rem)` and the rest) with a single
@@ -52,16 +52,16 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Case page (`/projects/[slug]`)
 
-- `DetailShell` wrapping `ProjectArticle`, inside the layout that stretches to fill the viewport so
-  the footer stays at the bottom: reading column `max-w-prose` on the `article` itself.
-- One `TerminalCommandHeader` `cat {id}.md`, title `text-2xl`, mono tagline, then metadata as a
-  `Stack` (`as="dl"`) of `ProjectMetadataRow`s (record rows, no row hover; links inside keep their
-  own hover): role, stack, status (and year), live, and repo when a public URL exists. The tagline
-  is not repeated as a What row.
+- `DetailPage` wrapping `ProjectEntry`, inside the layout that stretches to fill the viewport so the
+  footer stays at the bottom: reading column `max-w-prose` on the `article` itself.
+- One `TerminalCommandHeader` `cat {id}.md`, `PageHeaderTitle` at `text-2xl`, mono tagline, then
+  metadata as a `Stack` rendered as a `dl` of `RecordRow`s (record rows, no row hover; links inside
+  keep their own hover): role, stack, status (and year), live, and repo when a public URL exists.
+  The tagline is not repeated as a What row.
 - Then sections with a real mid-level heading step (`h2`, Geist `text-xl` semibold), not only 12px
   mono `TerminalCommandHeader` or `SectionHeading`: problem and point of view; key decisions (each
   title plus reason in a record `StackRow`); evidence and changelog only when they have entries
-  (changelog as a `Stack` `as="ul"` of record `StackRow`s `as="li"`).
+  (changelog as a `Stack` rendered as a `ul` of record `StackRow`s rendered as `li`).
 - A muted back link to `/projects`. Breadcrumbs for Home / Projects / name.
 
 ## Type & colour accents
@@ -96,7 +96,7 @@ page is static besides standard link hover. No scroll reveal. Collapse under
 - Do keep a mid-level heading step on the case page, and a 70ch reading measure.
 - Do keep Email-style restraint: one emerald action, the live site.
 - Don't publish a private repository URL. If no public repo is listed, omit the repo row.
-- Don't render Evidence or Changelog when those lists are empty, and don't invent an index lede.
+- Don't render Evidence or Changelog when those lists are empty.
 - Don't add a second figure, a KPI block, or a card grid, and don't turn the case page into a
   dashboard of metrics.
 - Don't add a second `TerminalCommandHeader`, shadows, or a gradient.

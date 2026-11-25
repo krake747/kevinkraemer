@@ -1,6 +1,7 @@
-import { dynamic, type ComponentProps, type JSX } from "@solidjs/web"
+import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { createMemo, merge, omit } from "solid-js"
+import { renderElement, type RenderProps, type WithRender } from "@ui/render"
+import { Show, createMemo, merge, omit } from "solid-js"
 
 const badge = cva({
     base: "inline-flex items-center border font-mono transition-colors",
@@ -56,31 +57,38 @@ function badgeTargetAttrs(target: BadgeTarget): { target?: "_blank"; rel?: strin
 }
 
 type BadgeVariants = VariantProps<typeof badge>
-type BadgeSpanProps = BadgeVariants & ComponentProps<"span"> & { as?: "span" }
-type BadgeAnchorProps = BadgeVariants & Omit<ComponentProps<"a">, "target"> & { as: "a"; target?: BadgeTarget }
 
-export function Badge(_props: BadgeSpanProps | BadgeAnchorProps): JSX.Element {
-    const props = merge({ as: "span", tone: "neutral" } as const, _props)
-    const Tag = dynamic(() => props.as)
-    const rest = createMemo(() => {
-        if (props.as === "a") {
-            return omit(props, "as", "tone", "size", "interactive", "class", "children", "target")
-        }
-        return omit(props, "as", "tone", "size", "interactive", "class", "children")
+type BadgeProps = BadgeVariants &
+    ComponentProps<"span"> &
+    WithRender<RenderProps & { target?: "_blank"; rel?: string }> & {
+        target?: BadgeTarget
+    }
+
+export function Badge(props: BadgeProps): JSX.Element {
+    const rest = omit(props, "tone", "size", "interactive", "class", "children", "render", "target")
+    const target = (): BadgeTarget => props.target ?? { kind: "internal" }
+    const attrs = createMemo(() => badgeTargetAttrs(target()))
+    const isExternal = (): boolean => target().kind === "external"
+    const merged = merge(rest, {
+        get target() {
+            return attrs().target
+        },
+        get rel() {
+            return attrs().rel
+        },
+        get class() {
+            return cx(badge({ tone: props.tone, size: props.size, interactive: props.interactive, class: props.class }))
+        },
+        get children() {
+            return (
+                <>
+                    {props.children}
+                    <Show when={isExternal()}>
+                        <span class="sr-only"> (opens in a new tab)</span>
+                    </Show>
+                </>
+            )
+        },
     })
-    const target = (): BadgeTarget => (props.as === "a" ? (props.target ?? { kind: "internal" }) : { kind: "internal" })
-    const isExternal = () => props.as === "a" && target().kind === "external"
-
-    return (
-        <Tag
-            {...rest()}
-            {...badgeTargetAttrs(target())}
-            class={cx(
-                badge({ tone: props.tone, size: props.size, interactive: props.interactive, class: props.class }),
-            )}
-        >
-            {props.children}
-            {isExternal() ? <span class="sr-only"> (opens in a new tab)</span> : null}
-        </Tag>
-    )
+    return renderElement({ defaultTag: "span", render: () => props.render, props: () => merged })
 }

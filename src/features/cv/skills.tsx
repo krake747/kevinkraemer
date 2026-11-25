@@ -1,6 +1,6 @@
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
-import { StackRow } from "@ui/stack-row"
+import { StackRow } from "@pattern/stack"
 import { For, type VoidProps } from "solid-js"
 
 type SkillCategory = {
