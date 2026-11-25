@@ -153,14 +153,14 @@ creates fewer reactive primitives on the server than in the browser shifts every
 next component claims its predecessor's node and everything below it never hydrates, leaving reveal
 sections invisible with `Cannot read properties of null (reading 'nextSibling')`. Solve never
 early-return on `isServer` inside a component or hook — the primitives are SSR-safe and must run on
-both sides. Pass a prop that inserts JSX as an element and render it directly (`lede` in
-`prose-shell.tsx`); `children` is claimed in place and needs no thunk. Check via `pnpm dev` —
-production strips the warnings — and load every route with the console open:
-`Hydration tag mismatch`, `Hydration structure mismatch`, or an "unclaimed server-rendered node"
-warning means an id moved. Search parameters are the other way to shift markup: they are absent
-while prerendering, so gate `useSearchParams` reads behind a `createSignal(false)` that `onSettled`
-sets to `true` (as in `src/pattern/create-url-query.ts` and `src/features/log/create-filter.ts`) and
-filter only after that.
+both sides. Pass a prop that inserts JSX as an element and render it directly (`meta` on
+`PageHeader`); `children` is claimed in place and needs no thunk. Check via `pnpm dev` — production
+strips the warnings — and load every route with the console open: `Hydration tag mismatch`,
+`Hydration structure mismatch`, or an "unclaimed server-rendered node" warning means an id moved.
+Search parameters are the other way to shift markup: they are absent while prerendering, so gate
+`useSearchParams` reads behind a `createSignal(false)` that `onSettled` sets to `true` (as in
+`src/pattern/create-url-query.ts` and `src/features/log/create-filter.ts`) and filter only after
+that.
 
 ## Polymorphism — `as` is first-party, `render` is ui-sdk
 

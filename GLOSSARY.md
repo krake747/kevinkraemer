@@ -71,8 +71,8 @@ entries, search hits). One `RegisterRow` per entry. A `Register` with a side rai
 **RecordRow**: One labeled record in a case file or reference (role, stack, status). Label width is
 a variant, never a call-site class. _Avoid_: key-value row, metadata row, field
 
-**PageHeader**: The opening block of a page: `TerminalCommandHeader`, title, lede, optional meta.
-The industry shape (Primer: title, description, actions); the `command` slot is this site's terminal
+**PageHeader**: The opening block of a page: `TerminalCommandHeader`, title, optional meta. The
+industry shape (Primer: title, description, actions); the `command` slot is this site's terminal
 twist. _Avoid_: page hero, title block
 
 **DocumentSection**: A labeled section: the caller composes `SectionHeading` and the body as

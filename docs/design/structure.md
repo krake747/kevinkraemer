@@ -52,27 +52,24 @@ the section label.
 
 Every page opens one of three ways, and the first is enforced by code:
 
-| Page kind                                              | Open with                                                                                                                                  |
-| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DocumentPage` route (`src/pattern/document-page.tsx`) | The layout itself: `command` prop (required) → `TerminalCommandHeader`, then `h1`, then the `lede` slot in Geist `text-sm leading-relaxed` |
-| Index route (not `DocumentPage`)                       | `TerminalCommandHeader`, `h1`, then a Geist lede at `text-sm max-w-2xl leading-relaxed`                                                    |
-| Entry route (`/logs/[slug]`)                           | `TerminalCommandHeader`, `h1`, then the description at `leading-relaxed` inside `max-w-prose`                                              |
+| Page kind                                              | Open with                                                                         |
+| ------------------------------------------------------ | --------------------------------------------------------------------------------- |
+| `DocumentPage` route (`src/pattern/document-page.tsx`) | The layout itself: `command` prop (required) → `TerminalCommandHeader`, then `h1` |
+| Index route (not `DocumentPage`)                       | `TerminalCommandHeader`, then `h1`                                                |
+| Entry route (`/logs/[slug]`)                           | `TerminalCommandHeader`, then `h1`, with optional `meta`                          |
 
 Why the layout owns it: `DocumentPage` takes `command` as a required prop, so a DocumentPage page
 physically cannot ship without exactly one command. Hand-rolling that header re-implements the h1
-size, the lede treatment, and the `kk-cascade` column, and will drift from all seven `DocumentPage`
-pages.
+size and the `kk-cascade` column, and will drift from all seven `DocumentPage` pages.
 
-**A short intro above a list is the `lede` slot, not a `DocumentSection`.** The DocumentSection
-anatomy is for sections with a heading that earns its place; a two-sentence intro on a page that
-then lists rows has no heading to give. Put it in `lede` and stop. Do not invent a heading so the
-measure is allowed, and do not hand-roll a measure column on a page intro: `DocumentPage` already
-sets it.
+The DocumentSection anatomy is for sections with a heading that earns its place; a two-sentence
+intro on a page that then lists rows has no heading to give. Do not invent a heading so a short
+intro is allowed, and do not add a page intro at all.
 
 A page whose entire body is one list needs **no** section heading: the `h1` already names it, and a
 `SectionHeading` would repeat the page title one line lower. A register that is not `/cv` opens as
-an Index route (`TerminalCommandHeader`, `h1`, Geist lede) and then goes straight to its list: a
-`Register` of rows, or the ruled entries of `/projects`.
+an Index route (`TerminalCommandHeader`, `h1`) and then goes straight to its list: a `Register` of
+rows, or the ruled entries of `/projects`.
 
 The fixed header's height is `--header-h`. `scroll-margin-top` and the sticky rails derive from it;
 never hard-code a second clearance number.

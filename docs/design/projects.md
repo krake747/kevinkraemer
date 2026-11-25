@@ -33,10 +33,9 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Index (`/projects`)
 
-- `DocumentPage`: `TerminalCommandHeader` `ls ~/projects`, title “Projects”, optional Geist lede
-  (omit the element when empty), then one plain `ul` of entries from the `projects` collection
-  (`sortByOrder`). An empty collection renders a `py-20 text-center` block with one mono `text-sm`
-  line instead of the list.
+- `DocumentPage`: `TerminalCommandHeader` `ls ~/projects`, title “Projects”, then one plain `ul` of
+  entries from the `projects` collection (`sortByOrder`). An empty collection renders a
+  `py-20 text-center` block with one mono `text-sm` line instead of the list.
 - Each entry is an `li` on a two-column grid (`md`, `minmax(0,15rem)` and the rest) with a single
   `border-t` in stone and `py-10`. The rule is the page's only divider: no frame, no `StackRow`, no
   `Stack` (deliberate exception to the framed-panel rule).
@@ -96,7 +95,7 @@ page is static besides standard link hover. No scroll reveal. Collapse under
 - Do keep a mid-level heading step on the case page, and a 70ch reading measure.
 - Do keep Email-style restraint: one emerald action, the live site.
 - Don't publish a private repository URL. If no public repo is listed, omit the repo row.
-- Don't render Evidence or Changelog when those lists are empty, and don't invent an index lede.
+- Don't render Evidence or Changelog when those lists are empty.
 - Don't add a second figure, a KPI block, or a card grid, and don't turn the case page into a
   dashboard of metrics.
 - Don't add a second `TerminalCommandHeader`, shadows, or a gradient.
