@@ -69,12 +69,13 @@ Never:
   `VariantProps<typeof variant>` for CVA values. A component that renders more than one tag declares
   the attributes its call sites use (`Badge` takes `ComponentProps<"a">` when `as="a"`).
 - Polymorphism is one prop, `as`, typed to the tags the component accepts (`StackRow` takes any
-  `ValidComponent`, `Stack` takes `div`/`ul`/`dl`, `Badge` takes `span`/`a`), resolved with
-  `dynamic(() => props.as ?? defaultTag, { static: isStatic(_props, "as") })`. The default is the
-  component's natural tag (`"div"` for `StackRow` and `Stack`, `"span"` for `Badge`). The value is a
-  tag name (`as="li"`, `as="a"`), never `as={<li />}`. The `static` flag is safe because every call
-  site passes a literal; an expression `as` keeps the memo. Imports stay split: `dynamic` from
-  `@solidjs/web`, `merge`/`omit`/`isStatic` from `solid-js`.
+  `ValidComponent`, `Stack` takes `div`/`ul`/`dl`, `Badge` takes `span`/`a`). The shared
+  merge/dynamic/omit shape lives in `src/ui/create-polymorphic.ts` and is what `Stack`, `StackRow`,
+  `Register`, and `DocumentSectionBody` use. `Badge` keeps the pattern inline because its merge
+  default includes `tone` and omit depends on `as`. The default is the component's natural tag
+  (`"div"` for `StackRow` and `Stack`, `"span"` for `Badge`). The value is a tag name (`as="li"`,
+  `as="a"`), never `as={<li />}`. The `static` flag is safe because every call site passes a
+  literal; an expression `as` keeps the memo.
 
 ## Shared chrome
 
