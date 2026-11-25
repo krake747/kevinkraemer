@@ -1,7 +1,6 @@
 import type { LogEntry } from "@core/content/model"
 import { Register, RegisterRow, RegisterRowDescription, RegisterRowTitle } from "@pattern/register"
-import { TerminalCommandHeader } from "@pattern/terminal-command-header"
-import { TerminalSection } from "@pattern/terminal-section"
+import { TerminalCommandHeader, TerminalSection } from "@pattern/terminal"
 import { For, Show, type ParentProps } from "solid-js"
 
 export function HomeLogs(props: ParentProps<{ entries: LogEntry[]; id: string }>) {

@@ -3,7 +3,7 @@ import { SearchQuerySection } from "@features/search/query-section"
 import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { NoIndex, Seo } from "@pattern/seo"
-import { TerminalCommandHeader } from "@pattern/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal"
 
 export default function SearchRoute() {
     return (

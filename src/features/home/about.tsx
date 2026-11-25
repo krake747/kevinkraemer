@@ -2,8 +2,7 @@ import { sortByOrder, type AboutEntry } from "@core/content/model"
 import { siteContent } from "@core/content/site-content"
 import { DocumentSectionBody } from "@pattern/document-section"
 import { SectionHeading } from "@pattern/section-heading"
-import { TerminalCommandHeader } from "@pattern/terminal-command-header"
-import { TerminalSection } from "@pattern/terminal-section"
+import { TerminalCommandHeader, TerminalSection } from "@pattern/terminal"
 import { For, type VoidProps } from "solid-js"
 
 type Column = {

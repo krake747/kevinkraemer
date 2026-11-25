@@ -2,7 +2,7 @@ import { HomeHeroContact } from "@features/home/hero-contact"
 import { HomeHeroName } from "@features/home/hero-name"
 import { PageColumn } from "@pattern/page-column"
 import { SectionHeading } from "@pattern/section-heading"
-import { TerminalCommandHeader } from "@pattern/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal"
 
 export function HomeHero() {
     return (

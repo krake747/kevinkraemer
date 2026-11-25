@@ -1,6 +1,6 @@
 import { site } from "@core/site/site-meta"
 import { CV_PDF_PATH } from "@core/site/urls"
-import { TerminalCommandHeader } from "@pattern/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal"
 import { Anchor } from "@ui/anchor"
 import { Badge } from "@ui/badge"
 

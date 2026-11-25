@@ -3,7 +3,7 @@ import { ProjectList } from "@features/project/list"
 import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
-import { TerminalCommandHeader } from "@pattern/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal"
 
 export default function ProjectsRoute() {
     return (

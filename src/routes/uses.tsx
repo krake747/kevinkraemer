@@ -5,7 +5,7 @@ import { UsesSection } from "@features/uses/section"
 import { DocumentPage } from "@pattern/document-page"
 import { PageHeader, PageHeaderTitle } from "@pattern/page-header"
 import { Seo } from "@pattern/seo"
-import { TerminalCommandHeader } from "@pattern/terminal-command-header"
+import { TerminalCommandHeader } from "@pattern/terminal"
 import { defineFileRoute } from "@solidjs/router/fs"
 import { For } from "solid-js"
 
