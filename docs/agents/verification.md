@@ -16,13 +16,10 @@ Solve work down this list and stop at the first rung that can settle the questio
 
 If a visual claim can be pinned as a unit test, write the test: it is cheaper and it stays.
 
-`pnpm lint` runs native rules (`curly` all, `typescript/consistent-type-definitions` type,
-`typescript/consistent-type-imports` inline type-imports, `unicorn/filename-case` kebabCase,
-`vitest/consistent-test-it`) plus `kk/*` (`lint/`): cva-class-prop, no-describe-function-title,
-strict-types, no-prose-comments, feature-names, no-class-string-const, component-props-omit,
-no-styles-import, alias-imports, no-transition-all, no-raw-color, no-separate-leading, route-shape,
-route-seo-path. Fallow checks are `fallow audit` against `.fallowrc.json` `boundaries` and
-`fallow-policy/imports.json` `edge-no-aliases`.
+`pnpm lint` runs native rules plus `kk/*` (see the `vite.config.ts` lint block and
+`lint/plugin.js`); keep the native-vs-`kk` distinction, not the list. Fallow checks are
+`fallow audit` against `.fallowrc.json` `boundaries` and `fallow-policy/imports.json`
+`edge-no-aliases`.
 
 ## A probe settles a prediction
 
@@ -59,3 +56,10 @@ alone carries it.
 Why a skipped check reported as green erodes every later claim. Solve state what ran and what did
 not: the commands, the rungs skipped, and the checks CI will run instead. Never present a skipped
 check as evidence.
+
+## Commit scope — attributable hunks
+
+Why mixed concerns and silent behavior changes slip through large refactors. Solve stage per file
+and read `git diff --stat` before committing so every hunk is attributable; when a test edit follows
+a behavior change, the commit names the behavior change. Check via `git diff --stat HEAD` — every
+file accounted for.

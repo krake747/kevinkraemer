@@ -21,8 +21,9 @@ index; every file here is reached through a pointer there.
 
 ## Standards
 
-Quality rules live in `AGENTS.md ## Coding rules` plus `CODING_STANDARDS.md`. Automated checks
-(`agent-files.spec.ts`, `check:docs`, oxlint, lefthook, `tsc`) outrank docs.
+Quality rules live in `AGENTS.md ## Coding rules` plus `CODING_STANDARDS.md`, enforced at diff time
+by `docs/agents/review.md`. Automated checks (`agent-files.spec.ts`, `check:docs`, oxlint, lefthook,
+`tsc`) outrank docs.
 
 ## Inventory
 

@@ -34,19 +34,14 @@ document with a metadata stack of record rows and mid-level headings.
 ### Index (`/projects`)
 
 - `DocumentPage`, with a child `PageHeader`: `TerminalCommandHeader` `ls ~/projects`,
-  `PageHeaderTitle` “Projects”, then one plain `ul` of entries from the `projects` collection
-  (`sortByOrder`). An empty collection renders a `py-20 text-center` block with one mono `text-sm`
-  line instead of the list.
-- Each entry is an `li` on a two-column grid (`md`, `minmax(0,15rem)` and the rest) with a single
-  `border-t` in stone and `py-10`. The rule is the page's only divider: no frame, no `StackRow`, no
-  `Stack` (deliberate exception to the framed-panel rule).
-- The identity rail: the name as `Anchor` `title` (mono `text-2xl`, underlined, hover emerald), then
-  status and year in mono `text-xs` uppercase `tabular-nums`, then the optional Headline Figure:
-  value in mono `text-3xl tabular-nums`, label in mono `text-xs`. A project with no figure keeps the
-  rail at name and status.
-- The body: the tagline in Geist `text-base leading-relaxed`, capped at `max-w-prose`, then role and
-  stack in mono `text-xs`. The tagline is the page's prose; do not set it in mono at `text-sm` as
-  the old register did.
+  `PageHeaderTitle` “Projects”, then one plain `ul` of entries (`sortByOrder`). An empty collection
+  renders `EmptyRegister spacious` instead of the list.
+- Each entry is an `li` in a two-column row with a single `border-t` in stone. The rule is the
+  page's only divider: no frame, no `StackRow`, no `Stack` (deliberate exception to the framed-panel
+  rule).
+- The identity rail: the name as `Anchor` `title`, then status and year, then the optional Headline
+  Figure. A project with no figure keeps the rail at name and status.
+- The body: the tagline, capped at `max-w-prose`, then role and stack in mono `text-xs`.
 - No group `SectionHeading` when the register is a single list. The register ends on its last entry;
   no footer copy.
 

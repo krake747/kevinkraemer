@@ -75,26 +75,8 @@ server you did not start. If you must start one, leave it running when you are d
 ## Visual probing — `scripts/probe.mts`
 
 Why rendered geometry is the one claim the source cannot settle. Solve run the probe against a
-server that is already up:
-
-```sh
-node scripts/probe.mts http://localhost:5173/about \
-  --viewport=390x844 \
-  --shot=/tmp/about-390.png \
-  h1 header "[data-parallax]"
-```
-
-It waits for `html[data-hydrated]` before reading, prints every match of every selector, and exits 1
-when a selector matches nothing.
-
-- `--viewport=<width>x<height>` — required.
-- `--scroll=<y>` — scroll to an offset after load.
-- `--hover=<selector>`, `--focus=<selector>`, `--click=<selector>` — act on the first match, in that
-  order.
-- `--shot=<path>` — save a viewport screenshot; `--clip=<x>,<y>,<width>,<height>` crops it.
-- `--wait=<ms>` — settle time after the last interaction.
-
-Each row prints `getBoundingClientRect()` as `top`, `height` and `bottom`, plus computed `position`,
-`display`, `transform` and `font-size`. Run multi-step sweeps (hover, scroll, timing) against
-`pnpm preview`, because HMR reloads drop the execution context mid-sweep. Probing is a checkpoint,
-not a per-edit step; [verification.md](verification.md) settles when the cost is worth it.
+server that is already up; see `probe --help` for flags. It waits for `html[data-hydrated]` before
+reading and exits 1 when a selector matches nothing. `--viewport` is required. Run multi-step sweeps
+against `pnpm preview`, because HMR reloads drop the execution context mid-sweep. Probing is a
+checkpoint, not a per-edit step; [verification.md](verification.md) settles when the cost is worth
+it.

@@ -15,24 +15,19 @@ capped at `≤10%` of any screen, **amber** is reserved for warnings. No other c
 | Code block                | `bg-stone-900`      | `dark:bg-stone-950`      |
 | Selected chip             | `bg-emerald-500/10` | `dark:bg-emerald-500/20` |
 
-Text: headline `stone-900` / `stone-100`, body `stone-800` / `stone-200`, prose body `stone-600` /
-`stone-400`, labels `stone-500` or `stone-600`. Never emerald body text. Borders: panel
-`border-stone-200/80` / `dark:border-stone-800`, inputs `border-stone-300/60`, active
-`border-emerald-500/30`. Dark mode gets exactly one wash: the `body::before` emerald radial in
-`src/app.css`. No other gradient. Theme follows system until chosen, persisted via
-`createColorScheme` in `src/core/theme.ts`.
+Text stays on the stone scale; never emerald body text. Borders stay stone, active
+`border-emerald-500/30`. Dark mode gets one wash only. Theme follows system until chosen, persisted
+in `src/core/theme.ts`.
 
 ## Type — `Pairing`
 
 **Geist** (`--font-display`) for headings, display, body, prose. **JetBrains Mono** (`--font-mono`)
 for commands, nav, data, labels, buttons, tags, counts, code. Sizes: `text-xs` mono chrome,
-`text-sm` secondary mono, `text-base` body and inputs. Floor `text-[11px]` for dense data only. One
-prose measure: `max-w-prose` (`--max-width-prose`, 70ch) at `text-*/[1.8]`; UI copy at component
-width with `text-*/relaxed`. Size and leading always combine in one `text-*/<leading>` class, never
-a separate `leading-*`. Tracking: `tracking-tight` on Geist headings, `tracking-widest` on uppercase
-mono labels, none elsewhere. Headings `text-balance`, body `text-pretty`. `tabular-nums` on every
-date, count, and figure. `InlineCode` is the only rounded element; `Kbd` stays square with a `1px`
-stone border.
+`text-sm` secondary mono, `text-base` body and inputs, floor `text-[11px]` dense data only. One
+prose measure: `max-w-prose` at `text-*/[1.8]`; UI copy at component width. Size and leading combine
+in one class, never a separate `leading-*`. `tracking-tight` on Geist headings, `tracking-widest` on
+uppercase mono labels. Headings `text-balance`, body `text-pretty`. `tabular-nums` on dates, counts,
+figures.
 
 ## Surfaces — `Panel, Not Hairline`
 
