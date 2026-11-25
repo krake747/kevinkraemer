@@ -1,6 +1,7 @@
 import { execSync } from "node:child_process"
 import { existsSync, readFileSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
+import { fileURLToPath } from "node:url"
 
 const root = new URL("../..", import.meta.url).pathname
 
@@ -93,21 +94,46 @@ function checkSourceOfTruth(file, text) {
     }
 }
 
-for (const file of markdownFiles()) {
-    const text = blankFences(blob(file))
-    checkProjectPaths(file, text)
-    checkRelativeLinks(file, text)
-    checkAdrShape(file, text)
-    checkSourceOfTruth(file, text)
-}
-checkCommands()
-
-if (failures.length > 0) {
-    for (const failure of failures) {
-        console.error(failure)
+export function findEmDashes(text) {
+    const hits = []
+    const lines = text.split("\n")
+    for (let i = 0; i < lines.length; i++) {
+        let column = lines[i].indexOf("—")
+        while (column !== -1) {
+            hits.push({ line: i + 1, column: column + 1 })
+            column = lines[i].indexOf("—", column + 1)
+        }
     }
-    console.error(`\n${failures.length} docs check failure(s): fix the docs or the code they describe.`)
-    process.exit(1)
+    return hits
 }
 
-console.log("docs check passed")
+function checkEmDashes(file, text) {
+    for (const hit of findEmDashes(text)) {
+        failures.push(`${file}:${hit.line}:${hit.column}`)
+    }
+}
+
+const invokedDirectly = process.argv[1] !== undefined && fileURLToPath(import.meta.url) === process.argv[1]
+
+if (invokedDirectly) {
+    for (const file of markdownFiles()) {
+        const raw = blob(file)
+        const text = blankFences(raw)
+        checkProjectPaths(file, text)
+        checkRelativeLinks(file, text)
+        checkAdrShape(file, text)
+        checkSourceOfTruth(file, text)
+        checkEmDashes(file, raw)
+    }
+    checkCommands()
+
+    if (failures.length > 0) {
+        for (const failure of failures) {
+            console.error(failure)
+        }
+        console.error(`\n${failures.length} docs check failure(s): fix the docs or the code they describe.`)
+        process.exit(1)
+    }
+
+    console.log("docs check passed")
+}
