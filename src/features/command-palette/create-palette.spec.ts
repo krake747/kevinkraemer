@@ -75,4 +75,17 @@ describe("palette rows", () => {
         })
         expect(rows.find((row) => row.label === "download cv")?.flash).toEqual({ kind: "none" })
     })
+
+    it("exposes href only on navigation rows", () => {
+        const { deps } = makeDeps()
+        const rows = buildCommandPaletteGroups(
+            getCommandPaletteCommands(),
+            [{ title: "Log entry", excerpt: "excerpt", href: "/logs/log-entry" }],
+            deps,
+        ).flatMap((group) => group.rows)
+        expect(rows.find((row) => row.label === "~/cv")?.href).toBe("/cv")
+        expect(rows.find((row) => row.label === "Log entry")?.href).toBe("/logs/log-entry")
+        expect(rows.find((row) => row.label === "copy email")?.href).toBeUndefined()
+        expect(rows.find((row) => row.label === "github")?.href).toBeUndefined()
+    })
 })

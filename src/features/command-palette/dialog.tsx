@@ -4,6 +4,7 @@ import { CommandPaletteHints } from "@features/command-palette/hints"
 import { CommandPaletteProvider, useCommandPalette } from "@features/command-palette/provider"
 import { CommandPaletteRowItem } from "@features/command-palette/row-item"
 import { createMediaQuery } from "@solid-primitives/media"
+import { usePreloadRoute } from "@solidjs/router"
 import { Command, CommandEmpty, CommandGroup, CommandGroupLabel, CommandInput, CommandList } from "@ui/command"
 import { Dialog, DialogBackdrop, DialogContent, DialogTitle } from "@ui/dialog"
 import { Errored, For, createEffect, latest, type VoidProps } from "solid-js"
@@ -20,6 +21,20 @@ function CommandPaletteDialogBody(props: VoidProps<{ open: boolean; onOpenChange
     const { state, actions } = useCommandPalette()
     const close = () => props.onOpenChange(false)
     const isCoarsePointer = createMediaQuery("(pointer: coarse)")
+    const preload = usePreloadRoute()
+
+    const preloadHighlighted = (value: string | null) => {
+        if (value === null) {
+            return
+        }
+        const row = state
+            .groups()
+            .flatMap((group) => group.rows)
+            .find((candidate) => candidate.rowId === value)
+        if (row?.href !== undefined) {
+            preload(row.href)
+        }
+    }
 
     createEffect(
         () => props.open,
@@ -50,6 +65,7 @@ function CommandPaletteDialogBody(props: VoidProps<{ open: boolean; onOpenChange
                 <Command
                     query={latest(state.input)}
                     onQueryChange={actions.update}
+                    onValueChange={preloadHighlighted}
                     filter={false}
                     autoHighlight
                     onAction={(value) => {

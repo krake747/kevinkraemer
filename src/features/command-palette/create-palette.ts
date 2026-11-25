@@ -22,6 +22,7 @@ export type CommandPaletteRow = {
     label: string
     icon: Component<{ class?: string }> | null
     flash: CommandPaletteRowFlash
+    href?: string
     run: () => void
 }
 
@@ -102,6 +103,7 @@ function commandRow(command: CommandPaletteCommand, deps: CommandPaletteDeps): C
         label: command.label,
         icon: command.icon,
         flash: rowFlash(command),
+        href: action.kind === "navigate" ? action.href : undefined,
         run: () => executeRowAction(action, deps),
     }
 }
@@ -113,6 +115,7 @@ function hitRow(hit: SearchHit, deps: CommandPaletteDeps): CommandPaletteRow {
         label: hit.title,
         icon: null,
         flash: { kind: "none" },
+        href: action.href,
         run: () => executeRowAction(action, deps),
     }
 }
