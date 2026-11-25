@@ -77,6 +77,7 @@ export default defineConfig({
             "kk/no-transition-all": "error",
             "kk/no-raw-color": "error",
             "kk/no-separate-leading": "error",
+            "kk/prefer-solid-control-flow": "error",
             "kk/route-seo-path": "error",
             "kk/route-shape": "error",
             "vitest/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],

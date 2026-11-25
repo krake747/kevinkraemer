@@ -12,6 +12,7 @@ import { noRawColor } from "./rules/no-raw-color.js"
 import { noSeparateLeading } from "./rules/no-separate-leading.js"
 import { noStylesImport } from "./rules/no-styles-import.js"
 import { noTransitionAll } from "./rules/no-transition-all.js"
+import { preferSolidControlFlow } from "./rules/prefer-solid-control-flow.js"
 import { routeSeoPath } from "./rules/route-seo-path.js"
 import { routeShape } from "./rules/route-shape.js"
 import { strictTypes } from "./rules/strict-types.js"
@@ -30,6 +31,7 @@ export default definePlugin({
         "no-raw-color": noRawColor,
         "no-separate-leading": noSeparateLeading,
         "no-styles-import": noStylesImport,
+        "prefer-solid-control-flow": preferSolidControlFlow,
         "no-transition-all": noTransitionAll,
         "route-seo-path": routeSeoPath,
         "route-shape": routeShape,
