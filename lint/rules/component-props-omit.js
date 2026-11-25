@@ -103,6 +103,13 @@ function usesOmitSpread(body, propsName) {
             if (node.type === "JSXSpreadAttribute") {
                 used.spread = true
             }
+            if (
+                node.type === "CallExpression" &&
+                node.callee.type === "Identifier" &&
+                node.callee.name === "renderElement"
+            ) {
+                used.spread = true
+            }
         },
         new Set(),
     )

@@ -3,7 +3,7 @@ import type { ComponentProps, JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
-import type { RenderProps } from "@ui/render"
+import { renderElement, type RenderProps } from "@ui/render"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
 
 type RegisterRowProps = ParentProps<{
@@ -51,7 +51,7 @@ export function RegisterRowTitle(props: RegisterRowTitleProps) {
             return props.children
         },
     })
-    return <>{props.render?.(resolved) ?? <span {...resolved} />}</>
+    return renderElement({ defaultTag: "span", render: () => props.render, props: () => resolved })
 }
 
 const registerRowDescription = cva({

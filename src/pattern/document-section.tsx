@@ -1,6 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import type { RenderProps } from "@ui/render"
+import { renderElement, type RenderProps } from "@ui/render"
 import { merge, omit } from "solid-js"
 
 export function DocumentSection(props: ComponentProps<"section">) {
@@ -33,5 +33,5 @@ export function DocumentSectionBody(props: DocumentSectionBodyProps): JSX.Elemen
             return props.children
         },
     })
-    return <>{props.render?.(merged) ?? <div {...merged} />}</>
+    return renderElement({ defaultTag: "div", render: () => props.render, props: () => merged })
 }

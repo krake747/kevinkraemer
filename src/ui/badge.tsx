@@ -1,6 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import type { RenderProps } from "@ui/render"
+import { renderElement, type RenderProps } from "@ui/render"
 import { Show, createMemo, merge, omit } from "solid-js"
 
 const badge = cva({
@@ -90,5 +90,5 @@ export function Badge(props: BadgeProps): JSX.Element {
             )
         },
     })
-    return <>{props.render?.(merged) ?? <span {...merged} />}</>
+    return renderElement({ defaultTag: "span", render: () => props.render, props: () => merged })
 }

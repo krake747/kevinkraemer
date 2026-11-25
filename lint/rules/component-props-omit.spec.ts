@@ -32,6 +32,11 @@ tester.run("kk/component-props-omit", componentPropsOmit, {
             filename: "src/ui/decor-mark.tsx",
             code: `import type { ComponentProps } from "@solidjs/web"\nimport { merge, omit } from "solid-js"\nexport function DecorMark(_props: ComponentProps<"svg"> & { arm?: "full" }) {\nconst props = merge({ arm: "full" } as const, _props)\nconst rest = omit(props, "arm", "class", "children")\nreturn <svg {...rest} />\n}`,
         },
+        {
+            name: "host delegating spread to renderElement",
+            filename: "src/pattern/stack.tsx",
+            code: `import type { ComponentProps, JSX } from "@solidjs/web"\nimport { renderElement } from "@ui/render"\nimport { merge, omit } from "solid-js"\nexport function Stack(props: ComponentProps<"div"> & { render?: (props: object) => JSX.Element }) {\nconst rest = omit(props, "class", "children", "render")\nconst merged = merge(rest, { get class() { return props.class } })\nreturn renderElement({ defaultTag: "div", render: () => props.render, props: () => merged })\n}`,
+        },
     ],
     invalid: [
         {
