@@ -3,10 +3,11 @@ import type { ComponentProps, JSX } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { ArrowRight, ChevronLeft } from "@ui/icon"
+import type { RenderProps } from "@ui/render"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
 
 type RegisterProps = ComponentProps<"div"> & {
-    render?: (props: Record<string, any>) => JSX.Element
+    render?: (props: RenderProps) => JSX.Element
 }
 
 export function Register(props: RegisterProps) {
@@ -16,7 +17,7 @@ export function Register(props: RegisterProps) {
 type RegisterRowProps = ParentProps<{
     href: string
     class?: string
-    render?: (props: Record<string, any>) => JSX.Element
+    render?: (props: RenderProps) => JSX.Element
 }>
 
 export function RegisterRow(props: RegisterRowProps) {

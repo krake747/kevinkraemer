@@ -1,5 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
+import type { RenderProps } from "@ui/render"
 import { merge, omit } from "solid-js"
 
 export function DocumentSection(props: ComponentProps<"section">) {
@@ -12,7 +13,7 @@ export function DocumentSection(props: ComponentProps<"section">) {
 }
 
 type DocumentSectionBodyProps = ComponentProps<"div"> & {
-    render?: (props: Record<string, any>) => JSX.Element
+    render?: (props: RenderProps) => JSX.Element
 }
 
 export function DocumentSectionBody(props: DocumentSectionBodyProps): JSX.Element {

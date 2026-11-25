@@ -1,5 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
+import type { RenderProps } from "@ui/render"
 import { Show, createMemo, merge, omit } from "solid-js"
 
 const badge = cva({
@@ -60,7 +61,7 @@ type BadgeVariants = VariantProps<typeof badge>
 type BadgeProps = BadgeVariants &
     ComponentProps<"span"> & {
         target?: BadgeTarget
-        render?: (props: Record<string, any>) => JSX.Element
+        render?: (props: RenderProps) => JSX.Element
     }
 
 export function Badge(props: BadgeProps): JSX.Element {

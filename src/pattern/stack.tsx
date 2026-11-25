@@ -1,9 +1,10 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
+import type { RenderProps } from "@ui/render"
 import { merge, omit } from "solid-js"
 
 type StackProps = ComponentProps<"div"> & {
-    render?: (props: Record<string, any>) => JSX.Element
+    render?: (props: RenderProps) => JSX.Element
 }
 
 export function Stack(props: StackProps): JSX.Element {
@@ -43,7 +44,7 @@ export const stackRow = cva({
 export function StackRow(
     props: ComponentProps<"div"> &
         VariantProps<typeof stackRow> & {
-            render?: (props: Record<string, any>) => JSX.Element
+            render?: (props: RenderProps) => JSX.Element
         },
 ): JSX.Element {
     const rest = omit(props, "size", "interactive", "class", "children", "render")
