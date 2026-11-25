@@ -18,7 +18,7 @@ Vite with prerendered pages and Netlify functions.
 
 - `boundary` placement: route vs feature vs pattern vs core, see `docs/agents/architecture.md`
 - `Specimen Panel` visual language: component, variant, color, see `docs/agents/design.md`, then
-  `docs/design/system.md` plus the one task file
+  `docs/design/system.md`
 - `Quietly confident` intent and audience, see `docs/agents/product.md`
 - `Review` diffs: names, imports, shape, see `docs/agents/review.md`
 - `Standards` quality: declarative, composable, single source, see `CODING_STANDARDS.md`
