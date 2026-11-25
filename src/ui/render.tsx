@@ -1,10 +1,31 @@
 import type { ComponentProps, JSX } from "@solidjs/web"
 import { Show } from "solid-js"
 
-export type RenderProps = Pick<ComponentProps<"div">, "class" | "children" | "id" | "aria-label" | "aria-labelledby">
+export type RenderProps = Pick<
+    ComponentProps<"div">,
+    | "class"
+    | "children"
+    | "id"
+    | "title"
+    | "style"
+    | "role"
+    | "tabindex"
+    | "hidden"
+    | "lang"
+    | "dir"
+    | "aria-label"
+    | "aria-labelledby"
+    | "aria-describedby"
+    | "aria-hidden"
+    | "aria-expanded"
+    | "aria-controls"
+    | "aria-current"
+> & {
+    [key: `data-${string}`]: string | number | boolean | undefined
+}
 
-export type WithRender = {
-    render?: (props: RenderProps) => JSX.Element
+export type WithRender<P = RenderProps> = {
+    render?: (props: P) => JSX.Element
 }
 
 export function renderElement<P extends { class?: string; children?: JSX.Element }>(options: {

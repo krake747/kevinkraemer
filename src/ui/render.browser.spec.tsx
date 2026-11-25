@@ -45,4 +45,17 @@ describe("the render helper", () => {
         const list = view.querySelector("ul.listed")
         expect(list?.getAttribute("aria-label")).toBe("Entries")
     })
+
+    it("forwards extra host props to the render override", () => {
+        const view = renderAttached(() =>
+            renderElement({
+                defaultTag: "div",
+                render: () => (props) => <ul {...props} />,
+                props: () => ({ class: "listed", "data-index": "3", title: "Rows" }),
+            }),
+        )
+        const list = view.querySelector("ul.listed")
+        expect(list?.getAttribute("data-index")).toBe("3")
+        expect(list?.getAttribute("title")).toBe("Rows")
+    })
 })

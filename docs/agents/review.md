@@ -173,4 +173,7 @@ filter only after that.
 Why two override APIs in one tree doubles the review surface. Solve every host, first-party or
 ui-sdk, changes its element with `render`, never an `as` prop. A function passed to `render` must
 forward the supplied props, as in `node_modules/@ui-sdk/solid/docs/parts-and-composition.md`. The
-tag still has to stay inside one semantic family (`docs/agents/html-semantics.md`).
+override sees the shared `RenderProps` subset (`ref` and `on*` handlers stay on the default tag so
+the props spread across element families); extend it where a host forwards more, as `Badge` does
+with `target`/`rel`. The tag still has to stay inside one semantic family
+(`docs/agents/html-semantics.md`).

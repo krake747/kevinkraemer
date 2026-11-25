@@ -1,6 +1,6 @@
 import { type ComponentProps, type JSX } from "@solidjs/web"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { renderElement, type WithRender } from "@ui/render"
+import { renderElement, type RenderProps, type WithRender } from "@ui/render"
 import { Show, createMemo, merge, omit } from "solid-js"
 
 const badge = cva({
@@ -60,7 +60,7 @@ type BadgeVariants = VariantProps<typeof badge>
 
 type BadgeProps = BadgeVariants &
     ComponentProps<"span"> &
-    WithRender & {
+    WithRender<RenderProps & { target?: "_blank"; rel?: string }> & {
         target?: BadgeTarget
     }
 
