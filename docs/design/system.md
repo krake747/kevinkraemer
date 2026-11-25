@@ -24,7 +24,7 @@ Unless a page file marks a bullet **Proposal**, it describes the site as shipped
 
 Other routes carry no page file; they read tokens plus structure directly.
 
-## Layer rule — what you may type into `class`
+## Layer rule: what you may type into `class`
 
 Why: a shade that is not in this list is invisible in review and drifts the palette one screen at a
 time. Two classes for the same job is how the site stops reading as one system.
@@ -35,9 +35,9 @@ Allowed, in this order of preference:
    `Button`, `Badge`, `Chip`, `Input`, `InlineCode`, `Kbd`, `DecorMark` live in `src/ui`; `Stack`,
    `StackRow`, `TerminalCommandHeader`, `SectionHeading`, `PanelLabel` live in `src/pattern`
    (`terminal.tsx`, `section.tsx`). The variant union is the source of truth for what exists.
-2. **Tailwind scale classes** — `stone-*` for grounds, borders, and text; `emerald-*` for signal;
+2. **Tailwind scale classes**: `stone-*` for grounds, borders, and text; `emerald-*` for signal;
    `amber-*` for warning. Exact values and mix percentages: `src/app.css` and the `src/ui` variants.
-3. **`@theme` tokens** — `--ease-out-quart` and the other easing curves, `--graph-accent`,
+3. **`@theme` tokens**: `--ease-out-quart` and the other easing curves, `--graph-accent`,
    `--graph-frame`, `--graph-muted`, `--graph-faint` for the graph utilities.
 
 Never:
@@ -46,7 +46,7 @@ Never:
   in `src/pattern/seo.tsx`, which writes browser chrome and cannot read a class.
 - A new shade of stone, emerald, or amber. Match the nearest existing usage instead.
 - A background, text, or border color invented at a call site. If no component variant gives you the
-  look, the variant is missing — add it to the component's inline CVA, do not override `class`.
+  look, the variant is missing: add it to the component's inline CVA, do not override `class`.
 - A second gradient. The one sanctioned gradient is `body::before`, dark mode only.
 
 ## Module shape
@@ -83,7 +83,7 @@ Fixed header and footer, each `h-10`, stone hairline plus `backdrop-blur-sm` on 
 sanctioned exceptions to the no-hairline rule in `tokens.md`.
 
 - Header: `KK` home mark, page routes, in-page section links on `/` and `/cv`, command palette,
-  theme toggle. The palette is also mobile navigation — there is no hamburger.
+  theme toggle. The palette is also mobile navigation (there is no hamburger).
 - Header routes are exactly three: `/`, `/cv`, `/logs` (`topNav: true` in
   `src/core/site/navigation.ts`). Every other route is palette-only. A new route does not earn a
   header slot by existing.

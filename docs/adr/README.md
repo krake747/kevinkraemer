@@ -20,13 +20,12 @@ cross-cutting rule.
 
 Copy `_template.md` to `NNNN-kebab-title.md`. Fill the four rungs:
 
-- **Date** — creation date (`YYYY-MM-DD`)
-- **Status** — `Proposed | Accepted | Superseded by ADR-XXXX | Deprecated`
-- **Context** — why a decision is needed: problem and forces, not how it is built
-- **Decision** — what we chose and what we ruled out; state the principle, not file paths or literal
+- **Date**: creation date (`YYYY-MM-DD`)
+- **Status**: `Proposed | Accepted | Superseded by ADR-XXXX | Deprecated`
+- **Context**: why a decision is needed: problem and forces, not how it is built
+- **Decision**: what we chose and what we ruled out; state the principle, not file paths or literal
   values. Optional first line as a Y-Statement
-- **Consequences** — what becomes easier or harder; trade-offs accepted. No implementation
-  inventory.
+- **Consequences**: what becomes easier or harder; trade-offs accepted. No implementation inventory.
 
 Keep it to 21–40 lines and plain prose.
 

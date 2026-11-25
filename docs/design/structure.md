@@ -1,4 +1,4 @@
-# Structure — commands, headings, page open
+# Structure: commands, headings, page open
 
 Source of truth: `src/pattern/terminal.tsx`, `src/pattern/section.tsx`, `src/pattern/page.tsx`, and
 the shipped pages.
@@ -21,12 +21,12 @@ Does this section need a name?
       └── Yes → PanelLabel.
 ```
 
-- One `TerminalCommandHeader` per section. No subordinate text beneath it — no eyebrow, no caption,
+- One `TerminalCommandHeader` per section. No subordinate text beneath it: no eyebrow, no caption,
   no second command. The command is the label.
 - `SectionHeading` renders `h2` with the emerald `#` and mono `text-xs`. It takes `id`, and that id
   is what the parent section's `aria-labelledby` points at.
 - `PanelLabel` is uppercase mono `text-xs` with loosened tracking. Panel headers and rail labels
-  only — never a heading.
+  only, never a heading.
 
 ## Command grammar
 
@@ -45,7 +45,7 @@ The command is the honest label, so it follows the page's job:
 
 A new route picks the row that matches its job. `cd ~/<route>` for a register or dated list;
 `cat <name>` for a document. Everything that is not a register, a query, or an invitation is a
-document. Never invent a command that is not shell-real, and never use the command as a joke — it is
+document. Never invent a command that is not shell-real, and never use the command as a joke: it is
 the section label.
 
 ## Page open
@@ -92,9 +92,9 @@ A prose section is a `DocumentSection` with a `SectionHeading` and a `DocumentSe
 ```
 
 - `DocumentSection` is a `<section>` with the reveal animation. The caller passes `aria-labelledby`
-  pointing at the heading `id` — it is a native attribute and flows through to the section.
-- `SectionHeading` takes the heading `id` as its own `id`. The string appears twice on purpose — on
-  the heading and as `aria-labelledby` on the section — that is what splitting the anchor from the
+  pointing at the heading `id`: it is a native attribute and flows through to the section.
+- `SectionHeading` takes the heading `id` as its own `id`. The string appears twice on purpose (on
+  the heading and as `aria-labelledby` on the section): that is what splitting the anchor from the
   label costs, and duplicating it is correct.
 - `DocumentSectionBody` is the measure column (`max-w-prose`), stone-600 body. It is the only place
   the prose measure is declared. The default element is a `div` with `flex-col gap-4`. For a
@@ -106,7 +106,7 @@ A prose section is a `DocumentSection` with a `SectionHeading` and a `DocumentSe
   `lg:col-span-7 lg:pl-12`. The narrow left column is the design, not a measure bug; the right
   column lands on the prose measure, the left runs shorter.
 
-Correct — the caller composes the heading and the body, with the heading id twice on purpose:
+Correct: the caller composes the heading and the body, with the heading id twice on purpose:
 
 ```tsx
 <DocumentSection aria-labelledby="philosophy-heading">
@@ -115,7 +115,7 @@ Correct — the caller composes the heading and the body, with the heading id tw
 </DocumentSection>
 ```
 
-Incorrect — a hand-rolled heading and a raw measure:
+Incorrect: a hand-rolled heading and a raw measure:
 
 ```tsx
 // No aria-labelledby, no hash, and a second measure declaration
@@ -155,7 +155,7 @@ Elements mean what the spec says, so the tag must match the content, not the sty
 - One `h1` per page from `PageHeader`, then step by one. No heading inside `li`.
 - `RecordRow` labels stay plain text; values live in `dd`. Order decides the list: unordered entries
   `ul`, meaningful order `ol`, name-value `dl`.
-- Disclosure is native `details`/`summary` only — never bolt button semantics onto a summary.
+- Disclosure is native `details`/`summary` only: never bolt button semantics onto a summary.
 - Name every exposed landmark: rail `aside`s point `aria-labelledby` at their rail label, and search
   operations sit in `search`.
 

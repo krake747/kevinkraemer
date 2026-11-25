@@ -16,7 +16,7 @@ pointing and pressing. If a new animation makes the reader wait or look at it, d
 layout, width, height, top/left, filter, box-shadow, background-color
 ```
 
-Why: those force layout or paint every frame, and the page is mostly text — the one thing a reflow
+Why: those force layout or paint every frame, and the page is mostly text, the one thing a reflow
 hurts most. Color is different: a row's ground and border may transition with `transition-colors`
 (`duration-150` on a control, `duration-200` on a log row), because color does not reflow.
 
@@ -25,7 +25,7 @@ hurts most. Color is different: a row's ground and border may transition with `t
   produces that. It stays scoped to that one utility.
 - Never `transition-all`. It silently animates layout properties the day someone adds one.
 - Hover that **moves or appears** is gated with `hover:pointer-fine:*`: an arrow that slides. A
-  color hover on a link is not gated — the tap navigates away, so nothing sticks. Write the variant
+  color hover on a link is not gated: the tap navigates away, so nothing sticks. Write the variant
   first: `hover:pointer-fine:translate-x-1`, not `pointer-fine:hover:…`.
 - The header home mark is static. It is a navigation link used often, so its hover offers no motion:
   the hit area is the affordance. A wordmark that rotates is decoration on the one element the
@@ -105,18 +105,18 @@ fade tracks the thumb.
 
 The block in `@layer base` clears every animation delay and collapses entrance animations to a
 near-zero duration, and turns off `scroll-behavior` under `prefers-reduced-motion: reduce`.
-Transitions are narrowed to the properties that still carry meaning — color, background, border,
-outline, fill, stroke, opacity — at the reduced-motion transition duration in `src/app.css`, so
+Transitions are narrowed to the properties that still carry meaning (color, background, border,
+outline, fill, stroke, opacity) at the reduced-motion transition duration in `src/app.css`, so
 movement (`transform`, `scale`, `block-size`) snaps while state and color feedback stay legible.
 `kk-cascade` zeroing its delays is belt and braces. `.reveal-item` is forced to `opacity: 1` and
 `.hero-char` drops its animation.
 
 - A new animation gets no exemption. The global block covers elements; a rule on a pseudo-element
-  (`::details-content`) is outside its universal selector and carries its own — `.accordion` is the
+  (`::details-content`) is outside its universal selector and carries its own. `.accordion` is the
   one that does.
 - Never hide content behind an animation that reduced-motion cancels. If an element starts at
-  `opacity: 0` via a class, it needs the reduced-motion rule that restores it — `.reveal-item` is
-  the pattern.
+  `opacity: 0` via a class, it needs the reduced-motion rule that restores it. `.reveal-item` is the
+  pattern.
 
 ## Theme swap
 

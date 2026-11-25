@@ -7,7 +7,7 @@ Source of truth: `vitest.config.ts` (projects `unit` on `node`, `browser` on Chr
 A test is done when it asserts `black-box` behavior, defines expected independently, and stays
 `deterministic`.
 
-## Naming — describe the behaviour
+## Naming: describe the behaviour
 
 Why a spec that says `describe("sortLogEntries")` restates the export and fails when the function is
 renamed, while a reader learns nothing about what the product does. Solve name the capability in
@@ -31,12 +31,12 @@ same property is a cost, not coverage.
 Why a test gated on a local `dist/` protects nothing: the unit job never builds, so the gate skips
 it in CI and a stale local build decides the local result. Assert built output in `e2e/` instead.
 
-## Bug fixes — repro first
+## Bug fixes: repro first
 
 Why a fix without a failing run first may fix nothing. Solve paste the failing run, then fix, then
 paste the passing run. The PR Evidence section carries both.
 
-## Tiers — one branch per target
+## Tiers: one branch per target
 
 - **Logic `src/core/**`, `netlify/**`** Why pure `node` suffices. Solve keep in the `unit` project,
   parameterize with `it.each`, inject RNG and time.
@@ -48,31 +48,31 @@ paste the passing run. The PR Evidence section carries both.
   needs a real DOM; everything else runs on `node` in the `unit` project.
 - **E2E `e2e/**`** Why smoke proves wiring across pages, hydration, and the edge function. Solve
   `playwright.config.ts` `webServer: pnpm preview` (the Netlify CLI builds and serves the production
-  stack), wait on `html[data-hydrated]` — set by `onHydrationEnd` in `src/app.tsx` — before
+  stack), wait on `html[data-hydrated]` (set by `onHydrationEnd` in `src/app.tsx`) before
   interacting, then assert via `toBeVisible` and `toHaveAttribute`. The preview command builds what
   it serves, so start it once and let `reuseExistingServer` reuse it; run `pnpm build` alone only
   when the prerendered output is itself the question.
 
-## Mocking — mock the `boundary`, not the behavior
+## Mocking: mock the `boundary`, not the behavior
 
 Why mocking internal code hides the behavior under test. Solve mock at the `boundary` with
 `vi.stubGlobal` and `vi.spyOn` for `fetch`; prefer `better-result` injection over
 `vi.mock("@core/...")`.
 
-## Reliability — stay `deterministic`
+## Reliability: stay `deterministic`
 
 Why flaky tests steal attention every run. Solve inject RNG and time via `vi.useFakeTimers` and
 `vi.setSystemTime`, isolate module caches with `vi.resetModules`, and clean up rendered components
 after each spec.
 
-## Local server — reuse, never kill
+## Local server: reuse, never kill
 
 Why an agent that stops a server destroys the developer's session and its own HMR state. Solve check
 first with `curl -sf http://localhost:5173/`; if it answers, work against it. Never stop or kill a
 server you did not start. If you must start one, leave it running when you are done or ask first.
 `pnpm dev` serves 5173; `pnpm preview` and Playwright serve 4321.
 
-## Visual probing — `scripts/probe.mts`
+## Visual probing: `scripts/probe.mts`
 
 Why rendered geometry is the one claim the source cannot settle. Solve run the probe against a
 server that is already up; see `probe --help` for flags. It waits for `html[data-hydrated]` before

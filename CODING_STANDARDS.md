@@ -33,7 +33,7 @@ Enforced at diff time by `docs/agents/review.md`. Mechanical parts enforced by `
 
 7. **Named from speech.** Shared names pair a closed kind with a spoken or industry word. Why:
    inventions hide meaning. Solve: kind from `Page`, `Section`, `Row`, `Panel`, `Header`, `Heading`,
-   `Column`, `Frame`, `Label`, `Rail` — new kinds only via `docs/design/structure.md`; leading word
+   `Column`, `Frame`, `Label`, `Rail` (new kinds only via `docs/design/structure.md`); leading word
    spoken in site copy, `docs/design/**`, or `GLOSSARY.md`, or the industry word. Compounds are
    parent plus part.
 
@@ -50,6 +50,8 @@ Run once, subscribe in JSX. Components run once to build the graph; reads live i
 Solve: never early-return on `isServer`; read signals and `index()` inside JSX; derive with memos;
 key lists by stable id. See `docs/agents/review.md ## Hydration ids` and `## Lists`.
 
-Control flow: see `docs/agents/review.md ## Control flow` (`kk/prefer-solid-control-flow`).
+Control flow: see `docs/agents/review.md ## Control flow` (`kk/prefer-solid-control-flow`). Do not
+use an em dash (U+2014) in documentation; recast the sentence with a comma, colon, full stop, or
+parentheses.
 
 Routing lives in `AGENTS.md ## Pointers`. Errors: see `docs/adr/0008-contracts-testing.md`.

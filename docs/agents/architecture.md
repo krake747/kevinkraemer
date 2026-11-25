@@ -5,7 +5,7 @@ Source of truth: `vite.config.ts`, `src/routes/**`, `src/app.tsx`, `src/document
 
 A change is done when every file sits behind its `boundary`.
 
-## Place code by `boundary` — `route` vs `feature` vs `pattern` vs `core`
+## Place code by `boundary`: `route` vs `feature` vs `pattern` vs `core`
 
 Why a page composed inside a feature hides the route's shape and locks sections to one ordering.
 Solve compose in `src/routes`: read params, then `PageColumn`/`Seo` plus feature sections in order.
@@ -34,7 +34,7 @@ only in production cannot be exercised by `vite`. Solve put an on-demand endpoin
 file; the handler lives in `src/features/<name>/` behind a `Request -> Response` function. Deploys
 through `scripts/function.ts`.
 
-## Shape routes by kind — `page` vs `endpoint`, with two exemptions
+## Shape routes by kind: `page` vs `endpoint`, with two exemptions
 
 Why a route file that mixes page composition with handler plumbing hides which surface it serves,
 and a page whose Seo path drifts from its filename ships the wrong canonical. Solve keep two shapes
@@ -43,7 +43,7 @@ file's path, inline (`<Seo path>`) or through a shell (`DetailPage seo`); an end
 exports method handlers and no page shell, with document endpoints also listed in the prerender
 artifact list. `[...404].tsx` and `scalar.ts` sit outside the convention.
 
-## One entry pair — `src/app.tsx` and `src/document.tsx`
+## One entry pair: `src/app.tsx` and `src/document.tsx`
 
 Why authored entries and a second HTML shell duplicate the hydration surface. Solve let start mode
 generate the entries: `vite.config.ts` names the app, document, and middleware explicitly. Site-wide
@@ -82,8 +82,8 @@ from the route.
 ## Validate once at the `intake`
 
 Why a second check deep in a call chain pays for the same question twice and still misses the seam
-where it entered. Solve parse at the `intake` where data crosses in — request bodies, `env`,
-upstream JSON, pagefind results, generated blobs — with a valibot schema, then trust the type below
-it. Derive types from that schema (`v.InferOutput`) rather than restating the shape beside it.
-Version a persisted blob and compare the version on read. Take an options object when two parameters
-are the same type and a swap would still compile.
+where it entered. Solve parse at the `intake` where data crosses in (request bodies, `env`, upstream
+JSON, pagefind results, generated blobs) with a valibot schema, then trust the type below it. Derive
+types from that schema (`v.InferOutput`) rather than restating the shape beside it. Version a
+persisted blob and compare the version on read. Take an options object when two parameters are the
+same type and a swap would still compile.

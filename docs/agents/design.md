@@ -9,12 +9,12 @@ wrong job, or the right job hand-rolled.
 
 System, four files:
 
-- `system.md` — the character, the layer rule (what you may type into `class`), module shape, shared
+- `system.md`: the character, the layer rule (what you may type into `class`), module shape, shared
   chrome. Read this first, always.
-- `tokens.md` — color, type, surfaces, controls, forms: the condensed per-token rules.
-- `structure.md` — how a page and a section open: command headers, grammar, prose sections.
-- `motion.md` — easing, reveal cadence, reduced motion.
-- `projects.md` — the `/projects` register and case page, kept as the worked example of a ruled
+- `tokens.md`: color, type, surfaces, controls, forms: the condensed per-token rules.
+- `structure.md`: how a page and a section open: command headers, grammar, prose sections.
+- `motion.md`: easing, reveal cadence, reduced motion.
+- `projects.md`: the `/projects` register and case page, kept as the worked example of a ruled
   exception.
 
 When building UI, read `system.md` plus the one file the task touches. Positioning and audience:
