@@ -49,21 +49,8 @@ flashes dark between the end of the fade and the unmount.
 
 ## Duration and easing
 
-| Motion                | Duration                     | Easing                                 |
-| --------------------- | ---------------------------- | -------------------------------------- |
-| Control color / press | `duration-150`               | `ease-out-quart`                       |
-| Overlay in            | `duration-150`               | `ease-out-quart`                       |
-| Overlay out           | `duration-100`               | `ease-out-quart`                       |
-| Backdrop fade         | `duration-150`               | `ease-out-quart`                       |
-| Accordion open        | `@utility accordion` (open)  | `ease-out-quart`                       |
-| Accordion close       | `@utility accordion` (close) | `ease-out-quart`                       |
-| Reveal                | `--animate-fade-up`          | `ease-out-expo` (baked into the token) |
-| Hero text rise        | `--animate-rise`             | `ease-out-expo` (baked into the token) |
-
-- Start from the `ease-out-quart` token. It is the house curve: fast out of the press, dead stop.
-- No bounce, no elastic, no spring. Nothing overshoots.
-- Exit is faster than entry (`duration-100` vs `duration-150`). A close that takes as long as an
-  open feels stuck.
+House curve is `ease-out-quart`: fast out, dead stop. No bounce, spring, or overshoot. Exit is
+faster than entry. Durations and tokens live in `src/app.css`.
 
 ## Reveal cadence
 

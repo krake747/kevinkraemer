@@ -14,7 +14,11 @@ Sections and interactive pieces live in `src/features`, drop-in shared UI and ge
 `src/pattern` (imports only `core`, `ui`, `pattern`; takes data via props; names use `GLOSSARY.md`
 domain terms), styled primitives in `src/ui`, pure logic in `src/core` with data in `content`, edge
 code in `netlify/edge-functions` with relative imports only. A `feature` that two slices need moves
-down to `pattern`; never import across `features` when `pattern` fits.
+down to `pattern`; never import across `features` when `pattern` fits. One exception: a `src` module
+the edge bundle imports joins the edge rule for its own imports, since the edge bundler resolves no
+aliases (`src/core/site/problem.ts` imports `./api-version.ts`, see
+`docs/adr/0004-edge-negotiation-conversion.md`). Keep the exception to modules the edge tree
+actually imports.
 
 ## Keep `src/ui` Solid only
 
@@ -27,9 +31,8 @@ to the feature that owns them, so `src/ui` holds no page-level composition.
 Why a host's request/response shape leaks into an endpoint's own policy, and a route that exists
 only in production cannot be exercised by `vite`. Solve put an on-demand endpoint in
 `src/routes/<name>.ts` with its transport policy (methods, CORS, problem bodies) at the top of the
-file; the handler lives in `src/features/<name>/` behind a `Request -> Response` function.
-`src/routes/ask.ts` and `src/routes/mcp.ts` follow this split and deploy through
-`scripts/function.ts` into the `dist/functions` host-function directory.
+file; the handler lives in `src/features/<name>/` behind a `Request -> Response` function. Deploys
+through `scripts/function.ts`.
 
 ## Shape routes by kind — `page` vs `endpoint`, with two exemptions
 
@@ -38,19 +41,14 @@ and a page whose Seo path drifts from its filename ships the wrong canonical. So
 in `src/routes`: a page (`.tsx`) default-exports a `*Route` component and declares Seo with the
 file's path, inline (`<Seo path>`) or through a shell (`DetailPage seo`); an endpoint (`.ts`)
 exports method handlers and no page shell, with document endpoints also listed in the prerender
-artifact list. `[...404].tsx` carries no canonical path by nature and `scalar.ts` serves a
-third-party shell, so both sit outside the convention.
+artifact list. `[...404].tsx` and `scalar.ts` sit outside the convention.
 
 ## One entry pair — `src/app.tsx` and `src/document.tsx`
 
 Why authored entries and a second HTML shell duplicate the hydration surface. Solve let start mode
-generate the entries: `vite.config.ts` names `./src/app.tsx`, `./src/document.tsx`, and
-`./src/middleware.ts` explicitly, because the plugin probes `src/Document.*` for the shell and repo
-files are lowercase. Keep `<HydrationScript />` in the head and `{props.children}` in the body of
-the document, site-wide chrome in `App`, and a page's content in its route. `scripts/prerender.ts`
-renders the same pair for every path into `dist/client` as `<path>.html`, not `<path>/index.html`,
-so Netlify serves `/about` without redirecting to `/about/`; `originHtmlPath` in the edge function
-mirrors that layout. No `src/entry-*` files exist, so there is one code path on every surface.
+generate the entries: `vite.config.ts` names the app, document, and middleware explicitly. Site-wide
+chrome lives in `App`, page content in its route. No `src/entry-*` files exist, so there is one code
+path on every surface.
 
 ## Create abstraction only behind a small seam
 

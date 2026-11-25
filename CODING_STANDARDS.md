@@ -1,41 +1,55 @@
 # Coding Standards
 
-How we judge project and code quality.
+How we judge quality. Read during review, not implementation.
 
-1. **Declarative.** State to UI without imperative branching in handlers. Prefer derived values and
-   maps. Why: fewer branches to maintain. Solve: replace `if` cascades with a derivation.
+Enforced at diff time by `docs/agents/review.md`. Mechanical parts enforced by `pnpm lint`.
 
-2. **Composable.** Small blocks that pass the deletion test. Why: keeps callers light. Solve: a file
-   stays only if deleting it moves complexity into the caller.
+1. **Declarative.** State to UI without imperative branching. Prefer derived values and maps. Why:
+   fewer branches. Solve: replace `if` cascades with a derivation.
 
-3. **Composition first.** A root plus parts, filled with children. Why: composes without prop
-   growth. Solve: render content as children of named parts. No slot or content props (no `title`,
-   `description`, `label`, `meta`, `action`, `rail`, or layout `command` props, and no `JSX.Element`
-   props). Variants via CVA. Change the element with ui-sdk `render`, never an `as` prop.
+2. **Composable.** Small blocks that pass the deletion test. Why: light callers. Solve: keep a file
+   only if deleting it moves complexity into the caller.
+
+3. **Composition first.** A root plus parts, filled with children. Why: no prop growth. Solve:
+   content as children of named parts. No slot props (no `title`, `description`, `label`, `meta`,
+   `action`, `rail`, `command`, or `JSX.Element` props). Variants via CVA. Element via `render`,
+   never `as`.
 
 4. **Single source per meaning.** One home, one import path. Why: one place to change. Solve: reuse
-   the existing `ui/` component, `pattern/` drop-in, panel, token, or nav definition instead of
-   hand-rolled HTML. Audit before adding a literal or element: grep it — one meaning reads from one
-   home (`canonicalFor`, `EMAIL`), and grep `src/ui/` then `src/pattern/` before writing a new
-   element. Cross-`feature` reuse moves down to `src/pattern/`.
+   the `ui/` component, `pattern/` drop-in, panel, token, or nav definition instead of hand-rolled
+   HTML. Grep before adding: one meaning reads from one home; grep `src/ui/` then `src/pattern/`
+   before writing a new element. Cross-`feature` reuse moves down to `src/pattern/`.
 
-5. **Types over interfaces, named imports, no casts.** Why: catches drift early. Solve: fix at
-   source, import from the defining module, no barrels. Declare a shape once; narrow it at the use
-   site with `Pick`, `Omit`, `Parameters`, `ReturnType`, or `typeof`, and with `v.InferOutput` where
-   a schema owns it. Encode absence as `?` on props and params; reserve `null` for serialization and
-   DOM boundaries; never `""` for a missing value. Exception: `declare module` augmentation uses
-   `interface` because TypeScript declaration merging cannot use `type`
+5. **Types over interfaces, named imports, no casts.** Why: catches drift. Solve: fix at source,
+   import from the defining module, no barrels. Declare once; narrow at the use site with `Pick`,
+   `Omit`, `Parameters`, `ReturnType`, `typeof`, or `v.InferOutput`. Parse at the `intake` with a
+   valibot schema, then trust the type below it. Absence is `?`; `null` only for serialization and
+   DOM boundaries; never `""`. Exception: `declare module` uses `interface`
    (`src/core/site/navigation.ts`).
 
-6. **Explicit machines.** Flag combinations that must agree are a discriminated union, not booleans.
-   Why: independent flags admit impossible states. Solve: one `kind` field, transitions in one
-   function or reducer, exhaustive `match` with `matchNever`.
+6. **Explicit machines.** Agreeing flags are a discriminated union, not booleans. Why: flags admit
+   impossible states. Solve: one `kind` field, transitions in one place, exhaustive `match` with
+   `matchNever`.
+
+7. **Named from speech.** Shared names pair a closed kind with a spoken or industry word. Why:
+   inventions hide meaning. Solve: kind from `Page`, `Section`, `Row`, `Panel`, `Header`, `Heading`,
+   `Column`, `Frame`, `Label`, `Rail` — new kinds only via `docs/design/structure.md`; leading word
+   spoken in site copy, `docs/design/**`, or `GLOSSARY.md`, or the industry word. Compounds are
+   parent plus part.
+
+8. **Data lives where it renders.** State stays local; shareable state goes in the URL. Why: shared
+   state couples and dies on reload. Solve: keep local; shareable in a search parameter; share
+   through `src/core`; `derive`, never sync. Build-time data from the route bundle; runtime fetch in
+   the rendering feature. Detail lives in `docs/agents/architecture.md`.
 
 ## Project: Solid plus Vite
 
-Barrel for project-specific standards. Why: keeps `CODING_STANDARDS.md` small and lets each question
-load only when needed. Control flow in JSX uses Solid's `Show`, `Switch`/`Match` and `For`, never
-ternaries, `&&` or `.map`.
+Barrel for project extras. Loads on demand.
 
-Routing lives in `AGENTS.md ## Pointers`. Project-only extra: for errors (how failures propagate),
-see `docs/adr/0008-contracts-testing.md`.
+Run once, subscribe in JSX. Components run once to build the graph; reads live in JSX or memos.
+Solve: never early-return on `isServer`; read signals and `index()` inside JSX; derive with memos;
+key lists by stable id. See `docs/agents/review.md ## Hydration ids` and `## Lists`.
+
+Control flow: see `docs/agents/review.md ## Control flow` (`kk/prefer-solid-control-flow`).
+
+Routing lives in `AGENTS.md ## Pointers`. Errors: see `docs/adr/0008-contracts-testing.md`.

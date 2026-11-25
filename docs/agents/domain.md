@@ -12,8 +12,7 @@ A skill is done when it uses `GLOSSARY.md` terms and flags any ADR conflict.
 
 ## Layout — single-context
 
-Why this repo is single-context. Solve `GLOSSARY.md` plus `docs/adr/` live at the root; no
-`CONTEXT-MAP.md`, no `src/<context>/docs/adr/`.
+`GLOSSARY.md` plus `docs/adr/` live at the root.
 
 ## Use the glossary's vocabulary
 
