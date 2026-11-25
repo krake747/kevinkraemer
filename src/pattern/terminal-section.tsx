@@ -3,15 +3,10 @@ import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
 import { omit } from "solid-js"
 
-type TerminalSectionProps = ComponentProps<"section">
+type TerminalSectionProps = Omit<ComponentProps<"section">, "id"> & { id: string }
 
 export function TerminalSection(props: TerminalSectionProps) {
-    const commandId = (): string | undefined => {
-        if (props.id) {
-            return `${props.id}-command`
-        }
-        return undefined
-    }
+    const commandId = (): string => `${props.id}-command`
     const rest = omit(props, "class", "children")
     const reveal = createScrollReveal()
     return (
