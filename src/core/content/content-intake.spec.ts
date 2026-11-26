@@ -101,7 +101,7 @@ describe("project intake", () => {
         ).toBe(true)
     })
 
-    it("accepts category, featured, implementation, tradeoffs, and resources", () => {
+    it("accepts category, featured, implementation, and tradeoffs", () => {
         const parsed = v.safeParse(ProjectSchema, {
             name: "Tool",
             tagline: "A useful tool.",
@@ -115,14 +115,13 @@ describe("project intake", () => {
             decisions: [],
             implementation: "A single binary.",
             tradeoffs: [{ title: "No cache", reason: "Freshness beats speed here." }],
-            resources: [{ label: "Repo", href: "https://example.com/repo", note: "Source." }],
         })
         expect(parsed.success).toBe(true)
         expect(parsed.success ? parsed.output.category : undefined).toBe("tool")
         expect(parsed.success ? parsed.output.featured : undefined).toBe(true)
     })
 
-    it("defaults featured, tradeoffs, and resources when absent", () => {
+    it("defaults featured and tradeoffs when absent", () => {
         const parsed = v.safeParse(ProjectSchema, {
             name: "Site",
             tagline: "A portfolio.",
@@ -136,7 +135,6 @@ describe("project intake", () => {
         expect(parsed.success).toBe(true)
         expect(parsed.success ? parsed.output.featured : undefined).toBe(false)
         expect(parsed.success ? parsed.output.tradeoffs : undefined).toEqual([])
-        expect(parsed.success ? parsed.output.resources : undefined).toEqual([])
     })
 
     it("accepts every known project category", () => {

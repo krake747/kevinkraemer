@@ -98,14 +98,4 @@ export const ProjectSchema = v.object({
         ),
         [],
     ),
-    resources: v.optional(
-        v.array(
-            v.object({
-                label: v.pipe(v.string(), v.minLength(1)),
-                href: v.optional(v.pipe(v.string(), v.url())),
-                note: v.optional(v.pipe(v.string(), v.minLength(1))),
-            }),
-        ),
-        [],
-    ),
 })

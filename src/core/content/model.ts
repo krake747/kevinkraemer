@@ -84,12 +84,6 @@ export type ProjectFigure = {
     source?: "prerender-routes" | "manual"
 }
 
-export type ProjectResourceEntry = {
-    label: string
-    href?: string
-    note?: string
-}
-
 export type Project = {
     id: string
     name: string
@@ -109,7 +103,6 @@ export type Project = {
     implementation?: string
     evidence: ProjectEvidence[]
     tradeoffs: ProjectDecision[]
-    resources: ProjectResourceEntry[]
     html: string
     graphs: GraphFlowSpec[]
 }

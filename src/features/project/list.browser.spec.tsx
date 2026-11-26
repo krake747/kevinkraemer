@@ -16,7 +16,6 @@ function fixture(overrides: Partial<Project> & { id: string }): Project {
         decisions: [],
         evidence: [],
         tradeoffs: [],
-        resources: [],
         html: "",
         graphs: [],
         ...overrides,

@@ -46,11 +46,4 @@ tradeoffs:
     reason:
       "The market language is presentation, not prices. No live widgets means nothing to operate,
       nothing to break, and nothing a visitor can mistake for a real quote."
-resources:
-  - label: "Live site"
-    href: https://www.kevinkraemer.com
-    note: "The site itself."
-  - label: "Source"
-    href: https://github.com/krake747/kevinkraemer
-    note: "History and automation."
 ---

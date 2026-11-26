@@ -3,7 +3,6 @@ import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
 import { ReturnToRegister } from "@pattern/register"
 import { Stack, StackRow } from "@pattern/stack"
-import { Anchor } from "@ui/anchor"
 import { For, Show, type ParentProps, type VoidProps } from "solid-js"
 
 function ProjectSection(props: ParentProps<{ id: string; title: string }>) {
@@ -80,47 +79,6 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                                     <p class="mt-2 font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
                                         {tradeoff.reason}
                                     </p>
-                                </StackRow>
-                            )}
-                        </For>
-                    </Stack>
-                </ProjectSection>
-            </Show>
-            <Show when={props.project.resources.length > 0}>
-                <ProjectSection id="resources" title="Links and resources">
-                    <Stack render={(renderProps) => <ul {...renderProps} />} class="mt-4">
-                        <For each={props.project.resources}>
-                            {(item) => (
-                                <StackRow
-                                    render={(renderProps) => <li {...renderProps} />}
-                                    class="grid gap-1 sm:grid-cols-[minmax(0,16rem)_1fr] sm:items-baseline sm:gap-4"
-                                >
-                                    <Show
-                                        when={item.href}
-                                        fallback={
-                                            <span class="font-mono text-sm text-stone-900 dark:text-stone-100">
-                                                {item.label}
-                                            </span>
-                                        }
-                                    >
-                                        {(href) => (
-                                            <Anchor
-                                                href={href()}
-                                                variant="muted"
-                                                target={{ kind: "external" }}
-                                                class="hit-area-y-2"
-                                            >
-                                                {item.label}
-                                            </Anchor>
-                                        )}
-                                    </Show>
-                                    <Show when={item.note}>
-                                        {(note) => (
-                                            <span class="font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
-                                                {note()}
-                                            </span>
-                                        )}
-                                    </Show>
                                 </StackRow>
                             )}
                         </For>

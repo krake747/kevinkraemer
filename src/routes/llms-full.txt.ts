@@ -45,16 +45,6 @@ function evidenceLines(evidence: Project["evidence"]): string[] {
     return evidence.length === 0 ? [] : ["", "### Evidence", "", ...evidence.map((item) => `- ${item.caption}`)]
 }
 
-function resourceEntryLine(entry: Project["resources"][number]): string {
-    const href = entry.href ? ` (${entry.href})` : ""
-    const note = entry.note ? `: ${entry.note}` : ""
-    return `- ${entry.label}${href}${note}`
-}
-
-function resourceLines(resources: Project["resources"]): string[] {
-    return resources.length === 0 ? [] : ["", "### Links and resources", "", ...resources.map(resourceEntryLine)]
-}
-
 function implementationLines(implementation: Project["implementation"]): string[] {
     return implementation === undefined ? [] : ["", "### Technical implementation", "", implementation]
 }
@@ -101,7 +91,6 @@ function formatProjectEntry(project: Project): string[] {
         ...implementationLines(project.implementation),
         ...evidenceLines(project.evidence),
         ...tradeoffLines(project.tradeoffs),
-        ...resourceLines(project.resources),
         "---",
         "",
     ]
