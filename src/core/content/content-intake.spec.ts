@@ -6,6 +6,7 @@ import {
     ProjectSchema,
     UsesSchema,
 } from "@core/content/content-intake"
+import { PROJECT_CATEGORIES } from "@core/content/project-category"
 import * as v from "valibot"
 import { describe, expect, it } from "vite-plus/test"
 
@@ -136,6 +137,24 @@ describe("project intake", () => {
         expect(parsed.success ? parsed.output.featured : undefined).toBe(false)
         expect(parsed.success ? parsed.output.tradeoffs : undefined).toEqual([])
         expect(parsed.success ? parsed.output.resources : undefined).toEqual([])
+    })
+
+    it("accepts every known project category", () => {
+        for (const category of PROJECT_CATEGORIES) {
+            expect(
+                v.safeParse(ProjectSchema, {
+                    name: "Site",
+                    tagline: "A portfolio.",
+                    category,
+                    status: "Live",
+                    stack: ["Solid"],
+                    role: "Owner",
+                    order: 1,
+                    problem: "Stand out.",
+                    decisions: [],
+                }).success,
+            ).toBe(true)
+        }
     })
 
     it("rejects an unknown category", () => {

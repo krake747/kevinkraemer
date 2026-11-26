@@ -1,4 +1,5 @@
 import type { FlowName } from "@core/content/graphs"
+import type { ProjectCategory } from "@core/content/project-category"
 import { compareDatesDesc } from "@core/time/date"
 
 export type GraphFlowSpec =
@@ -88,10 +89,6 @@ export type ProjectResourceEntry = {
     href?: string
     note?: string
 }
-
-export const PROJECT_CATEGORIES = ["site", "tool", "service"] as const
-
-export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number]
 
 export type Project = {
     id: string
