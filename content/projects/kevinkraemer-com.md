@@ -17,33 +17,32 @@ figure:
   source: prerender-routes
 order: 1
 problem:
-  "I wanted one address for the work. The register shows the cases. The stream shows the thinking.
-  The palette jumps anywhere."
+  "I wanted one address for the work. The projects show what I built, the logs show how I think, and
+  the command palette gets you anywhere fast."
 decisions:
   - title: "A Bloomberg screen meets a terminal."
     reason:
-      "The design is a homage to both sides of my path. I used to be a financial risk analyst,
-      looking at Bloomberg screens all day. Now I'm a software developer living in tools like
-      OpenCode, Herdr and Ghostty. Mixing the two felt like fun."
-  - title: "Built to iterate."
+      "I spent years reading Bloomberg screens as a risk analyst, and now I live in terminals.
+      Mixing the two felt like fun, and it fits: dense, fast, no decoration."
+  - title: "Never finished."
     reason:
-      "The first version was rough. The register, the case file, the motion pass, and this directory
-      each landed as their own commit. Design holds."
+      "The first version was rough. I keep this site as the place where I try things out: the
+      design, the writing, the motion. It is never done, and that is the point."
 implementation:
-  "Solid 2 with filesystem routes, prerendered to static HTML at build time. Content lives as
-  Markdown and is validated against a schema before it renders, so a typo fails the build instead of
-  shipping a broken page. Search is a Pagefind index, and /ask and /mcp run as Netlify functions."
+  "The site is one Solid app, prerendered to static pages when I deploy. The words are Markdown
+  files, checked against a schema at build time, so a typo breaks the build instead of the page.
+  Search runs off a Pagefind index, and the ask box and agent endpoints run as Netlify functions."
 evidence:
   - caption:
-      "I run pnpm generate and the content bundle lands. The home stream renders 3 rows. No fetch.
-      No spinner. You read the stream."
+      "Content is generated at build time, so the home page renders three log rows with no fetching
+      and no spinner. The words are already there."
 tradeoffs:
-  - title: "Strict intake for loose authorship."
+  - title: "Typos break the build."
     reason:
-      "Authors write Markdown, but every field is schema-checked at build time. The cost is a failed
-      build on a typo; the return is no broken page ever ships."
-  - title: "Metaphor without live data."
+      "Every Markdown file is checked against a schema before it renders. That costs me a red build
+      now and then; the return is a page that never renders half-missing."
+  - title: "No live numbers."
     reason:
-      "The market language is presentation, not prices. No live widgets means nothing to operate,
-      nothing to break, and nothing a visitor can mistake for a real quote."
+      "Nothing here is a real quote. The market look is presentation, not prices, so there are no
+      live widgets to operate, break, or mislead anyone."
 ---
