@@ -50,18 +50,18 @@ the section label.
 
 ## Page open
 
-Every page opens one of three ways, and the first is enforced by code:
+Every page opens one of three ways:
 
-| Page kind                                     | Open with                                                                                     |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `DocumentPage` route (`src/pattern/page.tsx`) | The route composes a `PageHeader` as a child: `TerminalCommandHeader`, then `PageHeaderTitle` |
-| Index route (not `DocumentPage`)              | `TerminalCommandHeader`, then `PageHeaderTitle`                                               |
-| Entry route (`/logs/[slug]`)                  | `TerminalCommandHeader`, then `PageHeaderTitle`, with optional `PageHeaderMeta`               |
+| Page kind                                     | Open with                                                                                 |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `DocumentPage` route (`src/pattern/page.tsx`) | The route composes a `header` as a child: `TerminalCommandHeader`, then `PageHeaderTitle` |
+| Index route (not `DocumentPage`)              | `TerminalCommandHeader`, then `PageHeaderTitle`                                           |
+| Entry route (`/logs/[slug]`)                  | `TerminalCommandHeader`, then `PageHeaderTitle`, then a meta `div`                        |
 
 Why the route owns it: `DocumentPage` is the column and the measure, not the header. The caller
 writes the command and the title as children, the same way it already composes `DocumentSection`.
-Use `PageHeader` and `PageHeaderTitle` so the h1 size does not drift across the seven document
-pages. Do not hand-roll that header.
+Write a plain `header` around `TerminalCommandHeader` and `PageHeaderTitle`, so the h1 size does not
+drift across the seven document pages. Do not hand-roll the `h1`.
 
 The DocumentSection anatomy is for sections with a heading that earns its place; a two-sentence
 intro on a page that then lists rows has no heading to give. Do not invent a heading so a short
@@ -152,7 +152,7 @@ Elements mean what the spec says, so the tag must match the content, not the sty
   `summary`. Never cross families.
 - Every `section` carries a name. `DocumentSection` pairs `aria-labelledby` with its `h2`;
   `TerminalSection` names itself with its command.
-- One `h1` per page from `PageHeader`, then step by one. No heading inside `li`.
+- One `h1` per page from `PageHeaderTitle`, then step by one. No heading inside `li`.
 - `RecordRow` labels stay plain text; values live in `dd`. Order decides the list: unordered entries
   `ul`, meaningful order `ol`, name-value `dl`.
 - Disclosure is native `details`/`summary` only: never bolt button semantics onto a summary.

@@ -104,9 +104,14 @@ export function RegisterWithRail(props: RegisterWithRailProps) {
     )
 }
 
-export function RegisterWithRailMain(props: ParentProps<{ class?: string }>) {
+export function RegisterWithRailMain(props: ComponentProps<"div">) {
+    const rest = omit(props, "class", "children")
     const spacing = useContext(RegisterWithRailSpacing)
-    return <div class={cx(railMain({ spacing: spacing(), class: props.class }))}>{props.children}</div>
+    return (
+        <div {...rest} class={cx(railMain({ spacing: spacing(), class: props.class }))}>
+            {props.children}
+        </div>
+    )
 }
 
 export function RegisterWithRailRail(props: ParentProps<{ labelledby: string; class?: string }>) {
