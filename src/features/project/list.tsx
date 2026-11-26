@@ -18,10 +18,14 @@ export function ProjectList(props: VoidProps<{ projects: Project[] }>) {
                 <ul class="m-0 flex list-none flex-col p-0">
                     <For each={ordered()}>
                         {(project) => (
-                            <li class="flex flex-col gap-6 border-t border-stone-200/80 py-10 md:flex-row md:gap-12 dark:border-stone-800">
+                            <li class="group flex flex-col gap-6 border-t border-stone-200/80 py-10 transition-colors duration-200 hover:bg-emerald-500/3 md:flex-row md:gap-12 dark:border-stone-800 dark:hover:bg-emerald-500/5">
                                 <div class="flex flex-col gap-4 md:w-60 md:shrink-0">
                                     <div class="flex flex-col gap-2">
-                                        <Anchor href={`/projects/${project.id}`} variant="title" class="hit-area-y-1.5">
+                                        <Anchor
+                                            href={`/projects/${project.id}`}
+                                            variant="title"
+                                            class="hit-area-y-1.5 group-hover:text-emerald-800 dark:group-hover:text-emerald-400"
+                                        >
                                             {project.name}
                                         </Anchor>
                                         <p class="font-mono text-xs tracking-widest text-stone-600 uppercase tabular-nums dark:text-stone-400">
