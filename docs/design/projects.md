@@ -38,13 +38,14 @@ document with a metadata stack of record rows and mid-level headings.
   “Projects”, then one plain intro line (“The work, filed…”). An empty collection renders
   `EmptyRegister spacious` instead of the list.
 - Featured case files come first, in the established two-column rows: `li` with a single `border-t`
-  in stone, identity rail (`Anchor` `title` name, status line, optional Headline Figure), and body
-  (tagline, role and stack). The row is a `group`: hovering anywhere highlights the name, gated
-  behind `pointer-fine` so a touch tap on row whitespace leaves no stuck highlight. No wash, no
-  frame, no `StackRow`, no `Stack` (deliberate exception to the framed-panel rule).
+  in stone and `px-4` content inset, identity rail (`Anchor` `title` name, status line, optional
+  Headline Figure), and body (tagline, role and stack). The row is a `group`: hovering anywhere
+  highlights the name, gated behind `pointer-fine` so a touch tap on row whitespace leaves no stuck
+  highlight. No wash, no frame, no `StackRow`, no `Stack` (deliberate exception to the framed-panel
+  rule).
 - The compact directory follows: one `li` per remaining project with a single `border-t`, a block
-  link (`group`, `py-5`) wrapping `RegisterRowTitle`, `RegisterRowDescription` (`lines={1}`), and
-  `RegisterRowMeta` (category · status · year). No arrow, no frame: density is the signal. A
+  link (`group`, `px-4 py-5`) wrapping `RegisterRowTitle`, `RegisterRowDescription` (`lines={1}`),
+  and `RegisterRowMeta` (category · status · year). No arrow, no frame: density is the signal. A
   featured entry never repeats in the compact list, and the compact section is omitted entirely when
   nothing is left: no heading, no empty state.
 - No group headings anywhere on the page. A “Featured” eyebrow is scaffolding; the density change

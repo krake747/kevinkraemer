@@ -18,7 +18,7 @@ function statusLine(project: Project): string {
 
 function FeaturedProject(props: VoidProps<{ project: Project }>) {
     return (
-        <li class="group flex flex-col gap-6 border-t border-stone-200/80 py-10 md:flex-row md:gap-12 dark:border-stone-800">
+        <li class="group flex flex-col gap-6 border-t border-stone-200/80 px-4 py-10 md:flex-row md:gap-12 dark:border-stone-800">
             <div class="flex flex-col gap-4 md:w-60 md:shrink-0">
                 <div class="flex flex-col gap-2">
                     <Anchor
@@ -58,7 +58,7 @@ function CompactProjectRow(props: VoidProps<{ project: Project }>) {
             <a
                 href={`/projects/${props.project.id}`}
                 aria-labelledby={titleId()}
-                class="group flex min-w-0 flex-1 py-5"
+                class="group flex min-w-0 flex-1 px-4 py-5"
             >
                 <span class="min-w-0 flex-1">
                     <RegisterRowTitle id={titleId()}>{props.project.name}</RegisterRowTitle>
