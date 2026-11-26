@@ -10,9 +10,10 @@ Unless marked **Proposal**, this describes the pages as shipped. Tokens and chro
 
 ## Purpose & audience
 
-A hiring manager or peer who wants to see how a project was approached (problem, decisions, and
-evidence) without treating the work as a card deck or a metrics wall. The index is for scanning; the
-case page is for reading.
+A hiring manager or peer who wants to find work fast (the index) and understand how a project was
+approached (the case file: problem, decisions, implementation, and trade-offs) without treating the
+work as a card deck or a metrics wall. The index is for discovery; the case page is for reading. The
+index is never a miniature of the detail pages.
 
 ## Mood
 
@@ -34,16 +35,20 @@ document with a metadata stack of record rows and mid-level headings.
 ### Index (`/projects`)
 
 - `DocumentPage`, with a child `header`: `TerminalCommandHeader` `ls ~/projects`, `PageHeaderTitle`
-  “Projects”, then one plain `ul` of entries (`sortByOrder`). An empty collection renders
+  “Projects”, then one plain intro line (“The work, filed…”). An empty collection renders
   `EmptyRegister spacious` instead of the list.
-- Each entry is an `li` in a two-column row with a single `border-t` in stone. The rule is the
-  page's only divider: no frame, no `StackRow`, no `Stack` (deliberate exception to the framed-panel
-  rule).
-- The identity rail: the name as `Anchor` `title`, then status and year, then the optional Headline
-  Figure. A project with no figure keeps the rail at name and status.
-- The body: the tagline, capped at `max-w-prose`, then role and stack in mono `text-xs`.
-- No group `SectionHeading` when the register is a single list. The register ends on its last entry;
-  no footer copy.
+- Featured case files come first, in the established two-column rows: `li` with a single `border-t`
+  in stone, identity rail (`Anchor` `title` name, status line, optional Headline Figure), and body
+  (tagline, role and stack). The row is a `group`: hovering anywhere highlights the name, and the
+  ground washes `emerald-500/3` (`duration-200`). The rule is the page's only divider: no frame, no
+  `StackRow`, no `Stack` (deliberate exception to the framed-panel rule).
+- The compact directory follows: one `li` per remaining project with a single `border-t`, a block
+  link (`group`, `py-5`) wrapping `RegisterRowTitle`, `RegisterRowDescription` (`lines={1}`), and
+  `RegisterRowMeta` (category · status · year). No arrow, no frame: density is the signal. A
+  featured entry never repeats in the compact list, and the compact section is omitted entirely when
+  nothing is left: no heading, no empty state.
+- No group headings anywhere on the page. A “Featured” eyebrow is scaffolding; the density change
+  between the two lists is the label. The register ends on its last entry; no footer copy.
 
 ### Case page (`/projects/[slug]`)
 
@@ -55,8 +60,11 @@ document with a metadata stack of record rows and mid-level headings.
   The tagline is not repeated as a What row.
 - Then sections with a real mid-level heading step (`h2`, Geist `text-xl` semibold), not only 12px
   mono `TerminalCommandHeader` or `SectionHeading`: problem and point of view; key decisions (each
-  title plus reason in a record `StackRow`); evidence and changelog only when they have entries
-  (changelog as a `Stack` rendered as a `ul` of record `StackRow`s rendered as `li`).
+  title plus reason in a record `StackRow`); technical implementation (one prose paragraph);
+  evidence (captions only, when present); challenges and trade-offs (same record rows as decisions);
+  links and resources (a `Stack` rendered as a `ul` of record `StackRow`s rendered as `li`: label,
+  optional external href, optional note). There is no separate changelog: dated build notes live as
+  resource entries.
 - A muted back link to `/projects`. Breadcrumbs for Home / Projects / name.
 
 ## Type & colour accents
@@ -66,10 +74,10 @@ document with a metadata stack of record rows and mid-level headings.
   size, semibold.
 - Body and notes: muted stone, `leading-[1.8]` in prose blocks, mono on metadata and captions. The
   index tagline is UI copy at `text-base leading-relaxed`, capped at the measure.
-- Emerald is the single signal: only the primary live-site link uses `Anchor` `channel`, and the
-  index name turns emerald on hover. Case-page repo, changelog, and the back link use `muted`. No
-  extra palette, no shadows, no gradients, no icon grids, and one Headline Figure per project at
-  most, never a grid of numbers.
+- Emerald is the single signal: only the primary live-site link uses `Anchor` `channel`, and a name
+  turns emerald on row hover. Case-page repo, resources, and the back link use `muted`. No extra
+  palette, no shadows, no gradients, no icon grids, and one Headline Figure per project at most,
+  never a grid of numbers.
 
 ## Signature component
 
@@ -78,9 +86,10 @@ display-size name, status line, one Headline Figure in the rail, tagline on the 
 
 ## Motion
 
-Staggered `animate-rise` on the index header, `animate-fade-up` on the register and footer. The case
-page is static besides standard link hover. No scroll reveal. Collapse under
-`prefers-reduced-motion`.
+Staggered `animate-rise` on the index header, `animate-fade-up` on the featured and compact
+sections. The case header rises on entry (`animate-rise`, transform-only, so the page's largest text
+paints on the first frame); the case body is static besides standard link hover. No scroll reveal.
+Collapse under `prefers-reduced-motion`.
 
 ## Do / Don't
 
@@ -90,8 +99,11 @@ page is static besides standard link hover. No scroll reveal. Collapse under
   page back into a filename listing.
 - Do keep a mid-level heading step on the case page, and a 70ch reading measure.
 - Do keep Email-style restraint: one emerald action, the live site.
+- Do keep featured entries out of the compact list, and omit the compact section when nothing is
+  left. Duplication reads as padding.
 - Don't publish a private repository URL. If no public repo is listed, omit the repo row.
-- Don't render Evidence or Changelog when those lists are empty.
+- Don't render Evidence, Trade-offs, or Resources when those lists are empty, and don't keep a
+  separate changelog: dated build notes are resource entries.
 - Don't add a second figure, a KPI block, or a card grid, and don't turn the case page into a
   dashboard of metrics.
 - Don't add a second `TerminalCommandHeader`, shadows, or a gradient.
