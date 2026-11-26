@@ -9,7 +9,7 @@ stack:
   - Solid
   - TypeScript
   - Tailwind CSS
-role: "Design and engineering."
+role: "Design and passion project."
 liveUrl: https://www.kevinkraemer.com
 repoUrl: https://github.com/krake747/kevinkraemer
 figure:
