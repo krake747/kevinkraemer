@@ -7,6 +7,7 @@ import {
     RegisterRowTitle,
 } from "@pattern/register"
 import { Anchor } from "@ui/anchor"
+import { Badge } from "@ui/badge"
 import { For, Show, createMemo, type VoidProps } from "solid-js"
 
 function statusLine(project: Project): string {
@@ -43,9 +44,16 @@ function FeaturedProject(props: VoidProps<{ project: Project }>) {
             </div>
             <div class="flex flex-col gap-4 md:min-w-0 md:flex-1">
                 <p class="max-w-prose text-base/relaxed text-stone-700 dark:text-stone-300">{props.project.tagline}</p>
-                <p class="font-mono text-xs/relaxed text-stone-600 dark:text-stone-400">
-                    {props.project.role} · {props.project.stack.join(" · ")}
-                </p>
+                <p class="font-mono text-xs/relaxed text-stone-600 dark:text-stone-400">{props.project.role}</p>
+                <ul aria-label="Stack" class="m-0 flex list-none flex-wrap gap-1.5 p-0">
+                    <For each={props.project.stack}>
+                        {(tech) => (
+                            <li>
+                                <Badge>{tech}</Badge>
+                            </li>
+                        )}
+                    </For>
+                </ul>
             </div>
         </li>
     )
