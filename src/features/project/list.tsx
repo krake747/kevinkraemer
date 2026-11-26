@@ -18,13 +18,13 @@ function statusLine(project: Project): string {
 
 function FeaturedProject(props: VoidProps<{ project: Project }>) {
     return (
-        <li class="group flex flex-col gap-6 border-t border-stone-200/80 py-10 transition-colors duration-200 hover:bg-emerald-500/3 md:flex-row md:gap-12 dark:border-stone-800 dark:hover:bg-emerald-500/5">
+        <li class="group flex flex-col gap-6 border-t border-stone-200/80 py-10 md:flex-row md:gap-12 dark:border-stone-800">
             <div class="flex flex-col gap-4 md:w-60 md:shrink-0">
                 <div class="flex flex-col gap-2">
                     <Anchor
                         href={`/projects/${props.project.id}`}
                         variant="title"
-                        class="hit-area-y-1.5 group-hover:text-emerald-800 dark:group-hover:text-emerald-400"
+                        class="hit-area-y-1.5 group-hover:pointer-fine:text-emerald-800 dark:group-hover:pointer-fine:text-emerald-400"
                     >
                         {props.project.name}
                     </Anchor>
