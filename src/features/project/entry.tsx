@@ -46,6 +46,13 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                     </Stack>
                 </ProjectSection>
             </Show>
+            <Show when={props.project.implementation}>
+                {(implementation) => (
+                    <ProjectSection id="implementation" title="Technical implementation">
+                        <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{implementation()}</p>
+                    </ProjectSection>
+                )}
+            </Show>
             <Show when={props.project.evidence.length > 0}>
                 <ProjectSection id="evidence" title="Evidence">
                     <Stack class="mt-4">
@@ -61,10 +68,28 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                     </Stack>
                 </ProjectSection>
             </Show>
-            <Show when={props.project.changelog.length > 0}>
-                <ProjectSection id="changelog" title="Changelog">
+            <Show when={props.project.tradeoffs.length > 0}>
+                <ProjectSection id="tradeoffs" title="Challenges and trade-offs">
+                    <Stack class="mt-4">
+                        <For each={props.project.tradeoffs}>
+                            {(tradeoff) => (
+                                <StackRow>
+                                    <h3 class="font-semibold tracking-tight text-stone-900 dark:text-stone-100">
+                                        {tradeoff.title}
+                                    </h3>
+                                    <p class="mt-2 font-mono text-sm/[1.8] text-stone-600 dark:text-stone-400">
+                                        {tradeoff.reason}
+                                    </p>
+                                </StackRow>
+                            )}
+                        </For>
+                    </Stack>
+                </ProjectSection>
+            </Show>
+            <Show when={props.project.resources.length > 0}>
+                <ProjectSection id="resources" title="Links and resources">
                     <Stack render={(renderProps) => <ul {...renderProps} />} class="mt-4">
-                        <For each={props.project.changelog}>
+                        <For each={props.project.resources}>
                             {(item) => (
                                 <StackRow
                                     render={(renderProps) => <li {...renderProps} />}

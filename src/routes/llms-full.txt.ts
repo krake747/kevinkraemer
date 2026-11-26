@@ -45,18 +45,43 @@ function evidenceLines(evidence: Project["evidence"]): string[] {
     return evidence.length === 0 ? [] : ["", "### Evidence", "", ...evidence.map((item) => `- ${item.caption}`)]
 }
 
-function changelogEntryLine(entry: Project["changelog"][number]): string {
+function resourceEntryLine(entry: Project["resources"][number]): string {
     const href = entry.href ? ` (${entry.href})` : ""
     const note = entry.note ? `: ${entry.note}` : ""
     return `- ${entry.label}${href}${note}`
 }
 
-function changelogLines(changelog: Project["changelog"]): string[] {
-    return changelog.length === 0 ? [] : ["", "### Changelog", "", ...changelog.map(changelogEntryLine)]
+function resourceLines(resources: Project["resources"]): string[] {
+    return resources.length === 0 ? [] : ["", "### Links and resources", "", ...resources.map(resourceEntryLine)]
+}
+
+function implementationLines(implementation: Project["implementation"]): string[] {
+    return implementation === undefined ? [] : ["", "### Technical implementation", "", implementation]
+}
+
+function tradeoffLines(tradeoffs: Project["tradeoffs"]): string[] {
+    return tradeoffs.length === 0
+        ? []
+        : [
+              "",
+              "### Challenges and trade-offs",
+              "",
+              ...tradeoffs.map((tradeoff) => `- ${tradeoff.title}: ${tradeoff.reason}`),
+          ]
+}
+
+function categoryLines(category: Project["category"]): string[] {
+    return category === undefined ? [] : [`Category: ${category}`]
 }
 
 function projectHeader(project: Project): string[] {
-    return [`## ${project.name}`, "", `URL: ${origin}/projects/${project.id}`, `Status: ${project.status}`]
+    return [
+        `## ${project.name}`,
+        "",
+        `URL: ${origin}/projects/${project.id}`,
+        `Status: ${project.status}`,
+        ...categoryLines(project.category),
+    ]
 }
 
 function projectIntro(project: Project): string[] {
@@ -73,8 +98,10 @@ function formatProjectEntry(project: Project): string[] {
         ...repoLines(project.repoUrl),
         ...projectIntro(project),
         ...decisionLines(project.decisions),
+        ...implementationLines(project.implementation),
         ...evidenceLines(project.evidence),
-        ...changelogLines(project.changelog),
+        ...tradeoffLines(project.tradeoffs),
+        ...resourceLines(project.resources),
         "---",
         "",
     ]

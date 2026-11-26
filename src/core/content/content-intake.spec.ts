@@ -99,6 +99,60 @@ describe("project intake", () => {
             }).success,
         ).toBe(true)
     })
+
+    it("accepts category, featured, implementation, tradeoffs, and resources", () => {
+        const parsed = v.safeParse(ProjectSchema, {
+            name: "Tool",
+            tagline: "A useful tool.",
+            category: "tool",
+            featured: true,
+            status: "Live",
+            stack: ["Go"],
+            role: "Owner",
+            order: 2,
+            problem: "Something slow.",
+            decisions: [],
+            implementation: "A single binary.",
+            tradeoffs: [{ title: "No cache", reason: "Freshness beats speed here." }],
+            resources: [{ label: "Repo", href: "https://example.com/repo", note: "Source." }],
+        })
+        expect(parsed.success).toBe(true)
+        expect(parsed.success ? parsed.output.category : undefined).toBe("tool")
+        expect(parsed.success ? parsed.output.featured : undefined).toBe(true)
+    })
+
+    it("defaults featured, tradeoffs, and resources when absent", () => {
+        const parsed = v.safeParse(ProjectSchema, {
+            name: "Site",
+            tagline: "A portfolio.",
+            status: "Live",
+            stack: ["Solid"],
+            role: "Owner",
+            order: 1,
+            problem: "Stand out.",
+            decisions: [],
+        })
+        expect(parsed.success).toBe(true)
+        expect(parsed.success ? parsed.output.featured : undefined).toBe(false)
+        expect(parsed.success ? parsed.output.tradeoffs : undefined).toEqual([])
+        expect(parsed.success ? parsed.output.resources : undefined).toEqual([])
+    })
+
+    it("rejects an unknown category", () => {
+        expect(
+            v.safeParse(ProjectSchema, {
+                name: "Site",
+                tagline: "A portfolio.",
+                category: "game",
+                status: "Live",
+                stack: ["Solid"],
+                role: "Owner",
+                order: 1,
+                problem: "Stand out.",
+                decisions: [],
+            }).success,
+        ).toBe(false)
+    })
 })
 
 describe("bundle version", () => {

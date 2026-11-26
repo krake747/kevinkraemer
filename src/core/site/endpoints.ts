@@ -409,7 +409,7 @@ export const endpoints: Endpoint[] = [
             operationId: "getProjectsIndex",
             summary: "Projects index",
             description:
-                "Case files for selected projects: name, one-line what, status, and year or stack, each linking to a case page at /projects/{slug}.",
+                "Case files for selected projects: name, one-line what, category, status, and year or stack, each linking to a case page at /projects/{slug}.",
         }),
     },
     {
@@ -450,7 +450,7 @@ export const endpoints: Endpoint[] = [
             operationId: "getProjectCase",
             summary: "Project case file",
             description:
-                "One project case file: metadata, problem and point of view, key decisions, evidence, and changelog. Slugs are stable; discover them via getProjectsIndex or getSitemapIndex.",
+                "One project case file: metadata, problem and point of view, key decisions, technical implementation, evidence, challenges and trade-offs, and links and resources. Slugs are stable; discover them via getProjectsIndex or getSitemapIndex.",
             parameters: [
                 {
                     name: "slug",

@@ -1,3 +1,4 @@
+import { PROJECT_CATEGORIES } from "@core/content/model"
 import * as v from "valibot"
 
 export const CONTENT_BUNDLE_VERSION = 1
@@ -51,6 +52,8 @@ export const UsesSchema = v.object({
 export const ProjectSchema = v.object({
     name: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
     tagline: v.pipe(v.string(), v.minLength(1), v.maxLength(300)),
+    category: v.optional(v.picklist(PROJECT_CATEGORIES)),
+    featured: v.optional(v.boolean(), false),
     status: v.pipe(v.string(), v.minLength(1), v.maxLength(50)),
     year: v.optional(v.pipe(v.number(), v.integer())),
     stack: v.array(v.pipe(v.string(), v.minLength(1))),
@@ -78,6 +81,7 @@ export const ProjectSchema = v.object({
             reason: v.pipe(v.string(), v.minLength(1)),
         }),
     ),
+    implementation: v.optional(v.pipe(v.string(), v.minLength(1))),
     evidence: v.optional(
         v.array(
             v.object({
@@ -86,7 +90,16 @@ export const ProjectSchema = v.object({
         ),
         [],
     ),
-    changelog: v.optional(
+    tradeoffs: v.optional(
+        v.array(
+            v.object({
+                title: v.pipe(v.string(), v.minLength(1)),
+                reason: v.pipe(v.string(), v.minLength(1)),
+            }),
+        ),
+        [],
+    ),
+    resources: v.optional(
         v.array(
             v.object({
                 label: v.pipe(v.string(), v.minLength(1)),

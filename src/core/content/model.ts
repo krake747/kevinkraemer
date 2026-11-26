@@ -83,16 +83,22 @@ export type ProjectFigure = {
     source?: "prerender-routes" | "manual"
 }
 
-export type ProjectChangelogEntry = {
+export type ProjectResourceEntry = {
     label: string
     href?: string
     note?: string
 }
 
+export const PROJECT_CATEGORIES = ["site", "tool", "service"] as const
+
+export type ProjectCategory = (typeof PROJECT_CATEGORIES)[number]
+
 export type Project = {
     id: string
     name: string
     tagline: string
+    category?: ProjectCategory
+    featured: boolean
     status: string
     year?: number
     stack: string[]
@@ -103,8 +109,10 @@ export type Project = {
     order: number
     problem: string
     decisions: ProjectDecision[]
+    implementation?: string
     evidence: ProjectEvidence[]
-    changelog: ProjectChangelogEntry[]
+    tradeoffs: ProjectDecision[]
+    resources: ProjectResourceEntry[]
     html: string
     graphs: GraphFlowSpec[]
 }
