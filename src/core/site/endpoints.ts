@@ -450,7 +450,7 @@ export const endpoints: Endpoint[] = [
             operationId: "getProjectCase",
             summary: "Project case file",
             description:
-                "One project case file: metadata, problem and point of view, key decisions, technical implementation, evidence, and challenges and trade-offs. Slugs are stable; discover them via getProjectsIndex or getSitemapIndex.",
+                "One project case file: metadata, problem and point of view, key decisions, technical implementation, and challenges and trade-offs. Slugs are stable; discover them via getProjectsIndex or getSitemapIndex.",
             parameters: [
                 {
                     name: "slug",

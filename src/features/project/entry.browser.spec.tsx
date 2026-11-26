@@ -17,7 +17,6 @@ const project: Project = {
     problem: "The problem the project answers.",
     decisions: [{ title: "One seam", reason: "Because two callers needed it." }],
     implementation: "A single module.",
-    evidence: [],
     tradeoffs: [{ title: "No cache", reason: "Freshness beats speed here." }],
     html: "",
     graphs: [],
@@ -45,13 +44,11 @@ describe("the project entry", () => {
             ...project,
             decisions: [],
             implementation: undefined,
-            evidence: [],
             tradeoffs: [],
         }
         const view = renderToContainer(() => <ProjectEntry project={sparse} />)
         expect(view.querySelector("#decisions-heading")).toBeNull()
         expect(view.querySelector("#implementation-heading")).toBeNull()
-        expect(view.querySelector("#evidence-heading")).toBeNull()
         expect(view.querySelector("#tradeoffs-heading")).toBeNull()
     })
 })

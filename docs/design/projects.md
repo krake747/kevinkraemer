@@ -63,9 +63,8 @@ document with a metadata stack of record rows and mid-level headings.
 - Then sections with a real mid-level heading step (`h2`, Geist `text-xl` semibold), not only 12px
   mono `TerminalCommandHeader` or `SectionHeading`: problem and point of view; key decisions (each
   title plus reason in a record `StackRow`); technical implementation (one prose paragraph);
-  evidence (captions only, when present); challenges and trade-offs (same record rows as decisions).
-  Metadata rows stay the single home for links: live site and repo are not repeated further down the
-  page.
+  challenges and trade-offs (same record rows as decisions). Metadata rows stay the single home for
+  links: live site and repo are not repeated further down the page.
 - A muted back link to `/projects`. Breadcrumbs for Home / Projects / name.
 
 ## Type & colour accents
@@ -103,7 +102,7 @@ Collapse under `prefers-reduced-motion`.
 - Do keep featured entries out of the compact list, and omit the compact section when nothing is
   left. Duplication reads as padding.
 - Don't publish a private repository URL. If no public repo is listed, omit the repo row.
-- Don't render Evidence or Trade-offs when those lists are empty.
+- Don't render Trade-offs when the list is empty.
 - Don't add a second figure, a KPI block, or a card grid, and don't turn the case page into a
   dashboard of metrics.
 - Don't add a second `TerminalCommandHeader`, shadows, or a gradient.

@@ -35,10 +35,6 @@ implementation: >-
   lives in Markdown files and is validated against schemas during the build, catching mistakes
   before they reach production. Search uses a Pagefind index, while the ask box and agent endpoints
   run as Netlify Functions.
-evidence:
-  - caption: >-
-      Content is generated at build time. The homepage renders its three latest log entries directly
-      into the HTML: no fetching, no loading state, no spinner. The content is already there.
 tradeoffs:
   - title: "Typos fail the build."
     reason: >-

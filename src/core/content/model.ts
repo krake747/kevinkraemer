@@ -74,10 +74,6 @@ export type ProjectDecision = {
     reason: string
 }
 
-export type ProjectEvidence = {
-    caption: string
-}
-
 export type ProjectFigure = {
     value: string
     label: string
@@ -101,7 +97,6 @@ export type Project = {
     problem: string
     decisions: ProjectDecision[]
     implementation?: string
-    evidence: ProjectEvidence[]
     tradeoffs: ProjectDecision[]
     html: string
     graphs: GraphFlowSpec[]

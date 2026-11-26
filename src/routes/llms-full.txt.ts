@@ -41,10 +41,6 @@ function decisionLines(decisions: Project["decisions"]): string[] {
         : ["", "### Key decisions", "", ...decisions.map((decision) => `- ${decision.title}: ${decision.reason}`)]
 }
 
-function evidenceLines(evidence: Project["evidence"]): string[] {
-    return evidence.length === 0 ? [] : ["", "### Evidence", "", ...evidence.map((item) => `- ${item.caption}`)]
-}
-
 function implementationLines(implementation: Project["implementation"]): string[] {
     return implementation === undefined ? [] : ["", "### Technical implementation", "", implementation]
 }
@@ -89,7 +85,6 @@ function formatProjectEntry(project: Project): string[] {
         ...projectIntro(project),
         ...decisionLines(project.decisions),
         ...implementationLines(project.implementation),
-        ...evidenceLines(project.evidence),
         ...tradeoffLines(project.tradeoffs),
         "---",
         "",

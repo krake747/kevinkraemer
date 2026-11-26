@@ -52,21 +52,6 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                     </ProjectSection>
                 )}
             </Show>
-            <Show when={props.project.evidence.length > 0}>
-                <ProjectSection id="evidence" title="Evidence">
-                    <Stack class="mt-4">
-                        <For each={props.project.evidence}>
-                            {(item) => (
-                                <StackRow render={(renderProps) => <figure {...renderProps} />} size="compact">
-                                    <p class="font-mono text-sm/[1.8] text-stone-700 dark:text-stone-300">
-                                        {item.caption}
-                                    </p>
-                                </StackRow>
-                            )}
-                        </For>
-                    </Stack>
-                </ProjectSection>
-            </Show>
             <Show when={props.project.tradeoffs.length > 0}>
                 <ProjectSection id="tradeoffs" title="Challenges and trade-offs">
                     <Stack class="mt-4">

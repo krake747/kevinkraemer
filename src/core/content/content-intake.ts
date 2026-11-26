@@ -81,14 +81,6 @@ export const ProjectSchema = v.object({
         }),
     ),
     implementation: v.optional(v.pipe(v.string(), v.minLength(1))),
-    evidence: v.optional(
-        v.array(
-            v.object({
-                caption: v.pipe(v.string(), v.minLength(1)),
-            }),
-        ),
-        [],
-    ),
     tradeoffs: v.optional(
         v.array(
             v.object({
