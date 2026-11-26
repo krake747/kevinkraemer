@@ -79,7 +79,12 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                                         }
                                     >
                                         {(href) => (
-                                            <Anchor href={href()} variant="muted" target={{ kind: "external" }}>
+                                            <Anchor
+                                                href={href()}
+                                                variant="muted"
+                                                target={{ kind: "external" }}
+                                                class="hit-area-y-2"
+                                            >
                                                 {item.label}
                                             </Anchor>
                                         )}
