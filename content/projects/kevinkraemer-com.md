@@ -1,6 +1,6 @@
 ---
 name: kevinkraemer.com
-tagline: "My personal site, built like a tool I'd want to use."
+tagline: "A personal site built like a tool: fast, useful, and always evolving."
 category: site
 featured: true
 status: Live
@@ -16,33 +16,36 @@ figure:
   label: routes prerendered
   source: prerender-routes
 order: 1
-problem:
-  "I wanted one address for the work. The projects show what I built, the logs show how I think, and
-  the command palette gets you anywhere fast."
+problem: >-
+  I wanted one place for everything I make and think about. Projects show what I build, logs capture
+  how I think, and the command palette makes everything one keystroke away.
 decisions:
-  - title: "A Bloomberg screen meets a terminal."
-    reason:
-      "I spent years reading Bloomberg screens as a risk analyst, and now I live in terminals.
-      Mixing the two felt like fun, and it fits: dense, fast, no decoration."
-  - title: "Never finished."
-    reason:
-      "The first version was rough. I keep this site as the place where I try things out: the
-      design, the writing, the motion. It is never done, and that is the point."
-implementation:
-  "The site is one Solid app, prerendered to static pages when I deploy. The words are Markdown
-  files, checked against a schema at build time, so a typo breaks the build instead of the page.
-  Search runs off a Pagefind index, and the ask box and agent endpoints run as Netlify functions."
+  - title: "A Bloomberg screen meets a developer terminal."
+    reason: >-
+      I spent years reading Bloomberg screens as a risk analyst. Now I spend my days in developer
+      terminals. Bringing those worlds together felt natural: dense information, fast navigation,
+      and no decoration without a purpose.
+  - title: "A site that's never finished."
+    reason: >-
+      I built the site because I wanted a place to experiment. The first version was rough, and
+      that's fine. I keep iterating on the design, writing, and interactions. The site evolves
+      alongside what I learn.
+implementation: >-
+  The site is a single Solid application, prerendered into static pages at deploy time. Content
+  lives in Markdown files and is validated against schemas during the build, catching mistakes
+  before they reach production. Search uses a Pagefind index, while the ask box and agent endpoints
+  run as Netlify Functions.
 evidence:
-  - caption:
-      "Content is generated at build time, so the home page renders three log rows with no fetching
-      and no spinner. The words are already there."
+  - caption: >-
+      Content is generated at build time. The homepage renders its three latest log entries directly
+      into the HTML: no fetching, no loading state, no spinner. The content is already there.
 tradeoffs:
-  - title: "Typos break the build."
-    reason:
-      "Every Markdown file is checked against a schema before it renders. That costs me a red build
-      now and then; the return is a page that never renders half-missing."
-  - title: "No live numbers."
-    reason:
-      "Nothing here is a real quote. The market look is presentation, not prices, so there are no
-      live widgets to operate, break, or mislead anyone."
+  - title: "Typos fail the build."
+    reason: >-
+      Every Markdown file is validated against a schema before rendering. A small mistake can break
+      a build, but I'd rather catch it there than ship incomplete content.
+  - title: "No live market data."
+    reason: >-
+      The market-terminal aesthetic is visual language, not a promise of live financial data. There
+      are no live quotes or widgets to maintain, break, or mislead.
 ---
