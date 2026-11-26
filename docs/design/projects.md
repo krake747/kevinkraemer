@@ -33,9 +33,9 @@ document with a metadata stack of record rows and mid-level headings.
 
 ### Index (`/projects`)
 
-- `DocumentPage`, with a child `PageHeader`: `TerminalCommandHeader` `ls ~/projects`,
-  `PageHeaderTitle` “Projects”, then one plain `ul` of entries (`sortByOrder`). An empty collection
-  renders `EmptyRegister spacious` instead of the list.
+- `DocumentPage`, with a child `header`: `TerminalCommandHeader` `ls ~/projects`, `PageHeaderTitle`
+  “Projects”, then one plain `ul` of entries (`sortByOrder`). An empty collection renders
+  `EmptyRegister spacious` instead of the list.
 - Each entry is an `li` in a two-column row with a single `border-t` in stone. The rule is the
   page's only divider: no frame, no `StackRow`, no `Stack` (deliberate exception to the framed-panel
   rule).
@@ -61,7 +61,7 @@ document with a metadata stack of record rows and mid-level headings.
 
 ## Type & colour accents
 
-- Standard `Prose` header on the index. The index name uses `Anchor` `title` (mono `text-2xl`); the
+- Standard page `header` on the index. The index name uses `Anchor` `title` (mono `text-2xl`); the
   case-page `h1` is Geist `text-2xl`; section `h2` is `text-xl`; decision titles are `h3` at body
   size, semibold.
 - Body and notes: muted stone, `leading-[1.8]` in prose blocks, mono on metadata and captions. The
