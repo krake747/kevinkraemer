@@ -30,6 +30,11 @@ export function DisclosureRowSummary(props: ComponentProps<"summary">) {
     )
 }
 
-export function DisclosureRowBody(props: ParentProps<{ class?: string }>) {
-    return <div class={cx("mt-3", props.class)}>{props.children}</div>
+export function DisclosureRowBody(props: ComponentProps<"div">) {
+    const rest = omit(props, "class", "children")
+    return (
+        <div {...rest} class={cx("mt-3", props.class)}>
+            {props.children}
+        </div>
+    )
 }
