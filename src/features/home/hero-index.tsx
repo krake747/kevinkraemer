@@ -4,7 +4,6 @@ import { For } from "solid-js"
 
 const HERO_INDEX = [
     { label: "Projects", href: "/projects", display: "ls ~/projects" },
-    { label: "Logs", href: "/logs", display: "tail -f ~/logs" },
     { label: "Contact", href: "/contact", display: "echo hello" },
 ] as const
 
