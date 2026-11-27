@@ -147,6 +147,16 @@ function SleepyZzz() {
     )
 }
 
+function TalkDots() {
+    return (
+        <div class="pointer-events-none absolute bottom-full left-1/2 mb-0.5 hidden -translate-x-1/2 items-end gap-1 font-mono text-stone-400 motion-safe:flex dark:text-stone-500">
+            <span class="text-[8px]/none motion-safe:animate-zzz motion-safe:[animation-delay:-1.6s]">.</span>
+            <span class="text-[10px]/none motion-safe:animate-zzz motion-safe:[animation-delay:-0.8s]">.</span>
+            <span class="text-[12px]/none motion-safe:animate-zzz">.</span>
+        </div>
+    )
+}
+
 export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mood?: PixelMood }>) {
     const props = merge({ mood: "idle" } as const, _props)
     const mood = () => props.mood
@@ -183,6 +193,9 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
                     <div class="flex animate-confirm-in flex-col items-center">
                         <Show when={current === "sleepy"}>
                             <SleepyZzz />
+                        </Show>
+                        <Show when={current === "talk"}>
+                            <TalkDots />
                         </Show>
                         <For each={rows()}>{(row) => <PixelRow cells={row} closed={blinking()} />}</For>
                     </div>
