@@ -159,6 +159,14 @@ export function Mail(props: IconProps) {
     )
 }
 
+export function MessageCircle(props: IconProps) {
+    return (
+        <Svg {...props}>
+            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+        </Svg>
+    )
+}
+
 export function Download(props: IconProps) {
     return (
         <Svg {...props}>
