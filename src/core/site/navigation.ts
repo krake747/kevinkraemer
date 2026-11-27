@@ -41,6 +41,7 @@ export const NAV_ENTRIES: NavEntry[] = [
     { label: "~/search", href: "/search", keywords: ["search", "find", "grep"], active: "exact" },
     { label: "~/about", href: "/about", keywords: ["bio", "story", "who"], active: "exact" },
     { label: "~/contact", href: "/contact", keywords: ["email", "reach", "touch"], active: "exact" },
+    { label: "~/ama", href: "/ama", keywords: ["ama", "ask", "questions", "answers"], active: "exact" },
     { label: "~/privacy", href: "/privacy", keywords: ["privacy", "data", "tracking", "cookies"], active: "exact" },
     {
         label: "~/developers",
