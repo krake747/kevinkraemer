@@ -133,7 +133,7 @@ const problemFields: Record<keyof ProblemDocument, SchemaRefOrObject> = {
     },
     hint: {
         type: "string",
-        description: "Resolution hint pointing at /llms.txt or /sitemap-index.xml for valid resources.",
+        description: "Resolution hint with a next step.",
     },
 }
 

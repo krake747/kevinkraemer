@@ -83,11 +83,11 @@ describe("the ask tool", () => {
         expect(result.content[0]?.text).toMatch(/not configured/)
     })
 
-    it("reports a question the published content does not answer", async () => {
+    it("reports a question nothing published answers", async () => {
         const { tool } = makeTool({ probability: null })
         const result = await tool({ question: "Anything" }, AbortSignal.timeout(1000))
         expect(result.isError).toBe(true)
-        expect(result.content[0]?.text).toMatch(/does not answer/)
+        expect(result.content[0]?.text).toMatch(/Nothing published here answers that/)
     })
 
     it("reports an upstream failure", async () => {

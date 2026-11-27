@@ -3,7 +3,7 @@ import { ASK_QUESTION_MAX_LENGTH } from "@core/ask/request"
 import type { Problem } from "@core/site/problem"
 import { matchError } from "better-result"
 
-const hint = "Send a question answered by this site; see /llms.txt and /openapi.json for valid resources."
+const hint = "Ask about the work, the stack, or the writing."
 const upstreamDetail = "Answering failed; retry once, then fall back to /llms.txt."
 
 export function malformedBodyProblem(): Problem {
@@ -55,7 +55,7 @@ export function askProblem(error: AskError): Problem {
         }),
         AskUnsupported: () => ({
             status: 404,
-            detail: "The published content does not answer this question. Try /llms.txt or /sitemap-index.xml.",
+            detail: "Nothing published here answers that. See /llms.txt for what the site covers.",
             code: "NOT_FOUND",
             hint,
         }),

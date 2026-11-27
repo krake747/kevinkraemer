@@ -66,7 +66,7 @@ export type AskDeps = {
 function selectSources(judgment: AskPageJudgment, summarize: boolean): Result<TapePrint[], AskUnsupported> {
     const selection = rankSources(judgment, summarize)
     if (selection.kind === "unsupported") {
-        return Result.err(new AskUnsupported({ message: "The published content does not answer this question" }))
+        return Result.err(new AskUnsupported({ message: "Nothing published here answers that" }))
     }
     return Result.ok(selection.sources)
 }
