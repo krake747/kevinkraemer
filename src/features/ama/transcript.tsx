@@ -124,7 +124,7 @@ export function AmaTranscript(props: {
                                 </Match>
                             </Switch>
                             <Show when={entry.status !== "loading"}>
-                                <div class="mt-4 flex items-center gap-4">
+                                <div class="mt-4 flex items-center justify-end gap-4">
                                     <Button
                                         intent="muted"
                                         class="disabled:opacity-50"
