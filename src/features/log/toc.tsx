@@ -49,18 +49,22 @@ export function LogTocDisclosure(props: VoidProps<{ entries: LogTocEntry[] }>) {
     )
 }
 
+function initialActive(hash: string, ids: string[]): string | undefined {
+    return hash.length > 0 ? hash : ids[0]
+}
+
 export function LogToc(props: VoidProps<{ entries: LogTocEntry[] }>) {
     const [active, setActive] = createSignal<string | undefined>(undefined)
 
     onSettled(() => {
         const headings = [...document.querySelectorAll(".log-entry h2[id]")]
         if (headings.length > 0) {
-            const hash = window.location.hash.slice(1)
-            if (hash.length > 0) {
-                setActive(hash)
-            } else if (headings[0] instanceof HTMLElement) {
-                setActive(headings[0].id)
-            }
+            setActive(
+                initialActive(
+                    window.location.hash.slice(1),
+                    headings.flatMap((heading) => (heading instanceof HTMLElement ? [heading.id] : [])),
+                ),
+            )
             const observer = new IntersectionObserver(
                 (observed) => {
                     for (const one of observed) {
