@@ -3,7 +3,6 @@ import { omit, type VoidProps } from "solid-js"
 import KeylineArrowLeft from "~icons/keyline-icons/arrow-left"
 import KeylineArrowRight from "~icons/keyline-icons/arrow-right"
 import KeylineArrowUpRight from "~icons/keyline-icons/arrow-up-right"
-import KeylineBolt from "~icons/keyline-icons/bolt"
 import KeylineBriefcaseBusiness from "~icons/keyline-icons/briefcase"
 import KeylineChevronLeft from "~icons/keyline-icons/chevron-left"
 import KeylineChevronRight from "~icons/keyline-icons/chevron-right"
@@ -18,6 +17,7 @@ import KeylineMoon from "~icons/keyline-icons/moon"
 import KeylineRss from "~icons/keyline-icons/rss"
 import KeylineSearch from "~icons/keyline-icons/search"
 import KeylineSun from "~icons/keyline-icons/sun"
+import KeylineZap from "~icons/keyline-icons/zap-duotone"
 
 type IconProps = VoidProps<ComponentProps<"svg">>
 
@@ -81,9 +81,9 @@ export function SunIcon(props: IconProps) {
     return <KeylineSun {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function BoltIcon(props: IconProps) {
+export function ZapIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
-    return <KeylineBolt {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
+    return <KeylineZap {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
 export function MailIcon(props: IconProps) {
