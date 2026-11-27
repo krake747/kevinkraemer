@@ -12,6 +12,8 @@ const BLINK_MIN_DELAY = 2000
 const BLINK_JITTER = 4000
 const GLANCE_MIN_DELAY = 2400
 const GLANCE_JITTER = 2600
+const GREET_OPEN_DELAY = 800
+const GREET_SHUT_DELAY = 2430
 
 const TONE_CLASS: Record<Tone, string> = {
     dark: "bg-stone-600 dark:bg-stone-500",
@@ -120,6 +122,26 @@ function createGlance(active: () => boolean): Accessor<boolean> {
     return left
 }
 
+function createGreeting(active: () => boolean): Accessor<boolean> {
+    const [greeting, setGreeting] = createSignal(false)
+    createEffect(
+        () => active(),
+        (on) => {
+            if (!on) {
+                setGreeting(false)
+                return () => {}
+            }
+            const open = setTimeout(() => setGreeting(true), GREET_OPEN_DELAY)
+            const shut = setTimeout(() => setGreeting(false), GREET_SHUT_DELAY)
+            return () => {
+                clearTimeout(open)
+                clearTimeout(shut)
+            }
+        },
+    )
+    return greeting
+}
+
 function PixelRow(props: VoidProps<{ cells: readonly Tone[]; closed: boolean }>) {
     return (
         <div class="flex">
@@ -171,22 +193,7 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
         }
         return mood() === "scan"
     })
-    const [sayingHi, setSayingHi] = createSignal(false)
-    createEffect(
-        () => mood() === "talk" && !prefersReducedMotion(),
-        (greeting) => {
-            if (!greeting) {
-                setSayingHi(false)
-                return () => {}
-            }
-            const open = setTimeout(() => setSayingHi(true), 800)
-            const shut = setTimeout(() => setSayingHi(false), 2430)
-            return () => {
-                clearTimeout(open)
-                clearTimeout(shut)
-            }
-        },
-    )
+    const sayingHi = createGreeting(() => mood() === "talk" && !prefersReducedMotion())
     const rows = (): Face => {
         if (mood() !== "scan") {
             if (mood() === "talk" && sayingHi()) {
