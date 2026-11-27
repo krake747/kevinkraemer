@@ -81,7 +81,7 @@ export function AmaInterface() {
         nextId += 1
         setEntries((current) => [...current, { id, question, status: "loading" }])
         setInput("")
-        setSearchParams({ q: question })
+        setSearchParams({ q: question }, { replace: true })
         await runAsk(id, question)
     }
 
