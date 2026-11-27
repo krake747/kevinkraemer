@@ -22,7 +22,7 @@ function mounted(
 
 describe("the ama transcript", () => {
     it("invites a first question when empty", () => {
-        expect(mounted([]).textContent).toContain("Ask anything about the site.")
+        expect(mounted([]).textContent).toContain("Answers come only from published pages and list sources")
     })
 
     it("shows the answer with its source", () => {

@@ -1,5 +1,6 @@
 import { ASK_QUESTION_MAX_LENGTH } from "@core/ask/request"
 import { askSite, AmaError, type AmaFailure } from "@features/ama/client"
+import { AMA_QUESTIONS } from "@features/ama/questions"
 import { AmaTopics } from "@features/ama/topics"
 import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
@@ -188,8 +189,8 @@ export function AmaInterface() {
                             </DisclosureRowBody>
                         </DisclosureRow>
                     </div>
-                    <DocumentSection aria-labelledby="ama-ask-heading">
-                        <SectionHeading id="ama-ask-heading">ask</SectionHeading>
+                    <DocumentSection aria-labelledby="ama-question-heading">
+                        <SectionHeading id="ama-question-heading">question</SectionHeading>
                         <search
                             aria-label="Ask the site"
                             class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3"
@@ -206,7 +207,7 @@ export function AmaInterface() {
                                     onInput={(event) => {
                                         setInput(event.currentTarget.value)
                                     }}
-                                    placeholder="Ask the site..."
+                                    placeholder={AMA_QUESTIONS[0]}
                                     aria-label="Your question"
                                     autocomplete="off"
                                     spellcheck={false}

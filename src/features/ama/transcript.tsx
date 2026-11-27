@@ -52,7 +52,7 @@ export function AmaTranscript(props: {
                 fallback={
                     <EmptyRegister>
                         <EmptyRegisterTitle>
-                            Ask anything about the site. Answers come only from published pages and list sources.
+                            Answers come only from published pages and list sources.
                         </EmptyRegisterTitle>
                         <EmptyRegisterNote>Start with a suggested question, or type your own.</EmptyRegisterNote>
                     </EmptyRegister>

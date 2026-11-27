@@ -38,7 +38,7 @@ async function flush(): Promise<void> {
 
 describe("the ama interface", () => {
     it("invites a first question when empty", () => {
-        expect(mounted().textContent).toContain("Ask anything about the site.")
+        expect(mounted().textContent).toContain("Answers come only from published pages and list sources")
     })
 
     it("holds a second question while one is in flight", async () => {
@@ -79,7 +79,7 @@ describe("the ama interface", () => {
             )
             dismiss?.click()
             await flush()
-            expect(root.textContent).toContain("Ask anything about the site.")
+            expect(root.textContent).toContain("Answers come only from published pages and list sources")
         } finally {
             vi.unstubAllGlobals()
         }
