@@ -1,5 +1,5 @@
 export const AMA_QUESTIONS: readonly string[] = [
-    "Tell me about yourself",
+    "What is your background?",
     "What tools do you use?",
     "What is this site built with?",
     "What is your work experience?",
