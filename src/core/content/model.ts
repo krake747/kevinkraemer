@@ -169,3 +169,10 @@ export function filterLogEntries<T extends FilterableLogEntry>(
 export function sortByOrder<T extends { order: number }>(entries: readonly T[]): T[] {
     return entries.toSorted((a, b) => a.order - b.order)
 }
+
+export function projectStatusLine(project: Pick<Project, "category" | "status" | "year">): string {
+    const parts = [project.category, project.status, project.year].filter(
+        (part): part is string | number => part !== undefined,
+    )
+    return parts.join(" · ")
+}

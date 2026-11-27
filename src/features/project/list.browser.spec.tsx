@@ -46,4 +46,10 @@ describe("the project list", () => {
         const view = renderToContainer(() => <ProjectList projects={[]} />)
         expect(view.textContent).toContain("No case files yet.")
     })
+
+    it("shows a cursor block after the featured status line", () => {
+        const view = renderToContainer(() => <ProjectList projects={[fixture({ id: "alpha", featured: true })]} />)
+        const featured = view.querySelector('[aria-label="Featured case files"]')
+        expect(featured?.querySelector('[aria-hidden="true"]')).not.toBeNull()
+    })
 })
