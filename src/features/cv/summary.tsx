@@ -1,4 +1,5 @@
-import { CvFact, CvFacts } from "@features/cv/facts"
+import { CvFact, CvFactLabel, CvFactValue } from "@features/cv/fact"
+import { CvFacts } from "@features/cv/facts"
 import { StackRow } from "@pattern/stack"
 import { For } from "solid-js"
 
@@ -20,7 +21,14 @@ export function CvSummary() {
         <div class="animate-fade-up">
             <StackRow class="text-sm">
                 <CvFacts>
-                    <For each={CV_FACTS}>{(fact) => <CvFact label={fact.label}>{fact.value}</CvFact>}</For>
+                    <For each={CV_FACTS}>
+                        {(fact) => (
+                            <CvFact>
+                                <CvFactLabel>{fact.label}</CvFactLabel>
+                                <CvFactValue>{fact.value}</CvFactValue>
+                            </CvFact>
+                        )}
+                    </For>
                 </CvFacts>
             </StackRow>
         </div>
