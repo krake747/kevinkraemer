@@ -9,10 +9,6 @@ export function ContactGuide() {
                     talk about. Tell me what caught your eye and what you're after, and I can skip the first round of
                     guessing.
                 </p>
-                <p class="max-w-[28rem] text-sm/relaxed text-stone-600 dark:text-stone-400">
-                    The financial-market framing across this site is a design metaphor. Nothing here is live market
-                    data.
-                </p>
             </DocumentSectionBody>
         </DocumentSection>
     )
