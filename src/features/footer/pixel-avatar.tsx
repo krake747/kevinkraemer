@@ -42,7 +42,7 @@ const FACES = {
     idle: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
     wink: [TOP, SECOND, EYES_WINK, MOUTH_FLAT, BOTTOM],
     sleepy: [TOP, SECOND, EYES_SHUT, MOUTH_SHUT, BOTTOM],
-    talk: [TOP, SECOND, EYES_OPEN, MOUTH_OPEN, BOTTOM],
+    talk: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
     scan: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
 } as const satisfies Record<PixelMood, Face>
 
@@ -171,8 +171,27 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
         }
         return mood() === "scan"
     })
+    const [sayingHi, setSayingHi] = createSignal(false)
+    createEffect(
+        () => mood() === "talk" && !prefersReducedMotion(),
+        (greeting) => {
+            if (!greeting) {
+                setSayingHi(false)
+                return () => {}
+            }
+            const open = setTimeout(() => setSayingHi(true), 1000)
+            const shut = setTimeout(() => setSayingHi(false), 3600)
+            return () => {
+                clearTimeout(open)
+                clearTimeout(shut)
+            }
+        },
+    )
     const rows = (): Face => {
         if (mood() !== "scan") {
+            if (mood() === "talk" && sayingHi()) {
+                return [TOP, SECOND, EYES_OPEN, MOUTH_OPEN, BOTTOM]
+            }
             return FACES[mood()]
         }
         const [eyes, mouth] = scanRows(glanceLeft())
