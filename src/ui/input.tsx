@@ -12,7 +12,7 @@ export function Input(props: ComponentProps<"input">) {
                 {...rest}
                 ref={props.ref}
                 class={cx(
-                    "min-w-0 flex-1 bg-transparent py-2.5 font-mono text-base text-stone-900 outline-none placeholder:text-stone-600 sm:text-sm dark:text-stone-100 dark:placeholder:text-stone-400",
+                    "min-w-0 flex-1 bg-transparent py-2.5 font-mono text-base text-stone-900 outline-none placeholder:text-stone-600 pointer-fine:text-sm dark:text-stone-100 dark:placeholder:text-stone-400",
                     props.class,
                 )}
             />

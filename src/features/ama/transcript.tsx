@@ -56,7 +56,7 @@ export function AmaTranscript(props: {
                     {(entry) => (
                         <StackRow size="default" data-ama-entry={entry.id} tabindex={-1}>
                             <div class="flex items-start justify-between gap-4">
-                                <p class="min-w-0 flex-1 font-mono text-sm text-stone-900 dark:text-stone-100">
+                                <p class="min-w-0 flex-1 font-mono text-sm wrap-break-word text-stone-900 dark:text-stone-100">
                                     <span aria-hidden="true" class="text-emerald-700 dark:text-emerald-400">
                                         {"$ "}
                                     </span>
@@ -85,7 +85,7 @@ export function AmaTranscript(props: {
                                         <>
                                             <Show when={ready().answer.summary}>
                                                 {(summary) => (
-                                                    <p class="mt-3 max-w-prose text-base/[1.8] text-stone-600 dark:text-stone-400">
+                                                    <p class="mt-3 max-w-prose text-base/[1.8] wrap-break-word text-stone-600 dark:text-stone-400">
                                                         {summary()}
                                                     </p>
                                                 )}

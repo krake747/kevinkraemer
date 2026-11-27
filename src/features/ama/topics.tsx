@@ -22,7 +22,7 @@ export function AmaTopics(props: { busy: boolean; onSelect: (question: string) =
                                     }}
                                     class={cx(
                                         row.class,
-                                        "group flex w-full items-center gap-4 text-left disabled:opacity-50",
+                                        "group flex w-full items-center gap-4 text-start disabled:opacity-50",
                                     )}
                                 />
                             )}
