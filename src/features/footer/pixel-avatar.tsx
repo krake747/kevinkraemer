@@ -179,8 +179,8 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
                 setSayingHi(false)
                 return () => {}
             }
-            const open = setTimeout(() => setSayingHi(true), 1000)
-            const shut = setTimeout(() => setSayingHi(false), 3600)
+            const open = setTimeout(() => setSayingHi(true), 800)
+            const shut = setTimeout(() => setSayingHi(false), 2430)
             return () => {
                 clearTimeout(open)
                 clearTimeout(shut)
