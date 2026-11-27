@@ -1,6 +1,8 @@
+import { AmaAbout } from "@features/ama/about"
 import { AMA_QUESTION_MAX_LENGTH, AmaError, askSite } from "@features/ama/client"
 import { AMA_QUESTIONS } from "@features/ama/questions"
 import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
+import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
 import { DocumentSection, SectionHeading } from "@pattern/section"
 import { StackRow } from "@pattern/stack"
 import { useSearchParams } from "@solidjs/router"
@@ -85,77 +87,87 @@ export function AmaInterface() {
     })
 
     return (
-        <div class="flex flex-col gap-10">
-            <DocumentSection aria-labelledby="ama-ask-heading">
-                <SectionHeading id="ama-ask-heading">ask</SectionHeading>
-                <search aria-label="Ask the site" class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
-                    <form
-                        class="contents"
-                        onSubmit={(event) => {
-                            event.preventDefault()
-                            void submit(input())
-                        }}
-                    >
-                        <Input
-                            value={input()}
-                            onInput={(event) => {
-                                setInput(event.currentTarget.value)
-                            }}
-                            placeholder="What do you want to know?"
-                            aria-label="Your question"
-                            autocomplete="off"
-                            spellcheck={false}
-                            maxlength={AMA_QUESTION_MAX_LENGTH}
+        <RegisterWithRail>
+            <RegisterWithRailMain>
+                <div class="flex flex-col gap-10">
+                    <DocumentSection aria-labelledby="ama-ask-heading">
+                        <SectionHeading id="ama-ask-heading">ask</SectionHeading>
+                        <search
+                            aria-label="Ask the site"
+                            class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3"
                         >
-                            <InputPrompt />
-                        </Input>
-                        <div class="flex items-center justify-end gap-3 sm:contents">
-                            <Show when={entries().length > 0}>
-                                <Button class="shrink-0" onClick={clear}>
-                                    clear
-                                </Button>
-                            </Show>
-                            <Button class="shrink-0" intent="quiet" onClick={() => void submit(input())}>
-                                {pending() ? "asking..." : "ask"}
-                            </Button>
-                        </div>
-                    </form>
-                </search>
-            </DocumentSection>
-            <DocumentSection aria-labelledby="ama-topics-heading">
-                <SectionHeading id="ama-topics-heading">topics</SectionHeading>
-                <ul class="flex flex-col gap-2">
-                    <For each={AMA_QUESTIONS}>
-                        {(suggested) => (
-                            <li>
-                                <StackRow size="compact" interactive>
-                                    <button
-                                        type="button"
-                                        class="group flex w-full items-center justify-between gap-4 text-left"
-                                        onClick={() => {
-                                            void submit(suggested)
-                                        }}
-                                    >
-                                        <span class="min-w-0 flex-1 font-mono text-sm text-stone-700 transition-colors group-hover:text-emerald-800 dark:text-stone-300 dark:group-hover:text-emerald-400">
-                                            {suggested}
-                                        </span>
-                                        <span
-                                            aria-hidden="true"
-                                            class="hidden shrink-0 items-center text-stone-600 transition-colors group-hover:text-emerald-700 sm:inline-flex dark:text-stone-400 dark:group-hover:text-emerald-400"
-                                        >
-                                            <ArrowRightIcon class="size-4 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-1" />
-                                        </span>
-                                    </button>
-                                </StackRow>
-                            </li>
-                        )}
-                    </For>
-                </ul>
-            </DocumentSection>
-            <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
-                <SectionHeading id="ama-answers-heading">answers</SectionHeading>
-                <AmaTranscript entries={entries()} />
-            </DocumentSection>
-        </div>
+                            <form
+                                class="contents"
+                                onSubmit={(event) => {
+                                    event.preventDefault()
+                                    void submit(input())
+                                }}
+                            >
+                                <Input
+                                    value={input()}
+                                    onInput={(event) => {
+                                        setInput(event.currentTarget.value)
+                                    }}
+                                    placeholder="What do you want to know?"
+                                    aria-label="Your question"
+                                    autocomplete="off"
+                                    spellcheck={false}
+                                    maxlength={AMA_QUESTION_MAX_LENGTH}
+                                >
+                                    <InputPrompt />
+                                </Input>
+                                <div class="flex items-center justify-end gap-3 sm:contents">
+                                    <Show when={entries().length > 0}>
+                                        <Button class="shrink-0" onClick={clear}>
+                                            clear
+                                        </Button>
+                                    </Show>
+                                    <Button class="shrink-0" intent="quiet" onClick={() => void submit(input())}>
+                                        {pending() ? "asking..." : "ask"}
+                                    </Button>
+                                </div>
+                            </form>
+                        </search>
+                    </DocumentSection>
+                    <DocumentSection aria-labelledby="ama-topics-heading">
+                        <SectionHeading id="ama-topics-heading">topics</SectionHeading>
+                        <ul class="flex flex-col gap-2">
+                            <For each={AMA_QUESTIONS}>
+                                {(suggested) => (
+                                    <li>
+                                        <StackRow size="compact" interactive>
+                                            <button
+                                                type="button"
+                                                class="group flex w-full items-center justify-between gap-4 text-left"
+                                                onClick={() => {
+                                                    void submit(suggested)
+                                                }}
+                                            >
+                                                <span class="min-w-0 flex-1 font-mono text-sm text-stone-700 transition-colors group-hover:text-emerald-800 dark:text-stone-300 dark:group-hover:text-emerald-400">
+                                                    {suggested}
+                                                </span>
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="hidden shrink-0 items-center text-stone-600 transition-colors group-hover:text-emerald-700 sm:inline-flex dark:text-stone-400 dark:group-hover:text-emerald-400"
+                                                >
+                                                    <ArrowRightIcon class="size-4 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-1" />
+                                                </span>
+                                            </button>
+                                        </StackRow>
+                                    </li>
+                                )}
+                            </For>
+                        </ul>
+                    </DocumentSection>
+                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
+                        <SectionHeading id="ama-answers-heading">answers</SectionHeading>
+                        <AmaTranscript entries={entries()} />
+                    </DocumentSection>
+                </div>
+            </RegisterWithRailMain>
+            <RegisterWithRailRail labelledby="ama-about-label">
+                <AmaAbout />
+            </RegisterWithRailRail>
+        </RegisterWithRail>
     )
 }

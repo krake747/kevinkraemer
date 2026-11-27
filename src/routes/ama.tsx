@@ -1,12 +1,12 @@
 import { AmaInterface } from "@features/ama/interface"
-import { DocumentPage, PageHeaderTitle } from "@pattern/page"
+import { PageColumn, PageHeaderTitle } from "@pattern/page"
 import { Seo } from "@pattern/seo"
 import { TerminalCommandHeader } from "@pattern/terminal"
 
 export default function AmaRoute() {
     return (
-        <DocumentPage>
-            <header class="animate-rise">
+        <PageColumn>
+            <header class="mb-8 animate-rise">
                 <TerminalCommandHeader command="ama --ask" class="mb-4" />
                 <PageHeaderTitle>Ask Me Anything</PageHeaderTitle>
             </header>
@@ -16,6 +16,6 @@ export default function AmaRoute() {
                 path="/ama"
             />
             <AmaInterface />
-        </DocumentPage>
+        </PageColumn>
     )
 }
