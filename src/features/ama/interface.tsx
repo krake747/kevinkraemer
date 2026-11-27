@@ -190,14 +190,15 @@ export function AmaInterface() {
                                             clear
                                         </Button>
                                     </Show>
-                                    <Button
-                                        class="shrink-0 text-emerald-800 hover:text-emerald-700 disabled:opacity-50 dark:text-emerald-400 dark:hover:text-emerald-300"
-                                        intent="quiet"
+                                    <button
+                                        type="submit"
                                         disabled={busy()}
-                                        onClick={() => void submit(input())}
+                                        class="hit-area-x-2 hit-area-y-3.5 shrink-0 font-mono text-xs text-emerald-800 transition-[color,background-color,border-color,scale] duration-150 ease-out-quart hover:text-emerald-700 active:scale-97 disabled:opacity-50 dark:text-emerald-400 dark:hover:text-emerald-300"
                                     >
-                                        {busy() ? "asking..." : "ask"}
-                                    </Button>
+                                        <Show when={busy()} fallback="ask">
+                                            asking...
+                                        </Show>
+                                    </button>
                                 </div>
                             </form>
                         </search>

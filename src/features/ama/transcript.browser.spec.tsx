@@ -53,7 +53,7 @@ describe("the ama transcript", () => {
         const loading: AmaEntry = { id: 2, question: "What tools do you use?", status: "loading" }
         const root = mounted([ready, loading])
         const retry = [...root.querySelectorAll("button")].find((button) => button.textContent === "retry")
-        expect(retry?.disabled).toBe(true)
+        expect(retry).toBeUndefined()
     })
 
     it("hides dismiss while loading", () => {

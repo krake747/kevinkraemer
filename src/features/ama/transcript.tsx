@@ -127,16 +127,16 @@ export function AmaTranscript(props: {
                             </Switch>
                             <Show when={entry.status !== "loading"}>
                                 <div class="mt-4 flex items-center justify-end gap-4">
-                                    <Button
-                                        intent="muted"
-                                        class="disabled:opacity-50"
-                                        disabled={busy()}
-                                        onClick={() => {
-                                            props.onRetry(entry.id)
-                                        }}
-                                    >
-                                        retry
-                                    </Button>
+                                    <Show when={!busy()}>
+                                        <Button
+                                            intent="muted"
+                                            onClick={() => {
+                                                props.onRetry(entry.id)
+                                            }}
+                                        >
+                                            retry
+                                        </Button>
+                                    </Show>
                                     <Show when={entry.status === "ready" ? entry : undefined}>
                                         {(ready) => <AmaCopyButton answer={ready().answer} />}
                                     </Show>
