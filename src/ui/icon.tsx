@@ -1,5 +1,6 @@
 import type { ComponentProps } from "@solidjs/web"
 import { omit } from "solid-js"
+import KeylineMessageDuotone from "~icons/keyline-icons/message-duotone"
 
 type IconProps = ComponentProps<"svg">
 
@@ -160,11 +161,8 @@ export function Mail(props: IconProps) {
 }
 
 export function MessageCircle(props: IconProps) {
-    return (
-        <Svg {...props}>
-            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
-        </Svg>
-    )
+    const rest = omit(props, "children", "aria-hidden")
+    return <KeylineMessageDuotone {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
 export function Download(props: IconProps) {
