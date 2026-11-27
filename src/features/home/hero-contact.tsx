@@ -5,6 +5,7 @@ import { For } from "solid-js"
 
 const HERO_CONTACTS = [
     { label: "Email", href: `mailto:${site.email}`, display: site.email, target: { kind: "internal" } },
+    { label: "Status", href: "/contact", display: "open, replies in 2d", target: { kind: "internal" } },
     {
         label: "Github",
         href: site.socials.github,
