@@ -146,19 +146,19 @@ function SleepyZzz() {
     )
 }
 
-const ENV_TOP: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
-const ENV_FLAP_TOP: readonly Tone[] = ["dark", "dark", "off", "off", "dark", "dark"]
-const ENV_FLAP_MID: readonly Tone[] = ["dark", "off", "dark", "dark", "off", "dark"]
-const ENV_BOTTOM: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
+const ENV_TIPS: readonly Tone[] = ["off", "dark", "off", "off", "dark", "off"]
+const ENV_BAR: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
+const ENV_BODY: readonly Tone[] = ["dark", "off", "off", "off", "off", "dark"]
+const ENV_BASE: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
 
 function TalkEnvelope() {
     return (
         <div class="pointer-events-none absolute bottom-full left-1/2 mb-1 hidden -translate-x-1/2 motion-safe:flex">
             <span class="flex flex-col motion-safe:animate-send">
-                <PixelRow cells={ENV_TOP} closed={false} />
-                <PixelRow cells={ENV_FLAP_TOP} closed={false} />
-                <PixelRow cells={ENV_FLAP_MID} closed={false} />
-                <PixelRow cells={ENV_BOTTOM} closed={false} />
+                <PixelRow cells={ENV_TIPS} closed={false} />
+                <PixelRow cells={ENV_BAR} closed={false} />
+                <PixelRow cells={ENV_BODY} closed={false} />
+                <PixelRow cells={ENV_BASE} closed={false} />
             </span>
         </div>
     )
