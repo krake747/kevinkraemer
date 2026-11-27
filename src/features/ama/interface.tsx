@@ -41,11 +41,13 @@ export function AmaInterface() {
     const [searchParams, setSearchParams] = useSearchParams<{ q?: string }>()
     const [input, setInput] = createSignal("")
     const [entries, setEntries] = createSignal<AmaEntry[]>([])
+    const [askedFromUrl, setAskedFromUrl] = createSignal(false)
     const controllers = new Map<number, AbortController>()
     const busy = (): boolean => entries().some((entry) => entry.status === "loading")
     const prefersReducedMotion = createMediaQuery("(prefers-reduced-motion: reduce)")
-    let nextId = 1
-    let askedFromUrl = false
+    function submitTopic(question: string): void {
+        void submit(question)
+    }
 
     function scrollToEntry(id: number): void {
         requestAnimationFrame(() => {
@@ -83,8 +85,7 @@ export function AmaInterface() {
         if (!canAsk(question, busy())) {
             return
         }
-        const id = nextId
-        nextId += 1
+        const id = Math.max(0, ...entries().map((entry) => entry.id)) + 1
         setEntries((current) => [...current, { id, question, status: "loading" }])
         setInput("")
         setSearchParams({ q: question }, { replace: true })
@@ -123,10 +124,10 @@ export function AmaInterface() {
     }
 
     onSettled(() => {
-        if (askedFromUrl) {
+        if (askedFromUrl()) {
             return
         }
-        askedFromUrl = true
+        setAskedFromUrl(true)
         const first = initialQuestion(searchParams)
         if (first !== undefined) {
             setInput(first)
@@ -149,12 +150,7 @@ export function AmaInterface() {
                                 <span class="hidden group-open:inline">− questions</span>
                             </DisclosureRowSummary>
                             <DisclosureRowBody>
-                                <AmaTopics
-                                    busy={busy()}
-                                    onSelect={(question) => {
-                                        void submit(question)
-                                    }}
-                                />
+                                <AmaTopics busy={busy()} onSelect={submitTopic} />
                             </DisclosureRowBody>
                         </DisclosureRow>
                     </div>
@@ -209,12 +205,7 @@ export function AmaInterface() {
             <RegisterWithRailRail labelledby="ama-questions-label">
                 <div>
                     <SectionHeading id="ama-questions-label">questions</SectionHeading>
-                    <AmaTopics
-                        busy={busy()}
-                        onSelect={(question) => {
-                            void submit(question)
-                        }}
-                    />
+                    <AmaTopics busy={busy()} onSelect={submitTopic} />
                 </div>
             </RegisterWithRailRail>
         </RegisterWithRail>
