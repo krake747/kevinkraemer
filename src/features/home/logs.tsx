@@ -1,5 +1,6 @@
 import type { LogEntry } from "@core/content/model"
-import { RegisterRow, RegisterRowDescription, RegisterRowTitle } from "@pattern/register"
+import { formatDateLong } from "@core/time/date"
+import { RegisterRow, RegisterRowDescription, RegisterRowMeta, RegisterRowTitle } from "@pattern/register"
 import { Stack } from "@pattern/stack"
 import { TerminalCommandHeader, TerminalSection } from "@pattern/terminal"
 import { For, Show, type ParentProps } from "solid-js"
@@ -15,6 +16,9 @@ export function HomeLogs(props: ParentProps<{ entries: LogEntry[]; id: string }>
                             <RegisterRow href={`/logs/${entry.id}`}>
                                 <RegisterRowTitle>{entry.title}</RegisterRowTitle>
                                 <RegisterRowDescription lines={1}>{entry.description}</RegisterRowDescription>
+                                <RegisterRowMeta>
+                                    <span>{formatDateLong(entry.date)}</span>
+                                </RegisterRowMeta>
                             </RegisterRow>
                         )}
                     </For>
