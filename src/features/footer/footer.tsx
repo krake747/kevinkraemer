@@ -14,10 +14,7 @@ const MOOD_BY_PATHNAME: Record<string, PixelMood> = {
 }
 
 function moodForPathname(pathname: string, night: boolean): PixelMood {
-    if (night || isLogsPath(pathname)) {
-        return "sleepy"
-    }
-    return MOOD_BY_PATHNAME[pathname] ?? "idle"
+    return night || isLogsPath(pathname) ? "sleepy" : (MOOD_BY_PATHNAME[pathname] ?? "idle")
 }
 
 export function Footer() {
