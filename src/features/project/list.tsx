@@ -1,4 +1,4 @@
-import { sortByOrder, type Project } from "@core/content/model"
+import { projectStatusLine, sortByOrder, type Project } from "@core/content/model"
 import {
     EmptyRegister,
     EmptyRegisterTitle,
@@ -10,27 +10,23 @@ import { Anchor } from "@ui/anchor"
 import { Badge } from "@ui/badge"
 import { For, Show, createMemo, type VoidProps } from "solid-js"
 
-function statusLine(project: Project): string {
-    const parts = [project.category, project.status, project.year].filter(
-        (part): part is string | number => part !== undefined,
-    )
-    return parts.join(" · ")
-}
-
 function FeaturedProject(props: VoidProps<{ project: Project }>) {
     return (
         <li class="group flex flex-col gap-6 border-t border-stone-200/80 py-10 md:flex-row md:gap-12 dark:border-stone-800">
             <div class="flex flex-col gap-4 md:w-60 md:shrink-0">
                 <div class="flex flex-col gap-2">
-                    <Anchor
-                        href={`/projects/${props.project.id}`}
-                        variant="title"
-                        class="hit-area-y-1.5 group-hover:pointer-fine:text-emerald-800 dark:group-hover:pointer-fine:text-emerald-400"
-                    >
-                        {props.project.name}
-                    </Anchor>
+                    <span class="inline-block transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-0.5">
+                        <Anchor
+                            href={`/projects/${props.project.id}`}
+                            variant="title"
+                            class="hit-area-y-1.5 group-hover:pointer-fine:text-emerald-800 dark:group-hover:pointer-fine:text-emerald-400"
+                        >
+                            {props.project.name}
+                        </Anchor>
+                    </span>
                     <p class="font-mono text-xs tracking-widest text-stone-600 uppercase tabular-nums dark:text-stone-400">
-                        {statusLine(props.project)}
+                        {projectStatusLine(props.project)}
+                        <span aria-hidden="true" class="ml-2 inline-block size-2 animate-pulse bg-emerald-500/70" />
                     </p>
                 </div>
                 <Show when={props.project.figure}>
@@ -71,7 +67,7 @@ function CompactProjectRow(props: VoidProps<{ project: Project }>) {
                 <span class="min-w-0 flex-1">
                     <RegisterRowTitle id={titleId()}>{props.project.name}</RegisterRowTitle>
                     <RegisterRowDescription lines={1}>{props.project.tagline}</RegisterRowDescription>
-                    <RegisterRowMeta>{statusLine(props.project)}</RegisterRowMeta>
+                    <RegisterRowMeta>{projectStatusLine(props.project)}</RegisterRowMeta>
                 </span>
             </a>
         </li>
