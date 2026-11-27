@@ -10,7 +10,7 @@ export default function ContactRoute() {
     return (
         <DocumentPage>
             <header class="animate-rise">
-                <TerminalCommandHeader command={'echo "Get in touch"'} class="mb-4" />
+                <TerminalCommandHeader command="say hello" class="mb-4" />
                 <PageHeaderTitle>Contact</PageHeaderTitle>
             </header>
             <Seo

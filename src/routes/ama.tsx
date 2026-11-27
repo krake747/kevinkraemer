@@ -7,7 +7,7 @@ export default function AmaRoute() {
     return (
         <PageColumn>
             <header class="mb-8 animate-rise">
-                <TerminalCommandHeader command={'echo "Ask anything"'} class="mb-4" />
+                <TerminalCommandHeader command='echo "ask anything"' class="mb-4" />
                 <PageHeaderTitle>Ask Me Anything</PageHeaderTitle>
             </header>
             <Seo
