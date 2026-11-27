@@ -1,14 +1,8 @@
 import type { AmaAnswer } from "@features/ama/client"
 import { createCopyFeedback } from "@pattern/create-copy-feedback"
-import {
-    EmptyRegister,
-    EmptyRegisterNote,
-    EmptyRegisterTitle,
-    RegisterRow,
-    RegisterRowDescription,
-    RegisterRowTitle,
-} from "@pattern/register"
-import { Stack, StackRow } from "@pattern/stack"
+import { EmptyRegister, EmptyRegisterNote, EmptyRegisterTitle } from "@pattern/register"
+import { StackRow } from "@pattern/stack"
+import { Anchor } from "@ui/anchor"
 import { Button } from "@ui/button"
 import { cx } from "@ui/cva.config"
 import { XIcon } from "@ui/icon"
@@ -96,21 +90,21 @@ export function AmaTranscript(props: {
                                                     </p>
                                                 )}
                                             </Show>
-                                            <Stack render={(list) => <ul {...list} />} class="mt-4">
-                                                <For each={ready().answer.sources}>
-                                                    {(source) => (
-                                                        <RegisterRow
-                                                            render={(row) => <li {...row} />}
-                                                            href={source.path}
-                                                        >
-                                                            <RegisterRowTitle>{source.title}</RegisterRowTitle>
-                                                            <RegisterRowDescription lines={2}>
-                                                                {source.description}
-                                                            </RegisterRowDescription>
-                                                        </RegisterRow>
-                                                    )}
-                                                </For>
-                                            </Stack>
+                                            <Show when={ready().answer.sources.length > 0}>
+                                                <p class="mt-4 font-mono text-xs text-stone-600 dark:text-stone-400">
+                                                    Sources:{" "}
+                                                    <For each={ready().answer.sources}>
+                                                        {(source, index) => (
+                                                            <>
+                                                                {index() > 0 ? " · " : ""}
+                                                                <Anchor href={source.path} variant="muted">
+                                                                    {source.title}
+                                                                </Anchor>
+                                                            </>
+                                                        )}
+                                                    </For>
+                                                </p>
+                                            </Show>
                                         </>
                                     )}
                                 </Match>
