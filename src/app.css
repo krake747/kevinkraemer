@@ -101,7 +101,7 @@
     --animate-rise: rise 0.3s var(--ease-out-expo) both;
     --animate-confirm-in: confirmIn 0.15s var(--ease-out-quart) both;
     --animate-zzz: zzzFloat 2.4s linear infinite;
-    --animate-hi: hiGreet 2.6s linear infinite;
+    --animate-hi: hiGreet 2.6s linear both;
 
     @keyframes fadeUp {
         from {
