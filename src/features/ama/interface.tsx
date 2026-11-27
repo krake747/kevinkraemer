@@ -1,4 +1,5 @@
-import { AMA_QUESTION_MAX_LENGTH, AmaError, askSite } from "@features/ama/client"
+import { ASK_QUESTION_MAX_LENGTH } from "@core/ask/request"
+import { askSite, AmaError, type AmaFailure } from "@features/ama/client"
 import { AmaTopics } from "@features/ama/topics"
 import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
@@ -14,10 +15,10 @@ function canAsk(question: string, busy: boolean): boolean {
     if (busy) {
         return false
     }
-    return question.length > 0 && question.length <= AMA_QUESTION_MAX_LENGTH
+    return question.length > 0 && question.length <= ASK_QUESTION_MAX_LENGTH
 }
 
-function toFailure(error: unknown): { detail: string; hint?: string } {
+function toFailure(error: unknown): AmaFailure {
     if (error instanceof AmaError) {
         return error.failure
     }
@@ -179,7 +180,7 @@ export function AmaInterface() {
                                     aria-label="Your question"
                                     autocomplete="off"
                                     spellcheck={false}
-                                    maxlength={AMA_QUESTION_MAX_LENGTH}
+                                    maxlength={ASK_QUESTION_MAX_LENGTH}
                                     disabled={busy()}
                                 >
                                     <InputPrompt />

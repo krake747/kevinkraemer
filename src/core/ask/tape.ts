@@ -3,7 +3,7 @@ import * as v from "valibot"
 
 export const TAPE_VERSION = 1
 
-const TapePrintSchema = v.object({
+export const TapePrintSchema = v.object({
     path: v.string(),
     title: v.string(),
     description: v.string(),

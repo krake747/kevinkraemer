@@ -1,12 +1,7 @@
+import { TapePrintSchema } from "@core/ask/tape"
 import * as v from "valibot"
 
-export const AMA_QUESTION_MAX_LENGTH = 500
-
-const amaSourceSchema = v.object({
-    path: v.string(),
-    title: v.string(),
-    description: v.string(),
-})
+const amaSourceSchema = v.pick(TapePrintSchema, ["path", "title", "description"])
 
 const amaAnswerSchema = v.object({
     sources: v.array(amaSourceSchema),
