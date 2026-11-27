@@ -278,6 +278,7 @@ const content = {
     about: await loadAbout(),
     experience: await loadJson("experience", ExperienceSchema),
     uses: (await loadJson("uses", UsesSchema)).map(toUsesSection),
+    credits: (await loadJson("credits", UsesSchema)).map(toUsesSection),
     projects,
 }
 
@@ -287,5 +288,5 @@ await writeFile(
     `import type { ContentBundle } from "@core/content/model"\n\nexport const content = ${JSON.stringify(content, null, 4)} satisfies ContentBundle\n`,
 )
 console.log(
-    `content: ${content.logs.length} log entries, ${content.about.length} about, ${content.experience.length} experience, ${content.uses.length} uses, ${content.projects.length} projects`,
+    `content: ${content.logs.length} log entries, ${content.about.length} about, ${content.experience.length} experience, ${content.uses.length} uses, ${content.credits.length} credits, ${content.projects.length} projects`,
 )

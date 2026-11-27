@@ -52,10 +52,10 @@ value is the router's opt-out from client-side navigation, not a new tab.
 ## Forms: `Input`, focus, hit areas
 
 `Input` is a square `<label>` frame owning border, ground, and focus; the inner input is bare with
-`outline-none`. `text-base` with `sm:text-sm` stops iOS zoom. Focus is
-`focus-within:border-emerald-500` plus `ring-emerald-500/20`; the global default is
-`:focus-visible outline-emerald-500`. Never ship `outline-none` alone. Small targets grow via
-`hit-area-*`; `Button` and `Chip` already carry theirs. Scroll containers use `kk-scrollbar` plus
-`scroll-fade-y` / `scroll-fade-x`. No checkbox, radio, switch, select, or textarea ships; a needed
-toggle is a feature-owned `StackRow compact` `role="switch"` row promoted to `src/ui` only on second
-use.
+`outline-none`. `text-base` with `pointer-fine:text-sm` stops iOS zoom without punishing wide touch
+screens; never gate it on a width breakpoint. Focus is `focus-within:border-emerald-500` plus
+`ring-emerald-500/20`; the global default is `:focus-visible outline-emerald-500`. Never ship
+`outline-none` alone. Small targets grow via `hit-area-*`; `Button` and `Chip` already carry theirs.
+Scroll containers use `kk-scrollbar` plus `scroll-fade-y` / `scroll-fade-x`. No checkbox, radio,
+switch, select, or textarea ships; a needed toggle is a feature-owned `StackRow compact`
+`role="switch"` row promoted to `src/ui` only on second use.

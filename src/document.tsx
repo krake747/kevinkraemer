@@ -7,7 +7,10 @@ export default function Document(props: ParentProps) {
             <head>
                 <script innerHTML={'document.documentElement.classList.add("js")'} />
                 <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"
+                />
                 <meta name="color-scheme" content="light dark" />
                 <link rel="ard" href="/.well-known/ard.json" />
                 <link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />

@@ -26,6 +26,9 @@ type SeoProps = SeoPage | SeoArticle
 
 type Crumb = { name: string; url: string } | { name: string }
 
+export const themeColorLight = "#fafaf9"
+export const themeColorDark = "#0c0a09"
+
 export function BreadcrumbSchema(props: VoidProps<{ items: Crumb[] }>) {
     return <Script type="application/ld+json">{JSON.stringify(toJsonLd(makeBreadcrumbListSchema(props.items)))}</Script>
 }

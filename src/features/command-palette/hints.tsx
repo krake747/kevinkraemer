@@ -30,7 +30,9 @@ export function CommandPaletteHints() {
                     </span>
                 }
             >
-                <span class="ml-auto motion-safe:animate-pulse">searching…</span>
+                <span aria-live="polite" class="ml-auto motion-safe:animate-pulse">
+                    searching…
+                </span>
             </Show>
         </div>
     )

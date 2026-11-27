@@ -82,7 +82,7 @@ export const ProjectSchema = v.object({
             reason: v.pipe(v.string(), v.minLength(1)),
         }),
     ),
-    implementation: v.optional(v.pipe(v.string(), v.minLength(1))),
+    implementation: v.optional(v.array(v.pipe(v.string(), v.minLength(1)))),
     tradeoffs: v.optional(
         v.array(
             v.object({

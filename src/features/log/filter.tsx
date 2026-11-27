@@ -18,6 +18,8 @@ function LogFilterList() {
             ref={(element) => {
                 element.setAttribute("data-settled", "")
             }}
+            aria-live="polite"
+            aria-label="Log entries"
             class="animate-fade-up"
         >
             <For each={state.visibleEntries()} keyed={(entry) => entry.id}>

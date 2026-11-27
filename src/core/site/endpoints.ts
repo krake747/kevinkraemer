@@ -363,6 +363,22 @@ export const endpoints: Endpoint[] = [
         }),
     },
     {
+        path: "/credits",
+        catalog: {
+            type: "text/html",
+            rel: "related",
+            title: "Credits: what this site is built with",
+            description: "Credits: what this site is built with. cat credits.md",
+        },
+        operation: negotiatedPageGet({
+            tag: "Trust",
+            operationId: "getCreditsPage",
+            summary: "Credits",
+            description:
+                "Colophon: Solid app prerendered to static pages, Tailwind CSS, Valibot schemas, Pagefind search, Netlify hosting with /ask and /mcp functions, Jev System One triage gate, OpenAI answers with nothing stored.",
+        }),
+    },
+    {
         path: CV_PDF_PATH,
         catalog: {
             type: "application/pdf",

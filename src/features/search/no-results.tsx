@@ -5,7 +5,7 @@ import type { VoidProps } from "solid-js"
 
 export function SearchNoResults(props: VoidProps<{ query: string; onClear: () => void }>) {
     return (
-        <EmptyRegister size="spacious">
+        <EmptyRegister size="spacious" announce="polite">
             <EmptyRegisterTitle>
                 <span class="text-stone-600 dark:text-stone-400">command not found:</span> {props.query}
             </EmptyRegisterTitle>

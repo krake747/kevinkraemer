@@ -44,7 +44,7 @@
     }
 
     .log-entry blockquote {
-        @apply my-6 border-l-2 border-emerald-500 pl-4 text-stone-600 italic dark:text-stone-400;
+        @apply my-6 border-l-2 border-emerald-500 pl-4 text-stone-600 dark:text-stone-400;
     }
 
     .log-entry a {

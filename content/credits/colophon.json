@@ -1,0 +1,51 @@
+{
+    "label": "colophon",
+    "order": 5,
+    "groups": [
+        {
+            "label": "stack",
+            "items": [
+                {
+                    "name": "Solid",
+                    "href": "https://www.solidjs.com",
+                    "note": "One app, prerendered into static pages at deploy time."
+                },
+                {
+                    "name": "Tailwind CSS",
+                    "href": "https://tailwindcss.com",
+                    "note": "Utility styling with v4 theme tokens."
+                },
+                {
+                    "name": "Valibot",
+                    "href": "https://valibot.dev",
+                    "note": "Content schemas. Typos fail the build."
+                },
+                {
+                    "name": "Pagefind",
+                    "href": "https://pagefind.app",
+                    "note": "Static search index over the built pages."
+                },
+                {
+                    "name": "Netlify",
+                    "href": "https://www.netlify.com",
+                    "note": "Hosts the build and runs /ask plus /mcp as functions."
+                }
+            ]
+        },
+        {
+            "label": "inference",
+            "items": [
+                {
+                    "name": "Jev",
+                    "href": "https://docs.typesafe.ai",
+                    "note": "TypeSafe's model for narrow judgments. Triage gate: answerable, and which pages matter."
+                },
+                {
+                    "name": "GPT-6 Luna",
+                    "href": "https://openai.com",
+                    "note": "OpenAI model writing the grounded first-person answer. Nothing stored."
+                }
+            ]
+        }
+    ]
+}

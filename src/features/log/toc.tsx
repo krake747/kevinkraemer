@@ -5,7 +5,7 @@ import { cva } from "@ui/cva.config"
 import { For, Show, createSignal, onSettled, type VoidProps } from "solid-js"
 
 const tocLink = cva({
-    base: "-ml-px block border-l py-1.5 pl-3 wrap-break-word font-mono text-xs transition-colors duration-150 ease-out-quart",
+    base: "-ml-px block border-l py-1.5 pl-3 wrap-break-word font-mono text-xs transition-colors duration-150 ease-out-quart hit-area-y-1",
     variants: {
         state: {
             active: "border-emerald-500 text-emerald-800 dark:text-emerald-400",
@@ -34,7 +34,7 @@ export function LogTocDisclosure(props: VoidProps<{ entries: LogTocEntry[] }>) {
                                     <li>
                                         <a
                                             href={`#${item.id}`}
-                                            class="block font-mono text-xs text-stone-600 dark:text-stone-400"
+                                            class="block py-2 font-mono text-xs text-stone-600 dark:text-stone-400"
                                         >
                                             {item.text}
                                         </a>
@@ -86,7 +86,7 @@ export function LogToc(props: VoidProps<{ entries: LogTocEntry[] }>) {
             <aside class="hidden lg:block">
                 <nav
                     aria-label="On this page"
-                    class="sticky top-[calc(var(--header-h)+1.5rem)] kk-scrollbar max-h-[calc(100vh-var(--header-h)-3rem)] overflow-y-auto"
+                    class="sticky top-[calc(var(--header-h)+1.5rem)] kk-scrollbar max-h-[calc(100dvh-var(--header-h)-3rem)] overflow-y-auto overscroll-contain"
                 >
                     <PanelLabel>On this page</PanelLabel>
                     <ul class="border-l border-stone-200 dark:border-stone-800">

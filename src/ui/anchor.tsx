@@ -3,7 +3,7 @@ import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { Show, omit } from "solid-js"
 
 export const anchor = cva({
-    base: "transition-colors duration-150 ease-out-quart",
+    base: "transition-colors duration-150 ease-out-quart active:opacity-70",
     variants: {
         variant: {
             nav: "font-mono text-xs text-stone-600 hover:text-emerald-800 dark:text-stone-300 dark:hover:text-emerald-400",

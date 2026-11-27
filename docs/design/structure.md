@@ -37,10 +37,12 @@ The command is the honest label, so it follows the page's job:
 | `whoami`                                                             | The landing hero, the person      | `/`                                             |
 | `cat story.md`                                                       | A document you read top to bottom | `/about`, `/` `#story`                          |
 | `cat uses.md`, `cat privacy.txt`, `cat developers.md`, `cat {id}.md` | A named file                      | `/uses`, `/privacy`, `/developers`, a log entry |
+| `cat credits.md`                                                     | A named file                      | `/credits`                                      |
 | `cd ~/cv`, `cd ~/logs`                                               | A register you browse             | `/cv`, `/logs`                                  |
 | `tail -f ~/logs`                                                     | A stream of recent entries        | `/` logs section                                |
 | `grep -r`                                                            | A query                           | `/search`                                       |
-| `echo "Get in touch"`                                                | An invitation to act              | `/contact`, `/` `#contact`                      |
+| `say hello`                                                          | A greeting you answer             | `/contact`, `/` `#contact`                      |
+| `echo "ask anything"`                                                | A question echoed back            | `/ama`                                          |
 | `cat missing.txt`                                                    | A file that is not there          | `/404`                                          |
 
 A new route picks the row that matches its job. `cd ~/<route>` for a register or dated list;

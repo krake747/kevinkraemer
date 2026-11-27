@@ -45,7 +45,10 @@ export function CommandList(props: ComponentProps<typeof BaseCommandList>) {
     return (
         <BaseCommandList
             {...rest}
-            class={cx("kk-scrollbar max-h-100 overflow-y-auto scroll-fade-y py-2 outline-none", props.class)}
+            class={cx(
+                "kk-scrollbar max-h-100 overflow-y-auto overscroll-contain scroll-fade-y py-2 outline-none",
+                props.class,
+            )}
         >
             {props.children}
         </BaseCommandList>
@@ -72,7 +75,7 @@ export function CommandItem(props: ComponentProps<typeof BaseCommandItem>) {
         <BaseCommandItem
             {...rest}
             class={cx(
-                "hit-area-y-0.5 flex w-full items-center gap-3 px-4 py-2.5 text-left font-mono text-sm text-stone-600 select-none data-highlighted:bg-stone-100 data-highlighted:text-emerald-800 dark:text-stone-300 dark:data-highlighted:bg-stone-900 dark:data-highlighted:text-emerald-400",
+                "hit-area-y-0.5 flex w-full items-center gap-3 px-4 py-2.5 text-start font-mono text-sm text-stone-600 select-none data-highlighted:bg-stone-100 data-highlighted:text-emerald-800 dark:text-stone-300 dark:data-highlighted:bg-stone-900 dark:data-highlighted:text-emerald-400",
                 props.class,
             )}
         >

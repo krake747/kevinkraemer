@@ -1,7 +1,8 @@
 import type { Project, ProjectDecision } from "@core/content/model"
 import { ProjectHeader } from "@features/project/header"
 import { ProjectMetadata } from "@features/project/metadata"
-import { ReturnToRegister } from "@pattern/register"
+import { ProjectRail } from "@features/project/rail"
+import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail, ReturnToRegister } from "@pattern/register"
 import { Stack, StackRow } from "@pattern/stack"
 import { type ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
@@ -45,35 +46,54 @@ function ProjectDecisionList(props: VoidProps<{ items: ProjectDecision[] }>) {
 
 export function ProjectEntry(props: VoidProps<{ project: Project }>) {
     return (
-        <article class="mx-auto max-w-prose">
+        <article class="mx-auto max-w-4xl">
             <ProjectHeader project={props.project} />
-            <ProjectMetadata project={props.project} />
-            <ProjectSection aria-labelledby="problem-heading">
-                <ProjectSectionHeading id="problem-heading">Problem and point of view</ProjectSectionHeading>
-                <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{props.project.problem}</p>
-            </ProjectSection>
-            <Show when={props.project.decisions.length > 0}>
-                <ProjectSection aria-labelledby="decisions-heading">
-                    <ProjectSectionHeading id="decisions-heading">Key decisions</ProjectSectionHeading>
-                    <ProjectDecisionList items={props.project.decisions} />
-                </ProjectSection>
-            </Show>
-            <Show when={props.project.implementation}>
-                {(implementation) => (
-                    <ProjectSection aria-labelledby="implementation-heading">
-                        <ProjectSectionHeading id="implementation-heading">
-                            Technical implementation
-                        </ProjectSectionHeading>
-                        <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{implementation()}</p>
+            <div class="mb-12 lg:hidden">
+                <ProjectMetadata project={props.project} />
+            </div>
+            <RegisterWithRail spacing="loose" width="wide">
+                <RegisterWithRailMain>
+                    <ProjectSection aria-labelledby="problem-heading">
+                        <ProjectSectionHeading id="problem-heading">Problem and point of view</ProjectSectionHeading>
+                        <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{props.project.problem}</p>
                     </ProjectSection>
-                )}
-            </Show>
-            <Show when={props.project.tradeoffs.length > 0}>
-                <ProjectSection aria-labelledby="tradeoffs-heading">
-                    <ProjectSectionHeading id="tradeoffs-heading">Challenges and trade-offs</ProjectSectionHeading>
-                    <ProjectDecisionList items={props.project.tradeoffs} />
-                </ProjectSection>
-            </Show>
+                    <Show when={props.project.decisions.length > 0}>
+                        <ProjectSection aria-labelledby="decisions-heading">
+                            <ProjectSectionHeading id="decisions-heading">Key decisions</ProjectSectionHeading>
+                            <ProjectDecisionList items={props.project.decisions} />
+                        </ProjectSection>
+                    </Show>
+                    <Show when={props.project.implementation}>
+                        {(implementation) => (
+                            <ProjectSection aria-labelledby="implementation-heading">
+                                <ProjectSectionHeading id="implementation-heading">
+                                    Technical implementation
+                                </ProjectSectionHeading>
+                                <div class="mt-4 flex flex-col gap-4">
+                                    <For each={implementation()}>
+                                        {(paragraph) => (
+                                            <p class="text-base/[1.8] text-stone-600 dark:text-stone-400">
+                                                {paragraph}
+                                            </p>
+                                        )}
+                                    </For>
+                                </div>
+                            </ProjectSection>
+                        )}
+                    </Show>
+                    <Show when={props.project.tradeoffs.length > 0}>
+                        <ProjectSection aria-labelledby="tradeoffs-heading">
+                            <ProjectSectionHeading id="tradeoffs-heading">
+                                Challenges and trade-offs
+                            </ProjectSectionHeading>
+                            <ProjectDecisionList items={props.project.tradeoffs} />
+                        </ProjectSection>
+                    </Show>
+                </RegisterWithRailMain>
+                <RegisterWithRailRail labelledby="project-rail-label">
+                    <ProjectRail project={props.project} />
+                </RegisterWithRailRail>
+            </RegisterWithRail>
             <p class="mt-10">
                 <ReturnToRegister href="/projects">Back to all case files</ReturnToRegister>
             </p>

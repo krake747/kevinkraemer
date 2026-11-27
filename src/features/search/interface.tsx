@@ -5,6 +5,7 @@ import { SearchOutcomeView } from "@features/search/outcome-view"
 import { SearchSkeleton } from "@features/search/skeleton"
 import { createPagefindSearch } from "@pattern/create-pagefind-search"
 import { createUrlQuery } from "@pattern/create-url-query"
+import { createMediaQuery } from "@solid-primitives/media"
 import { Button } from "@ui/button"
 import { cx } from "@ui/cva.config"
 import { Input, InputPrompt } from "@ui/input"
@@ -14,6 +15,7 @@ export function SearchInterface() {
     const query = createUrlQuery({ param: "q", wait: PAGEFIND_DEBOUNCE_MS })
     const committedQuery = () => query.query()?.trim() ?? ""
     const { outcome, total, isLoading: isStale } = createPagefindSearch(committedQuery, 10)
+    const isCoarsePointer = createMediaQuery("(pointer: coarse)")
     let input!: HTMLInputElement
 
     const resetQuery = () => {
@@ -26,6 +28,7 @@ export function SearchInterface() {
             <search aria-label="Site search" class="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
                 <Input
                     ref={input}
+                    type="search"
                     value={latest(query.input)}
                     onInput={(event) => {
                         query.update(event.currentTarget.value)
@@ -34,14 +37,18 @@ export function SearchInterface() {
                     aria-label="Search site"
                     autocomplete="off"
                     spellcheck={false}
-                    autofocus
+                    enterkeyhint="search"
+                    autofocus={!isCoarsePointer()}
                 >
                     <InputPrompt />
                 </Input>
                 <div class="flex items-center justify-end gap-3 sm:contents">
                     <Loading fallback={null}>
                         <Show when={total() !== null}>
-                            <span class="min-w-14 shrink-0 text-right font-mono text-xs whitespace-nowrap text-stone-600 tabular-nums dark:text-stone-400">
+                            <span
+                                aria-live="polite"
+                                class="min-w-14 shrink-0 text-right font-mono text-xs whitespace-nowrap text-stone-600 tabular-nums dark:text-stone-400"
+                            >
                                 {total()} {total() === 1 ? "hit" : "hits"}
                             </span>
                         </Show>

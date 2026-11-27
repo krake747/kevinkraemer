@@ -9,7 +9,7 @@ stack:
   - Solid
   - TypeScript
   - Tailwind CSS
-  - OpenAI
+  - GPT-6 Luna
   - Jev
   - MCP
 role: "Design and passion project."
@@ -33,11 +33,20 @@ decisions:
       I built the site because I wanted a place to experiment. The first version was rough, and
       that's fine. I keep iterating on the design, writing, and interactions. The site evolves
       alongside what I learn.
-implementation: >-
-  The site is a single Solid application, prerendered into static pages at deploy time. Content
-  lives in Markdown files and is validated against schemas during the build, catching mistakes
-  before they reach production. Search uses a Pagefind index, while the ask box and agent endpoints
-  run as Netlify Functions.
+implementation:
+  - >-
+    The site is a single Solid application, prerendered into static pages at deploy time. Content
+    lives in Markdown files and is validated against schemas during the build, catching mistakes
+    before they reach production. Search uses a Pagefind index, while the ask box and agent
+    endpoints run as Netlify Functions.
+  - >-
+    Every ask question passes a Jev System One gate first: a fast triage that judges whether the
+    question is answerable from published pages, and which pages matter. Only grounded questions
+    reach GPT-6 Luna, which writes a first-person answer from the cited pages alone, with nothing
+    stored.
+  - >-
+    Agents get the same content through an MCP endpoint with OpenAPI docs, so the site answers the
+    same way no matter who asks.
 tradeoffs:
   - title: "Typos fail the build."
     reason: >-
@@ -47,4 +56,9 @@ tradeoffs:
     reason: >-
       The market-terminal aesthetic is visual language, not a promise of live financial data. There
       are no live quotes or widgets to maintain, break, or mislead.
+  - title: "The expensive model never sees a bad question."
+    reason: >-
+      The Jev gate answers answerability before GPT-6 Luna writes a word, so off-topic questions get
+      a quick refusal instead of a slow, costly guess. Grounding is enforced twice: the gate picks
+      the pages, and the answer may only use them.
 ---

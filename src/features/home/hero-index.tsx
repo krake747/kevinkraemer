@@ -4,7 +4,8 @@ import { For } from "solid-js"
 
 const HERO_INDEX = [
     { label: "Projects", href: "/projects", display: "ls ~/projects" },
-    { label: "Contact", href: "/contact", display: "echo hello" },
+    { label: "Contact", href: "/contact", display: "say hello" },
+    { label: "Ask", href: "/ama", display: 'echo "ask anything"' },
 ] as const
 
 export function HomeHeroIndex() {
@@ -15,7 +16,7 @@ export function HomeHeroIndex() {
                 <For each={HERO_INDEX}>
                     {(entry) => (
                         <div class="flex items-baseline gap-4">
-                            <span class="w-20 tracking-widest text-stone-600 uppercase dark:text-stone-300">
+                            <span class="w-20 text-xs tracking-widest text-stone-600 uppercase dark:text-stone-300">
                                 {entry.label}
                             </span>
                             <Anchor href={entry.href} variant="channel" class="hit-area-y-2">

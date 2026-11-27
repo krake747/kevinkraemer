@@ -6,7 +6,7 @@ import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
 function toolName(item: UsesItem, variant: "channel" | "muted") {
     if (item.kind === "text") {
-        return <span class="font-mono text-sm font-medium text-stone-900 dark:text-stone-100">{item.name}</span>
+        return <span class="font-mono text-sm text-stone-900 dark:text-stone-100">{item.name}</span>
     }
     return (
         <Anchor
@@ -66,9 +66,7 @@ function UsesHardware(props: VoidProps<{ items: UsesItem[] }>) {
                 <For each={props.items}>
                     {(item) => (
                         <div class="flex flex-col gap-1">
-                            <dt class="font-mono text-sm font-medium text-stone-900 dark:text-stone-100">
-                                {item.name}
-                            </dt>
+                            <dt class="font-mono text-sm text-stone-900 dark:text-stone-100">{item.name}</dt>
                             <dd class="m-0 font-mono text-xs/relaxed text-stone-600 dark:text-stone-400">
                                 {item.note}
                             </dd>

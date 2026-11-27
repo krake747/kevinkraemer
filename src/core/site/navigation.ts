@@ -36,11 +36,19 @@ export type NavEntry = {
 
 export const NAV_ENTRIES: NavEntry[] = [
     { label: "~/portfolio", href: "/", keywords: ["home", "start"], topNav: true, active: "home" },
+    {
+        label: "~/projects",
+        href: "/projects",
+        keywords: ["projects", "work", "case", "cases", "portfolio"],
+        active: "exact",
+    },
     { label: "~/cv", href: "/cv", keywords: ["cv", "resume", "experience"], topNav: true, active: "cv" },
     { label: "~/logs", href: "/logs", keywords: ["logs", "entries", "writing"], topNav: true, active: "logs" },
-    { label: "~/search", href: "/search", keywords: ["search", "find", "grep"], active: "exact" },
     { label: "~/about", href: "/about", keywords: ["bio", "story", "who"], active: "exact" },
+    { label: "~/ama", href: "/ama", keywords: ["ama", "ask", "questions", "answers"], active: "exact" },
     { label: "~/contact", href: "/contact", keywords: ["email", "reach", "touch"], active: "exact" },
+    { label: "~/search", href: "/search", keywords: ["search", "find", "grep"], active: "exact" },
+    { label: "~/uses", href: "/uses", keywords: ["uses", "stack", "tools", "setup", "gear"], active: "uses" },
     { label: "~/privacy", href: "/privacy", keywords: ["privacy", "data", "tracking", "cookies"], active: "exact" },
     {
         label: "~/developers",
@@ -48,13 +56,7 @@ export const NAV_ENTRIES: NavEntry[] = [
         keywords: ["api", "docs", "agents", "openapi", "machine", "llm"],
         active: "exact",
     },
-    { label: "~/uses", href: "/uses", keywords: ["uses", "stack", "tools", "setup", "gear"], active: "uses" },
-    {
-        label: "~/projects",
-        href: "/projects",
-        keywords: ["projects", "work", "case", "cases", "portfolio"],
-        active: "exact",
-    },
+    { label: "~/credits", href: "/credits", keywords: ["credits", "colophon", "stack", "built"], active: "exact" },
 ]
 
 export const TOP_NAV: NavEntry[] = NAV_ENTRIES.filter((entry) => entry.topNav)

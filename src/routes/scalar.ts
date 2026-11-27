@@ -1,7 +1,9 @@
 import { html } from "@core/site/respond"
-import { buildTitle } from "@core/site/seo"
+import { buildTitle, seoDefaults } from "@core/site/seo"
+import { site } from "@core/site/site-meta"
 import { canonicalFor } from "@core/site/urls"
 import { colorScheme } from "@core/theme"
+import { themeColorDark, themeColorLight } from "@pattern/seo"
 import { preferencesScript } from "@ui-sdk/core"
 
 const pageTitle = buildTitle("API Reference")
@@ -17,9 +19,23 @@ function htmlDocument(): string {
     <head>
         <script>${themeScript}</script>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
         <meta name="color-scheme" content="light dark" />
+        <meta name="theme-color" content="${themeColorLight}" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="${themeColorDark}" media="(prefers-color-scheme: dark)" />
         <meta name="description" content="${description}" />
+        <meta property="og:title" content="${pageTitle}" />
+        <meta property="og:description" content="${description}" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="${site.name}" />
+        <meta property="og:url" content="${canonical}" />
+        <meta property="og:image" content="${seoDefaults.image}" />
+        <meta property="og:image:width" content="${site.imageDimensions.width}" />
+        <meta property="og:image:height" content="${site.imageDimensions.height}" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="${site.twitter.site}" />
+        <meta name="twitter:creator" content="${site.twitter.handle}" />
+        <meta name="twitter:image" content="${seoDefaults.image}" />
         <link rel="canonical" href="${canonical}" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" media="(prefers-color-scheme: light)" />
         <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: dark)" />
