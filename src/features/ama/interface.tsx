@@ -1,4 +1,3 @@
-import { AmaAbout } from "@features/ama/about"
 import { AMA_QUESTION_MAX_LENGTH, AmaError, askSite } from "@features/ama/client"
 import { AmaTopics } from "@features/ama/topics"
 import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
@@ -193,17 +192,14 @@ export function AmaInterface() {
                 </div>
             </RegisterWithRailMain>
             <RegisterWithRailRail labelledby="ama-topics-label">
-                <div class="flex flex-col gap-4">
-                    <div>
-                        <PanelLabel id="ama-topics-label">topics</PanelLabel>
-                        <AmaTopics
-                            pending={pending()}
-                            onSelect={(question) => {
-                                void submit(question)
-                            }}
-                        />
-                    </div>
-                    <AmaAbout />
+                <div>
+                    <PanelLabel id="ama-topics-label">topics</PanelLabel>
+                    <AmaTopics
+                        pending={pending()}
+                        onSelect={(question) => {
+                            void submit(question)
+                        }}
+                    />
                 </div>
             </RegisterWithRailRail>
         </RegisterWithRail>
