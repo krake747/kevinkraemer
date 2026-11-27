@@ -208,7 +208,8 @@
         @apply font-mono;
     }
 
-    [id] {
+    [id],
+    [data-ama-entry] {
         scroll-margin-top: calc(var(--header-h) + 0.5rem);
     }
 
