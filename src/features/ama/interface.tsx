@@ -9,7 +9,7 @@ import { createMediaQuery } from "@solid-primitives/media"
 import { useSearchParams } from "@solidjs/router"
 import { Button } from "@ui/button"
 import { Input, InputPrompt } from "@ui/input"
-import { Show, createSignal, onSettled } from "solid-js"
+import { Show, createEffect, createSignal } from "solid-js"
 
 function canAsk(question: string, busy: boolean): boolean {
     if (busy) {
@@ -41,7 +41,7 @@ export function AmaInterface() {
     const [searchParams, setSearchParams] = useSearchParams<{ q?: string }>()
     const [input, setInput] = createSignal("")
     const [entries, setEntries] = createSignal<AmaEntry[]>([])
-    const [askedFromUrl, setAskedFromUrl] = createSignal(false)
+    const [askedFromUrl, setAskedFromUrl] = createSignal<string | undefined>(undefined)
     const controllers = new Map<number, AbortController>()
     const busy = (): boolean => entries().some((entry) => entry.status === "loading")
     const prefersReducedMotion = createMediaQuery("(prefers-reduced-motion: reduce)")
@@ -80,16 +80,39 @@ export function AmaInterface() {
         }
     }
 
+    function nextEntryId(): number {
+        return Math.max(0, ...entries().map((entry) => entry.id)) + 1
+    }
+
     async function submit(raw: string): Promise<void> {
         const question = raw.trim()
         if (!canAsk(question, busy())) {
             return
         }
-        const id = Math.max(0, ...entries().map((entry) => entry.id)) + 1
+        const id = nextEntryId()
         setEntries((current) => [...current, { id, question, status: "loading" }])
         setInput("")
+        setAskedFromUrl(question)
         setSearchParams({ q: question }, { replace: true })
         await runAsk(id, question)
+    }
+
+    function askFromUrl(question: string): void {
+        if (question.length > ASK_QUESTION_MAX_LENGTH) {
+            const id = nextEntryId()
+            setEntries((current) => [
+                ...current,
+                {
+                    id,
+                    question,
+                    status: "failed",
+                    detail: `That question runs past ${ASK_QUESTION_MAX_LENGTH} characters.`,
+                    hint: "Shorten it and ask again.",
+                },
+            ])
+            return
+        }
+        void submit(question)
     }
 
     function retry(id: number): void {
@@ -101,6 +124,8 @@ export function AmaInterface() {
             return
         }
         setEntries((current) => replaceEntry(current, { id, question: entry.question, status: "loading" }))
+        setAskedFromUrl(entry.question)
+        setSearchParams({ q: entry.question }, { replace: true })
         void runAsk(id, entry.question)
     }
 
@@ -109,9 +134,9 @@ export function AmaInterface() {
         controllers.delete(id)
         const next = entries().filter((candidate) => candidate.id !== id)
         setEntries(next)
-        if (next.length === 0) {
-            setSearchParams({ q: undefined }, { replace: true })
-        }
+        const last = next[next.length - 1]
+        setAskedFromUrl(last?.question)
+        setSearchParams({ q: last?.question }, { replace: true })
     }
 
     function clear(): void {
@@ -123,17 +148,20 @@ export function AmaInterface() {
         setSearchParams({ q: undefined }, { replace: true })
     }
 
-    onSettled(() => {
-        if (askedFromUrl()) {
-            return
-        }
-        setAskedFromUrl(true)
-        const first = initialQuestion(searchParams)
-        if (first !== undefined) {
-            setInput(first)
-            void submit(first)
-        }
-    })
+    createEffect(
+        () => initialQuestion(searchParams),
+        (current) => {
+            if (current === undefined || current === askedFromUrl()) {
+                return
+            }
+            setAskedFromUrl(current)
+            if (busy()) {
+                return
+            }
+            setInput(current)
+            askFromUrl(current)
+        },
+    )
 
     return (
         <RegisterWithRail>
