@@ -137,7 +137,7 @@ export function AmaInterface() {
         <RegisterWithRail>
             <RegisterWithRailMain>
                 <div class="flex flex-col gap-10">
-                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={busy() ? "true" : "false"}>
+                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={busy() ? "true" : undefined}>
                         <SectionHeading id="ama-answers-heading">answers</SectionHeading>
                         <AmaTranscript entries={entries()} onRetry={retry} onDismiss={dismiss} />
                     </DocumentSection>

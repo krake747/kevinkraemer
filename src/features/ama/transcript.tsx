@@ -38,7 +38,7 @@ export function AmaTranscript(props: {
 }) {
     const busy = (): boolean => props.entries.some((entry) => entry.status === "loading")
     return (
-        <div aria-live="polite" aria-atomic="false" class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2">
             <Show
                 when={props.entries.length > 0}
                 fallback={
