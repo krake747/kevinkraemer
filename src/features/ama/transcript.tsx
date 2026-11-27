@@ -91,19 +91,20 @@ export function AmaTranscript(props: {
                                                 )}
                                             </Show>
                                             <Show when={ready().answer.sources.length > 0}>
-                                                <p class="mt-4 font-mono text-xs text-stone-600 dark:text-stone-400">
-                                                    Sources:{" "}
+                                                <ul class="mt-4 flex flex-col gap-3">
                                                     <For each={ready().answer.sources}>
-                                                        {(source, index) => (
-                                                            <>
-                                                                {index() > 0 ? " · " : ""}
+                                                        {(source) => (
+                                                            <li class="min-w-0">
                                                                 <Anchor href={source.path} variant="muted">
-                                                                    {source.path}
+                                                                    {source.title}
                                                                 </Anchor>
-                                                            </>
+                                                                <span class="mt-1 block text-sm/relaxed text-stone-600 dark:text-stone-400">
+                                                                    {source.description}
+                                                                </span>
+                                                            </li>
                                                         )}
                                                     </For>
-                                                </p>
+                                                </ul>
                                             </Show>
                                         </>
                                     )}
