@@ -118,21 +118,21 @@ export function AmaInterface() {
                             </Button>
                         </div>
                     </form>
-                    <div class="mt-4 flex flex-wrap gap-2">
-                        <For each={AMA_QUESTIONS}>
-                            {(suggested) => (
-                                <Button
-                                    intent="link"
-                                    onClick={() => {
-                                        void submit(suggested)
-                                    }}
-                                >
-                                    {suggested}
-                                </Button>
-                            )}
-                        </For>
-                    </div>
                 </search>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <For each={AMA_QUESTIONS}>
+                        {(suggested) => (
+                            <Button
+                                intent="link"
+                                onClick={() => {
+                                    void submit(suggested)
+                                }}
+                            >
+                                {suggested}
+                            </Button>
+                        )}
+                    </For>
+                </div>
             </DocumentSection>
             <DocumentSection aria-labelledby="ama-answers-heading">
                 <SectionHeading id="ama-answers-heading">answers</SectionHeading>
