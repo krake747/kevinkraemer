@@ -39,7 +39,7 @@ export function Footer() {
                 </div>
                 <div class="relative hidden flex-1 items-center justify-center gap-4 border-r border-stone-200 px-4 font-mono text-stone-600 sm:flex dark:border-stone-800 dark:text-stone-300">
                     <span class="flex items-center gap-1.5">
-                        Built with intent <BoltIcon class="inline size-3" />
+                        Built with intent <BoltIcon class="inline size-3.5" />
                     </span>
                     <DecorMark position="top-right" arm="short" class="rotate-180" />
                 </div>
