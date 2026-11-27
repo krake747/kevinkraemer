@@ -52,7 +52,7 @@ export function AmaTranscript(props: {
             >
                 <For each={props.entries}>
                     {(entry) => (
-                        <StackRow size="relaxed">
+                        <StackRow size="relaxed" data-ama-entry={entry.id}>
                             <p class="font-mono text-sm text-stone-900 dark:text-stone-100">
                                 <span aria-hidden="true" class="text-emerald-700 dark:text-emerald-400">
                                     {"$ "}

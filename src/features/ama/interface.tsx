@@ -5,6 +5,7 @@ import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
 import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
 import { DocumentSection, SectionHeading } from "@pattern/section"
 import { StackRow } from "@pattern/stack"
+import { createMediaQuery } from "@solid-primitives/media"
 import { useSearchParams } from "@solidjs/router"
 import { Button } from "@ui/button"
 import { ArrowRightIcon } from "@ui/icon"
@@ -42,8 +43,18 @@ export function AmaInterface() {
     const [input, setInput] = createSignal("")
     const [entries, setEntries] = createSignal<AmaEntry[]>([])
     const [pending, setPending] = createSignal(false)
+    const prefersReducedMotion = createMediaQuery("(prefers-reduced-motion: reduce)")
     let nextId = 1
     let askedFromUrl = false
+
+    function scrollToEntry(id: number): void {
+        requestAnimationFrame(() => {
+            const target = document.querySelector(`[data-ama-entry="${id}"]`)
+            if (target instanceof HTMLElement) {
+                target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" })
+            }
+        })
+    }
 
     async function runAsk(id: number, question: string): Promise<void> {
         setPending(true)
@@ -57,6 +68,7 @@ export function AmaInterface() {
             )
         } finally {
             setPending(false)
+            scrollToEntry(id)
         }
     }
 
@@ -106,6 +118,41 @@ export function AmaInterface() {
         <RegisterWithRail>
             <RegisterWithRailMain>
                 <div class="flex flex-col gap-10">
+                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
+                        <SectionHeading id="ama-answers-heading">answers</SectionHeading>
+                        <AmaTranscript entries={entries()} pending={pending()} onRetry={retry} />
+                    </DocumentSection>
+                    <DocumentSection aria-labelledby="ama-topics-heading">
+                        <SectionHeading id="ama-topics-heading">topics</SectionHeading>
+                        <ul class="flex flex-col gap-2">
+                            <For each={AMA_QUESTIONS}>
+                                {(suggested) => (
+                                    <li>
+                                        <StackRow size="compact" interactive>
+                                            <button
+                                                type="button"
+                                                class="group flex w-full items-center justify-between gap-4 text-left disabled:opacity-50"
+                                                disabled={pending()}
+                                                onClick={() => {
+                                                    void submit(suggested)
+                                                }}
+                                            >
+                                                <span class="min-w-0 flex-1 font-mono text-sm text-stone-700 transition-colors group-hover:text-emerald-800 dark:text-stone-300 dark:group-hover:text-emerald-400">
+                                                    {suggested}
+                                                </span>
+                                                <span
+                                                    aria-hidden="true"
+                                                    class="hidden shrink-0 items-center text-stone-600 transition-colors group-hover:text-emerald-700 sm:inline-flex dark:text-stone-400 dark:group-hover:text-emerald-400"
+                                                >
+                                                    <ArrowRightIcon class="size-4 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-1" />
+                                                </span>
+                                            </button>
+                                        </StackRow>
+                                    </li>
+                                )}
+                            </For>
+                        </ul>
+                    </DocumentSection>
                     <DocumentSection aria-labelledby="ama-ask-heading">
                         <SectionHeading id="ama-ask-heading">ask</SectionHeading>
                         <search
@@ -150,41 +197,6 @@ export function AmaInterface() {
                                 </div>
                             </form>
                         </search>
-                    </DocumentSection>
-                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
-                        <SectionHeading id="ama-answers-heading">answers</SectionHeading>
-                        <AmaTranscript entries={entries()} pending={pending()} onRetry={retry} />
-                    </DocumentSection>
-                    <DocumentSection aria-labelledby="ama-topics-heading">
-                        <SectionHeading id="ama-topics-heading">topics</SectionHeading>
-                        <ul class="flex flex-col gap-2">
-                            <For each={AMA_QUESTIONS}>
-                                {(suggested) => (
-                                    <li>
-                                        <StackRow size="compact" interactive>
-                                            <button
-                                                type="button"
-                                                class="group flex w-full items-center justify-between gap-4 text-left disabled:opacity-50"
-                                                disabled={pending()}
-                                                onClick={() => {
-                                                    void submit(suggested)
-                                                }}
-                                            >
-                                                <span class="min-w-0 flex-1 font-mono text-sm text-stone-700 transition-colors group-hover:text-emerald-800 dark:text-stone-300 dark:group-hover:text-emerald-400">
-                                                    {suggested}
-                                                </span>
-                                                <span
-                                                    aria-hidden="true"
-                                                    class="hidden shrink-0 items-center text-stone-600 transition-colors group-hover:text-emerald-700 sm:inline-flex dark:text-stone-400 dark:group-hover:text-emerald-400"
-                                                >
-                                                    <ArrowRightIcon class="size-4 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-1" />
-                                                </span>
-                                            </button>
-                                        </StackRow>
-                                    </li>
-                                )}
-                            </For>
-                        </ul>
                     </DocumentSection>
                 </div>
             </RegisterWithRailMain>
