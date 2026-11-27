@@ -98,9 +98,6 @@ export function AmaTranscript(props: {
                                                                 <Anchor href={source.path} variant="muted">
                                                                     {source.title}
                                                                 </Anchor>
-                                                                <span class="mt-1 block text-sm/relaxed text-stone-600 dark:text-stone-400">
-                                                                    {source.description}
-                                                                </span>
                                                             </li>
                                                         )}
                                                     </For>
