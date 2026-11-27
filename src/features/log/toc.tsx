@@ -89,7 +89,7 @@ export function LogToc(props: VoidProps<{ entries: LogTocEntry[] }>) {
                     class="sticky top-[calc(var(--header-h)+1.5rem)] kk-scrollbar max-h-[calc(100dvh-var(--header-h)-3rem)] overflow-y-auto overscroll-contain"
                 >
                     <PanelLabel>On this page</PanelLabel>
-                    <ul class="border-l border-stone-200 dark:border-stone-800">
+                    <ul class="border-l border-stone-200 py-1 dark:border-stone-800">
                         <For each={props.entries}>
                             {(item) => (
                                 <li>
