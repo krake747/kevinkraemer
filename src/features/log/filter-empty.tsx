@@ -14,7 +14,7 @@ export function LogFilterEmpty() {
 
 export function LogFilterEmptyView(props: VoidProps<{ dirty: boolean; onClear: () => void }>) {
     return (
-        <div class="flex animate-confirm-in flex-col items-center gap-3 py-20 text-center">
+        <div aria-live="polite" class="flex animate-confirm-in flex-col items-center gap-3 py-20 text-center">
             <p class="font-mono text-sm text-stone-600 dark:text-stone-300">
                 {props.dirty ? "No log entries match the selected filters." : "No log entries yet. Coming soon."}
             </p>

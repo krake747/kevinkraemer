@@ -125,11 +125,17 @@ export function RegisterWithRailRail(props: ParentProps<{ labelledby: string; cl
 type EmptyRegisterProps = ParentProps<{
     size?: Extract<VariantProps<typeof stackRow>["size"], "relaxed" | "spacious">
     class?: string
+    announce?: "polite" | "assertive"
 }>
 
 export function EmptyRegister(props: EmptyRegisterProps) {
     return (
-        <StackRow size={props.size ?? "relaxed"} class={cx("text-center", props.class)}>
+        <StackRow
+            size={props.size ?? "relaxed"}
+            role={props.announce === "assertive" ? "alert" : undefined}
+            aria-live={props.announce}
+            class={cx("text-center", props.class)}
+        >
             {props.children}
         </StackRow>
     )

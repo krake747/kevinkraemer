@@ -4,7 +4,7 @@ import { Anchor } from "@ui/anchor"
 
 export function SearchUnavailable() {
     return (
-        <EmptyRegister size="relaxed">
+        <EmptyRegister size="relaxed" announce="polite">
             <EmptyRegisterTitle>Search index unavailable.</EmptyRegisterTitle>
             <EmptyRegisterNote>
                 Build the site first: <SearchPanelEmphasis>pnpm build</SearchPanelEmphasis> then{" "}

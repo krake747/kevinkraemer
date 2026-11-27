@@ -176,7 +176,11 @@
             "ss02" 1;
         font-synthesis: none;
         color-scheme: light;
-        @apply scroll-smooth bg-stone-50 antialiased;
+        @apply bg-stone-50 antialiased;
+
+        @media (prefers-reduced-motion: no-preference) {
+            scroll-behavior: smooth;
+        }
 
         &[data-color-scheme="dark"] {
             background-color: var(--color-stone-950);

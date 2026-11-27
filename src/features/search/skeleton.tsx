@@ -7,9 +7,9 @@ export function SearchSkeleton() {
             <Repeat count={3}>
                 {() => (
                     <StackRow>
-                        <div class="h-4 w-2/3 animate-pulse bg-stone-200 dark:bg-stone-800" />
-                        <div class="mt-2 h-3 w-full animate-pulse bg-stone-200/70 dark:bg-stone-800/70" />
-                        <div class="mt-1 h-3 w-5/6 animate-pulse bg-stone-200/60 dark:bg-stone-800/60" />
+                        <div class="h-4 w-2/3 bg-stone-200 motion-safe:animate-pulse dark:bg-stone-800" />
+                        <div class="mt-2 h-3 w-full bg-stone-200/70 motion-safe:animate-pulse dark:bg-stone-800/70" />
+                        <div class="mt-1 h-3 w-5/6 bg-stone-200/60 motion-safe:animate-pulse dark:bg-stone-800/60" />
                     </StackRow>
                 )}
             </Repeat>

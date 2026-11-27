@@ -9,13 +9,16 @@ export function LogFilterSearch() {
     return (
         <div class="flex items-center gap-3">
             <Input
-                type="text"
+                type="search"
                 placeholder="Search logs…"
                 value={state.input()}
                 onInput={(event) => {
                     actions.updateQuery(event.currentTarget.value)
                 }}
                 aria-label="Search logs"
+                autocomplete="off"
+                spellcheck={false}
+                enterkeyhint="search"
             >
                 <InputPrompt />
             </Input>

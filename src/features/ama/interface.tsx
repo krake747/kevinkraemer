@@ -30,6 +30,15 @@ function replaceEntry(current: readonly AmaEntry[], entry: AmaEntry): AmaEntry[]
     return current.map((candidate) => (candidate.id === entry.id ? entry : candidate))
 }
 
+function focusEntry(id: number): void {
+    requestAnimationFrame(() => {
+        const target = document.querySelector(`[data-ama-entry="${id}"]`)
+        if (target instanceof HTMLElement) {
+            target.focus({ preventScroll: true })
+        }
+    })
+}
+
 function initialQuestion(params: { q?: string | string[] }): string | undefined {
     const raw = Array.isArray(params.q) ? params.q[0] : params.q
     if (raw === undefined || raw.trim().length === 0) {
@@ -46,6 +55,7 @@ export function AmaInterface() {
     const controllers = new Map<number, AbortController>()
     const busy = (): boolean => entries().some((entry) => entry.status === "loading")
     const prefersReducedMotion = createMediaQuery("(prefers-reduced-motion: reduce)")
+    let inputElement!: HTMLInputElement
     function submitTopic(question: string): void {
         void submit(question)
     }
@@ -139,11 +149,20 @@ export function AmaInterface() {
     function dismiss(id: number): void {
         controllers.get(id)?.abort()
         controllers.delete(id)
+        const at = entries().findIndex((candidate) => candidate.id === id)
         const next = entries().filter((candidate) => candidate.id !== id)
         setEntries(next)
         const last = next[next.length - 1]
         setAskedFromUrl(last?.question)
         setSearchParams({ q: last?.question }, { replace: true })
+        const neighbor = next[Math.min(at, next.length - 1)]
+        requestAnimationFrame(() => {
+            if (neighbor === undefined) {
+                inputElement.focus()
+                return
+            }
+            focusEntry(neighbor.id)
+        })
     }
 
     function clear(): void {
@@ -153,6 +172,9 @@ export function AmaInterface() {
         controllers.clear()
         setEntries([])
         setSearchParams({ q: undefined }, { replace: true })
+        requestAnimationFrame(() => {
+            inputElement.focus()
+        })
     }
 
     createEffect(
@@ -212,6 +234,7 @@ export function AmaInterface() {
                                 }}
                             >
                                 <Input
+                                    ref={inputElement}
                                     value={input()}
                                     onInput={(event) => {
                                         setInput(event.currentTarget.value)
@@ -220,6 +243,8 @@ export function AmaInterface() {
                                     aria-label="Your question"
                                     autocomplete="off"
                                     spellcheck={false}
+                                    required
+                                    enterkeyhint="send"
                                     maxlength={ASK_QUESTION_MAX_LENGTH}
                                 >
                                     <InputPrompt />

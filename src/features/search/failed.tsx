@@ -4,7 +4,7 @@ import type { VoidProps } from "solid-js"
 
 export function SearchFailed(props: VoidProps<{ message: string; onRetry: () => void }>) {
     return (
-        <EmptyRegister size="relaxed">
+        <EmptyRegister size="relaxed" announce="assertive">
             <EmptyRegisterTitle>Search failed.</EmptyRegisterTitle>
             <EmptyRegisterNote>{props.message}</EmptyRegisterNote>
             <EmptyRegisterAction>
