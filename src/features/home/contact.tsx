@@ -1,6 +1,6 @@
 import { site } from "@core/site/site-meta"
 import { TerminalCommandHeader, TerminalSection } from "@pattern/terminal"
-import { MessageCircle } from "@ui/icon"
+import { MessageCircleIcon } from "@ui/icon"
 import type { VoidProps } from "solid-js"
 
 export function HomeContact(props: VoidProps<{ id: string }>) {
@@ -23,7 +23,7 @@ export function HomeContact(props: VoidProps<{ id: string }>) {
                     {site.email}
                 </a>
                 <p class="reveal-item flex items-center gap-2 font-mono text-sm text-stone-600 tabular-nums dark:text-stone-400">
-                    <MessageCircle class="size-4 shrink-0" />
+                    <MessageCircleIcon class="size-4 shrink-0" />
                     <span>open, replies in 2d</span>
                 </p>
                 <p class="reveal-item font-mono text-sm text-stone-600 dark:text-stone-400">Based in Luxembourg</p>

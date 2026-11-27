@@ -2,7 +2,7 @@ import { applyWithoutTransitions, colorScheme } from "@core/theme"
 import { usePreference } from "@ui-sdk/solid/preferences"
 import { Toggle } from "@ui-sdk/solid/toggle"
 import { cx } from "@ui/cva.config"
-import { Moon, Sun } from "@ui/icon"
+import { MoonIcon, SunIcon } from "@ui/icon"
 
 export function ThemeToggle() {
     const scheme = usePreference(colorScheme)
@@ -22,13 +22,13 @@ export function ThemeToggle() {
             )}
         >
             <span class="relative size-4">
-                <Sun
+                <SunIcon
                     class={cx(
                         "theme-toggle-icon ease-out-quart absolute inset-0 size-4 transition-[opacity,scale,rotate] duration-150",
                         isDark() ? "scale-50 rotate-90 opacity-0" : "scale-100 rotate-0 opacity-100",
                     )}
                 />
-                <Moon
+                <MoonIcon
                     class={cx(
                         "theme-toggle-icon ease-out-quart absolute inset-0 size-4 transition-[opacity,scale,rotate] duration-150",
                         isDark() ? "scale-100 rotate-0 opacity-100" : "scale-50 -rotate-90 opacity-0",

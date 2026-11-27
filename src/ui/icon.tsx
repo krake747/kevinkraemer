@@ -21,92 +21,92 @@ import KeylineSun from "~icons/keyline-icons/sun"
 
 type IconProps = VoidProps<ComponentProps<"svg">>
 
-export function ChevronRight(props: IconProps) {
+export function ChevronRightIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineChevronRight {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Hash(props: IconProps) {
+export function HashIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineHash {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function ArrowRight(props: IconProps) {
+export function ArrowRightIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineArrowRight {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function ArrowLeft(props: IconProps) {
+export function ArrowLeftIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineArrowLeft {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function ChevronLeft(props: IconProps) {
+export function ChevronLeftIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineChevronLeft {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Clock(props: IconProps) {
+export function ClockIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineClock {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function FileText(props: IconProps) {
+export function FileTextIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineFileText {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function ArrowUpRight(props: IconProps) {
+export function ArrowUpRightIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineArrowUpRight {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Rss(props: IconProps) {
+export function RssIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineRss {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Search(props: IconProps) {
+export function SearchIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineSearch {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Moon(props: IconProps) {
+export function MoonIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineMoon {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Sun(props: IconProps) {
+export function SunIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineSun {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Bolt(props: IconProps) {
+export function BoltIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineBolt {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Mail(props: IconProps) {
+export function MailIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineMail {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function Download(props: IconProps) {
+export function DownloadIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineDownload {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function CodeXml(props: IconProps) {
+export function CodeXmlIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineCodeXml {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function BriefcaseBusiness(props: IconProps) {
+export function BriefcaseBusinessIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineBriefcaseBusiness {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
-export function MessageCircle(props: IconProps) {
+export function MessageCircleIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineMessageCircle {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }

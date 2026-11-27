@@ -2,7 +2,7 @@ import { StackRow, type stackRow } from "@pattern/stack"
 import type { ComponentProps } from "@solidjs/web"
 import { Anchor } from "@ui/anchor"
 import { cva, cx, type VariantProps } from "@ui/cva.config"
-import { ArrowRight, ChevronLeft } from "@ui/icon"
+import { ArrowRightIcon, ChevronLeftIcon } from "@ui/icon"
 import { renderElement, type WithRender } from "@ui/render"
 import { createContext, merge, omit, useContext, type ParentProps } from "solid-js"
 
@@ -15,7 +15,7 @@ export function RegisterRow(props: ParentProps<{ href: string; class?: string } 
                     aria-hidden="true"
                     class="hidden shrink-0 items-center text-stone-600 transition-colors group-hover:text-emerald-700 sm:inline-flex dark:text-stone-400 dark:group-hover:text-emerald-400"
                 >
-                    <ArrowRight class="size-4 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-1" />
+                    <ArrowRightIcon class="size-4 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-1" />
                 </span>
             </a>
         </StackRow>
@@ -169,7 +169,7 @@ export function ReturnToRegister(props: ParentProps<{ href: string; class?: stri
             variant="muted"
             class={cx("hit-area-y-2 inline-flex items-center gap-1.5", props.class)}
         >
-            <ChevronLeft class="size-3 shrink-0" />
+            <ChevronLeftIcon class="size-3 shrink-0" />
             {props.children}
         </Anchor>
     )

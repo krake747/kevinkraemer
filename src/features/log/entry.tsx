@@ -11,7 +11,7 @@ import { PageHeaderTitle } from "@pattern/page"
 import { ReturnToRegister } from "@pattern/register"
 import { TerminalCommandHeader } from "@pattern/terminal"
 import { Badge } from "@ui/badge"
-import { Clock, FileText } from "@ui/icon"
+import { ClockIcon, FileTextIcon } from "@ui/icon"
 import { For, Show, type VoidProps } from "solid-js"
 
 export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
@@ -29,11 +29,11 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
                         <div class="mt-4">
                             <div class="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400">
                                 <span class="flex items-center gap-1.5">
-                                    <FileText class="size-3 shrink-0" />
+                                    <FileTextIcon class="size-3 shrink-0" />
                                     {formatDateLong(entry().date)}
                                 </span>{" "}
                                 <span class="flex items-center gap-1.5">
-                                    <Clock class="size-3 shrink-0" />
+                                    <ClockIcon class="size-3 shrink-0" />
                                     {getReadTime(entry().body)}
                                 </span>{" "}
                                 <span class="text-stone-600 dark:text-stone-400">

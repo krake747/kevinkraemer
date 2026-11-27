@@ -2,7 +2,7 @@ import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
-import { ArrowUpRight } from "@ui/icon"
+import { ArrowUpRightIcon } from "@ui/icon"
 import { For, Show, type VoidProps } from "solid-js"
 
 type SideProject = {
@@ -55,7 +55,7 @@ export function CvProjects(props: VoidProps<{ id: string }>) {
                                                 aria-label={`${project.name} (opens in new tab)`}
                                                 class="inline-flex"
                                             >
-                                                <ArrowUpRight class="size-3" />
+                                                <ArrowUpRightIcon class="size-3" />
                                             </Anchor>
                                         )}
                                     </Show>

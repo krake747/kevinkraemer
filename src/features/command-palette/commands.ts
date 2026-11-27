@@ -1,7 +1,7 @@
 import { NAV_ENTRIES } from "@core/site/navigation"
 import { site } from "@core/site/site-meta"
 import { RSS_PATH } from "@core/site/urls"
-import { BriefcaseBusiness, CodeXml, Download, Mail, Moon, Rss } from "@ui/icon"
+import { BriefcaseBusinessIcon, CodeXmlIcon, DownloadIcon, MailIcon, MoonIcon, RssIcon } from "@ui/icon"
 import type { Component } from "solid-js"
 
 export type CommandPaletteActionId = "toggle-theme" | "copy-email" | "download-cv"
@@ -38,7 +38,7 @@ const ACTION_COMMANDS = [
         id: "toggle-theme",
         label: "toggle theme",
         keywords: ["theme", "dark", "light", "mode"],
-        icon: Moon,
+        icon: MoonIcon,
     },
     {
         kind: "action",
@@ -46,7 +46,7 @@ const ACTION_COMMANDS = [
         id: "copy-email",
         label: "copy email",
         keywords: ["copy", "email", "mail", site.email],
-        icon: Mail,
+        icon: MailIcon,
         flashLabel: "email copied",
     },
     {
@@ -55,7 +55,7 @@ const ACTION_COMMANDS = [
         id: "download-cv",
         label: "download cv",
         keywords: ["download", "pdf"],
-        icon: Download,
+        icon: DownloadIcon,
     },
 ] satisfies CommandPaletteCommand[]
 
@@ -66,7 +66,7 @@ const EXTERNAL_COMMANDS = [
         label: "rss feed",
         href: RSS_PATH,
         keywords: ["rss", "feed", "subscribe", "logs", "blog", "xml"],
-        icon: Rss,
+        icon: RssIcon,
     },
     {
         kind: "external",
@@ -74,7 +74,7 @@ const EXTERNAL_COMMANDS = [
         label: "github",
         href: site.socials.github,
         keywords: ["github", "code", "repo", "open source"],
-        icon: CodeXml,
+        icon: CodeXmlIcon,
     },
     {
         kind: "external",
@@ -82,7 +82,7 @@ const EXTERNAL_COMMANDS = [
         label: "linkedin",
         href: site.socials.linkedin,
         keywords: ["linkedin", "career", "profile", "network", "work"],
-        icon: BriefcaseBusiness,
+        icon: BriefcaseBusinessIcon,
     },
 ] satisfies CommandPaletteCommand[]
 

@@ -2,7 +2,7 @@ import { RSS_PATH, origin } from "@core/site/urls"
 import { createCopyFeedback } from "@pattern/create-copy-feedback"
 import { Anchor } from "@ui/anchor"
 import { Button } from "@ui/button"
-import { Rss } from "@ui/icon"
+import { RssIcon } from "@ui/icon"
 import { Show } from "solid-js"
 
 const feedUrl = `${origin}${RSS_PATH}`
@@ -19,7 +19,7 @@ export function LogSubscribe() {
 
     return (
         <span data-subscribe class="inline-flex items-center gap-1.5 font-mono text-xs">
-            <Rss class="size-3 text-emerald-600 dark:text-emerald-400" />
+            <RssIcon class="size-3 text-emerald-600 dark:text-emerald-400" />
             <Anchor href={RSS_PATH} variant="prose" rel="external">
                 rss
             </Anchor>{" "}

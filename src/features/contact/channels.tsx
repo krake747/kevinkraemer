@@ -1,7 +1,7 @@
 import { site } from "@core/site/site-meta"
 import { DocumentSection, SectionHeading } from "@pattern/section"
 import { cva } from "@ui/cva.config"
-import { ArrowUpRight } from "@ui/icon"
+import { ArrowUpRightIcon } from "@ui/icon"
 import { For, Show } from "solid-js"
 
 const contactCell = cva({
@@ -152,7 +152,7 @@ export function ContactChannels() {
                                         <Show when={channel.kind === "external"}>
                                             <span class="sr-only"> (opens in a new tab)</span>
                                         </Show>
-                                        <ArrowUpRight class={contactArrow({ primary: channel.primary })} />
+                                        <ArrowUpRightIcon class={contactArrow({ primary: channel.primary })} />
                                     </span>
                                 </a>
                             </li>

@@ -2,7 +2,7 @@ import type { CommandPaletteRow } from "@features/command-palette/create-palette
 import { useCommandPalette } from "@features/command-palette/provider"
 import { dynamic } from "@solidjs/web"
 import { CommandItem } from "@ui/command"
-import { ArrowRight } from "@ui/icon"
+import { ArrowRightIcon } from "@ui/icon"
 import { Show, createMemo, type VoidProps } from "solid-js"
 
 export function CommandPaletteRowItem(props: VoidProps<{ row: CommandPaletteRow }>) {
@@ -28,7 +28,7 @@ export function CommandPaletteRowItem(props: VoidProps<{ row: CommandPaletteRow 
                     <span class="animate-confirm-in">{label().text}</span>
                 </Show>
             </span>
-            <ArrowRight class="size-3.5 shrink-0 opacity-0 in-data-highlighted:opacity-100" />
+            <ArrowRightIcon class="size-3.5 shrink-0 opacity-0 in-data-highlighted:opacity-100" />
         </CommandItem>
     )
 }
