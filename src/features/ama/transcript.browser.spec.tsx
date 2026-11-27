@@ -12,8 +12,8 @@ const ready: AmaEntry = {
     },
 }
 
-function mounted(entries: AmaEntry[], onRetry: (id: number) => void = () => {}): HTMLElement {
-    return renderToContainer(() => <AmaTranscript entries={entries} pending={false} onRetry={onRetry} />)
+function mounted(entries: AmaEntry[], onRetry: (id: number) => void = () => {}, pending = false): HTMLElement {
+    return renderToContainer(() => <AmaTranscript entries={entries} pending={pending} onRetry={onRetry} />)
 }
 
 describe("the ama transcript", () => {
@@ -43,6 +43,12 @@ describe("the ama transcript", () => {
     it("offers no copy on a failed answer", () => {
         const failed: AmaEntry = { id: 2, question: "zzz", status: "failed", detail: "No published page answers this." }
         expect(mounted([failed]).textContent).not.toContain("copy")
+    })
+
+    it("holds retry while asking", () => {
+        const root = mounted([ready], () => {}, true)
+        const retry = [...root.querySelectorAll("button")].find((button) => button.textContent === "retry")
+        expect(retry?.disabled).toBe(true)
     })
 
     it("retries only the chosen entry", () => {

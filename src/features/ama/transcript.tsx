@@ -61,9 +61,9 @@ export function AmaTranscript(props: {
                             </p>
                             <Switch>
                                 <Match when={entry.status === "loading"}>
-                                    <p class="mt-4 font-mono text-xs text-stone-600 dark:text-stone-400">
+                                    <output class="mt-4 block font-mono text-xs text-stone-600 dark:text-stone-400">
                                         Reading published pages...
-                                    </p>
+                                    </output>
                                 </Match>
                                 <Match when={entry.status === "ready" ? entry : undefined}>
                                     {(ready) => (
@@ -113,6 +113,8 @@ export function AmaTranscript(props: {
                                 <div class="mt-4 flex items-center gap-4">
                                     <Button
                                         intent="muted"
+                                        class="disabled:opacity-50"
+                                        disabled={props.pending}
                                         onClick={() => {
                                             props.onRetry(entry.id)
                                         }}

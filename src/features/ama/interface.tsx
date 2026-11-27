@@ -129,6 +129,7 @@ export function AmaInterface() {
                                     autocomplete="off"
                                     spellcheck={false}
                                     maxlength={AMA_QUESTION_MAX_LENGTH}
+                                    disabled={pending()}
                                 >
                                     <InputPrompt />
                                 </Input>
@@ -138,7 +139,12 @@ export function AmaInterface() {
                                             clear
                                         </Button>
                                     </Show>
-                                    <Button class="shrink-0" intent="quiet" onClick={() => void submit(input())}>
+                                    <Button
+                                        class="shrink-0 disabled:opacity-50"
+                                        intent="quiet"
+                                        disabled={pending()}
+                                        onClick={() => void submit(input())}
+                                    >
                                         {pending() ? "asking..." : "ask"}
                                     </Button>
                                 </div>
@@ -158,7 +164,8 @@ export function AmaInterface() {
                                         <StackRow size="compact" interactive>
                                             <button
                                                 type="button"
-                                                class="group flex w-full items-center justify-between gap-4 text-left"
+                                                class="group flex w-full items-center justify-between gap-4 text-left disabled:opacity-50"
+                                                disabled={pending()}
                                                 onClick={() => {
                                                     void submit(suggested)
                                                 }}
