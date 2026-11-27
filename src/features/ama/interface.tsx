@@ -134,7 +134,7 @@ export function AmaInterface() {
                     </For>
                 </div>
             </DocumentSection>
-            <DocumentSection aria-labelledby="ama-answers-heading">
+            <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
                 <SectionHeading id="ama-answers-heading">answers</SectionHeading>
                 <AmaTranscript entries={entries()} />
             </DocumentSection>
