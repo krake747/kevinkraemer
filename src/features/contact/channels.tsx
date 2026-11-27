@@ -1,5 +1,6 @@
 import { site } from "@core/site/site-meta"
 import { DocumentSection, SectionHeading } from "@pattern/section"
+import { Anchor, type AnchorTarget } from "@ui/anchor"
 import { cva } from "@ui/cva.config"
 import { ArrowUpRightIcon } from "@ui/icon"
 import { For, Show } from "solid-js"
@@ -75,6 +76,7 @@ type Channel = {
     note: string
     action: string
     primary: boolean
+    rel?: string
 } & ({ kind: "email"; address: string } | { kind: "external" })
 
 const CHANNELS: Channel[] = [
@@ -93,6 +95,7 @@ const CHANNELS: Channel[] = [
         href: site.socials.github,
         note: "Code and open source",
         action: "browse code",
+        rel: "me",
         primary: false,
     },
     {
@@ -101,23 +104,14 @@ const CHANNELS: Channel[] = [
         href: site.socials.linkedin,
         note: "The formal career history",
         action: "career",
+        rel: "me",
         primary: false,
     },
 ]
 
-function linkAttrs(channel: Channel): { target?: "_blank"; rel?: string } {
-    switch (channel.kind) {
-        case "email": {
-            return {}
-        }
-        case "external": {
-            return { target: "_blank", rel: "me noopener noreferrer" }
-        }
-        default: {
-            const exhaustive: never = channel
-            return exhaustive
-        }
-    }
+const CHANNEL_TARGETS: Record<Channel["kind"], AnchorTarget> = {
+    email: { kind: "internal" },
+    external: { kind: "external" },
 }
 
 export function ContactChannels() {
@@ -127,13 +121,12 @@ export function ContactChannels() {
             <ul class="grid border border-stone-300 md:grid-cols-3 dark:border-stone-700">
                 <For each={CHANNELS}>
                     {(channel) => {
-                        const attrs = linkAttrs(channel)
                         return (
                             <li class="border-t border-stone-300 first:border-t-0 md:border-t-0 md:border-l md:first:border-l-0 dark:border-stone-700">
-                                <a
+                                <Anchor
                                     href={channel.href}
-                                    target={attrs.target}
-                                    rel={attrs.rel}
+                                    target={CHANNEL_TARGETS[channel.kind]}
+                                    rel={channel.rel}
                                     class={contactCell({ primary: channel.primary })}
                                 >
                                     <div>
@@ -149,12 +142,9 @@ export function ContactChannels() {
                                     </div>
                                     <span class={contactAction({ primary: channel.primary })}>
                                         {channel.action}
-                                        <Show when={channel.kind === "external"}>
-                                            <span class="sr-only"> (opens in a new tab)</span>
-                                        </Show>
                                         <ArrowUpRightIcon class={contactArrow({ primary: channel.primary })} />
                                     </span>
-                                </a>
+                                </Anchor>
                             </li>
                         )
                     }}
