@@ -20,7 +20,7 @@ export function CommandPaletteRowItem(props: VoidProps<{ row: CommandPaletteRow 
             <Show when={props.row.icon}>
                 {(icon) => {
                     const Icon = dynamic(icon)
-                    return <Icon class="size-4 shrink-0 opacity-70" />
+                    return <Icon class="size-3.5 shrink-0 opacity-70" />
                 }}
             </Show>
             <span class="min-w-0 flex-1 truncate">

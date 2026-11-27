@@ -54,7 +54,7 @@ export function CommandPalette() {
                 }}
                 class={cx("hit-area-x-3 hit-area-y-3 flex items-center gap-1.5", anchor({ variant: "subtle" }))}
             >
-                <SearchIcon class="size-4 opacity-70" />
+                <SearchIcon class="size-3 opacity-70" />
                 <Kbd>{shortcutHint().label}</Kbd>
             </button>
             <Show when={mounted()}>

@@ -57,7 +57,7 @@ const contactAction = cva({
 })
 
 const contactArrow = cva({
-    base: "size-4 shrink-0 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:-translate-y-0.5 group-hover:pointer-fine:translate-x-0.5",
+    base: "size-3 shrink-0 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:-translate-y-0.5 group-hover:pointer-fine:translate-x-0.5",
     variants: {
         primary: {
             true: "text-emerald-400",

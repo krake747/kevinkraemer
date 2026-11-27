@@ -55,7 +55,7 @@ export function CvProjects(props: VoidProps<{ id: string }>) {
                                                 aria-label={`${project.name} (opens in new tab)`}
                                                 class="inline-flex"
                                             >
-                                                <ArrowUpRightIcon class="size-3" />
+                                                <ArrowUpRightIcon class="size-4" />
                                             </Anchor>
                                         )}
                                     </Show>
