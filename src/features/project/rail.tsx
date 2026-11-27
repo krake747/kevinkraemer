@@ -1,6 +1,7 @@
 import type { Project } from "@core/content/model"
 import { ProjectMetadata } from "@features/project/metadata"
 import { PanelLabel } from "@pattern/section"
+import { Anchor } from "@ui/anchor"
 import { For, type VoidProps } from "solid-js"
 
 const RAIL_TOC = [
@@ -23,12 +24,9 @@ export function ProjectRail(props: VoidProps<{ project: Project }>) {
                     <For each={RAIL_TOC}>
                         {(item) => (
                             <li>
-                                <a
-                                    href={item.href}
-                                    class="text-stone-600 transition-colors hover:text-emerald-700 dark:text-stone-400 dark:hover:text-emerald-400"
-                                >
+                                <Anchor href={item.href} variant="subtle" class="text-sm">
                                     {item.label}
-                                </a>
+                                </Anchor>
                             </li>
                         )}
                     </For>
