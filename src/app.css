@@ -199,6 +199,14 @@
         @apply bg-stone-50 text-pretty text-stone-800 antialiased dark:bg-stone-950 dark:text-stone-200;
     }
 
+    a,
+    button,
+    summary,
+    [role="button"] {
+        -webkit-tap-highlight-color: transparent;
+        touch-action: manipulation;
+    }
+
     h1,
     h2,
     h3,

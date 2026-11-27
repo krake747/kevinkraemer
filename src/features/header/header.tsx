@@ -16,7 +16,7 @@ export function Header() {
     return (
         <header
             data-pagefind-ignore
-            class="fixed top-0 right-0 left-0 z-40 h-(--header-h) border-b border-stone-200 bg-stone-50/95 backdrop-blur-sm dark:border-stone-800 dark:bg-stone-950/95 print:hidden"
+            class="fixed top-0 right-0 left-0 z-40 h-[calc(var(--header-h)+env(safe-area-inset-top))] border-b border-stone-200 bg-stone-50/95 pt-[env(safe-area-inset-top)] backdrop-blur-sm dark:border-stone-800 dark:bg-stone-950/95 print:hidden"
         >
             <div class="flex h-full max-w-full items-stretch text-sm">
                 <div class="relative flex shrink-0 items-center gap-2 border-r border-stone-200 px-3 sm:px-4 dark:border-stone-800">

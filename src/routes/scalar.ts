@@ -17,7 +17,7 @@ function htmlDocument(): string {
     <head>
         <script>${themeScript}</script>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
         <meta name="color-scheme" content="light dark" />
         <meta name="description" content="${description}" />
         <link rel="canonical" href="${canonical}" />

@@ -3,7 +3,7 @@ import { cva, cx, type VariantProps } from "@ui/cva.config"
 import { omit } from "solid-js"
 
 const button = cva({
-    base: "hit-area-x-2 hit-area-y-3.5 font-mono text-xs transition-[color,background-color,border-color,scale] duration-150 ease-out-quart active:scale-97",
+    base: "hit-area-x-2 hit-area-y-3.5 font-mono text-xs transition-[color,background-color,border-color,scale] duration-150 ease-out-quart active:scale-97 select-none [-webkit-touch-callout:none]",
     variants: {
         intent: {
             quiet: "text-stone-600 hover:text-stone-900 dark:text-stone-400 dark:hover:text-stone-100",
