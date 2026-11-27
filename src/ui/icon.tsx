@@ -81,6 +81,27 @@ export function SunIcon(props: IconProps) {
     return <KeylineSun {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />
 }
 
+export function SunMoonIcon(props: IconProps) {
+    const rest = omit(props, "children", "aria-hidden")
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            {...rest}
+            aria-hidden={props["aria-hidden"] ?? "true"}
+        >
+            <path d="M9 8C5.134 8 2 11.134 2 15C2 18.866 5.134 22 9 22C12.866 22 16 18.866 16 15C15.1345 15.6491 14.0819 16 13 16C10.2386 16 8 13.7614 8 11C8 9.9181 8.3509 8.8655 9 8ZM13 4.5V2M17.5962 6.4038L19.364 4.636M19.5 11H22" />
+        </svg>
+    )
+}
+
 export function ZapIcon(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
     return <KeylineZap {...rest} aria-hidden={props["aria-hidden"] ?? "true"} />

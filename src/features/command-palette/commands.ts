@@ -1,7 +1,7 @@
 import { NAV_ENTRIES } from "@core/site/navigation"
 import { site } from "@core/site/site-meta"
 import { RSS_PATH } from "@core/site/urls"
-import { BriefcaseBusinessIcon, CodeXmlIcon, DownloadIcon, MailIcon, MoonIcon, RssIcon } from "@ui/icon"
+import { BriefcaseBusinessIcon, CodeXmlIcon, DownloadIcon, MailIcon, RssIcon, SunMoonIcon } from "@ui/icon"
 import type { Component } from "solid-js"
 
 export type CommandPaletteActionId = "toggle-theme" | "copy-email" | "download-cv"
@@ -38,7 +38,7 @@ const ACTION_COMMANDS = [
         id: "toggle-theme",
         label: "toggle theme",
         keywords: ["theme", "dark", "light", "mode"],
-        icon: MoonIcon,
+        icon: SunMoonIcon,
     },
     {
         kind: "action",
