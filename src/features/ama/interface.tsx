@@ -129,6 +129,10 @@ export function AmaInterface() {
                             </form>
                         </search>
                     </DocumentSection>
+                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
+                        <SectionHeading id="ama-answers-heading">answers</SectionHeading>
+                        <AmaTranscript entries={entries()} />
+                    </DocumentSection>
                     <DocumentSection aria-labelledby="ama-topics-heading">
                         <SectionHeading id="ama-topics-heading">topics</SectionHeading>
                         <ul class="flex flex-col gap-2">
@@ -158,10 +162,6 @@ export function AmaInterface() {
                                 )}
                             </For>
                         </ul>
-                    </DocumentSection>
-                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
-                        <SectionHeading id="ama-answers-heading">answers</SectionHeading>
-                        <AmaTranscript entries={entries()} />
                     </DocumentSection>
                 </div>
             </RegisterWithRailMain>
