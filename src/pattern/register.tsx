@@ -88,16 +88,29 @@ const railMain = cva({
     },
 })
 
+const railGrid = cva({
+    base: "grid gap-8",
+    variants: {
+        width: {
+            narrow: "lg:grid-cols-[minmax(0,1fr)_15rem]",
+            wide: "lg:grid-cols-[minmax(0,1fr)_18rem]",
+        },
+    },
+    defaultVariants: {
+        width: "narrow",
+    },
+})
+
+type RegisterWithRailProps = ComponentProps<"div"> & VariantProps<typeof railMain> & VariantProps<typeof railGrid>
+
 const RegisterWithRailSpacing = createContext<() => VariantProps<typeof railMain>["spacing"]>(() => undefined)
 
-type RegisterWithRailProps = ComponentProps<"div"> & VariantProps<typeof railMain>
-
 export function RegisterWithRail(props: RegisterWithRailProps) {
-    const rest = omit(props, "class", "children", "spacing")
+    const rest = omit(props, "class", "children", "spacing", "width")
     const spacing = (): VariantProps<typeof railMain>["spacing"] => props.spacing
     return (
         <RegisterWithRailSpacing value={spacing}>
-            <div {...rest} class={cx("grid gap-8 lg:grid-cols-[minmax(0,1fr)_15rem]", props.class)}>
+            <div {...rest} class={cx(railGrid({ width: props.width, class: props.class }))}>
                 {props.children}
             </div>
         </RegisterWithRailSpacing>

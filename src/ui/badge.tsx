@@ -13,7 +13,6 @@ const badge = cva({
         },
         size: {
             sm: "px-2 py-0.5 text-xs",
-            xs: "px-1.5 py-0.5 text-[11px]/none",
         },
         interactive: {
             true: "hit-area-x-1 hit-area-y-3",

@@ -47,6 +47,20 @@ describe("the project entry", () => {
         expect(section?.querySelectorAll("p")).toHaveLength(2)
     })
 
+    it("renders the rail meta and table of contents", () => {
+        const view = mounted()
+        const rail = view.querySelector('aside[aria-labelledby="project-rail-label"]')
+        expect(rail).not.toBeNull()
+        expect(rail?.textContent).toContain("Design and build")
+        const links = [...(rail?.querySelectorAll('nav[aria-label="On this page"] a') ?? [])]
+        expect(links.map((link) => link.getAttribute("href"))).toEqual([
+            "#problem-heading",
+            "#decisions-heading",
+            "#implementation-heading",
+            "#tradeoffs-heading",
+        ])
+    })
+
     it("omits sections with no entries", () => {
         const sparse: Project = {
             ...project,

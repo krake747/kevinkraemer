@@ -19,8 +19,8 @@ index is never a miniature of the detail pages.
 
 **Case File.** The index is an editorial register, not a card grid and not a spreadsheet: one entry
 per project, divided by a single rule, with the name at display size and at most one sourced figure.
-It still has to read as a register with one entry, not an empty gallery. The case page is a 70ch
-document with a metadata stack of record rows and mid-level headings.
+It still has to read as a register with one entry, not an empty gallery. The case page is a document
+with a sticky case-file rail: meta and section index on the side, prose in the measure.
 
 ## How it differs from sibling pages
 
@@ -55,16 +55,17 @@ document with a metadata stack of record rows and mid-level headings.
 ### Case page (`/projects/[slug]`)
 
 - `DetailPage` wrapping `ProjectEntry`, inside the layout that stretches to fill the viewport so the
-  footer stays at the bottom: reading column `max-w-prose` on the `article` itself.
-- One `TerminalCommandHeader` `cat {id}.md`, `PageHeaderTitle` at `text-2xl`, mono tagline, then
-  metadata as a `Stack` rendered as a `dl` of `RecordRow`s (record rows, no row hover; links inside
-  keep their own hover): role, stack, status (and year), live, and repo when a public URL exists.
-  The tagline is not repeated as a What row.
+  footer stays at the bottom: reading column `max-w-4xl` on the `article` itself.
+- One `TerminalCommandHeader` `cat {id}.md`, `PageHeaderTitle` at `text-2xl`, mono tagline, then the
+  case file in a `RegisterWithRail` with `width="wide"` (an `18rem` rail): the main column holds the
+  sections, the sticky rail holds stacked label-above-value meta (stack as static neutral `Badge`s)
+  plus an on-this-page index. The tagline is not repeated as a What row. Below `lg` the rail hides
+  and the meta renders inline as the record-row `Stack` above the sections.
 - Then sections with a real mid-level heading step (`h2`, Geist `text-xl` semibold), not only 12px
   mono `TerminalCommandHeader` or `SectionHeading`: problem and point of view; key decisions (each
-  title plus reason in a record `StackRow`); technical implementation (one prose paragraph);
-  challenges and trade-offs (same record rows as decisions). Metadata rows stay the single home for
-  links: live site and repo are not repeated further down the page.
+  title plus reason in a record `StackRow`); technical implementation (one prose paragraph per
+  entry); challenges and trade-offs (same record rows as decisions). Metadata rows stay the single
+  home for links: live site and repo are not repeated further down the page.
 - A muted back link to `/projects`. Breadcrumbs for Home / Projects / name.
 
 ## Type & colour accents
@@ -81,8 +82,8 @@ document with a metadata stack of record rows and mid-level headings.
 
 ## Signature component
 
-The metadata `Stack` of record `StackRow`s at the top of the case page, and the index entry: rule,
-display-size name, status line, one Headline Figure in the rail, tagline on the measure.
+The sticky case-file rail beside the case page sections, and the index entry: rule, display-size
+name, status line, one Headline Figure in the identity rail, tagline on the measure.
 
 ## Motion
 
