@@ -1,7 +1,7 @@
 import { CvBullets } from "@features/cv/bullets"
 import { CvDates } from "@features/cv/dates"
 import { CvRole } from "@features/cv/role"
-import { CvRowHeader } from "@features/cv/row-header"
+import { CvRowHeader, CvRowHeaderMeta, CvRowHeaderTitle } from "@features/cv/row-header"
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack, StackRow } from "@pattern/stack"
@@ -54,7 +54,10 @@ export function CvEducation(props: VoidProps<{ id: string }>) {
                 <For each={EDUCATION_ENTRIES}>
                     {(item) => (
                         <StackRow render={(renderProps) => <article {...renderProps} />} class="break-inside-avoid">
-                            <CvRowHeader title={item.institution} meta={item.location} />
+                            <CvRowHeader>
+                                <CvRowHeaderTitle>{item.institution}</CvRowHeaderTitle>
+                                <CvRowHeaderMeta>{item.location}</CvRowHeaderMeta>
+                            </CvRowHeader>
                             <CvRole>{item.degree}</CvRole>
                             <CvDates
                                 period={{ kind: "past", start: item.startDate, end: item.endDate }}
