@@ -54,7 +54,7 @@ export function AmaTranscript(props: {
             >
                 <For each={props.entries}>
                     {(entry) => (
-                        <StackRow size="relaxed" data-ama-entry={entry.id}>
+                        <StackRow size="default" data-ama-entry={entry.id}>
                             <div class="flex items-start justify-between gap-4">
                                 <p class="min-w-0 flex-1 font-mono text-sm text-stone-900 dark:text-stone-100">
                                     <span aria-hidden="true" class="text-emerald-700 dark:text-emerald-400">
@@ -75,7 +75,7 @@ export function AmaTranscript(props: {
                             </div>
                             <Switch>
                                 <Match when={entry.status === "loading"}>
-                                    <output class="mt-4 block font-mono text-xs text-stone-600 dark:text-stone-400">
+                                    <output class="mt-3 block font-mono text-xs text-stone-600 dark:text-stone-400">
                                         Reading published pages...
                                     </output>
                                 </Match>
@@ -84,7 +84,7 @@ export function AmaTranscript(props: {
                                         <>
                                             <Show when={ready().answer.summary}>
                                                 {(summary) => (
-                                                    <p class="mt-4 max-w-prose text-base/[1.8] text-stone-600 dark:text-stone-400">
+                                                    <p class="mt-3 max-w-prose text-base/[1.8] text-stone-600 dark:text-stone-400">
                                                         {summary()}
                                                     </p>
                                                 )}
@@ -109,7 +109,7 @@ export function AmaTranscript(props: {
                                 <Match when={entry.status === "failed" ? entry : undefined}>
                                     {(failed) => (
                                         <>
-                                            <p class="mt-4 font-mono text-sm text-stone-700 dark:text-stone-300">
+                                            <p class="mt-3 font-mono text-sm text-stone-700 dark:text-stone-300">
                                                 {failed().detail}
                                             </p>
                                             <Show when={failed().hint}>
