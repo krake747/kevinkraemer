@@ -145,8 +145,8 @@ export function AmaInterface() {
                     <div class="lg:hidden">
                         <DisclosureRow>
                             <DisclosureRowSummary>
-                                <span class="group-open:hidden">+ topics</span>
-                                <span class="hidden group-open:inline">− topics</span>
+                                <span class="group-open:hidden">+ questions</span>
+                                <span class="hidden group-open:inline">− questions</span>
                             </DisclosureRowSummary>
                             <DisclosureRowBody>
                                 <AmaTopics
@@ -206,9 +206,9 @@ export function AmaInterface() {
                     </DocumentSection>
                 </div>
             </RegisterWithRailMain>
-            <RegisterWithRailRail labelledby="ama-topics-label">
+            <RegisterWithRailRail labelledby="ama-questions-label">
                 <div>
-                    <SectionHeading id="ama-topics-label">topics</SectionHeading>
+                    <SectionHeading id="ama-questions-label">questions</SectionHeading>
                     <AmaTopics
                         busy={busy()}
                         onSelect={(question) => {

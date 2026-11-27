@@ -47,7 +47,7 @@ export function AmaTranscript(props: {
                             Ask anything about the site. Answers come only from published pages and list sources.
                         </p>
                         <p class="mt-2 font-mono text-xs text-stone-600 dark:text-stone-400">
-                            Start with a suggested topic, or type your own.
+                            Start with a suggested question, or type your own.
                         </p>
                     </StackRow>
                 }
