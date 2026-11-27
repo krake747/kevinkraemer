@@ -1,7 +1,6 @@
 import solid from "@solidjs/vite-plugin"
 import tailwindcss from "@tailwindcss/vite"
 import { fileRoutes } from "filesystem-routing/vite"
-import Icons from "unplugin-icons/vite"
 import { defineConfig, lazyPlugins } from "vite-plus"
 
 export default defineConfig({
@@ -200,7 +199,6 @@ export default defineConfig({
         }),
         fileRoutes({ httpMethods: true }),
         tailwindcss(),
-        Icons({ compiler: "solid", scale: 1 }),
     ]),
     resolve: { tsconfigPaths: true },
     optimizeDeps: { exclude: ["@ui-sdk/core"] },
