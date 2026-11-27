@@ -12,7 +12,8 @@ Solve work down this list and stop at the first rung that can settle the questio
 
 1. The narrowest unit test that would fail if the claim were false, or `pnpm lint:ts`.
 2. `pnpm fmt:ci`, `pnpm lint`, `pnpm check:docs` on the touched paths.
-3. `pnpm preview` plus `scripts/probe.mts` against it.
+3. `vpr generate && vp build` to settle bundling without prerender, functions, or search index.
+4. `pnpm preview` plus `scripts/probe.mts` against it.
 
 If a visual claim can be pinned as a unit test, write the test: it is cheaper and it stays.
 
