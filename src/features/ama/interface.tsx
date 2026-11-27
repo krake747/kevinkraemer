@@ -175,7 +175,16 @@ export function AmaInterface() {
             <RegisterWithRailMain>
                 <div class="flex flex-col gap-10">
                     <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={busy() ? "true" : undefined}>
-                        <SectionHeading id="ama-answers-heading">answers</SectionHeading>
+                        <div class="mb-4 flex items-center justify-between">
+                            <SectionHeading id="ama-answers-heading" class="mb-0">
+                                answers
+                            </SectionHeading>
+                            <Show when={entries().length > 0}>
+                                <Button class="shrink-0" onClick={clear}>
+                                    clear
+                                </Button>
+                            </Show>
+                        </div>
                         <AmaTranscript entries={entries()} onRetry={retry} onDismiss={dismiss} />
                     </DocumentSection>
                     <div class="lg:hidden">
@@ -216,15 +225,10 @@ export function AmaInterface() {
                                     <InputPrompt />
                                 </Input>
                                 <div class="flex items-center justify-end gap-1 sm:shrink-0">
-                                    <Show when={entries().length > 0}>
-                                        <Button class="shrink-0" onClick={clear}>
-                                            clear
-                                        </Button>
-                                    </Show>
                                     <button
                                         type="submit"
                                         disabled={busy()}
-                                        class="hit-area-x-2 hit-area-y-3.5 min-w-20 shrink-0 text-center font-mono text-xs text-emerald-800 transition-[color,background-color,border-color,scale] duration-150 ease-out-quart hover:text-emerald-700 active:scale-97 disabled:opacity-50 dark:text-emerald-400 dark:hover:text-emerald-300"
+                                        class="hit-area-x-2 hit-area-y-3.5 shrink-0 font-mono text-xs text-emerald-800 transition-[color,background-color,border-color,scale] duration-150 ease-out-quart hover:text-emerald-700 active:scale-97 disabled:opacity-50 dark:text-emerald-400 dark:hover:text-emerald-300"
                                     >
                                         <Show when={busy()} fallback="ask">
                                             asking...
