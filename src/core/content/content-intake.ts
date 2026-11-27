@@ -1,5 +1,7 @@
 import * as v from "valibot"
 
+import { PROJECT_CATEGORIES } from "./project-category.ts"
+
 export const CONTENT_BUNDLE_VERSION = 1
 
 export const LogEntrySchema = v.object({
@@ -51,7 +53,7 @@ export const UsesSchema = v.object({
 export const ProjectSchema = v.object({
     name: v.pipe(v.string(), v.minLength(1), v.maxLength(100)),
     tagline: v.pipe(v.string(), v.minLength(1), v.maxLength(300)),
-    category: v.optional(v.picklist(["site", "tool", "service"])),
+    category: v.optional(v.picklist(PROJECT_CATEGORIES)),
     featured: v.optional(v.boolean(), false),
     status: v.pipe(v.string(), v.minLength(1), v.maxLength(50)),
     year: v.optional(v.pipe(v.number(), v.integer())),

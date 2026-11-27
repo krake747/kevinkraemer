@@ -30,7 +30,7 @@ function isCodeSpecifier(specifier) {
 }
 
 function isAllowlisted(filename) {
-    return filename.endsWith("src/core/site/problem.ts")
+    return filename.endsWith("src/core/site/problem.ts") || filename.endsWith("src/core/content/content-intake.ts")
 }
 
 export const aliasImports = defineRule({

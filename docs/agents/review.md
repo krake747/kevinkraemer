@@ -79,8 +79,8 @@ component is the smell.
 
 Why `@scope/*` aliases shorten paths and survive moves. Solve import via the `@scope/*` aliases
 defined in `tsconfig.json`: every module import in `src` uses one, even within a single folder; keep
-`netlify/edge-functions/**` on relative imports only, no `@` alias. The one edge-bundle exception
-lives in `architecture.md`. Enforced by `kk/alias-imports` and the Fallow pack `edge-no-aliases`.
+`netlify/edge-functions/**` on relative imports only, no `@` alias. The alias exceptions live in
+`architecture.md`. Enforced by `kk/alias-imports` and the Fallow pack `edge-no-aliases`.
 Orchestrator and chrome leaves may import across features; do not treat those as boundary
 violations.
 

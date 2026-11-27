@@ -18,7 +18,9 @@ down to `pattern`; never import across `features` when `pattern` fits. One excep
 the edge bundle imports joins the edge rule for its own imports, since the edge bundler resolves no
 aliases (`src/core/site/problem.ts` imports `./api-version.ts`, see
 `docs/adr/0004-edge-negotiation-conversion.md`). Keep the exception to modules the edge tree
-actually imports.
+actually imports. A second exception: a `src` module a Node script loads without the alias loader
+also uses relative imports (`src/core/content/content-intake.ts` imports `./project-category.ts`,
+loaded by `scripts/content.ts`).
 
 ## Keep `src/ui` Solid only
 
