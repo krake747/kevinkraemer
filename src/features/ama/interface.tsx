@@ -4,7 +4,7 @@ import { AmaTopics } from "@features/ama/topics"
 import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
 import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
-import { DocumentSection, SectionHeading } from "@pattern/section"
+import { DocumentSection, PanelLabel, SectionHeading } from "@pattern/section"
 import { createMediaQuery } from "@solid-primitives/media"
 import { useSearchParams } from "@solidjs/router"
 import { Button } from "@ui/button"
@@ -200,7 +200,7 @@ export function AmaInterface() {
                                     onInput={(event) => {
                                         setInput(event.currentTarget.value)
                                     }}
-                                    placeholder="What do you want to know?"
+                                    placeholder="Ask the site…"
                                     aria-label="Your question"
                                     autocomplete="off"
                                     spellcheck={false}
@@ -232,7 +232,7 @@ export function AmaInterface() {
             </RegisterWithRailMain>
             <RegisterWithRailRail labelledby="ama-questions-label">
                 <div>
-                    <SectionHeading id="ama-questions-label">questions</SectionHeading>
+                    <PanelLabel id="ama-questions-label">questions</PanelLabel>
                     <AmaTopics busy={busy()} onSelect={submitTopic} />
                 </div>
             </RegisterWithRailRail>

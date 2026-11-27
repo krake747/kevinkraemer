@@ -1,7 +1,14 @@
 import type { AmaAnswer } from "@features/ama/client"
 import { createCopyFeedback } from "@pattern/create-copy-feedback"
-import { StackRow } from "@pattern/stack"
-import { Anchor } from "@ui/anchor"
+import {
+    EmptyRegister,
+    EmptyRegisterNote,
+    EmptyRegisterTitle,
+    RegisterRow,
+    RegisterRowDescription,
+    RegisterRowTitle,
+} from "@pattern/register"
+import { Stack, StackRow } from "@pattern/stack"
 import { Button } from "@ui/button"
 import { XIcon } from "@ui/icon"
 import { For, Match, Show, Switch } from "solid-js"
@@ -42,14 +49,12 @@ export function AmaTranscript(props: {
             <Show
                 when={props.entries.length > 0}
                 fallback={
-                    <StackRow size="roomy">
-                        <p class="font-mono text-sm text-stone-700 dark:text-stone-300">
+                    <EmptyRegister>
+                        <EmptyRegisterTitle>
                             Ask anything about the site. Answers come only from published pages and list sources.
-                        </p>
-                        <p class="mt-2 font-mono text-xs text-stone-600 dark:text-stone-400">
-                            Start with a suggested question, or type your own.
-                        </p>
-                    </StackRow>
+                        </EmptyRegisterTitle>
+                        <EmptyRegisterNote>Start with a suggested question, or type your own.</EmptyRegisterNote>
+                    </EmptyRegister>
                 }
             >
                 <For each={props.entries}>
@@ -91,20 +96,21 @@ export function AmaTranscript(props: {
                                                     </p>
                                                 )}
                                             </Show>
-                                            <ul class="mt-4 flex flex-col gap-3">
+                                            <Stack render={(list) => <ul {...list} />} class="mt-4">
                                                 <For each={ready().answer.sources}>
                                                     {(source) => (
-                                                        <li class="min-w-0">
-                                                            <Anchor href={source.path} variant="muted">
-                                                                {source.title}
-                                                            </Anchor>
-                                                            <span class="mt-1 block text-sm/relaxed text-stone-600 dark:text-stone-400">
+                                                        <RegisterRow
+                                                            render={(row) => <li {...row} />}
+                                                            href={source.path}
+                                                        >
+                                                            <RegisterRowTitle>{source.title}</RegisterRowTitle>
+                                                            <RegisterRowDescription lines={2}>
                                                                 {source.description}
-                                                            </span>
-                                                        </li>
+                                                            </RegisterRowDescription>
+                                                        </RegisterRow>
                                                     )}
                                                 </For>
-                                            </ul>
+                                            </Stack>
                                         </>
                                     )}
                                 </Match>
