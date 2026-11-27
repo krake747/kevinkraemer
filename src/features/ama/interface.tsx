@@ -200,7 +200,7 @@ export function AmaInterface() {
                                     onInput={(event) => {
                                         setInput(event.currentTarget.value)
                                     }}
-                                    placeholder="Ask the site…"
+                                    placeholder="Ask the site..."
                                     aria-label="Your question"
                                     autocomplete="off"
                                     spellcheck={false}
