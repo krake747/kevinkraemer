@@ -7,7 +7,7 @@ type ToolText = {
     text: string
 }
 
-export type AskToolResult = {
+export type McpAskToolResult = {
     content: ToolText[]
     isError?: boolean
 }
@@ -16,8 +16,8 @@ function text(value: string): ToolText {
     return { type: "text", text: value }
 }
 
-export function createAskTool(ask: Ask) {
-    return async (args: AskRequestInput, signal: AbortSignal): Promise<AskToolResult> => {
+export function createMcpAskTool(ask: Ask) {
+    return async (args: AskRequestInput, signal: AbortSignal): Promise<McpAskToolResult> => {
         const result = await ask(args, signal)
         return result.match({
             ok: (answer) => ({ content: [text(JSON.stringify(answer))] }),

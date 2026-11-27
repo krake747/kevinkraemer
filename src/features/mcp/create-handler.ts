@@ -2,9 +2,9 @@ import { createAsk } from "@core/ask/create-ask"
 import type { AskRequestInput } from "@core/ask/request"
 import { tapeResult } from "@core/ask/tape-data"
 import { apiVersion } from "@core/site/api-version"
-import { askInputSchema } from "@features/mcp/ask-schema"
-import { createAskTool } from "@features/mcp/ask-tool"
-import { askToolAnnotations, askToolDescription, askToolTitle } from "@features/mcp/ask-tool-metadata"
+import { mcpAskInputSchema } from "@features/mcp/ask-schema"
+import { createMcpAskTool } from "@features/mcp/ask-tool"
+import { mcpAskToolAnnotations, mcpAskToolDescription, mcpAskToolTitle } from "@features/mcp/ask-tool-metadata"
 import { listResources, readResource } from "@features/mcp/resources"
 import {
     McpServer,
@@ -29,7 +29,7 @@ export function createMcpHandler(env: unknown): (request: Request) => Promise<Re
             throw error
         },
     })
-    const askTool = createAskTool(createAsk({ tape: tapeResult, env }))
+    const askTool = createMcpAskTool(createAsk({ tape: tapeResult, env }))
 
     const createServer: McpServerFactory = async () => {
         const server = new McpServer({ name: serverName, version: apiVersion } satisfies Implementation, {
@@ -46,10 +46,10 @@ export function createMcpHandler(env: unknown): (request: Request) => Promise<Re
         server.registerTool(
             "ask",
             {
-                title: askToolTitle,
-                description: askToolDescription,
-                inputSchema: askInputSchema,
-                annotations: askToolAnnotations,
+                title: mcpAskToolTitle,
+                description: mcpAskToolDescription,
+                inputSchema: mcpAskInputSchema,
+                annotations: mcpAskToolAnnotations,
             },
             async (args: AskRequestInput, ctx: ServerContext) => askTool(args, ctx.mcpReq.signal),
         )
