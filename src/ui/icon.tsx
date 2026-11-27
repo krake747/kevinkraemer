@@ -17,7 +17,7 @@ import KeylineMoon from "~icons/keyline-icons/moon"
 import KeylineRss from "~icons/keyline-icons/rss"
 import KeylineSearch from "~icons/keyline-icons/search"
 import KeylineSun from "~icons/keyline-icons/sun"
-import KeylineZap from "~icons/keyline-icons/zap-duotone"
+import KeylineZap from "~icons/keyline-icons/zap-two-tone"
 
 type IconProps = VoidProps<ComponentProps<"svg">>
 
