@@ -29,11 +29,11 @@ export function LogEntry(props: VoidProps<{ detail: LogDetail }>) {
                         <div class="mt-4">
                             <div class="flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-xs text-stone-600 tabular-nums dark:text-stone-400">
                                 <span class="flex items-center gap-1.5">
-                                    <FileTextIcon class="size-3 shrink-0" />
+                                    <FileTextIcon class="size-3.5 shrink-0" />
                                     {formatDateLong(entry().date)}
                                 </span>{" "}
                                 <span class="flex items-center gap-1.5">
-                                    <ClockIcon class="size-3 shrink-0" />
+                                    <ClockIcon class="size-3.5 shrink-0" />
                                     {getReadTime(entry().body)}
                                 </span>{" "}
                                 <span class="text-stone-600 dark:text-stone-400">

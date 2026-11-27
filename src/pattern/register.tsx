@@ -169,7 +169,7 @@ export function ReturnToRegister(props: ParentProps<{ href: string; class?: stri
             variant="muted"
             class={cx("hit-area-y-2 inline-flex items-center gap-1.5", props.class)}
         >
-            <ChevronLeftIcon class="size-3 shrink-0" />
+            <ChevronLeftIcon class="size-3.5 shrink-0" />
             {props.children}
         </Anchor>
     )

@@ -19,7 +19,7 @@ export function LogSubscribe() {
 
     return (
         <span data-subscribe class="inline-flex items-center gap-1.5 font-mono text-xs">
-            <RssIcon class="size-3 text-emerald-600 dark:text-emerald-400" />
+            <RssIcon class="size-3.5 text-emerald-600 dark:text-emerald-400" />
             <Anchor href={RSS_PATH} variant="prose" rel="external">
                 rss
             </Anchor>{" "}
