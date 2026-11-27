@@ -1,5 +1,6 @@
 import { ASK_QUESTION_MAX_LENGTH } from "@core/ask/request"
 import { buildTape } from "@core/ask/tape"
+import { siteContent } from "@core/content/site-content"
 import { catalogEntries } from "@core/site/catalog"
 import { AMA_QUESTIONS } from "@features/ama/questions"
 import { describe, expect, it } from "vite-plus/test"
@@ -15,12 +16,16 @@ function tokens(text: string): Set<string> {
     )
 }
 
-const vocabulary = new Set(
-    buildTape(() => "")(catalogEntries).flatMap((print) => [
+const vocabulary = new Set([
+    ...buildTape(() => "")(catalogEntries).flatMap((print) => [
         ...tokens(`${print.title} ${print.description}`),
         ...print.path.toLowerCase().split(/[^a-z0-9]+/),
     ]),
-)
+    ...siteContent.logs.flatMap((entry) => [
+        ...tokens(`${entry.title} ${entry.description}`),
+        ...entry.id.split(/[^a-z0-9]+/),
+    ]),
+])
 
 describe("the suggested questions", () => {
     it("names six distinct askable questions", () => {

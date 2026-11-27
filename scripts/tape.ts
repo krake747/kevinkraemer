@@ -4,7 +4,8 @@ import { mkdir, writeFile } from "node:fs/promises"
 import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 
-import { buildTape, TAPE_VERSION } from "@core/ask/tape"
+import { buildTape, TAPE_VERSION, type TapePrint } from "@core/ask/tape"
+import { siteContent } from "@core/content/site-content"
 import { catalogEntries } from "@core/site/catalog"
 import { site } from "@core/site/site-meta"
 
@@ -114,7 +115,15 @@ function contentFor(path: string): string {
     return ""
 }
 
-const prints = buildTape(contentFor)(catalogEntries)
+const prints: TapePrint[] = [
+    ...buildTape(contentFor)(catalogEntries),
+    ...siteContent.logs.map((entry) => ({
+        path: `/logs/${entry.id}`,
+        title: entry.title,
+        description: entry.description,
+        content: entry.body === "" ? entry.description : entry.body,
+    })),
+]
 
 await mkdir(fileURLToPath(new URL("../src/generated/", import.meta.url)), { recursive: true })
 await writeFile(
