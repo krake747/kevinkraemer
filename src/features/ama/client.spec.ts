@@ -54,4 +54,44 @@ describe("asking the site", () => {
             vi.unstubAllGlobals()
         }
     })
+
+    it("falls back when the network fails", async () => {
+        vi.stubGlobal(
+            "fetch",
+            vi.fn(async () => {
+                throw new TypeError("offline")
+            }),
+        )
+        try {
+            const failure = await askSite("What stack powers this site?").then(
+                () => undefined,
+                (error: unknown) => error,
+            )
+            expect(failure).toBeInstanceOf(AmaError)
+            expect(failure instanceof AmaError ? failure.failure.detail : undefined).toBe(
+                "The answer did not arrive. Try again.",
+            )
+        } finally {
+            vi.unstubAllGlobals()
+        }
+    })
+
+    it("falls back on a non-json error body", async () => {
+        vi.stubGlobal(
+            "fetch",
+            vi.fn(async () => new Response("boom", { status: 500 })),
+        )
+        try {
+            const failure = await askSite("What stack powers this site?").then(
+                () => undefined,
+                (error: unknown) => error,
+            )
+            expect(failure).toBeInstanceOf(AmaError)
+            expect(failure instanceof AmaError ? failure.failure.detail : undefined).toBe(
+                "The answer did not arrive. Try again.",
+            )
+        } finally {
+            vi.unstubAllGlobals()
+        }
+    })
 })

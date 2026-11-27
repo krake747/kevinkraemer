@@ -34,10 +34,18 @@ function readFailure(body: unknown): AmaFailure {
 
 export async function askSite(question: string, signal?: AbortSignal): Promise<AmaAnswer> {
     const params = new URLSearchParams({ question, summarize: "true" })
-    const response = await fetch(`/ask?${params.toString()}`, {
-        headers: { Accept: "application/json" },
-        signal,
-    })
+    let response: Response
+    try {
+        response = await fetch(`/ask?${params.toString()}`, {
+            headers: { Accept: "application/json" },
+            signal,
+        })
+    } catch (error) {
+        if (signal?.aborted === true) {
+            throw error
+        }
+        throw new AmaError({ detail: "The answer did not arrive. Try again." })
+    }
     const body: unknown = await response.json().catch(() => undefined)
     if (!response.ok) {
         throw new AmaError(readFailure(body))
