@@ -147,14 +147,14 @@
     @keyframes sendSlide {
         from {
             opacity: 0;
-            transform: translate(-6px, 2px);
+            transform: translate(-2px, 2px);
         }
         30% {
             opacity: 1;
         }
         to {
             opacity: 0;
-            transform: translate(6px, -4px);
+            transform: translate(4px, -10px);
         }
     }
 }
