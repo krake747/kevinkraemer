@@ -45,16 +45,7 @@ export function AmaInterface() {
     let nextId = 1
     let askedFromUrl = false
 
-    async function submit(raw: string): Promise<void> {
-        const question = raw.trim()
-        if (!canAsk(question, pending())) {
-            return
-        }
-        const id = nextId
-        nextId += 1
-        setEntries((current) => [...current, { id, question, status: "loading" }])
-        setInput("")
-        setSearchParams({ q: question })
+    async function runAsk(id: number, question: string): Promise<void> {
         setPending(true)
         try {
             const answer = await askSite(question)
@@ -67,6 +58,31 @@ export function AmaInterface() {
         } finally {
             setPending(false)
         }
+    }
+
+    async function submit(raw: string): Promise<void> {
+        const question = raw.trim()
+        if (!canAsk(question, pending())) {
+            return
+        }
+        const id = nextId
+        nextId += 1
+        setEntries((current) => [...current, { id, question, status: "loading" }])
+        setInput("")
+        setSearchParams({ q: question })
+        await runAsk(id, question)
+    }
+
+    function retry(id: number): void {
+        if (pending()) {
+            return
+        }
+        const entry = entries().find((candidate) => candidate.id === id)
+        if (entry === undefined || entry.status === "loading") {
+            return
+        }
+        setEntries((current) => replaceEntry(current, { id, question: entry.question, status: "loading" }))
+        void runAsk(id, entry.question)
     }
 
     function clear(): void {
@@ -131,7 +147,7 @@ export function AmaInterface() {
                     </DocumentSection>
                     <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
                         <SectionHeading id="ama-answers-heading">answers</SectionHeading>
-                        <AmaTranscript entries={entries()} />
+                        <AmaTranscript entries={entries()} pending={pending()} onRetry={retry} />
                     </DocumentSection>
                     <DocumentSection aria-labelledby="ama-topics-heading">
                         <SectionHeading id="ama-topics-heading">topics</SectionHeading>

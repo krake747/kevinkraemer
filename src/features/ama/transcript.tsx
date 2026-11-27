@@ -1,6 +1,7 @@
 import type { AmaAnswer } from "@features/ama/client"
 import { StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
+import { Button } from "@ui/button"
 import { For, Match, Show, Switch } from "solid-js"
 
 export type AmaEntry =
@@ -8,7 +9,11 @@ export type AmaEntry =
     | { id: number; question: string; status: "ready"; answer: AmaAnswer }
     | { id: number; question: string; status: "failed"; detail: string; hint?: string }
 
-export function AmaTranscript(props: { entries: readonly AmaEntry[] }) {
+export function AmaTranscript(props: {
+    entries: readonly AmaEntry[]
+    pending: boolean
+    onRetry: (id: number) => void
+}) {
     return (
         <div aria-live="polite" aria-atomic="false" class="flex flex-col gap-2">
             <Show
@@ -83,6 +88,18 @@ export function AmaTranscript(props: { entries: readonly AmaEntry[] }) {
                                     )}
                                 </Match>
                             </Switch>
+                            <Show when={entry.status !== "loading"}>
+                                <div class="mt-4 flex items-center gap-4">
+                                    <Button
+                                        intent="muted"
+                                        onClick={() => {
+                                            props.onRetry(entry.id)
+                                        }}
+                                    >
+                                        retry
+                                    </Button>
+                                </div>
+                            </Show>
                         </StackRow>
                     )}
                 </For>
