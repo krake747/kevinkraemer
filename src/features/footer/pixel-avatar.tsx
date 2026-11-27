@@ -36,12 +36,13 @@ const EYES_WINK: readonly Tone[] = ["dark", "mid", "lid", "mid", "open", "dark"]
 const EYES_SHUT: readonly Tone[] = ["dark", "mid", "mid", "mid", "mid", "dark"]
 const MOUTH_FLAT: readonly Tone[] = ["dark", "mid", "mid", "dark", "mid", "dark"]
 const MOUTH_SHUT: readonly Tone[] = ["dark", "mid", "dark", "dark", "mid", "dark"]
+const MOUTH_OPEN: readonly Tone[] = ["dark", "mid", "mid", "off", "mid", "dark"]
 
 const FACES = {
     idle: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
     wink: [TOP, SECOND, EYES_WINK, MOUTH_FLAT, BOTTOM],
     sleepy: [TOP, SECOND, EYES_SHUT, MOUTH_SHUT, BOTTOM],
-    talk: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
+    talk: [TOP, SECOND, EYES_OPEN, MOUTH_OPEN, BOTTOM],
     scan: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
 } as const satisfies Record<PixelMood, Face>
 
