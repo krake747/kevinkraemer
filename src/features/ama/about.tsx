@@ -3,10 +3,10 @@ import { Anchor } from "@ui/anchor"
 import { For } from "solid-js"
 
 const AMA_LINKS = [
-    { label: "developers", href: "/developers", note: "Endpoints and the MCP server" },
-    { label: "scalar", href: "/scalar", note: "Human-friendly API reference" },
-    { label: "llms.txt", href: "/llms.txt", note: "What agents may read" },
-    { label: "openapi.json", href: "/openapi.json", note: "The ask contract" },
+    { label: "~/developers", href: "/developers", note: "Endpoints and the MCP server" },
+    { label: "~/scalar", href: "/scalar", note: "Human-friendly API reference" },
+    { label: "~/llms.txt", href: "/llms.txt", note: "What agents may read" },
+    { label: "~/openapi.json", href: "/openapi.json", note: "The ask contract" },
 ] as const
 
 export function AmaAbout() {
