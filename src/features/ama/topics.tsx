@@ -3,7 +3,7 @@ import { StackRow } from "@pattern/stack"
 import { ArrowRightIcon } from "@ui/icon"
 import { For } from "solid-js"
 
-export function AmaTopics(props: { pending: boolean; onSelect: (question: string) => void }) {
+export function AmaTopics(props: { busy: boolean; onSelect: (question: string) => void }) {
     return (
         <ul class="flex flex-col gap-2">
             <For each={AMA_QUESTIONS}>
@@ -13,7 +13,7 @@ export function AmaTopics(props: { pending: boolean; onSelect: (question: string
                             <button
                                 type="button"
                                 class="group flex w-full items-center justify-between gap-4 text-left disabled:opacity-50"
-                                disabled={props.pending}
+                                disabled={props.busy}
                                 onClick={() => {
                                     props.onSelect(suggested)
                                 }}

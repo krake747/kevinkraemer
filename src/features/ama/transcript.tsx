@@ -33,10 +33,10 @@ function AmaCopyButton(props: { answer: AmaAnswer }) {
 
 export function AmaTranscript(props: {
     entries: readonly AmaEntry[]
-    pending: boolean
     onRetry: (id: number) => void
     onDismiss: (id: number) => void
 }) {
+    const busy = (): boolean => props.entries.some((entry) => entry.status === "loading")
     return (
         <div aria-live="polite" aria-atomic="false" class="flex flex-col gap-2">
             <Show
@@ -62,16 +62,18 @@ export function AmaTranscript(props: {
                                     </span>
                                     {entry.question}
                                 </p>
-                                <Button
-                                    intent="muted"
-                                    class="shrink-0"
-                                    aria-label="Dismiss answer"
-                                    onClick={() => {
-                                        props.onDismiss(entry.id)
-                                    }}
-                                >
-                                    <XIcon class="size-4" />
-                                </Button>
+                                <Show when={entry.status !== "loading"}>
+                                    <Button
+                                        intent="muted"
+                                        class="shrink-0"
+                                        aria-label="Dismiss answer"
+                                        onClick={() => {
+                                            props.onDismiss(entry.id)
+                                        }}
+                                    >
+                                        <XIcon class="size-4" />
+                                    </Button>
+                                </Show>
                             </div>
                             <Switch>
                                 <Match when={entry.status === "loading"}>
@@ -128,7 +130,7 @@ export function AmaTranscript(props: {
                                     <Button
                                         intent="muted"
                                         class="disabled:opacity-50"
-                                        disabled={props.pending}
+                                        disabled={busy()}
                                         onClick={() => {
                                             props.onRetry(entry.id)
                                         }}

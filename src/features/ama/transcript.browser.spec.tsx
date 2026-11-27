@@ -15,12 +15,9 @@ const ready: AmaEntry = {
 function mounted(
     entries: AmaEntry[],
     onRetry: (id: number) => void = () => {},
-    pending = false,
     onDismiss: (id: number) => void = () => {},
 ): HTMLElement {
-    return renderToContainer(() => (
-        <AmaTranscript entries={entries} pending={pending} onRetry={onRetry} onDismiss={onDismiss} />
-    ))
+    return renderToContainer(() => <AmaTranscript entries={entries} onRetry={onRetry} onDismiss={onDismiss} />)
 }
 
 describe("the ama transcript", () => {
@@ -53,9 +50,19 @@ describe("the ama transcript", () => {
     })
 
     it("holds retry while asking", () => {
-        const root = mounted([ready], () => {}, true)
+        const loading: AmaEntry = { id: 2, question: "What tools do you use?", status: "loading" }
+        const root = mounted([ready, loading])
         const retry = [...root.querySelectorAll("button")].find((button) => button.textContent === "retry")
         expect(retry?.disabled).toBe(true)
+    })
+
+    it("hides dismiss while loading", () => {
+        const loading: AmaEntry = { id: 2, question: "What tools do you use?", status: "loading" }
+        const root = mounted([loading])
+        const dismiss = [...root.querySelectorAll("button")].find(
+            (button) => button.getAttribute("aria-label") === "Dismiss answer",
+        )
+        expect(dismiss).toBeUndefined()
     })
 
     it("dismisses the chosen entry", () => {
@@ -63,7 +70,6 @@ describe("the ama transcript", () => {
         const root = mounted(
             [ready],
             () => {},
-            false,
             (id) => {
                 seen.push(id)
             },

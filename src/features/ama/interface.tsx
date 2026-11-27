@@ -40,7 +40,8 @@ export function AmaInterface() {
     const [searchParams, setSearchParams] = useSearchParams<{ q?: string }>()
     const [input, setInput] = createSignal("")
     const [entries, setEntries] = createSignal<AmaEntry[]>([])
-    const [pending, setPending] = createSignal(false)
+    const controllers = new Map<number, AbortController>()
+    const busy = (): boolean => entries().some((entry) => entry.status === "loading")
     const prefersReducedMotion = createMediaQuery("(prefers-reduced-motion: reduce)")
     let nextId = 1
     let askedFromUrl = false
@@ -55,24 +56,30 @@ export function AmaInterface() {
     }
 
     async function runAsk(id: number, question: string): Promise<void> {
-        setPending(true)
+        const controller = new AbortController()
+        controllers.set(id, controller)
         try {
-            const answer = await askSite(question)
+            const answer = await askSite(question, controller.signal)
             setEntries((current) => replaceEntry(current, { id, question, status: "ready", answer }))
         } catch (error) {
+            if (controller.signal.aborted) {
+                return
+            }
             const failure = toFailure(error)
             setEntries((current) =>
                 replaceEntry(current, { id, question, status: "failed", detail: failure.detail, hint: failure.hint }),
             )
         } finally {
-            setPending(false)
-            scrollToEntry(id)
+            controllers.delete(id)
+            if (!controller.signal.aborted) {
+                scrollToEntry(id)
+            }
         }
     }
 
     async function submit(raw: string): Promise<void> {
         const question = raw.trim()
-        if (!canAsk(question, pending())) {
+        if (!canAsk(question, busy())) {
             return
         }
         const id = nextId
@@ -84,7 +91,7 @@ export function AmaInterface() {
     }
 
     function retry(id: number): void {
-        if (pending()) {
+        if (busy()) {
             return
         }
         const entry = entries().find((candidate) => candidate.id === id)
@@ -96,6 +103,8 @@ export function AmaInterface() {
     }
 
     function dismiss(id: number): void {
+        controllers.get(id)?.abort()
+        controllers.delete(id)
         const next = entries().filter((candidate) => candidate.id !== id)
         setEntries(next)
         if (next.length === 0) {
@@ -104,6 +113,10 @@ export function AmaInterface() {
     }
 
     function clear(): void {
+        for (const controller of controllers.values()) {
+            controller.abort()
+        }
+        controllers.clear()
         setEntries([])
         setSearchParams({ q: undefined }, { replace: true })
     }
@@ -124,9 +137,9 @@ export function AmaInterface() {
         <RegisterWithRail>
             <RegisterWithRailMain>
                 <div class="flex flex-col gap-10">
-                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
+                    <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={busy() ? "true" : "false"}>
                         <SectionHeading id="ama-answers-heading">answers</SectionHeading>
-                        <AmaTranscript entries={entries()} pending={pending()} onRetry={retry} onDismiss={dismiss} />
+                        <AmaTranscript entries={entries()} onRetry={retry} onDismiss={dismiss} />
                     </DocumentSection>
                     <div class="lg:hidden">
                         <DisclosureRow>
@@ -136,7 +149,7 @@ export function AmaInterface() {
                             </DisclosureRowSummary>
                             <DisclosureRowBody>
                                 <AmaTopics
-                                    pending={pending()}
+                                    busy={busy()}
                                     onSelect={(question) => {
                                         void submit(question)
                                     }}
@@ -167,7 +180,7 @@ export function AmaInterface() {
                                     autocomplete="off"
                                     spellcheck={false}
                                     maxlength={AMA_QUESTION_MAX_LENGTH}
-                                    disabled={pending()}
+                                    disabled={busy()}
                                 >
                                     <InputPrompt />
                                 </Input>
@@ -180,10 +193,10 @@ export function AmaInterface() {
                                     <Button
                                         class="shrink-0 text-emerald-800 hover:text-emerald-700 disabled:opacity-50 dark:text-emerald-400 dark:hover:text-emerald-300"
                                         intent="quiet"
-                                        disabled={pending()}
+                                        disabled={busy()}
                                         onClick={() => void submit(input())}
                                     >
-                                        {pending() ? "asking..." : "ask"}
+                                        {busy() ? "asking..." : "ask"}
                                     </Button>
                                 </div>
                             </form>
@@ -195,7 +208,7 @@ export function AmaInterface() {
                 <div>
                     <SectionHeading id="ama-topics-label">topics</SectionHeading>
                     <AmaTopics
-                        pending={pending()}
+                        busy={busy()}
                         onSelect={(question) => {
                             void submit(question)
                         }}
