@@ -28,7 +28,7 @@ describe("the ama transcript", () => {
     it("shows the answer with its source", () => {
         const text = mounted([ready]).textContent
         expect(text).toContain("Kevin automates the boring parts first.")
-        expect(text).toContain("About")
+        expect(text).toContain("/about")
     })
 
     it("names the failed question with the reason", () => {

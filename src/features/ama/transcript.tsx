@@ -98,7 +98,7 @@ export function AmaTranscript(props: {
                                                             <>
                                                                 {index() > 0 ? " · " : ""}
                                                                 <Anchor href={source.path} variant="muted">
-                                                                    {source.title}
+                                                                    {source.path}
                                                                 </Anchor>
                                                             </>
                                                         )}
