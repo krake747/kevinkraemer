@@ -3,7 +3,7 @@ import { AmaTopics } from "@features/ama/topics"
 import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
 import { RegisterWithRail, RegisterWithRailMain, RegisterWithRailRail } from "@pattern/register"
-import { DocumentSection, PanelLabel, SectionHeading } from "@pattern/section"
+import { DocumentSection, SectionHeading } from "@pattern/section"
 import { createMediaQuery } from "@solid-primitives/media"
 import { useSearchParams } from "@solidjs/router"
 import { Button } from "@ui/button"
@@ -193,7 +193,7 @@ export function AmaInterface() {
             </RegisterWithRailMain>
             <RegisterWithRailRail labelledby="ama-topics-label">
                 <div>
-                    <PanelLabel id="ama-topics-label">topics</PanelLabel>
+                    <SectionHeading id="ama-topics-label">topics</SectionHeading>
                     <AmaTopics
                         pending={pending()}
                         onSelect={(question) => {
