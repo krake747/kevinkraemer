@@ -36,9 +36,13 @@ describe("the ama transcript", () => {
         expect(mounted([ready]).textContent).toContain("retry")
     })
 
-    it("offers retry on a failed answer", () => {
+    it("copies a ready answer", () => {
+        expect(mounted([ready]).textContent).toContain("copy")
+    })
+
+    it("offers no copy on a failed answer", () => {
         const failed: AmaEntry = { id: 2, question: "zzz", status: "failed", detail: "No published page answers this." }
-        expect(mounted([failed]).textContent).toContain("retry")
+        expect(mounted([failed]).textContent).not.toContain("copy")
     })
 
     it("retries only the chosen entry", () => {

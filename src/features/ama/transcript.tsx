@@ -1,4 +1,5 @@
 import type { AmaAnswer } from "@features/ama/client"
+import { createCopyFeedback } from "@pattern/create-copy-feedback"
 import { StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { Button } from "@ui/button"
@@ -8,6 +9,26 @@ export type AmaEntry =
     | { id: number; question: string; status: "loading" }
     | { id: number; question: string; status: "ready"; answer: AmaAnswer }
     | { id: number; question: string; status: "failed"; detail: string; hint?: string }
+
+function copyText(answer: AmaAnswer): string {
+    const lines = answer.sources.map((source) => `- ${source.title} (${source.path})`)
+    return [answer.summary ?? "", "Sources:", ...lines].filter((part) => part.length > 0).join("\n")
+}
+
+function AmaCopyButton(props: { answer: AmaAnswer }) {
+    const { copyLabel, copy } = createCopyFeedback()
+    return (
+        <Button
+            intent="muted"
+            aria-label="Copy answer"
+            onClick={() => {
+                void copy(copyText(props.answer))
+            }}
+        >
+            {copyLabel()}
+        </Button>
+    )
+}
 
 export function AmaTranscript(props: {
     entries: readonly AmaEntry[]
@@ -98,6 +119,9 @@ export function AmaTranscript(props: {
                                     >
                                         retry
                                     </Button>
+                                    <Show when={entry.status === "ready" ? entry : undefined}>
+                                        {(ready) => <AmaCopyButton answer={ready().answer} />}
+                                    </Show>
                                 </div>
                             </Show>
                         </StackRow>
