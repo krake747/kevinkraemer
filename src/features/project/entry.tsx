@@ -54,12 +54,8 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
             <RegisterWithRail spacing="loose" width="wide">
                 <RegisterWithRailMain>
                     <ProjectSection aria-labelledby="problem-heading">
-                        <ProjectSectionHeading id="problem-heading">
-                            Problem and point of view
-                        </ProjectSectionHeading>
-                        <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">
-                            {props.project.problem}
-                        </p>
+                        <ProjectSectionHeading id="problem-heading">Problem and point of view</ProjectSectionHeading>
+                        <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{props.project.problem}</p>
                     </ProjectSection>
                     <Show when={props.project.decisions.length > 0}>
                         <ProjectSection aria-labelledby="decisions-heading">
