@@ -3,6 +3,7 @@ import { createCopyFeedback } from "@pattern/create-copy-feedback"
 import { StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { Button } from "@ui/button"
+import { XIcon } from "@ui/icon"
 import { For, Match, Show, Switch } from "solid-js"
 
 export type AmaEntry =
@@ -34,6 +35,7 @@ export function AmaTranscript(props: {
     entries: readonly AmaEntry[]
     pending: boolean
     onRetry: (id: number) => void
+    onDismiss: (id: number) => void
 }) {
     return (
         <div aria-live="polite" aria-atomic="false" class="flex flex-col gap-2">
@@ -53,12 +55,24 @@ export function AmaTranscript(props: {
                 <For each={props.entries}>
                     {(entry) => (
                         <StackRow size="relaxed" data-ama-entry={entry.id}>
-                            <p class="font-mono text-sm text-stone-900 dark:text-stone-100">
-                                <span aria-hidden="true" class="text-emerald-700 dark:text-emerald-400">
-                                    {"$ "}
-                                </span>
-                                {entry.question}
-                            </p>
+                            <div class="flex items-start justify-between gap-4">
+                                <p class="min-w-0 flex-1 font-mono text-sm text-stone-900 dark:text-stone-100">
+                                    <span aria-hidden="true" class="text-emerald-700 dark:text-emerald-400">
+                                        {"$ "}
+                                    </span>
+                                    {entry.question}
+                                </p>
+                                <Button
+                                    intent="muted"
+                                    class="shrink-0"
+                                    aria-label="Dismiss answer"
+                                    onClick={() => {
+                                        props.onDismiss(entry.id)
+                                    }}
+                                >
+                                    <XIcon class="size-4" />
+                                </Button>
+                            </div>
                             <Switch>
                                 <Match when={entry.status === "loading"}>
                                     <output class="mt-4 block font-mono text-xs text-stone-600 dark:text-stone-400">

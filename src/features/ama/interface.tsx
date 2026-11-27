@@ -97,6 +97,14 @@ export function AmaInterface() {
         void runAsk(id, entry.question)
     }
 
+    function dismiss(id: number): void {
+        const next = entries().filter((candidate) => candidate.id !== id)
+        setEntries(next)
+        if (next.length === 0) {
+            setSearchParams({ q: undefined }, { replace: true })
+        }
+    }
+
     function clear(): void {
         setEntries([])
         setSearchParams({ q: undefined }, { replace: true })
@@ -120,7 +128,7 @@ export function AmaInterface() {
                 <div class="flex flex-col gap-10">
                     <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
                         <SectionHeading id="ama-answers-heading">answers</SectionHeading>
-                        <AmaTranscript entries={entries()} pending={pending()} onRetry={retry} />
+                        <AmaTranscript entries={entries()} pending={pending()} onRetry={retry} onDismiss={dismiss} />
                     </DocumentSection>
                     <DocumentSection aria-labelledby="ama-topics-heading">
                         <SectionHeading id="ama-topics-heading">topics</SectionHeading>

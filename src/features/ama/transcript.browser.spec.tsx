@@ -12,8 +12,15 @@ const ready: AmaEntry = {
     },
 }
 
-function mounted(entries: AmaEntry[], onRetry: (id: number) => void = () => {}, pending = false): HTMLElement {
-    return renderToContainer(() => <AmaTranscript entries={entries} pending={pending} onRetry={onRetry} />)
+function mounted(
+    entries: AmaEntry[],
+    onRetry: (id: number) => void = () => {},
+    pending = false,
+    onDismiss: (id: number) => void = () => {},
+): HTMLElement {
+    return renderToContainer(() => (
+        <AmaTranscript entries={entries} pending={pending} onRetry={onRetry} onDismiss={onDismiss} />
+    ))
 }
 
 describe("the ama transcript", () => {
@@ -49,6 +56,23 @@ describe("the ama transcript", () => {
         const root = mounted([ready], () => {}, true)
         const retry = [...root.querySelectorAll("button")].find((button) => button.textContent === "retry")
         expect(retry?.disabled).toBe(true)
+    })
+
+    it("dismisses the chosen entry", () => {
+        const seen: number[] = []
+        const root = mounted(
+            [ready],
+            () => {},
+            false,
+            (id) => {
+                seen.push(id)
+            },
+        )
+        const dismiss = [...root.querySelectorAll("button")].find(
+            (button) => button.getAttribute("aria-label") === "Dismiss answer",
+        )
+        dismiss?.click()
+        expect(seen).toEqual([1])
     })
 
     it("retries only the chosen entry", () => {
