@@ -2,8 +2,10 @@ import { AMA_QUESTION_MAX_LENGTH, AmaError, askSite } from "@features/ama/client
 import { AMA_QUESTIONS } from "@features/ama/questions"
 import { AmaTranscript, type AmaEntry } from "@features/ama/transcript"
 import { DocumentSection, SectionHeading } from "@pattern/section"
+import { StackRow } from "@pattern/stack"
 import { useSearchParams } from "@solidjs/router"
 import { Button } from "@ui/button"
+import { ArrowRightIcon } from "@ui/icon"
 import { Input, InputPrompt } from "@ui/input"
 import { For, Show, createSignal, onSettled } from "solid-js"
 
@@ -119,20 +121,36 @@ export function AmaInterface() {
                         </div>
                     </form>
                 </search>
-                <div class="mt-4 flex flex-wrap gap-2">
+            </DocumentSection>
+            <DocumentSection aria-labelledby="ama-topics-heading">
+                <SectionHeading id="ama-topics-heading">topics</SectionHeading>
+                <ul class="flex flex-col gap-2">
                     <For each={AMA_QUESTIONS}>
                         {(suggested) => (
-                            <Button
-                                intent="link"
-                                onClick={() => {
-                                    void submit(suggested)
-                                }}
-                            >
-                                {suggested}
-                            </Button>
+                            <li>
+                                <StackRow size="compact" interactive>
+                                    <button
+                                        type="button"
+                                        class="group flex w-full items-center justify-between gap-4 text-left"
+                                        onClick={() => {
+                                            void submit(suggested)
+                                        }}
+                                    >
+                                        <span class="min-w-0 flex-1 font-mono text-sm text-stone-700 transition-colors group-hover:text-emerald-800 dark:text-stone-300 dark:group-hover:text-emerald-400">
+                                            {suggested}
+                                        </span>
+                                        <span
+                                            aria-hidden="true"
+                                            class="hidden shrink-0 items-center text-stone-600 transition-colors group-hover:text-emerald-700 sm:inline-flex dark:text-stone-400 dark:group-hover:text-emerald-400"
+                                        >
+                                            <ArrowRightIcon class="size-4 transition-transform duration-150 ease-out-quart group-hover:pointer-fine:translate-x-1" />
+                                        </span>
+                                    </button>
+                                </StackRow>
+                            </li>
                         )}
                     </For>
-                </div>
+                </ul>
             </DocumentSection>
             <DocumentSection aria-labelledby="ama-answers-heading" aria-busy={pending() ? "true" : "false"}>
                 <SectionHeading id="ama-answers-heading">answers</SectionHeading>
