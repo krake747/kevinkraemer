@@ -40,6 +40,7 @@ Vite with prerendered pages and Netlify functions.
 - Short declarative sentences. Lead with what changes.
 - Every claim carries evidence or a label: measured, inferred, or guess.
 - Run the check here and paste the result. Push back when the evidence points the other way.
+- Human friendly tone, no em dashes. Recast with a comma, colon, or full stop.
 
 ## Autonomy
 
