@@ -14,23 +14,37 @@ function toLane(name: FlowName): Lane {
     return { caption: LANE_CAPTION[name], steps: namedFlows[name] }
 }
 
-function lanesFor(spec: GraphFlowSpec): Lane[] {
-    if (spec.kind === "single") {
-        return [{ caption: spec.title, steps: namedFlows[spec.flow] }]
-    }
-    return [spec.flow, spec.compare, ...(spec.third === undefined ? [] : [spec.third])].map(toLane)
+type FlowLayout = {
+    lanes: Lane[]
+    grid: string
 }
 
-function gridClass(spec: GraphFlowSpec): string {
-    if (spec.kind === "single") {
-        return "grid grid-cols-1 gap-8"
+function layoutFor(spec: GraphFlowSpec): FlowLayout {
+    switch (spec.kind) {
+        case "single": {
+            return {
+                lanes: [{ caption: spec.title, steps: namedFlows[spec.flow] }],
+                grid: "grid grid-cols-1 gap-8",
+            }
+        }
+        case "compare": {
+            return {
+                lanes: [spec.flow, spec.compare, ...(spec.third === undefined ? [] : [spec.third])].map(toLane),
+                grid:
+                    spec.third === undefined
+                        ? "grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4"
+                        : "grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-4",
+            }
+        }
+        default: {
+            const exhaustive: never = spec
+            return exhaustive
+        }
     }
-    return spec.third === undefined
-        ? "grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-4"
-        : "grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-4"
 }
 
 export function LogGraphFlow(props: VoidProps<{ spec: GraphFlowSpec }>) {
+    const layout = () => layoutFor(props.spec)
     return (
         <figure class="not-prose relative my-8 graph-frame font-mono text-sm/6" aria-label={props.spec.title}>
             <div
@@ -52,8 +66,8 @@ export function LogGraphFlow(props: VoidProps<{ spec: GraphFlowSpec }>) {
                 +
             </span>
             <div class="px-4 py-6 sm:px-6">
-                <div class={gridClass(props.spec)}>
-                    <For each={lanesFor(props.spec)}>
+                <div class={layout().grid}>
+                    <For each={layout().lanes}>
                         {(lane) => (
                             <div class="flex flex-col items-center">
                                 <Show when={props.spec.kind === "compare"}>
