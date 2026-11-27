@@ -54,7 +54,7 @@ export function AmaTranscript(props: {
                     {(entry) => (
                         <StackRow size="relaxed">
                             <div class="flex justify-end">
-                                <p class="max-w-[80%] bg-stone-200/70 px-4 py-2.5 font-mono text-sm text-stone-900 dark:bg-stone-800 dark:text-stone-100">
+                                <p class="max-w-prose bg-stone-200/70 px-4 py-2.5 font-mono text-sm text-stone-900 dark:bg-stone-800 dark:text-stone-100">
                                     {entry.question}
                                 </p>
                             </div>
