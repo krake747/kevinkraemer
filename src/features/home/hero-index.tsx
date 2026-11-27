@@ -10,7 +10,7 @@ const HERO_INDEX = [
 export function HomeHeroIndex() {
     return (
         <div class="mt-12">
-            <SectionHeading id="hero-index-heading">index</SectionHeading>
+            <SectionHeading id="hero-index-heading">index.html</SectionHeading>
             <div class="flex flex-col gap-3 font-mono text-sm">
                 <For each={HERO_INDEX}>
                     {(entry) => (
