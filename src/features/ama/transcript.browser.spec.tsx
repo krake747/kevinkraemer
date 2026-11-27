@@ -56,13 +56,13 @@ describe("the ama transcript", () => {
         expect(retry).toBeUndefined()
     })
 
-    it("hides dismiss while loading", () => {
+    it("reserves the dismiss slot while loading", () => {
         const loading: AmaEntry = { id: 2, question: "What tools do you use?", status: "loading" }
         const root = mounted([loading])
         const dismiss = [...root.querySelectorAll("button")].find(
             (button) => button.getAttribute("aria-label") === "Dismiss answer",
         )
-        expect(dismiss).toBeUndefined()
+        expect(dismiss?.parentElement?.classList.contains("invisible")).toBe(true)
     })
 
     it("dismisses the chosen entry", () => {

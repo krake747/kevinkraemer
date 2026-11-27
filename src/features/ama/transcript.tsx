@@ -10,6 +10,7 @@ import {
 } from "@pattern/register"
 import { Stack, StackRow } from "@pattern/stack"
 import { Button } from "@ui/button"
+import { cx } from "@ui/cva.config"
 import { XIcon } from "@ui/icon"
 import { For, Match, Show, Switch } from "solid-js"
 
@@ -67,10 +68,9 @@ export function AmaTranscript(props: {
                                     </span>
                                     {entry.question}
                                 </p>
-                                <Show when={entry.status !== "loading"}>
+                                <div class={cx("shrink-0", entry.status === "loading" && "invisible")}>
                                     <Button
                                         intent="muted"
-                                        class="shrink-0"
                                         aria-label="Dismiss answer"
                                         onClick={() => {
                                             props.onDismiss(entry.id)
@@ -78,7 +78,7 @@ export function AmaTranscript(props: {
                                     >
                                         <XIcon class="size-4" />
                                     </Button>
-                                </Show>
+                                </div>
                             </div>
                             <Switch>
                                 <Match when={entry.status === "loading"}>
