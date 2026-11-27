@@ -1,4 +1,5 @@
 import type { ComponentProps, JSX } from "@solidjs/web"
+import { Show } from "solid-js"
 
 export type RenderProps = Pick<
     ComponentProps<"div">,
@@ -32,10 +33,12 @@ export function renderElement<P extends { class?: string; children?: JSX.Element
     render: () => ((props: P) => JSX.Element) | undefined
     props: () => P
 }): JSX.Element {
-    const render = options.render()
-    if (render === undefined) {
-        const props = options.props()
-        return options.defaultTag === "span" ? <span {...props} /> : <div {...props} />
-    }
-    return <>{render(options.props())}</>
+    return (
+        <Show
+            when={options.render()}
+            fallback={options.defaultTag === "span" ? <span {...options.props()} /> : <div {...options.props()} />}
+        >
+            {(render) => render()(options.props())}
+        </Show>
+    )
 }

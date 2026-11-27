@@ -36,14 +36,14 @@
             "label": "inference",
             "items": [
                 {
-                    "name": "Jev System One",
+                    "name": "Jev",
                     "href": "https://docs.typesafe.ai",
-                    "note": "Fast triage gate: answerable, and which pages matter."
+                    "note": "TypeSafe's model for narrow judgments. Triage gate: answerable, and which pages matter."
                 },
                 {
-                    "name": "OpenAI",
+                    "name": "GPT-6 Luna",
                     "href": "https://openai.com",
-                    "note": "Writes the grounded first-person answer. Nothing stored."
+                    "note": "OpenAI model writing the grounded first-person answer. Nothing stored."
                 }
             ]
         }

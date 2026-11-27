@@ -9,7 +9,7 @@ stack:
   - Solid
   - TypeScript
   - Tailwind CSS
-  - OpenAI
+  - GPT-6 Luna
   - Jev
   - MCP
 role: "Design and passion project."
@@ -42,7 +42,7 @@ implementation:
   - >-
     Every ask question passes a Jev System One gate first: a fast triage that judges whether the
     question is answerable from published pages, and which pages matter. Only grounded questions
-    reach OpenAI, which writes a first-person answer from the cited pages alone, with nothing
+    reach GPT-6 Luna, which writes a first-person answer from the cited pages alone, with nothing
     stored.
   - >-
     Agents get the same content through an MCP endpoint with OpenAPI docs, so the site answers the
@@ -58,7 +58,7 @@ tradeoffs:
       are no live quotes or widgets to maintain, break, or mislead.
   - title: "The expensive model never sees a bad question."
     reason: >-
-      The Jev gate answers answerability before OpenAI writes a word, so off-topic questions get a
-      quick refusal instead of a slow, costly guess. Grounding is enforced twice: the gate picks the
-      pages, and the answer may only use them.
+      The Jev gate answers answerability before GPT-6 Luna writes a word, so off-topic questions get
+      a quick refusal instead of a slow, costly guess. Grounding is enforced twice: the gate picks
+      the pages, and the answer may only use them.
 ---
