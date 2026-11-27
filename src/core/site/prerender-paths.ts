@@ -12,6 +12,7 @@ const PRERENDER_STATIC_PATHS = [
     "/logs",
     "/search",
     "/scalar",
+    "/ama",
 ] as const
 
 type PathContent = {

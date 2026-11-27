@@ -347,20 +347,8 @@
     & > *:nth-child(4) {
         animation-delay: calc(var(--kk-cascade-step, 100ms) * 3);
     }
-    & > *:nth-child(5) {
+    & > *:nth-child(n + 5) {
         animation-delay: calc(var(--kk-cascade-step, 100ms) * 4);
-    }
-    & > *:nth-child(6) {
-        animation-delay: calc(var(--kk-cascade-step, 100ms) * 5);
-    }
-    & > *:nth-child(7) {
-        animation-delay: calc(var(--kk-cascade-step, 100ms) * 6);
-    }
-    & > *:nth-child(8) {
-        animation-delay: calc(var(--kk-cascade-step, 100ms) * 7);
-    }
-    & > *:nth-child(n + 9) {
-        animation-delay: calc(var(--kk-cascade-step, 100ms) * 8);
     }
 
     @media (prefers-reduced-motion: reduce) {
