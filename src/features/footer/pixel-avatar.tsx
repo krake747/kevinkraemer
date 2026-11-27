@@ -150,7 +150,7 @@ function SleepyZzz() {
 function TalkHi() {
     return (
         <div class="pointer-events-none absolute top-1/2 left-full ml-1 hidden -translate-y-1/2 font-mono text-[12px]/none text-stone-400 motion-safe:flex dark:text-stone-500">
-            <span class="motion-safe:animate-hi">Hi</span>
+            <span class="motion-safe:animate-hi motion-safe:[animation-delay:1s]">Hi</span>
         </div>
     )
 }
