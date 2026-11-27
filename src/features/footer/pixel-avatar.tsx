@@ -146,19 +146,10 @@ function SleepyZzz() {
     )
 }
 
-const BUB_TOP: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
-const BUB_MID: readonly Tone[] = ["dark", "off", "off", "off", "off", "dark"]
-const BUB_TAIL: readonly Tone[] = ["dark", "dark", "off", "off", "off", "off"]
-
-function TalkBubble() {
+function TalkHi() {
     return (
-        <div class="pointer-events-none absolute bottom-full left-1/2 mb-1 hidden -translate-x-1/2 motion-safe:flex">
-            <span class="flex flex-col motion-safe:animate-send">
-                <PixelRow cells={BUB_TOP} closed={false} />
-                <PixelRow cells={BUB_MID} closed={false} />
-                <PixelRow cells={BUB_MID} closed={false} />
-                <PixelRow cells={BUB_TAIL} closed={false} />
-            </span>
+        <div class="pointer-events-none absolute bottom-full left-1/2 mb-0.5 hidden -translate-x-1/2 font-mono text-[12px]/none text-stone-400 motion-safe:flex dark:text-stone-500">
+            <span class="motion-safe:animate-zzz">Hi</span>
         </div>
     )
 }
@@ -201,7 +192,7 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
                             <SleepyZzz />
                         </Show>
                         <Show when={current === "talk"}>
-                            <TalkBubble />
+                            <TalkHi />
                         </Show>
                         <For each={rows()}>{(row) => <PixelRow cells={row} closed={blinking()} />}</For>
                     </div>
