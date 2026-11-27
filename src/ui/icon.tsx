@@ -1,5 +1,5 @@
 import type { ComponentProps } from "@solidjs/web"
-import { omit } from "solid-js"
+import { omit, type VoidProps } from "solid-js"
 import KeylineArrowLeft from "~icons/keyline-icons/arrow-left"
 import KeylineArrowRight from "~icons/keyline-icons/arrow-right"
 import KeylineArrowUpRight from "~icons/keyline-icons/arrow-up-right"
@@ -19,7 +19,7 @@ import KeylineRss from "~icons/keyline-icons/rss"
 import KeylineSearch from "~icons/keyline-icons/search"
 import KeylineSun from "~icons/keyline-icons/sun"
 
-type IconProps = ComponentProps<"svg">
+type IconProps = VoidProps<ComponentProps<"svg">>
 
 export function ChevronRight(props: IconProps) {
     const rest = omit(props, "children", "aria-hidden")
