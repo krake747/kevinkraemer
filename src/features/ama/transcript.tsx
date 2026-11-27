@@ -59,7 +59,7 @@ export function AmaTranscript(props: {
             >
                 <For each={props.entries}>
                     {(entry) => (
-                        <StackRow size="default" data-ama-entry={entry.id}>
+                        <StackRow size="default" data-ama-entry={entry.id} tabindex={-1}>
                             <div class="flex items-start justify-between gap-4">
                                 <p class="min-w-0 flex-1 font-mono text-sm text-stone-900 dark:text-stone-100">
                                     <span aria-hidden="true" class="text-emerald-700 dark:text-emerald-400">

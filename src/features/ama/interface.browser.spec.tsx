@@ -12,12 +12,11 @@ function jsonResponse(body: unknown, status: number): Response {
     return new Response(JSON.stringify(body), { status })
 }
 
-const Router = createRouter({
-    history: memoryHistory(),
-    routes: defineRoutes([{ path: "/", component: () => <AmaInterface /> }]),
-})
-
 function mounted(): HTMLElement {
+    const Router = createRouter({
+        history: memoryHistory(),
+        routes: defineRoutes([{ path: "/", component: () => <AmaInterface /> }]),
+    })
     return renderToContainer(() => <Router />)
 }
 

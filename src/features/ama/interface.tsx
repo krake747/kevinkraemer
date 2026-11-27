@@ -49,12 +49,13 @@ export function AmaInterface() {
         void submit(question)
     }
 
-    function scrollToEntry(id: number): void {
+    function revealEntry(id: number): void {
         requestAnimationFrame(() => {
             const target = document.querySelector(`[data-ama-entry="${id}"]`)
             if (!(target instanceof HTMLElement)) {
                 return
             }
+            target.focus({ preventScroll: true })
             const rect = target.getBoundingClientRect()
             if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
                 return
@@ -80,7 +81,7 @@ export function AmaInterface() {
         } finally {
             controllers.delete(id)
             if (!controller.signal.aborted && scroll) {
-                scrollToEntry(id)
+                revealEntry(id)
             }
         }
     }
@@ -210,7 +211,6 @@ export function AmaInterface() {
                                     autocomplete="off"
                                     spellcheck={false}
                                     maxlength={ASK_QUESTION_MAX_LENGTH}
-                                    disabled={busy()}
                                 >
                                     <InputPrompt />
                                 </Input>
