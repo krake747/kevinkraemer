@@ -52,13 +52,18 @@ export function AmaInterface() {
     function scrollToEntry(id: number): void {
         requestAnimationFrame(() => {
             const target = document.querySelector(`[data-ama-entry="${id}"]`)
-            if (target instanceof HTMLElement) {
-                target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "start" })
+            if (!(target instanceof HTMLElement)) {
+                return
             }
+            const rect = target.getBoundingClientRect()
+            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                return
+            }
+            target.scrollIntoView({ behavior: prefersReducedMotion() ? "auto" : "smooth", block: "nearest" })
         })
     }
 
-    async function runAsk(id: number, question: string): Promise<void> {
+    async function runAsk(id: number, question: string, scroll: boolean): Promise<void> {
         const controller = new AbortController()
         controllers.set(id, controller)
         try {
@@ -74,7 +79,7 @@ export function AmaInterface() {
             )
         } finally {
             controllers.delete(id)
-            if (!controller.signal.aborted) {
+            if (!controller.signal.aborted && scroll) {
                 scrollToEntry(id)
             }
         }
@@ -84,7 +89,7 @@ export function AmaInterface() {
         return Math.max(0, ...entries().map((entry) => entry.id)) + 1
     }
 
-    async function submit(raw: string): Promise<void> {
+    async function submit(raw: string, scroll = true): Promise<void> {
         const question = raw.trim()
         if (!canAsk(question, busy())) {
             return
@@ -94,7 +99,7 @@ export function AmaInterface() {
         setInput("")
         setAskedFromUrl(question)
         setSearchParams({ q: question }, { replace: true })
-        await runAsk(id, question)
+        await runAsk(id, question, scroll)
     }
 
     function askFromUrl(question: string): void {
@@ -112,7 +117,7 @@ export function AmaInterface() {
             ])
             return
         }
-        void submit(question)
+        void submit(question, false)
     }
 
     function retry(id: number): void {
@@ -126,7 +131,7 @@ export function AmaInterface() {
         setEntries((current) => replaceEntry(current, { id, question: entry.question, status: "loading" }))
         setAskedFromUrl(entry.question)
         setSearchParams({ q: entry.question }, { replace: true })
-        void runAsk(id, entry.question)
+        void runAsk(id, entry.question, true)
     }
 
     function dismiss(id: number): void {
