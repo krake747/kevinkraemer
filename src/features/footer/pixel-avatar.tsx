@@ -146,19 +146,18 @@ function SleepyZzz() {
     )
 }
 
-const ENV_TIPS: readonly Tone[] = ["off", "dark", "off", "off", "dark", "off"]
-const ENV_BAR: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
-const ENV_BODY: readonly Tone[] = ["dark", "off", "off", "off", "off", "dark"]
-const ENV_BASE: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
+const BUB_TOP: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
+const BUB_MID: readonly Tone[] = ["dark", "off", "off", "off", "off", "dark"]
+const BUB_TAIL: readonly Tone[] = ["dark", "dark", "off", "off", "off", "off"]
 
-function TalkEnvelope() {
+function TalkBubble() {
     return (
         <div class="pointer-events-none absolute bottom-full left-1/2 mb-1 hidden -translate-x-1/2 motion-safe:flex">
             <span class="flex flex-col motion-safe:animate-send">
-                <PixelRow cells={ENV_TIPS} closed={false} />
-                <PixelRow cells={ENV_BAR} closed={false} />
-                <PixelRow cells={ENV_BODY} closed={false} />
-                <PixelRow cells={ENV_BASE} closed={false} />
+                <PixelRow cells={BUB_TOP} closed={false} />
+                <PixelRow cells={BUB_MID} closed={false} />
+                <PixelRow cells={BUB_MID} closed={false} />
+                <PixelRow cells={BUB_TAIL} closed={false} />
             </span>
         </div>
     )
@@ -202,7 +201,7 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
                             <SleepyZzz />
                         </Show>
                         <Show when={current === "talk"}>
-                            <TalkEnvelope />
+                            <TalkBubble />
                         </Show>
                         <For each={rows()}>{(row) => <PixelRow cells={row} closed={blinking()} />}</For>
                     </div>
