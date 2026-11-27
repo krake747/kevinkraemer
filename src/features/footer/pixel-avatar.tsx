@@ -48,6 +48,13 @@ const FACES = {
     scan: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
 } as const satisfies Record<PixelMood, Face>
 
+const TALKING_FACE: Face = [TOP, SECOND, EYES_OPEN, MOUTH_OPEN, BOTTOM]
+
+function scanFace(glancing: boolean): Face {
+    const [eyes, mouth] = scanRows(glancing)
+    return [TOP, SECOND, eyes, mouth, BOTTOM]
+}
+
 const SCAN_LEFT_ROWS: readonly [readonly Tone[], readonly Tone[]] = [
     ["dark", "lid", "mid", "lid", "mid", "dark"],
     ["dark", "mid", "dark", "mid", "mid", "dark"],
@@ -195,14 +202,13 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
     })
     const sayingHi = createGreeting(() => mood() === "talk" && !prefersReducedMotion())
     const rows = (): Face => {
-        if (mood() !== "scan") {
-            if (mood() === "talk" && sayingHi()) {
-                return [TOP, SECOND, EYES_OPEN, MOUTH_OPEN, BOTTOM]
-            }
-            return FACES[mood()]
+        if (mood() === "scan") {
+            return scanFace(glanceLeft())
         }
-        const [eyes, mouth] = scanRows(glanceLeft())
-        return [TOP, SECOND, eyes, mouth, BOTTOM]
+        if (mood() === "talk" && sayingHi()) {
+            return TALKING_FACE
+        }
+        return FACES[mood()]
     }
     const forwarded = omit(props, "class", "mood", "children")
 
