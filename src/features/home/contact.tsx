@@ -21,6 +21,9 @@ export function HomeContact(props: VoidProps<{ id: string }>) {
                 >
                     {site.email}
                 </a>
+                <p class="reveal-item font-mono text-sm text-stone-600 tabular-nums dark:text-stone-400">
+                    open, replies in 2d
+                </p>
                 <p class="reveal-item font-mono text-sm text-stone-600 dark:text-stone-400">Based in Luxembourg</p>
             </div>
         </TerminalSection>
