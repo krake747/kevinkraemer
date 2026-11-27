@@ -36,13 +36,12 @@ const EYES_WINK: readonly Tone[] = ["dark", "mid", "lid", "mid", "open", "dark"]
 const EYES_SHUT: readonly Tone[] = ["dark", "mid", "mid", "mid", "mid", "dark"]
 const MOUTH_FLAT: readonly Tone[] = ["dark", "mid", "mid", "dark", "mid", "dark"]
 const MOUTH_SHUT: readonly Tone[] = ["dark", "mid", "dark", "dark", "mid", "dark"]
-const MOUTH_OPEN: readonly Tone[] = ["dark", "mid", "mid", "off", "mid", "dark"]
 
 const FACES = {
     idle: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
     wink: [TOP, SECOND, EYES_WINK, MOUTH_FLAT, BOTTOM],
     sleepy: [TOP, SECOND, EYES_SHUT, MOUTH_SHUT, BOTTOM],
-    talk: [TOP, SECOND, EYES_OPEN, MOUTH_OPEN, BOTTOM],
+    talk: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
     scan: [TOP, SECOND, EYES_OPEN, MOUTH_FLAT, BOTTOM],
 } as const satisfies Record<PixelMood, Face>
 
@@ -148,8 +147,8 @@ function SleepyZzz() {
 }
 
 const ENV_TOP: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
-const ENV_FLAP_TOP: readonly Tone[] = ["dark", "dark", "mid", "mid", "dark", "dark"]
-const ENV_FLAP_MID: readonly Tone[] = ["dark", "mid", "dark", "dark", "mid", "dark"]
+const ENV_FLAP_TOP: readonly Tone[] = ["dark", "dark", "off", "off", "dark", "dark"]
+const ENV_FLAP_MID: readonly Tone[] = ["dark", "off", "dark", "dark", "off", "dark"]
 const ENV_BOTTOM: readonly Tone[] = ["dark", "dark", "dark", "dark", "dark", "dark"]
 
 function TalkEnvelope() {
