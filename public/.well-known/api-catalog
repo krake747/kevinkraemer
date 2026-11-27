@@ -112,6 +112,12 @@
           "title": "Data handling statement: no analytics, no tracking, no cookies"
         },
         {
+          "href": "https://www.kevinkraemer.com/credits",
+          "rel": "related",
+          "type": "text/html",
+          "title": "Credits: what this site is built with"
+        },
+        {
           "href": "https://www.kevinkraemer.com/20260503_kevinkraemer_cv.pdf",
           "rel": "related",
           "type": "application/pdf",

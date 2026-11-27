@@ -56,6 +56,7 @@ export const NAV_ENTRIES: NavEntry[] = [
         keywords: ["api", "docs", "agents", "openapi", "machine", "llm"],
         active: "exact",
     },
+    { label: "~/credits", href: "/credits", keywords: ["credits", "colophon", "stack", "built"], active: "exact" },
 ]
 
 export const TOP_NAV: NavEntry[] = NAV_ENTRIES.filter((entry) => entry.topNav)

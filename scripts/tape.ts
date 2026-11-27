@@ -78,6 +78,9 @@ localStorage stores only the theme preference (light or dark). No personal data 
     "/developers": `Machine-readable endpoints: llms.txt (site index), llms-full.txt (every log entry), openapi.json (OpenAPI),
 .well-known/api-catalog (RFC 9264 linkset), rss.xml, sitemap. Every page also serves markdown for Accept: text/markdown
 and a typed JSON descriptor for Accept: application/json.`,
+    "/credits": `Colophon: the site is one Solid app prerendered to static pages, styled with Tailwind CSS, schemas with Valibot,
+search with Pagefind, hosted on Netlify with /ask and /mcp as functions. Ask triages through Jev System One and answers
+with OpenAI from published pages, storing nothing.`,
 }
 
 function contentFor(path: string): string {

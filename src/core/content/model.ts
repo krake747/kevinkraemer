@@ -108,6 +108,7 @@ export type ContentBundle = {
     about: AboutEntry[]
     experience: ExperienceEntry[]
     uses: UsesSection[]
+    credits: UsesSection[]
     projects: Project[]
 }
 

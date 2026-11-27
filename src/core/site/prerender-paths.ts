@@ -8,6 +8,7 @@ const PRERENDER_STATIC_PATHS = [
     "/contact",
     "/privacy",
     "/developers",
+    "/credits",
     "/projects",
     "/logs",
     "/search",
