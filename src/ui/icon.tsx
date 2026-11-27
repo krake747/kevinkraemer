@@ -13,10 +13,10 @@ import KeylineFileText from "~icons/keyline-icons/file-text"
 import KeylineHash from "~icons/keyline-icons/hash"
 import KeylineMail from "~icons/keyline-icons/mail"
 import KeylineMessageCircle from "~icons/keyline-icons/message-duotone"
-import KeylineMoon from "~icons/keyline-icons/moon"
+import KeylineMoon from "~icons/keyline-icons/moon-two-tone"
 import KeylineRss from "~icons/keyline-icons/rss"
 import KeylineSearch from "~icons/keyline-icons/search"
-import KeylineSun from "~icons/keyline-icons/sun"
+import KeylineSun from "~icons/keyline-icons/sun-two-tone"
 import KeylineZap from "~icons/keyline-icons/zap-two-tone"
 
 type IconProps = VoidProps<ComponentProps<"svg">>
