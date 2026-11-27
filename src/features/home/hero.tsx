@@ -1,4 +1,4 @@
-import { HomeHeroContact } from "@features/home/hero-contact"
+import { HomeHeroIndex } from "@features/home/hero-index"
 import { HomeHeroName } from "@features/home/hero-name"
 import { PageColumn } from "@pattern/page"
 import { SectionHeading } from "@pattern/section"
@@ -35,7 +35,7 @@ export function HomeHero() {
                     </p>
                 </div>
             </div>
-            <HomeHeroContact />
+            <HomeHeroIndex />
         </PageColumn>
     )
 }
