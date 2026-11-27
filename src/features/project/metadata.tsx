@@ -21,7 +21,14 @@ export function ProjectMetadata(props: VoidProps<{ project: Project }>) {
                 <RecordRowLabel>Status</RecordRowLabel>
                 <dd class="font-mono text-sm text-stone-600 tabular-nums dark:text-stone-400">
                     <span class="tracking-widest uppercase">{props.project.status}</span>
-                    {props.project.year !== undefined ? ` · ${props.project.year}` : ""}
+                    <Show when={props.project.year}>
+                        {(year) => (
+                            <>
+                                {" · "}
+                                {year()}
+                            </>
+                        )}
+                    </Show>
                 </dd>
             </RecordRow>
             <Show when={props.project.liveUrl}>

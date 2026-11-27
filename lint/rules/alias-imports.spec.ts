@@ -28,6 +28,11 @@ tester.run("kk/alias-imports", aliasImports, {
             code: `import { apiVersion } from "./api-version.ts"`,
         },
         {
+            name: "relative import in the content intake allowlisted file",
+            filename: "src/core/content/content-intake.ts",
+            code: `import { PROJECT_CATEGORIES } from "./project-category.ts"`,
+        },
+        {
             name: "relative import outside src",
             filename: "lint/rules/helper.ts",
             code: `import { helper } from "./helper-util"`,
