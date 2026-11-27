@@ -53,11 +53,12 @@ export function AmaTranscript(props: {
                 <For each={props.entries}>
                     {(entry) => (
                         <StackRow size="relaxed">
-                            <div class="flex justify-end">
-                                <p class="max-w-prose bg-stone-200/70 px-4 py-2.5 font-mono text-sm text-stone-900 dark:bg-stone-800 dark:text-stone-100">
-                                    {entry.question}
-                                </p>
-                            </div>
+                            <p class="font-mono text-sm text-stone-900 dark:text-stone-100">
+                                <span aria-hidden="true" class="text-emerald-700 dark:text-emerald-400">
+                                    {"$ "}
+                                </span>
+                                {entry.question}
+                            </p>
                             <Switch>
                                 <Match when={entry.status === "loading"}>
                                     <output class="mt-4 block font-mono text-xs text-stone-600 dark:text-stone-400">
