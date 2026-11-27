@@ -5,7 +5,7 @@ import { For } from "solid-js"
 const HERO_INDEX = [
     { label: "Projects", href: "/projects", display: "ls ~/projects" },
     { label: "Contact", href: "/contact", display: "echo hello" },
-    { label: "Ama", href: "/ama", display: "ama --ask" },
+    { label: "Ask", href: "/ama", display: "ama --ask" },
 ] as const
 
 export function HomeHeroIndex() {
