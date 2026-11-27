@@ -178,7 +178,7 @@ export function AmaInterface() {
                                         </Button>
                                     </Show>
                                     <Button
-                                        class="shrink-0 disabled:opacity-50"
+                                        class="shrink-0 text-emerald-800 hover:text-emerald-700 disabled:opacity-50 dark:text-emerald-400 dark:hover:text-emerald-300"
                                         intent="quiet"
                                         disabled={pending()}
                                         onClick={() => void submit(input())}
