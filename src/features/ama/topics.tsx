@@ -1,9 +1,9 @@
 import { AMA_QUESTIONS } from "@features/ama/questions"
 import { StackRow } from "@pattern/stack"
 import { cx } from "@ui/cva.config"
-import { For } from "solid-js"
+import { For, type VoidProps } from "solid-js"
 
-export function AmaTopics(props: { busy: boolean; onSelect: (question: string) => void }) {
+export function AmaTopics(props: VoidProps<{ busy: boolean; onSelect: (question: string) => void }>) {
     return (
         <ul class="flex flex-col gap-2">
             <For each={AMA_QUESTIONS}>
