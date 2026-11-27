@@ -7,7 +7,6 @@ import {
 } from "@features/command-palette/commands"
 import { createDebouncedInput } from "@pattern/create-debounced-input"
 import { createPagefindSearch } from "@pattern/create-pagefind-search"
-import type { Component } from "solid-js"
 import { createMemo, createSignal } from "solid-js"
 
 type CommandPaletteRowFlash = { kind: "flash"; id: CommandPaletteActionId; label: string } | { kind: "none" }
@@ -20,7 +19,7 @@ type CommandPaletteRowAction =
 export type CommandPaletteRow = {
     rowId: string
     label: string
-    icon: Component<{ class?: string }> | null
+    icon: CommandPaletteCommand["icon"]
     flash: CommandPaletteRowFlash
     href?: string
     run: () => void
