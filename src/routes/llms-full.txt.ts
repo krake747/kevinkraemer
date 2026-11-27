@@ -42,7 +42,9 @@ function decisionLines(decisions: Project["decisions"]): string[] {
 }
 
 function implementationLines(implementation: Project["implementation"]): string[] {
-    return implementation === undefined ? [] : ["", "### Technical implementation", "", implementation]
+    return implementation === undefined
+        ? []
+        : ["", "### Technical implementation", "", ...implementation.flatMap((paragraph) => [paragraph, ""])]
 }
 
 function tradeoffLines(tradeoffs: Project["tradeoffs"]): string[] {

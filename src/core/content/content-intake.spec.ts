@@ -113,7 +113,7 @@ describe("project intake", () => {
             order: 2,
             problem: "Something slow.",
             decisions: [],
-            implementation: "A single binary.",
+            implementation: ["A single binary."],
             tradeoffs: [{ title: "No cache", reason: "Freshness beats speed here." }],
         })
         expect(parsed.success).toBe(true)

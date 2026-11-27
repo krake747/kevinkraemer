@@ -16,7 +16,7 @@ const project: Project = {
     order: 1,
     problem: "The problem the project answers.",
     decisions: [{ title: "One seam", reason: "Because two callers needed it." }],
-    implementation: "A single module.",
+    implementation: ["A single module."],
     tradeoffs: [{ title: "No cache", reason: "Freshness beats speed here." }],
     html: "",
     graphs: [],
@@ -37,6 +37,14 @@ describe("the project entry", () => {
         expect(view.textContent).toContain("One seam")
         expect(view.textContent).toContain("A single module.")
         expect(view.textContent).toContain("No cache")
+    })
+
+    it("renders one paragraph per implementation entry", () => {
+        const view = renderToContainer(() => (
+            <ProjectEntry project={{ ...project, implementation: ["First.", "Second."] }} />
+        ))
+        const section = view.querySelector("#implementation-heading")?.parentElement
+        expect(section?.querySelectorAll("p")).toHaveLength(2)
     })
 
     it("omits sections with no entries", () => {

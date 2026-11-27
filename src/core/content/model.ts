@@ -96,7 +96,7 @@ export type Project = {
     order: number
     problem: string
     decisions: ProjectDecision[]
-    implementation?: string
+    implementation?: string[]
     tradeoffs: ProjectDecision[]
     html: string
     graphs: GraphFlowSpec[]

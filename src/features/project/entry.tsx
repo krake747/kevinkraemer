@@ -64,7 +64,13 @@ export function ProjectEntry(props: VoidProps<{ project: Project }>) {
                         <ProjectSectionHeading id="implementation-heading">
                             Technical implementation
                         </ProjectSectionHeading>
-                        <p class="mt-4 text-base/[1.8] text-stone-600 dark:text-stone-400">{implementation()}</p>
+                        <div class="mt-4 flex flex-col gap-4">
+                            <For each={implementation()}>
+                                {(paragraph) => (
+                                    <p class="text-base/[1.8] text-stone-600 dark:text-stone-400">{paragraph}</p>
+                                )}
+                            </For>
+                        </div>
                     </ProjectSection>
                 )}
             </Show>
