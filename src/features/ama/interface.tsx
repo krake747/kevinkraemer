@@ -215,7 +215,7 @@ export function AmaInterface() {
                                 >
                                     <InputPrompt />
                                 </Input>
-                                <div class="flex items-center justify-end gap-3 sm:contents">
+                                <div class="flex items-center justify-end gap-1 sm:shrink-0">
                                     <Show when={entries().length > 0}>
                                         <Button class="shrink-0" onClick={clear}>
                                             clear
