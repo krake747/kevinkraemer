@@ -1,3 +1,4 @@
+import { Anchor } from "@ui/anchor"
 import { For } from "solid-js"
 
 const QUICK_LINKS = [
@@ -12,12 +13,13 @@ export function SearchShortcuts() {
         <div class="mt-4 flex flex-wrap gap-2">
             <For each={QUICK_LINKS}>
                 {(link) => (
-                    <a
+                    <Anchor
                         href={link.href}
-                        class="hit-area-y-2.5 border border-stone-200 px-2.5 py-1 font-mono text-xs text-stone-600 transition-colors hover:border-emerald-500/30 hover:text-emerald-800 dark:border-stone-800 dark:text-stone-400 dark:hover:text-emerald-400"
+                        variant="subtle"
+                        class="hit-area-y-2.5 border border-stone-200 px-2.5 py-1 hover:border-emerald-500/30 dark:border-stone-800"
                     >
                         {link.label}
-                    </a>
+                    </Anchor>
                 )}
             </For>
         </div>

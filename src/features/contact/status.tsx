@@ -1,5 +1,7 @@
 import { DisclosureRow, DisclosureRowBody, DisclosureRowSummary } from "@pattern/disclosure-row"
+import { RecordRow, RecordRowLabel } from "@pattern/record"
 import { PanelLabel } from "@pattern/section"
+import { Stack } from "@pattern/stack"
 import { For } from "solid-js"
 
 const STATUS_ROWS = [
@@ -10,16 +12,16 @@ const STATUS_ROWS = [
 
 function ContactStatusRows() {
     return (
-        <dl class="flex flex-col gap-3 font-mono text-xs">
+        <Stack render={(renderProps) => <dl {...renderProps} />} class="font-mono text-xs">
             <For each={STATUS_ROWS}>
                 {(row) => (
-                    <div>
-                        <dt class="tracking-widest text-stone-600 uppercase dark:text-stone-400">{row.label}</dt>
+                    <RecordRow>
+                        <RecordRowLabel>{row.label}</RecordRowLabel>
                         <dd class="text-stone-700 tabular-nums dark:text-stone-300">{row.value}</dd>
-                    </div>
+                    </RecordRow>
                 )}
             </For>
-        </dl>
+        </Stack>
     )
 }
 

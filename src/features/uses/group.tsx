@@ -4,20 +4,28 @@ import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
 import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
-function toolName(item: UsesItem, variant: "channel" | "muted") {
-    if (item.kind === "text") {
-        return <span class="font-mono text-sm text-stone-900 dark:text-stone-100">{item.name}</span>
-    }
+function UsesToolName(props: VoidProps<{ item: UsesItem; variant: "channel" | "muted" }>) {
+    const text = () => (props.item.kind === "text" ? props.item : undefined)
+    const link = () => (props.item.kind === "link" ? props.item : undefined)
     return (
-        <Anchor
-            href={item.href}
-            variant={variant}
-            target={{ kind: "external" }}
-            aria-label={item.ariaLabel}
-            class="hit-area-y-2"
-        >
-            {item.name}
-        </Anchor>
+        <Switch>
+            <Match when={text()}>
+                {(item) => <span class="font-mono text-sm text-stone-900 dark:text-stone-100">{item().name}</span>}
+            </Match>
+            <Match when={link()}>
+                {(item) => (
+                    <Anchor
+                        href={item().href}
+                        variant={props.variant}
+                        target={{ kind: "external" }}
+                        aria-label={item().ariaLabel}
+                        class="hit-area-y-2"
+                    >
+                        {item().name}
+                    </Anchor>
+                )}
+            </Match>
+        </Switch>
     )
 }
 
@@ -28,7 +36,9 @@ function UsesRow(props: VoidProps<{ item: UsesItem }>) {
             size="compact"
             class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4"
         >
-            <span class="sm:w-56 sm:shrink-0">{toolName(props.item, "muted")}</span>
+            <span class="sm:w-56 sm:shrink-0">
+                <UsesToolName item={props.item} variant="muted" />
+            </span>
             <span class="min-w-0 text-sm/relaxed text-stone-600 sm:flex-1 dark:text-stone-400">{props.item.note}</span>
         </StackRow>
     )
@@ -49,7 +59,7 @@ function UsesDailyPanel(props: VoidProps<{ items: UsesItem[] }>) {
                 <For each={props.items}>
                     {(item) => (
                         <li class="flex flex-col gap-1">
-                            {toolName(item, "channel")}
+                            <UsesToolName item={item} variant="channel" />
                             <span class="text-sm/relaxed text-stone-600 dark:text-stone-400">{item.note}</span>
                         </li>
                     )}
@@ -84,7 +94,9 @@ function UsesPlain(props: VoidProps<{ items: UsesItem[] }>) {
             <For each={props.items}>
                 {(item) => (
                     <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
-                        <dt class="sm:w-32 sm:shrink-0">{toolName(item, "muted")}</dt>
+                        <dt class="sm:w-32 sm:shrink-0">
+                            <UsesToolName item={item} variant="muted" />
+                        </dt>
                         <dd class="m-0 min-w-0 text-sm/relaxed text-stone-600 sm:flex-1 dark:text-stone-400">
                             {item.note}
                         </dd>

@@ -2,8 +2,7 @@ import { siteContent } from "@core/content/site-content"
 import { isLogsPath } from "@core/site/navigation"
 import { FooterPixelAvatar, type PixelMood } from "@features/footer/pixel-avatar"
 import { useLocation } from "@solidjs/router"
-import { anchor } from "@ui/anchor"
-import { cx } from "@ui/cva.config"
+import { Anchor } from "@ui/anchor"
 import { DecorMark } from "@ui/decor-mark"
 import { ZapIcon } from "@ui/icon"
 import { createSignal, onSettled } from "solid-js"
@@ -15,10 +14,7 @@ const MOOD_BY_PATHNAME: Record<string, PixelMood> = {
 }
 
 function moodForPathname(pathname: string, night: boolean): PixelMood {
-    if (night || isLogsPath(pathname)) {
-        return "sleepy"
-    }
-    return MOOD_BY_PATHNAME[pathname] ?? "idle"
+    return night || isLogsPath(pathname) ? "sleepy" : (MOOD_BY_PATHNAME[pathname] ?? "idle")
 }
 
 export function Footer() {
@@ -46,9 +42,9 @@ export function Footer() {
                 <div class="flex items-center gap-2 px-2 sm:gap-3 sm:px-4">
                     <span class="hidden font-mono text-stone-600 dark:text-stone-300">Solid</span>
                     <span class="hidden text-stone-300 dark:text-stone-700">|</span>
-                    <a href="/developers" class={cx("hit-area-x-2 hit-area-y-3", anchor({ variant: "subtle" }))}>
+                    <Anchor href="/developers" variant="subtle" class="hit-area-x-2 hit-area-y-3">
                         ~/developers
-                    </a>
+                    </Anchor>
                     <span class="text-stone-300 dark:text-stone-700">|</span>
                     <span class="font-mono text-xs text-stone-600 tabular-nums dark:text-stone-300">
                         (c) {siteContent.meta.buildYear}

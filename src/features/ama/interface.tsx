@@ -13,10 +13,7 @@ import { Input, InputPrompt } from "@ui/input"
 import { Show, createEffect, createSignal } from "solid-js"
 
 function canAsk(question: string, busy: boolean): boolean {
-    if (busy) {
-        return false
-    }
-    return question.length > 0 && question.length <= ASK_QUESTION_MAX_LENGTH
+    return !busy && question.length > 0 && question.length <= ASK_QUESTION_MAX_LENGTH
 }
 
 function toFailure(error: unknown): AmaFailure {

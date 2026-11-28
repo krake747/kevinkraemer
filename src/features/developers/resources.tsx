@@ -1,5 +1,7 @@
 import { catalogEntries } from "@core/site/catalog"
 import { CV_PDF_PATH, origin } from "@core/site/urls"
+import { DevelopersLead } from "@features/developers/lead"
+import { DevelopersProse } from "@features/developers/prose"
 import { DocumentSection, SectionHeading } from "@pattern/section"
 import { Stack, StackRow } from "@pattern/stack"
 import { Anchor } from "@ui/anchor"
@@ -18,15 +20,15 @@ export function DevelopersResources() {
                             <Anchor href={resource.path} variant="channel" rel="external" class="hit-area-y-2">
                                 {resource.path}
                             </Anchor>
-                            <p class="max-w-prose text-sm/relaxed text-stone-600 dark:text-stone-400">
-                                <span class="font-mono text-xs text-stone-600 dark:text-stone-400">
+                            <DevelopersProse class="text-stone-600 dark:text-stone-400">
+                                <DevelopersLead class="text-stone-600 dark:text-stone-400">
                                     {resource.type}
-                                </span>{" "}
+                                </DevelopersLead>{" "}
                                 <span aria-hidden="true" class="mx-2 text-stone-400 dark:text-stone-400">
                                     /
                                 </span>{" "}
                                 {resource.description}
-                            </p>
+                            </DevelopersProse>
                         </StackRow>
                     )}
                 </For>

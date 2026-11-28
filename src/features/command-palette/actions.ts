@@ -2,7 +2,7 @@ import { site } from "@core/site/site-meta"
 import { CV_PDF_PATH } from "@core/site/urls"
 import type { CommandPaletteActionId } from "@features/command-palette/commands"
 
-type CommandPaletteDeps = {
+type CommandPaletteActionDeps = {
     scheme: "light" | "dark"
     setScheme: (scheme: "light" | "dark") => void
     flash: (id: CommandPaletteActionId) => void
@@ -16,7 +16,7 @@ function triggerDownload(href: string, filename: string): void {
     link.click()
 }
 
-function copyEmail(deps: CommandPaletteDeps): void {
+function copyEmail(deps: CommandPaletteActionDeps): void {
     navigator.clipboard
         .writeText(site.email)
         .then(() => {
@@ -27,7 +27,7 @@ function copyEmail(deps: CommandPaletteDeps): void {
         })
 }
 
-const actionHandlers: Record<CommandPaletteActionId, (deps: CommandPaletteDeps) => void> = {
+const actionHandlers: Record<CommandPaletteActionId, (deps: CommandPaletteActionDeps) => void> = {
     "toggle-theme": (deps) => {
         deps.setScheme(deps.scheme === "dark" ? "light" : "dark")
         deps.close()
@@ -39,6 +39,6 @@ const actionHandlers: Record<CommandPaletteActionId, (deps: CommandPaletteDeps) 
     "copy-email": copyEmail,
 }
 
-export function runCommandPaletteAction(id: CommandPaletteActionId, deps: CommandPaletteDeps): void {
+export function runCommandPaletteAction(id: CommandPaletteActionId, deps: CommandPaletteActionDeps): void {
     actionHandlers[id](deps)
 }

@@ -4,7 +4,7 @@ import { CvBullets } from "@features/cv/bullets"
 import { CvDates } from "@features/cv/dates"
 import { CvEntry } from "@features/cv/entry"
 import { CvRole } from "@features/cv/role"
-import { CvRowHeader } from "@features/cv/row-header"
+import { CvRowHeader, CvRowHeaderMeta, CvRowHeaderTitle } from "@features/cv/row-header"
 import { CvSection } from "@features/cv/section"
 import { CvSectionHeading } from "@features/cv/section-heading"
 import { Stack, StackRow } from "@pattern/stack"
@@ -33,7 +33,10 @@ export function CvExperience(props: VoidProps<{ id: string }>) {
                                     render={(renderProps) => <article {...renderProps} />}
                                     class="break-inside-avoid"
                                 >
-                                    <CvRowHeader title={item.company} meta={item.location} />
+                                    <CvRowHeader>
+                                        <CvRowHeaderTitle>{item.company}</CvRowHeaderTitle>
+                                        <CvRowHeaderMeta>{item.location}</CvRowHeaderMeta>
+                                    </CvRowHeader>
                                     <CvRole>{item.role}</CvRole>
                                     <CvDates period={period} />
                                     <CvBullets items={item.responsibilities} />

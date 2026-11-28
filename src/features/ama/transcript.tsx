@@ -6,7 +6,7 @@ import { Anchor } from "@ui/anchor"
 import { Button } from "@ui/button"
 import { cx } from "@ui/cva.config"
 import { XIcon } from "@ui/icon"
-import { For, Match, Show, Switch } from "solid-js"
+import { For, Match, Show, Switch, type VoidProps } from "solid-js"
 
 export type AmaEntry =
     | { id: number; question: string; status: "loading" }
@@ -18,7 +18,7 @@ function copyText(answer: AmaAnswer): string {
     return [answer.summary ?? "", "Sources:", ...lines].filter((part) => part.length > 0).join("\n")
 }
 
-function AmaCopyButton(props: { answer: AmaAnswer }) {
+function AmaCopyButton(props: VoidProps<{ answer: AmaAnswer }>) {
     const { copyLabel, copy } = createCopyFeedback()
     return (
         <Button
@@ -33,11 +33,13 @@ function AmaCopyButton(props: { answer: AmaAnswer }) {
     )
 }
 
-export function AmaTranscript(props: {
-    entries: readonly AmaEntry[]
-    onRetry: (id: number) => void
-    onDismiss: (id: number) => void
-}) {
+export function AmaTranscript(
+    props: VoidProps<{
+        entries: readonly AmaEntry[]
+        onRetry: (id: number) => void
+        onDismiss: (id: number) => void
+    }>,
+) {
     const busy = (): boolean => props.entries.some((entry) => entry.status === "loading")
     return (
         <div class="flex flex-col gap-2">

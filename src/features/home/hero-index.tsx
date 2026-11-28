@@ -1,3 +1,4 @@
+import { RecordRowLabel } from "@pattern/record"
 import { SectionHeading } from "@pattern/section"
 import { Anchor } from "@ui/anchor"
 import { For } from "solid-js"
@@ -12,20 +13,20 @@ export function HomeHeroIndex() {
     return (
         <div class="mt-12">
             <SectionHeading id="hero-index-heading">index.html</SectionHeading>
-            <div class="flex flex-col gap-3 font-mono text-sm">
+            <dl class="flex flex-col gap-3 font-mono text-sm">
                 <For each={HERO_INDEX}>
                     {(entry) => (
                         <div class="flex items-baseline gap-4">
-                            <span class="w-20 text-xs tracking-widest text-stone-600 uppercase dark:text-stone-300">
-                                {entry.label}
-                            </span>
-                            <Anchor href={entry.href} variant="channel" class="hit-area-y-2">
-                                {entry.display}
-                            </Anchor>
+                            <RecordRowLabel class="w-20">{entry.label}</RecordRowLabel>
+                            <dd>
+                                <Anchor href={entry.href} variant="channel" class="hit-area-y-2">
+                                    {entry.display}
+                                </Anchor>
+                            </dd>
                         </div>
                     )}
                 </For>
-            </div>
+            </dl>
         </div>
     )
 }

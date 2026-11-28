@@ -2,7 +2,7 @@ import type { AskPageJudgment } from "@core/ask/ask"
 import { createAsk } from "@core/ask/create-ask"
 import { AskTapeBroken, AskUpstream } from "@core/ask/errors"
 import { TAPE_VERSION, type TapeFile, type TapePrint } from "@core/ask/tape"
-import { createAskTool } from "@features/mcp/ask-tool"
+import { createMcpAskTool } from "@features/mcp/ask-tool"
 import { Result } from "better-result"
 import { describe, expect, it } from "vite-plus/test"
 
@@ -25,7 +25,7 @@ type ToolOptions = {
 
 function makeTool(options: ToolOptions = {}) {
     const calls = { answer: 0 }
-    const tool = createAskTool(
+    const tool = createMcpAskTool(
         createAsk({
             tape: options.tape ?? Result.ok({ version: TAPE_VERSION, sourceHash: "test", prints: [page] }),
             env: options.env ?? keys,
