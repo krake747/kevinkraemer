@@ -10,7 +10,7 @@ import { createMediaQuery } from "@solid-primitives/media"
 import { useSearchParams } from "@solidjs/router"
 import { Button } from "@ui/button"
 import { Input, InputPrompt } from "@ui/input"
-import { Show, createEffect, createSignal } from "solid-js"
+import { Show, createEffect, createMemo, createSignal } from "solid-js"
 
 function canAsk(question: string, busy: boolean): boolean {
     return !busy && question.length > 0 && question.length <= ASK_QUESTION_MAX_LENGTH
@@ -50,7 +50,7 @@ export function AmaInterface() {
     const [entries, setEntries] = createSignal<AmaEntry[]>([])
     const [askedFromUrl, setAskedFromUrl] = createSignal<string | undefined>(undefined)
     const controllers = new Map<number, AbortController>()
-    const busy = (): boolean => entries().some((entry) => entry.status === "loading")
+    const busy = createMemo(() => entries().some((entry) => entry.status === "loading"))
     const prefersReducedMotion = createMediaQuery("(prefers-reduced-motion: reduce)")
     let inputElement!: HTMLInputElement
     function submitTopic(question: string): void {

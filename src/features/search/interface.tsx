@@ -9,11 +9,11 @@ import { createMediaQuery } from "@solid-primitives/media"
 import { Button } from "@ui/button"
 import { cx } from "@ui/cva.config"
 import { Input, InputPrompt } from "@ui/input"
-import { Errored, Loading, Show, latest } from "solid-js"
+import { Errored, Loading, Show, createMemo, latest } from "solid-js"
 
 export function SearchInterface() {
     const query = createUrlQuery({ param: "q", wait: PAGEFIND_DEBOUNCE_MS })
-    const committedQuery = () => query.query()?.trim() ?? ""
+    const committedQuery = createMemo(() => query.query()?.trim() ?? "")
     const { outcome, total, isLoading: isStale } = createPagefindSearch(committedQuery, 10)
     const isCoarsePointer = createMediaQuery("(pointer: coarse)")
     let input!: HTMLInputElement

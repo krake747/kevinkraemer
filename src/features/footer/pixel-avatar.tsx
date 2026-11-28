@@ -1,7 +1,7 @@
 import { createMediaQuery } from "@solid-primitives/media"
 import type { ComponentProps } from "@solidjs/web"
 import { cx } from "@ui/cva.config"
-import { For, Show, createEffect, createSignal, merge, omit, type Accessor, type VoidProps } from "solid-js"
+import { For, Show, createEffect, createMemo, createSignal, merge, omit, type Accessor, type VoidProps } from "solid-js"
 
 export type PixelMood = "idle" | "wink" | "sleepy" | "talk" | "scan"
 type Tone = "dark" | "mid" | "lid" | "open" | "off"
@@ -201,7 +201,7 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
         return mood() === "scan"
     })
     const sayingHi = createGreeting(() => mood() === "talk" && !prefersReducedMotion())
-    const rows = (): Face => {
+    const rows = createMemo((): Face => {
         if (mood() === "scan") {
             return scanFace(glanceLeft())
         }
@@ -209,7 +209,7 @@ export function FooterPixelAvatar(_props: VoidProps<ComponentProps<"div"> & { mo
             return TALKING_FACE
         }
         return FACES[mood()]
-    }
+    })
     const forwarded = omit(props, "class", "mood", "children")
 
     return (
