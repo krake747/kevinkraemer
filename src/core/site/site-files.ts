@@ -105,12 +105,18 @@ function headerBlock(endpoint: Endpoint, apiVersion: string): string {
     return lines.join("\n")
 }
 
+const cacheBlocks = [
+    ["/fonts/*", "public, max-age=31536000, immutable"],
+    ["/assets/*", "public, max-age=31536000, immutable"],
+] as const
+
 export function buildHeaders(endpoints: Endpoint[], apiVersion: string): string {
     const headerBlocks = endpoints
         .filter((endpoint) => endpoint.headers !== undefined)
         .map((endpoint) => headerBlock(endpoint, apiVersion))
     const globalHeaders = ["/*", ...discoveryLinks.map((link) => `  Link: ${link}`)].join("\n")
-    return [globalHeaders, ...headerBlocks].join("\n\n")
+    const cacheHeaders = cacheBlocks.map(([path, cacheControl]) => `${path}\n  Cache-Control: ${cacheControl}`)
+    return [globalHeaders, ...headerBlocks, ...cacheHeaders].join("\n\n")
 }
 
 export function buildLinkset(entries: CatalogEntry[], origin: string) {
