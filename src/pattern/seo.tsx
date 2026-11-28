@@ -45,8 +45,8 @@ export function Seo(_props: VoidProps<SeoProps>) {
             <Title>{fullTitle()}</Title>
             <Link rel="alternate" type="application/rss+xml" title={`${site.name} · Logs`} href={`${origin}/rss.xml`} />
             <Meta name="description" content={description()} />
-            <Meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
-            <Meta name="theme-color" content="#0c0a09" media="(prefers-color-scheme: dark)" />
+            <Meta name="theme-color" content={themeColorLight} media="(prefers-color-scheme: light)" />
+            <Meta name="theme-color" content={themeColorDark} media="(prefers-color-scheme: dark)" />
             <Meta property="og:title" content={fullTitle()} />
             <Meta property="og:description" content={description()} />
             <Meta property="og:type" content={props.type} />
