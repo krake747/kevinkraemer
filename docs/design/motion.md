@@ -63,7 +63,7 @@ A staggered reveal is a property of the **container**, not of each child:
 </div>
 ```
 
-- `kk-cascade` sets `animation-delay` on children 1–8, then holds the 9th step for everything after.
+- `kk-cascade` sets `animation-delay` on children 1–4, then holds the 5th step for everything after.
 - Override the step with the `--kk-cascade-step` custom property. The default lives in
   `@utility kk-cascade`; the 404 page overrides the step to a tighter value.
 - The hero is the exception: its blocks use explicit `[animation-delay:*]` literals and

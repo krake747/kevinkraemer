@@ -96,7 +96,9 @@ as the only binding is the smell.
 ## Icons: one home, no `aria-hidden` (Standards 4)
 
 Why duplicated icon sets drift in stroke and size. Solve import icons from `src/ui/icon.tsx` and
-drop `aria-hidden` where the component already sets it. Enforced by `pnpm lint`.
+drop `aria-hidden` where the component already sets it. Enforced by `pnpm lint`. Each export there
+is a vendored Keyline drawing named `{Name}Icon` (`ZapIcon`, `HashIcon`); a new icon keeps that
+suffix.
 
 ## Lists: keep row identity, derive the visible set (Standards 1)
 

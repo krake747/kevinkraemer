@@ -63,7 +63,7 @@ Every page opens one of three ways:
 Why the route owns it: `DocumentPage` is the column and the measure, not the header. The caller
 writes the command and the title as children, the same way it already composes `DocumentSection`.
 Write a plain `header` around `TerminalCommandHeader` and `PageHeaderTitle`, so the h1 size does not
-drift across the seven document pages. Do not hand-roll the `h1`.
+drift across the eight document pages. Do not hand-roll the `h1`.
 
 The DocumentSection anatomy is for sections with a heading that earns its place; a two-sentence
 intro on a page that then lists rows has no heading to give. Do not invent a heading so a short

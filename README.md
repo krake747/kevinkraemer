@@ -34,5 +34,8 @@ To run it locally, follow [CONTRIBUTING](CONTRIBUTING.md) for setup, secrets, an
 
 Code: MPL-2.0 © 2025-2026 Kevin Kraemer, see [LICENSE](LICENSE).
 
+Icon drawings in `src/ui/icon.tsx` come from Keyline Icons under the MIT License, see
+[NOTICE](NOTICE).
+
 Content (log entries, about/experience copy, images, CV PDF) is © Kevin Kraemer under CC BY-NC-ND
 4.0, see [LICENSE-CONTENT](LICENSE-CONTENT).
