@@ -10,9 +10,6 @@ export default function ProjectsRoute() {
             <header class="animate-rise">
                 <TerminalCommandHeader command="ls ~/projects" class="mb-4" />
                 <PageHeaderTitle>Projects</PageHeaderTitle>
-                <p class="mt-4 max-w-prose text-base/relaxed text-stone-700 dark:text-stone-300">
-                    The work, in one place. Each one gets the full story.
-                </p>
             </header>
             <Seo title="Projects" description="Case files for selected projects." path="/projects" />
             <ProjectList projects={siteContent.projects} />

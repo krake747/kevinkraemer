@@ -34,9 +34,9 @@ with a sticky case-file rail: meta and section index on the side, prose in the m
 
 ### Index (`/projects`)
 
-- `DocumentPage`, with a child `header`: `TerminalCommandHeader` `ls ~/projects`, `PageHeaderTitle`
-  “Projects”, then one plain intro line (“The work, in one place…”). An empty collection renders
-  `EmptyRegister spacious` instead of the list.
+- `DocumentPage`, with a child `header`: `TerminalCommandHeader` `ls ~/projects` and
+  `PageHeaderTitle` “Projects”, no intro line. An empty collection renders `EmptyRegister spacious`
+  instead of the list.
 - Featured case files come first, in the established two-column rows: `li` with a single `border-t`
   in stone and no content inset, identity rail (`Anchor` `title` name, status line ending in a small
   pulsing emerald cursor block, optional Headline Figure), and body (tagline, role sentence, stack
